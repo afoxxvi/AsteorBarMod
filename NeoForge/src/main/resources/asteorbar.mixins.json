@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.afoxxvi.asteorbar.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "EntityMixin"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "refmap": "asteorbar.mixins.refmap.json"
+}

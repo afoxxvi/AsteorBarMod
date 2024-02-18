@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "asteorbar",
+  "version": "${version}",
+  "name": "AsteorBar",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/afoxx/AsteorBarFabric"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/asteorbar/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.afoxxvi.asteorbar.AsteorBarFabricClient"
+    ],
+    "main": [
+      "com.afoxxvi.asteorbar.AsteorBarFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  },
+  "mixins": [
+    "asteorbar.mixins.json"
+  ],
+  "accessWidener": "asteorbar.accesswidener"
+}

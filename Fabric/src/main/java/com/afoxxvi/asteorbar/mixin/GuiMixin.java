@@ -30,7 +30,6 @@ public abstract class GuiMixin {
         Overlays.PLAYER_HEALTH.render(gui, poseStack, tick, width, height);
         Overlays.FOOD_LEVEL.render(gui, poseStack, tick, width, height);
         Overlays.MOUNT_HEALTH.render(gui, poseStack, tick, width, height);
-        FabricRenderGui.DEHYDRATION.render(gui, poseStack, tick, width, height);
         Overlays.AIR_LEVEL.render(gui, poseStack, tick, width, height);
         Overlays.EXPERIENCE_BAR.render(gui, poseStack, tick, width, height);
         Overlays.ARMOR_LEVEL.render(gui, poseStack, tick, width, height);

@@ -31,7 +31,7 @@ public class ExperienceBarOverlay extends BaseOverlay {
     public void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var mc = gui.mc();
         var player = mc.player;
-        if (player == null || player.isRidingJumpable() || gui.mc().options.hideGui) {
+        if (player == null || player.jumpableVehicle() != null || gui.mc().options.hideGui) {
             return;
         }
         if (mc.gameMode == null || !mc.gameMode.hasExperience()) {

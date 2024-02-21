@@ -2,10 +2,8 @@ package com.afoxxvi.asteorbar.network;
 
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.Overlays;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import net.dehydration.access.ThirstManagerAccess;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -26,8 +24,6 @@ public class NetworkHandler {
     private static final int INDEX_SATURATION = 1;
     private static final int INDEX_ABSORPTION = 2;
     private static final int INDEX_ACTIVATE = 3;
-
-    private static final int INDEX_DEHYDRATION = 65;
 
     @Environment(EnvType.CLIENT)
     public static void init() {
@@ -68,17 +64,6 @@ public class NetworkHandler {
                     });
                 }
                 break;
-                case INDEX_DEHYDRATION: {
-                    float dehydration = buf.readFloat();
-                    client.execute(() -> {
-                        if (client.player != null && Overlays.dehydration) {
-                            var thirstManager = ((ThirstManagerAccess) client.player).getThirstManager();
-                            if (thirstManager != null) {
-                                thirstManager.dehydration = dehydration;
-                            }
-                        }
-                    });
-                }
             }
         });
     }
@@ -87,8 +72,6 @@ public class NetworkHandler {
     //avoid sending packets too frequently
     private static final Map<UUID, Float> EXHAUSTION = new HashMap<>();
     private static final Map<UUID, Float> SATURATION = new HashMap<>();
-
-    private static final Map<UUID, Float> DEHYDRATION = new HashMap<>();
 
     public static void onPlayerTick(ServerPlayer player) {
         var foodStats = player.getFoodData();
@@ -107,19 +90,6 @@ public class NetworkHandler {
             ByteBuf buf = PacketByteBufs.create().writeByte(INDEX_SATURATION).writeFloat(saturationLevel);
             var packet = ServerPlayNetworking.createS2CPacket(CHANNEL, PacketByteBufs.duplicate(buf));
             player.connection.send(packet);
-        }
-        if (Overlays.dehydration) {
-            var thirstManager = ((ThirstManagerAccess) player).getThirstManager();
-            if (thirstManager != null && thirstManager.hasThirst()) {
-                float dehydration = thirstManager.dehydration;
-                Float oldDehydration = DEHYDRATION.get(player.getUUID());
-                if (oldDehydration == null || Math.abs(oldDehydration - dehydration) >= 0.01F) {
-                    DEHYDRATION.put(player.getUUID(), dehydration);
-                    ByteBuf buf = PacketByteBufs.create().writeByte(INDEX_DEHYDRATION).writeFloat(dehydration);
-                    var packet = ServerPlayNetworking.createS2CPacket(CHANNEL, PacketByteBufs.duplicate(buf));
-                    player.connection.send(packet);
-                }
-            }
         }
     }
 }

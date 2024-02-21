@@ -1,12 +1,9 @@
 package com.afoxxvi.asteorbar.overlay;
 
-import com.afoxxvi.asteorbar.overlay.parts.DehydrationOverlay;
 import net.minecraft.client.gui.Gui;
 
 public class FabricRenderGui extends RenderGui {
     private final Gui gui;
-
-    public static final DehydrationOverlay DEHYDRATION = new DehydrationOverlay();
 
     public FabricRenderGui(Gui gui) {
         this.gui = gui;

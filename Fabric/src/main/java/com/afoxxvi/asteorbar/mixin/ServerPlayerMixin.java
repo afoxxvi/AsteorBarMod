@@ -16,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin extends Player {
 
-    public ServerPlayerMixin(Level level, BlockPos blockPos, float f, GameProfile gameProfile, @Nullable ProfilePublicKey profilePublicKey) {
-        super(level, blockPos, f, gameProfile, profilePublicKey);
+    public ServerPlayerMixin(Level level, BlockPos blockPos, float f, GameProfile gameProfile) {
+        super(level, blockPos, f, gameProfile);
     }
 
     @Inject(at = @At(value = "HEAD"), method = "tick")

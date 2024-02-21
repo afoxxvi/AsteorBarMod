@@ -20,6 +20,9 @@
     ],
     "mixinsquared": [
       "com.afoxxvi.asteorbar.mixin.third.DehydrationMixin"
+    ],
+    "modmenu": [
+      "com.afoxxvi.asteorbar.config.ModMenuIntegration"
     ]
   },
   "depends": {

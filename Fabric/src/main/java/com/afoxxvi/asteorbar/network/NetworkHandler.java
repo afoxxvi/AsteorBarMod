@@ -71,8 +71,8 @@ public class NetworkHandler {
                 case INDEX_DEHYDRATION: {
                     float dehydration = buf.readFloat();
                     client.execute(() -> {
-                        if (client.player != null && Overlays.dehydration) {
-                            var thirstManager = ((ThirstManagerAccess) client.player).getThirstManager();
+                        if (client.player != null && Overlays.dehydration && AsteorBar.config.hookDehydration()) {
+                            var thirstManager = ((ThirstManagerAccess) client.player).getThirstManager(client.player);
                             if (thirstManager != null) {
                                 thirstManager.dehydration = dehydration;
                             }
@@ -109,7 +109,7 @@ public class NetworkHandler {
             player.connection.send(packet);
         }
         if (Overlays.dehydration) {
-            var thirstManager = ((ThirstManagerAccess) player).getThirstManager();
+            var thirstManager = ((ThirstManagerAccess) player).getThirstManager(player);
             if (thirstManager != null && thirstManager.hasThirst()) {
                 float dehydration = thirstManager.dehydration;
                 Float oldDehydration = DEHYDRATION.get(player.getUUID());

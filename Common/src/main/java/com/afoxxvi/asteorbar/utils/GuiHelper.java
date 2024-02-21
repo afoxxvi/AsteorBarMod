@@ -23,18 +23,19 @@ public class GuiHelper {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
-        builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         var matrix = poseStack.last().pose();
         var z = 0;
         var uv_left = uvLeft / textureWidth;
         var uv_top = uvTop / textureHeight;
         var uv_right = uvRight / textureWidth;
         var uv_bottom = uvBottom / textureHeight;
+        builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         builder.vertex(matrix, (float) left, (float) top, (float) z).uv(uv_left, uv_top).endVertex();
         builder.vertex(matrix, (float) left, (float) bottom, (float) z).uv(uv_left, uv_bottom).endVertex();
         builder.vertex(matrix, (float) right, (float) bottom, (float) z).uv(uv_right, uv_bottom).endVertex();
         builder.vertex(matrix, (float) right, (float) top, (float) z).uv(uv_right, uv_top).endVertex();
-        BufferUploader.drawWithShader(builder.end());
+        builder.end();
+        BufferUploader.end(builder);
         RenderSystem.disableBlend();
     }
 
@@ -52,7 +53,8 @@ public class GuiHelper {
         builder.vertex(matrix, (float) left, (float) bottom, (float) 0).color(color).uv(uv_left, uv_bottom).endVertex();
         builder.vertex(matrix, (float) right, (float) bottom, (float) 0).color(color).uv(uv_right, uv_bottom).endVertex();
         builder.vertex(matrix, (float) right, (float) top, (float) 0).color(color).uv(uv_right, uv_top).endVertex();
-        BufferUploader.drawWithShader(builder.end());
+        builder.end();
+        BufferUploader.end(builder);
         RenderSystem.disableBlend();
     }
 
@@ -75,7 +77,8 @@ public class GuiHelper {
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
         renderSolidGradient(builder, poseStack, left, top, right, bottom, color, 0);
-        BufferUploader.drawWithShader(builder.end());
+        builder.end();
+        BufferUploader.end(builder);
         RenderSystem.disableBlend();
     }
 
@@ -85,7 +88,8 @@ public class GuiHelper {
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
         renderSolidGradientUpDown(builder, poseStack, left, top, right, bottom, color, 0);
-        BufferUploader.drawWithShader(builder.end());
+        builder.end();
+        BufferUploader.end(builder);
         RenderSystem.disableBlend();
     }
 

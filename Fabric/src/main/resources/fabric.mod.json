@@ -17,6 +17,9 @@
     ],
     "main": [
       "com.afoxxvi.asteorbar.AsteorBarFabric"
+    ],
+    "mixinsquared": [
+      "com.afoxxvi.asteorbar.mixin.third.DehydrationMixin"
     ]
   },
   "depends": {

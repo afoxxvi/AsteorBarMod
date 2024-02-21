@@ -1,41 +1,29 @@
 package com.afoxxvi.asteorbar.listener;
 
-import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarForge;
-import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.ForgeRenderGui;
 import com.afoxxvi.asteorbar.overlay.parts.MekanismOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ThirstOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.OverlayRegistry;
 
 import static com.afoxxvi.asteorbar.overlay.Overlays.*;
 
-@Mod.EventBusSubscriber(modid = AsteorBar.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEventListener {
-    @SubscribeEvent
-    public static void registerOverlay(RegisterGuiOverlaysEvent event) {
+    public static boolean registerOverlay = false;
+    public static void registerOverlays() {
         AsteorBarForge.LOGGER.info("Registering Overlays");
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "player_health", new ForgeRenderGui(PLAYER_HEALTH));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "food_level", new ForgeRenderGui(FOOD_LEVEL));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mount_health", new ForgeRenderGui(MOUNT_HEALTH));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "tough_as_nails", new ForgeRenderGui(new ToughAsNailsOverlay()));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "thirst", new ForgeRenderGui(new ThirstOverlay()));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "experience_bar", new ForgeRenderGui(EXPERIENCE_BAR));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "armor_level", new ForgeRenderGui(ARMOR_LEVEL));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mekanism", new ForgeRenderGui(new MekanismOverlay()));
-        event.registerBelow(VanillaGuiOverlay.AIR_LEVEL.id(), "air_level", new ForgeRenderGui(AIR_LEVEL));
-        event.registerAbove(VanillaGuiOverlay.EXPERIENCE_BAR.id(), "string", new ForgeRenderGui(STRING));
-    }
-
-    @SubscribeEvent
-    public static void registerKeyMapping(RegisterKeyMappingsEvent event) {
-        event.register(KeyBinding.TOGGLE_OVERLAY);
-        event.register(KeyBinding.TOGGLE_MOB_BAR);
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "player_health", new ForgeRenderGui(PLAYER_HEALTH));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "food_level", new ForgeRenderGui(FOOD_LEVEL));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "mount_health", new ForgeRenderGui(MOUNT_HEALTH));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "tough_as_nails", new ForgeRenderGui(new ToughAsNailsOverlay()));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "thirst", new ForgeRenderGui(new ThirstOverlay()));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "experience_bar", new ForgeRenderGui(EXPERIENCE_BAR));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "armor_level", new ForgeRenderGui(ARMOR_LEVEL));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "mekanism", new ForgeRenderGui(new MekanismOverlay()));
+        OverlayRegistry.registerOverlayBelow(ForgeIngameGui.AIR_LEVEL_ELEMENT, "air_level", new ForgeRenderGui(AIR_LEVEL));
+        OverlayRegistry.registerOverlayAbove(ForgeIngameGui.EXPERIENCE_BAR_ELEMENT, "string", new ForgeRenderGui(STRING));
+        registerOverlay = true;
     }
 }

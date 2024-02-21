@@ -2,12 +2,13 @@ package com.afoxxvi.asteorbar.overlay;
 
 import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.IIngameOverlay;
 
-public class ForgeRenderGui extends RenderGui implements IGuiOverlay {
-    private ForgeGui gui;
+public class ForgeRenderGui extends RenderGui implements IIngameOverlay {
+    private ForgeIngameGui gui;
     private final BaseOverlay overlay;
     private final boolean survival;
 
@@ -22,22 +23,22 @@ public class ForgeRenderGui extends RenderGui implements IGuiOverlay {
 
     @Override
     public int leftHeight() {
-        return gui.leftHeight;
+        return gui.left_height;
     }
 
     @Override
     public int rightHeight() {
-        return gui.rightHeight;
+        return gui.right_height;
     }
 
     @Override
     public void leftHeight(int i) {
-        gui.leftHeight += i;
+        gui.left_height += i;
     }
 
     @Override
     public void rightHeight(int i) {
-        gui.rightHeight += i;
+        gui.right_height += i;
     }
 
     @Override
@@ -46,9 +47,9 @@ public class ForgeRenderGui extends RenderGui implements IGuiOverlay {
     }
 
     @Override
-    public void render(ForgeGui forgeGui, PoseStack poseStack, float v, int i, int i1) {
+    public void render(ForgeIngameGui forgeGui, PoseStack poseStack, float v, int i, int i1) {
         this.gui = forgeGui;
-        if (!gui.getMinecraft().options.hideGui && (!survival || gui.shouldDrawSurvivalElements())) {
+        if (!Minecraft.getInstance().options.hideGui && (!survival || gui.shouldDrawSurvivalElements())) {
             forgeGui.setupOverlayRenderState(true, false);
             overlay.render(this, poseStack, v, i, i1);
         }

@@ -48,7 +48,7 @@ public class ToughAsNailsOverlay extends BaseOverlay {
         float hydration = thirst.getHydration();
         float exhaustion = thirst.getExhaustion();
         int thirstColor = 0xff1c5ee4;
-        if (player.hasEffect(TANEffects.THIRST.get())) {
+        if (player.hasEffect(TANEffects.THIRST)) {
             thirstColor = 0xff76db4c;
         }
         if (AsteorBar.config.enableFoodBlink()) {

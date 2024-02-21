@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9aa40c5-07ef-4a65-bfbb-e509e86c4dde" name="Changes" comment="v1.3 update" />
+    <list default="true" id="f9aa40c5-07ef-4a65-bfbb-e509e86c4dde" name="Changes" comment="bugfix in neoforge">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +144,7 @@
       <recent name="com.afoxxvi.asteorbar.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AsteorBarMod:Forge [jar]">
+  <component name="RunManager" selected="Gradle.AsteorBarMod:NeoForge [jar]">
     <configuration name="NeoForge: Client" type="Application" factoryName="Application">
       <envs>
         <env name="MOD_CLASSES" value="NeoForge%%C:\Users\afoxx\IdeaProjects\AsteorBarMod\NeoForge\build\resources\main;NeoForge%%C:\Users\afoxx\IdeaProjects\AsteorBarMod\NeoForge\build\classes\java\main" />
@@ -319,10 +321,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AsteorBarMod:Forge [jar]" />
-        <item itemvalue="Gradle.AsteorBarMod:Forge [clean]" />
         <item itemvalue="Gradle.AsteorBarMod:NeoForge [jar]" />
+        <item itemvalue="Gradle.AsteorBarMod:Forge [jar]" />
         <item itemvalue="Gradle.AsteorBarMod:Fabric [build]" />
+        <item itemvalue="Gradle.AsteorBarMod:Forge [clean]" />
         <item itemvalue="Gradle.AsteorBarMod:Fabric [jar]" />
       </list>
     </recent_temporary>
@@ -354,15 +356,56 @@
       <option name="project" value="LOCAL" />
       <updated>1708262979658</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add hook config, bug fix">
+      <option name="closed" value="true" />
+      <created>1708498119701</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708498119701</updated>
+    </task>
+    <task id="LOCAL-00003" summary="bugfix in neoforge">
+      <option name="closed" value="true" />
+      <created>1708500456425</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1708500456425</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v1.3 update" />
     <MESSAGE value="migrate to 1.20.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="migrate to 1.20.1" />
+    <MESSAGE value="add hook config, bug fix" />
+    <MESSAGE value="bugfix in neoforge" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix in neoforge" />
   </component>
 </project>

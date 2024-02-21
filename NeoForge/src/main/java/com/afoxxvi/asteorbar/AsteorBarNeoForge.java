@@ -20,7 +20,6 @@ public class AsteorBarNeoForge {
     public AsteorBarNeoForge() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(NetworkHandler.class);
         NetworkHandler.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, NeoForgeConfigAdapter.Config.CONFIG);

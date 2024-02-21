@@ -18,6 +18,8 @@ import net.minecraftforge.fml.common.Mod;
 public class ForgeEventListener {
     public static long tickCount = 0L;
     public static final ResourceLocation TOUGH_AS_NAILS_THIRST_LEVEL = new ResourceLocation("toughasnails", "thirst_level");
+    public static final ResourceLocation THIRST_THIRST_LEVEL = new ResourceLocation("thirst", "thirst_level");
+    public static final ResourceLocation MEKANISM_ENERGY_LEVEL = new ResourceLocation("mekanism", "energy_level");
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -40,6 +42,8 @@ public class ForgeEventListener {
                 || overlay == VanillaGuiOverlay.MOUNT_HEALTH.type()
                 || (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type())
                 || Overlays.toughAsNails && overlay.id().equals(TOUGH_AS_NAILS_THIRST_LEVEL)
+                || Overlays.thirst && overlay.id().equals(THIRST_THIRST_LEVEL)
+                || Overlays.mekanism && overlay.id().equals(MEKANISM_ENERGY_LEVEL)
         ) {
             event.setCanceled(true);
         }

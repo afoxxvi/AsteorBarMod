@@ -5,7 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9aa40c5-07ef-4a65-bfbb-e509e86c4dde" name="Changes" comment="v1.3 update">
-      <change beforePath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ExperienceBarOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ExperienceBarOverlay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/mixin/third/DehydrationMixin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/overlay/parts/DehydrationOverlay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/overlay/parts/MekanismOverlay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ThirstOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/Overlays.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/Overlays.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/mixin/GuiMixin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/mixin/GuiMixin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/network/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/network/NetworkHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/overlay/FabricRenderGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fabric/src/main/java/com/afoxxvi/asteorbar/overlay/FabricRenderGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fabric/src/main/resources/asteorbar.mixins.json" beforeDir="false" afterPath="$PROJECT_DIR$/Fabric/src/main/resources/asteorbar.mixins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/listener/ForgeEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/listener/ForgeEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/listener/ModEventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/listener/ModEventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/network/NetworkHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/network/NetworkHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ToughAsNailsOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/Forge/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ToughAsNailsOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/NeoForge/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/AsteorBarNeoForge.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/config/NeoForgeConfigAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/entity/AsteorBarRenderType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/listener/ModEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/listener/NeoForgeEventListener.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/mixin/EntityMixin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/network/NetworkHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/overlay/NeoForgeRenderGui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeoForge/src/main/java/com/afoxxvi/asteorbar/utils/NeoForgePlatformAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +39,25 @@
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
-      <ProjectState />
+      <ProjectState>
+        <dataType path="$PROJECT_DIR$/NeoForge">
+          <ModuleState>
+            <id value="com.demonwav.mcdev.platform.architectury.framework.ArchitecturyGradleData" />
+            <id value="com.intellij.externalSystem.JavaModuleData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ContentRootData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ModuleData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ModuleDependencyData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.ModuleSdkData" />
+            <id value="com.intellij.openapi.externalSystem.model.project.TestData" />
+            <id value="com.intellij.openapi.externalSystem.model.task.TaskData" />
+            <id value="org.jetbrains.idea.gradle.ext.profiler.model.JavaTaskData" />
+            <id value="org.jetbrains.plugins.gradle.model.GradleExtensions" />
+            <id value="org.jetbrains.plugins.gradle.model.data.BuildScriptClasspathData" />
+            <id value="org.jetbrains.plugins.gradle.model.data.GradleProjectBuildScriptData" />
+            <id value="org.jetbrains.plugins.gradle.model.data.GradleSourceSetData" />
+          </ModuleState>
+        </dataType>
+      </ProjectState>
     </projectState>
   </component>
   <component name="ExternalProjectsManager">
@@ -46,36 +89,18 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
@@ -95,6 +120,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -109,40 +139,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.AsteorBarMod [:Forge:createMcpToSrg :Forge:createMcpToSrg :Forge:createMcpToSrg].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [build].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [clean].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [jar].executor": "Run",
-    "Gradle.AsteorBarMod:Forge [clean].executor": "Run",
-    "Gradle.AsteorBarMod:Forge [jar].executor": "Run",
-    "Gradle.AsteorBarMod:NeoForge [idePostSync].executor": "Run",
-    "Gradle.AsteorBarMod:NeoForge [jar].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "17",
-    "jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": "17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/afoxx/IdeaProjects/AsteorBarMod",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.AsteorBarMod [:Forge:createMcpToSrg :Forge:createMcpToSrg :Forge:createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Forge [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Forge [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:NeoForge [idePostSync].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:NeoForge [jar].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;1.20.1&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/afoxx/IdeaProjects/AsteorBarMod&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": [
-      "17=C:/Program Files/Java/jdk-17"
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: [
+      &quot;17=C:/Program Files/Java/jdk-17&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\afoxx\IdeaProjects\AsteorBarMod" />
@@ -162,7 +192,7 @@
       <recent name="com.afoxxvi.asteorbar.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.AsteorBarMod:Forge [jar]">
+  <component name="RunManager" selected="Gradle.AsteorBarMod:Fabric [build]">
     <configuration name="NeoForge: Client" type="Application" factoryName="Application">
       <envs>
         <env name="MOD_CLASSES" value="NeoForge%%C:\Users\afoxx\IdeaProjects\AsteorBarMod\NeoForge\build\resources\main;NeoForge%%C:\Users\afoxx\IdeaProjects\AsteorBarMod\NeoForge\build\classes\java\main" />
@@ -339,10 +369,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AsteorBarMod:Fabric [build]" />
         <item itemvalue="Gradle.AsteorBarMod:Forge [jar]" />
         <item itemvalue="Gradle.AsteorBarMod:Forge [clean]" />
         <item itemvalue="Gradle.AsteorBarMod:NeoForge [jar]" />
-        <item itemvalue="Gradle.AsteorBarMod:Fabric [build]" />
         <item itemvalue="Gradle.AsteorBarMod:Fabric [jar]" />
       </list>
     </recent_temporary>
@@ -364,7 +394,9 @@
       <updated>1708157160994</updated>
       <workItem from="1708157162359" duration="15282000" />
       <workItem from="1708177203649" duration="8411000" />
-      <workItem from="1708232024084" duration="26509000" />
+      <workItem from="1708232024084" duration="28841000" />
+      <workItem from="1708265613697" duration="4500000" />
+      <workItem from="1708490511878" duration="6575000" />
     </task>
     <task id="LOCAL-00001" summary="v1.3 update">
       <option name="closed" value="true" />
@@ -374,11 +406,30 @@
       <option name="project" value="LOCAL" />
       <updated>1708262979658</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="v1.3 update">
+      <option name="closed" value="true" />
+      <created>1708263208070</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1708263208070</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v1.3 update" />

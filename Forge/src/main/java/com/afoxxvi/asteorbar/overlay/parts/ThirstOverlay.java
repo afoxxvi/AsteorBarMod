@@ -5,19 +5,17 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.ghen.thirst.foundation.common.capability.IThirst;
+import dev.ghen.thirst.foundation.common.capability.ModCapabilities;
 import net.minecraft.client.gui.GuiGraphics;
-import toughasnails.api.potion.TANEffects;
-import toughasnails.api.thirst.IThirst;
-import toughasnails.api.thirst.ThirstHelper;
-import toughasnails.config.ThirstConfig;
 
-public class ToughAsNailsOverlay extends BaseOverlay {
+public class ThirstOverlay extends BaseOverlay {
     private int thirstBlinkTime = 0;
 
     @SuppressWarnings("DuplicatedCode")
     private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int thirstColor, int thirstLevel, float hydration, float exhaustion, boolean flip) {
         var boundColor = Utils.mixColor(0xff000000, thirstColor, 0.5);
-        if (highlight) boundColor = Utils.mixColor(0xffffffff, thirstColor, 0.2);
+        if (highlight) boundColor = Utils.mixColor(0xffffffff, thirstColor, 0.08);
         drawBound(guiGraphics, left, top, right, bottom, boundColor);
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.foodEmptyColor());
         final int innerWidth = right - left - 2;
@@ -29,7 +27,7 @@ public class ToughAsNailsOverlay extends BaseOverlay {
         }
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            var cap = ThirstConfig.thirstExhaustionThreshold.get();
+            var cap = 4.0F;
             int exhaustionWidth = (int) (innerWidth * (Math.min(cap, exhaustion) / cap));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
@@ -39,20 +37,17 @@ public class ToughAsNailsOverlay extends BaseOverlay {
     @SuppressWarnings("DuplicatedCode")
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.toughAsNails) return;
-        if (!ThirstHelper.isThirstEnabled()) return;
+        if (!Overlays.thirst) return;
         var player = gui.mc().player;
         if (player == null) return;
-        IThirst thirst = ThirstHelper.getThirst(player);
+        IThirst thirst = player.getCapability(ModCapabilities.PLAYER_THIRST).orElse((IThirst) null);
+        if (thirst == null) return;
         int level = thirst.getThirst();
-        float hydration = thirst.getHydration();
+        float quenched = thirst.getQuenched();
         float exhaustion = thirst.getExhaustion();
-        int thirstColor = 0xff1c5ee4;
-        if (player.hasEffect(TANEffects.THIRST.get())) {
-            thirstColor = 0xff76db4c;
-        }
+        int thirstColor = 0xff37bac4;
         if (AsteorBar.config.enableFoodBlink()) {
-            if (hydration <= 0.0F && gui.gui().getGuiTicks() % (Math.max(4, level) * 3L + 1) == 0) {
+            if (quenched <= 0.0F && gui.gui().getGuiTicks() % (Math.max(4, level) * 3L + 1) == 0) {
                 thirstBlinkTime = 2;
             }
             if (thirstBlinkTime > 0) {
@@ -67,30 +62,30 @@ public class ToughAsNailsOverlay extends BaseOverlay {
                 int left = screenWidth / 2 + 10;
                 int top = screenHeight - gui.rightHeight() + 4;
                 gui.rightHeight(6);
-                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, thirstBlinkTime > 0, thirstColor, level, hydration, exhaustion, true);
+                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, thirstBlinkTime > 0, thirstColor, level, quenched, exhaustion, true);
             }
             case Overlays.STYLE_TOP_LEFT -> {
                 int top = Overlays.vertical;
                 int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, hydration, exhaustion, false);
+                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, quenched, exhaustion, false);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_TOP_RIGHT -> {
                 int top = Overlays.vertical;
                 int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, hydration, exhaustion, true);
+                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, quenched, exhaustion, true);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_LEFT -> {
                 int top = screenHeight - Overlays.vertical;
                 int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, hydration, exhaustion, false);
+                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, quenched, exhaustion, false);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_RIGHT -> {
                 int top = screenHeight - Overlays.vertical;
                 int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, hydration, exhaustion, true);
+                draw(guiGraphics, left, top, left + Overlays.length, top + 5, thirstBlinkTime > 0, thirstColor, level, quenched, exhaustion, true);
                 Overlays.vertical += 6;
             }
         }

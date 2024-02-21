@@ -37,10 +37,16 @@ public class Overlays {
     private static List<Render> stringRenders = new ArrayList<>();
     private static boolean initialized = false;
     public static boolean toughAsNails = false;
+    public static boolean thirst = false;
+    public static boolean mekanism = false;
+    public static boolean dehydration = false;
 
     public static void init() {
         initialized = true;
         toughAsNails = AsteorBar.platformAdapter.isModLoaded("toughasnails");
+        thirst = AsteorBar.platformAdapter.isModLoaded("thirst");
+        mekanism = AsteorBar.platformAdapter.isModLoaded("mekanism");
+        dehydration = AsteorBar.platformAdapter.isModLoaded("dehydration");
     }
 
     public static void reset() {

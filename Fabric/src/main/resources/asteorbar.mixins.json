@@ -8,7 +8,8 @@
   "client": [
     "EntityMixin",
     "GuiMixin",
-    "RenderTypeMixin"
+    "RenderTypeMixin",
+    "third.DehydrationMixin"
   ],
   "server": [],
   "injectors": {

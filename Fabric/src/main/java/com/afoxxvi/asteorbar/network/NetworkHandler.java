@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class NetworkHandler {
-    private static final ResourceLocation CHANNEL = new ResourceLocation("assets/asteorbar", "network");
+    private static final ResourceLocation CHANNEL = new ResourceLocation("asteorbar", "network");
     private static final int INDEX_EXHAUSTION = 0;
     private static final int INDEX_SATURATION = 1;
     private static final int INDEX_ABSORPTION = 2;

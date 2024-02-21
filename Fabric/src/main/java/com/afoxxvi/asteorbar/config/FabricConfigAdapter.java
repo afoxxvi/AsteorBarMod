@@ -5,6 +5,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
@@ -379,8 +380,28 @@ public class FabricConfigAdapter implements ConfigAdapter {
         return config.HEALTH_BAR_HEALTH_COLOR_EMPTY;
     }
 
+    @Override
+    public boolean hookToughAsNails() {
+        return config.HOOK_TOUGH_AS_NAILS;
+    }
+
+    @Override
+    public boolean hookThirstWasTaken() {
+        return config.HOOK_THIRST_WAS_TAKEN;
+    }
+
+    @Override
+    public boolean hookMekanism() {
+        return config.HOOK_MEKANISM;
+    }
+
+    @Override
+    public boolean hookDehydration() {
+        return config.HOOK_DEHYDRATION;
+    }
+
     public static void init() {
-        AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, Toml4jConfigSerializer::new);
+        AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, JanksonConfigSerializer::new);
         config = AutoConfig.getConfigHolder(FabricConfigAdapter.AsteorBarConfig.class).getConfig();
     }
 
@@ -643,5 +664,21 @@ public class FabricConfigAdapter implements ConfigAdapter {
         @ConfigEntry.Gui.Tooltip
         @Comment("The color of the health bar when the mob is low health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
         public int HEALTH_BAR_HEALTH_COLOR_EMPTY = DefaultConfigAdapter.I.healthBarHealthColorEmpty();
+
+        @ConfigEntry.Gui.Tooltip
+        @Comment("Whether to hook Tough As Nails. If enabled, the mod will display the thirst bar.")
+        public boolean HOOK_TOUGH_AS_NAILS = DefaultConfigAdapter.I.hookToughAsNails();
+
+        @ConfigEntry.Gui.Tooltip
+        @Comment("Whether to hook Thirst Was Taken. If enabled, the mod will display the thirst bar.")
+        public boolean HOOK_THIRST_WAS_TAKEN = DefaultConfigAdapter.I.hookThirstWasTaken();
+
+        @ConfigEntry.Gui.Tooltip
+        @Comment("Whether to hook Mekanism. If enabled, the mod will display the energy bar.")
+        public boolean HOOK_MEKANISM = DefaultConfigAdapter.I.hookMekanism();
+
+        @ConfigEntry.Gui.Tooltip
+        @Comment("Whether to hook Dehydration. If enabled, the mod will display the thirst bar.")
+        public boolean HOOK_DEHYDRATION = DefaultConfigAdapter.I.hookDehydration();
     }
 }

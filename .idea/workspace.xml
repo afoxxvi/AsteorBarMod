@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9aa40c5-07ef-4a65-bfbb-e509e86c4dde" name="Changes" comment="v1.3 update">
-      <change beforePath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ExperienceBarOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/Common/src/main/java/com/afoxxvi/asteorbar/overlay/parts/ExperienceBarOverlay.java" afterDir="false" />
-    </list>
+    <list default="true" id="f9aa40c5-07ef-4a65-bfbb-e509e86c4dde" name="Changes" comment="v1.3 update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,36 +44,18 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="Forge" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="AsteorBarMod" type="f1a62948:ProjectNode" />
-                <item name="NeoForge" type="2d1252cf:ModuleNode" />
+                <item name="Fabric" type="2d1252cf:ModuleNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
@@ -109,40 +89,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.AsteorBarMod [:Forge:createMcpToSrg :Forge:createMcpToSrg :Forge:createMcpToSrg].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [build].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [clean].executor": "Run",
-    "Gradle.AsteorBarMod:Fabric [jar].executor": "Run",
-    "Gradle.AsteorBarMod:Forge [clean].executor": "Run",
-    "Gradle.AsteorBarMod:Forge [jar].executor": "Run",
-    "Gradle.AsteorBarMod:NeoForge [idePostSync].executor": "Run",
-    "Gradle.AsteorBarMod:NeoForge [jar].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "jdk.selected.JAVA_MODULE": "17",
-    "jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": "17",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/afoxx/IdeaProjects/AsteorBarMod",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.AsteorBarMod [:Forge:createMcpToSrg :Forge:createMcpToSrg :Forge:createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Fabric [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Forge [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:Forge [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:NeoForge [idePostSync].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.AsteorBarMod:NeoForge [jar].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;jdk.selected.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/afoxx/IdeaProjects/AsteorBarMod&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk": [
-      "17=C:/Program Files/Java/jdk-17"
+  &quot;keyToStringList&quot;: {
+    &quot;jdk.preference.com.intellij.ui.dsl.builder.impl.RowImpl.sdk&quot;: [
+      &quot;17=C:/Program Files/Java/jdk-17&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\afoxx\IdeaProjects\AsteorBarMod" />
@@ -382,6 +362,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="v1.3 update" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.3 update" />
+    <MESSAGE value="migrate to 1.20.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="migrate to 1.20.1" />
   </component>
 </project>

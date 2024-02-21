@@ -371,4 +371,24 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     public int healthBarHealthColorEmpty() {
         return 0xAA800000;
     }
+
+    @Override
+    public boolean hookToughAsNails() {
+        return true;
+    }
+
+    @Override
+    public boolean hookThirstWasTaken() {
+        return true;
+    }
+
+    @Override
+    public boolean hookMekanism() {
+        return true;
+    }
+
+    @Override
+    public boolean hookDehydration() {
+        return true;
+    }
 }

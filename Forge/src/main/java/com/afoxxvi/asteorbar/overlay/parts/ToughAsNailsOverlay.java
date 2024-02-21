@@ -39,7 +39,7 @@ public class ToughAsNailsOverlay extends BaseOverlay {
     @SuppressWarnings("DuplicatedCode")
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.toughAsNails) return;
+        if (!Overlays.toughAsNails || !AsteorBar.config.hookToughAsNails()) return;
         if (!ThirstHelper.isThirstEnabled()) return;
         var player = gui.mc().player;
         if (player == null) return;
@@ -52,7 +52,7 @@ public class ToughAsNailsOverlay extends BaseOverlay {
             thirstColor = 0xff76db4c;
         }
         if (AsteorBar.config.enableFoodBlink()) {
-            if (player.getFoodData().getSaturationLevel() <= 0.0F && gui.gui().getGuiTicks() % (Math.max(4, level) * 3L + 1) == 0) {
+            if (hydration <= 0.0F && gui.gui().getGuiTicks() % (Math.max(4, level) * 3L + 1) == 0) {
                 thirstBlinkTime = 2;
             }
             if (thirstBlinkTime > 0) {

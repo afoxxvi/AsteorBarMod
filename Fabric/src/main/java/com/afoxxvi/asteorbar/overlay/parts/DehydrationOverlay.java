@@ -5,48 +5,48 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.dehydration.access.ThirstManagerAccess;
 import net.dehydration.init.ConfigInit;
 import net.dehydration.init.EffectInit;
 import net.dehydration.item.LeatherFlask;
 import net.dehydration.misc.ThirstTooltipData;
 import net.dehydration.thirst.ThirstManager;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 
 public class DehydrationOverlay extends BaseOverlay {
     private int blinkTime = 0;
     private final int[] qualityColor = {0xff36abff, 0xff5a99b0, 0xffc3e71a, 0xff7ec9ff};
 
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int thirstColor, int foodLevel, float thirstQuench, int quality, float exhaustion, float alpha, boolean flip) {
+    private void draw(PoseStack poseStack, int left, int top, int right, int bottom, boolean highlight, int thirstColor, int foodLevel, float thirstQuench, int quality, float exhaustion, float alpha, boolean flip) {
         var boundColor = Utils.mixColor(0xff000000, thirstColor, 0.5);
         if (highlight) boundColor = Utils.mixColor(0xffffffff, thirstColor, 0.08);
-        drawBound(guiGraphics, left, top, right, bottom, boundColor);
-        drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.foodEmptyColor());
+        drawBound(poseStack, left, top, right, bottom, boundColor);
+        drawEmptyFill(poseStack, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.foodEmptyColor());
         final int innerWidth = right - left - 2;
         int foodWidth = (int) (innerWidth * foodLevel / 20.0F);
-        drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, foodWidth, thirstColor, flip);
+        drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, foodWidth, thirstColor, flip);
         if (thirstQuench > 0) {
             int quenchWidth = (int) (innerWidth * (thirstQuench / 20.0F));
             quenchWidth = Math.min(quenchWidth, innerWidth - foodWidth);
             RenderSystem.setShaderColor(1, 1, 1, alpha);
             if (flip) {
-                drawFillFlip(guiGraphics, left + 1, top + 1, right - 1 - foodWidth, bottom - 1, quenchWidth, qualityColor[Math.max(0, Math.min(3, quality))], true);
+                drawFillFlip(poseStack, left + 1, top + 1, right - 1 - foodWidth, bottom - 1, quenchWidth, qualityColor[Math.max(0, Math.min(3, quality))], true);
             } else {
-                drawFillFlip(guiGraphics, left + 1 + foodWidth, top + 1, right - 1, bottom - 1, quenchWidth, qualityColor[Math.max(0, Math.min(3, quality))], false);
+                drawFillFlip(poseStack, left + 1 + foodWidth, top + 1, right - 1, bottom - 1, quenchWidth, qualityColor[Math.max(0, Math.min(3, quality))], false);
             }
             RenderSystem.setShaderColor(1, 1, 1, 1);
         }
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
             int exhaustionWidth = (int) (innerWidth * (Math.min(4.0F, exhaustion) / 4.0F));
-            drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
+            drawTextureFillFlip(poseStack, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
         if (!Overlays.dehydration || !AsteorBar.config.hookDehydration()) return;
         var player = gui.mc().player;
         if (player == null) return;
@@ -72,7 +72,7 @@ public class DehydrationOverlay extends BaseOverlay {
         int thirstQuench = 0;
         int quality = 0;
         float alpha = 1.0F;
-        if (ConfigInit.CONFIG.thirst_preview && thirst < 20) {
+        if (thirst < 20) {
             ItemStack itemStack = null;
             if (!player.getMainHandItem().isEmpty() && !player.getMainHandItem().getTooltipImage().isEmpty() && player.getMainHandItem().getTooltipImage().get() instanceof ThirstTooltipData) {
                 itemStack = player.getMainHandItem();
@@ -96,30 +96,30 @@ public class DehydrationOverlay extends BaseOverlay {
                 int left = screenWidth / 2 + 10;
                 int top = screenHeight - gui.rightHeight() + 4;
                 gui.rightHeight(6);
-                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
+                draw(poseStack, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
             }
             case Overlays.STYLE_TOP_LEFT -> {
                 int top = Overlays.vertical;
                 int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, false);
+                draw(poseStack, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, false);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_TOP_RIGHT -> {
                 int top = Overlays.vertical;
                 int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
+                draw(poseStack, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_LEFT -> {
                 int top = screenHeight - Overlays.vertical;
                 int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, false);
+                draw(poseStack, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, false);
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_RIGHT -> {
                 int top = screenHeight - Overlays.vertical;
                 int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
+                draw(poseStack, left, top, left + Overlays.length, top + 5, blinkTime > 0, thirstColor, thirst, thirstQuench, quality, dehydration, alpha, true);
                 Overlays.vertical += 6;
             }
         }

@@ -188,7 +188,7 @@ public class NetworkHandler {
             context.get().enqueueWork(() -> {
                 var player = getPlayer(context.get());
                 if (player != null) {
-                    var entity = player.level().getEntity(packet.entityId);
+                    var entity = player.getLevel().getEntity(packet.entityId);
                     if (entity instanceof LivingEntity livingEntity) {
                         livingEntity.setAbsorptionAmount(packet.absorption);
                     }

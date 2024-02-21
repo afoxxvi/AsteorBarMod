@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.*;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,25 +62,25 @@ public class Overlays {
         rightHeight = 39;
     }
 
-    public static void renderString(GuiGraphics guiGraphics) {
+    public static void renderString(PoseStack poseStack) {
         if (stringRenders == null) return;
-        guiGraphics.pose().pushPose();
+        poseStack.pushPose();
         float scale = (float) AsteorBar.config.overlayTextScale();
-        guiGraphics.pose().scale(scale, scale, 1);
+        poseStack.scale(scale, scale, 1);
         var font = Minecraft.getInstance().font;
         for (var render : stringRenders) {
             var width = font.width(render.text);
             var x = render.x / scale + width / 2f * (1 / scale - 1);
             var y = render.y / scale + font.lineHeight / 2f * (1 / scale - 1);
             if (render.bound) {
-                GuiHelper.drawString(guiGraphics, render.text, (int) x + 1, (int) y, render.boundColor, render.shadow);
-                GuiHelper.drawString(guiGraphics, render.text, (int) x - 1, (int) y, render.boundColor, render.shadow);
-                GuiHelper.drawString(guiGraphics, render.text, (int) x, (int) y + 1, render.boundColor, render.shadow);
-                GuiHelper.drawString(guiGraphics, render.text, (int) x, (int) y - 1, render.boundColor, render.shadow);
+                GuiHelper.drawString(poseStack, render.text, (int) x + 1, (int) y, render.boundColor, render.shadow);
+                GuiHelper.drawString(poseStack, render.text, (int) x - 1, (int) y, render.boundColor, render.shadow);
+                GuiHelper.drawString(poseStack, render.text, (int) x, (int) y + 1, render.boundColor, render.shadow);
+                GuiHelper.drawString(poseStack, render.text, (int) x, (int) y - 1, render.boundColor, render.shadow);
             }
-            GuiHelper.drawString(guiGraphics, render.text, (int) x, (int) y, render.color, render.shadow);
+            GuiHelper.drawString(poseStack, render.text, (int) x, (int) y, render.color, render.shadow);
         }
-        guiGraphics.pose().popPose();
+        poseStack.popPose();
         stringRenders.clear();
     }
 

@@ -5,20 +5,20 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 public class ExperienceBarOverlay extends BaseOverlay {
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float exp, String levelStr, boolean flip) {
-        drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.experienceBoundColor());
-        drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.experienceEmptyColor());
+    private void draw(PoseStack poseStack, int left, int top, int right, int bottom, float exp, String levelStr, boolean flip) {
+        drawBound(poseStack, left, top, right, bottom, AsteorBar.config.experienceBoundColor());
+        drawEmptyFill(poseStack, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.experienceEmptyColor());
         int innerWidth = right - left - 2;
         int expWidth = (int) (innerWidth * exp);
         if (expWidth > 0) {
-            drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, expWidth, AsteorBar.config.experienceColor(), flip);
+            drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, expWidth, AsteorBar.config.experienceColor(), flip);
         }
         int textureWidth = Math.min(179, Math.max(0, (innerWidth + 5) / 10 - 1) * 10 + 9);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        drawTextureFillColor(guiGraphics, left + 1, top, innerWidth, 5, 10, Y_EXPERIENCE_DECORATION, textureWidth, 5, AsteorBar.config.experienceColor());
+        drawTextureFillColor(poseStack, left + 1, top, innerWidth, 5, 10, Y_EXPERIENCE_DECORATION, textureWidth, 5, AsteorBar.config.experienceColor());
         RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         if (AsteorBar.config.displayExperienceLevel()) {
             int x = (right + left) / 2;
@@ -28,10 +28,10 @@ public class ExperienceBarOverlay extends BaseOverlay {
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var mc = gui.mc();
         var player = mc.player;
-        if (player == null || player.jumpableVehicle() != null || gui.mc().options.hideGui) {
+        if (player == null || player.isRidingJumpable() || gui.mc().options.hideGui) {
             return;
         }
         if (mc.gameMode == null || !mc.gameMode.hasExperience()) {

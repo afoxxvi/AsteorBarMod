@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.listener;
 
 import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.AsteorBarForge;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.Minecraft;
@@ -19,7 +20,7 @@ public class ForgeEventListener {
     public static long tickCount = 0L;
     public static final ResourceLocation TOUGH_AS_NAILS_THIRST_LEVEL = new ResourceLocation("toughasnails", "thirst_level");
     public static final ResourceLocation THIRST_THIRST_LEVEL = new ResourceLocation("thirst", "thirst_level");
-    public static final ResourceLocation MEKANISM_ENERGY_LEVEL = new ResourceLocation("mekanism", "energy_level");
+    public static final ResourceLocation MEKANISM_ENERGY_LEVEL = new ResourceLocation("mekanism", "mekasuit_energy_level");
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -32,6 +33,7 @@ public class ForgeEventListener {
     public static void disableVanillaOverlays(RenderGuiOverlayEvent.Pre event) {
         if (!AsteorBar.config.enableOverlay()) return;
         NamedGuiOverlay overlay = event.getOverlay();
+        //AsteorBarForge.LOGGER.info(overlay.id().toString());
         if (overlay == VanillaGuiOverlay.VIGNETTE.type()) {
             Overlays.reset();
         }

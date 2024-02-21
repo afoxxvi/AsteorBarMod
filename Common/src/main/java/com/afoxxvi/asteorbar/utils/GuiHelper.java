@@ -4,26 +4,27 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 
 @SuppressWarnings("unused")
 public class GuiHelper {
-    public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int textureX, int textureY, int width, int height) {
-        drawTexturedRect(guiGraphics, left, top, left + width, top + height, textureX, textureY, textureX + width, textureY + height, 256, 256);
+    public static void drawTexturedRect(PoseStack poseStack, int left, int top, int textureX, int textureY, int width, int height) {
+        drawTexturedRect(poseStack, left, top, left + width, top + height, textureX, textureY, textureX + width, textureY + height, 256, 256);
     }
 
-    public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int textureX, int textureY, int width, int height, int color) {
-        drawTexturedRectColor(guiGraphics, left, top, left + width, top + height, textureX, textureY, textureX + width, textureY + height, 256, 256, color);
+    public static void drawTexturedRectColor(PoseStack poseStack, int left, int top, int textureX, int textureY, int width, int height, int color) {
+        drawTexturedRectColor(poseStack, left, top, left + width, top + height, textureX, textureY, textureX + width, textureY + height, 256, 256, color);
     }
 
-    public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight) {
+    public static void drawTexturedRect(PoseStack poseStack, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-        var matrix = guiGraphics.pose().last().pose();
+        var matrix = poseStack.last().pose();
         var z = 0;
         var uv_left = uvLeft / textureWidth;
         var uv_top = uvTop / textureHeight;
@@ -37,12 +38,12 @@ public class GuiHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
+    public static void drawTexturedRectColor(PoseStack poseStack, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().getBuilder();
         builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
-        var matrix = guiGraphics.pose().last().pose();
+        var matrix = poseStack.last().pose();
         var uv_left = uvLeft / textureWidth;
         var uv_top = uvTop / textureHeight;
         var uv_right = uvRight / textureWidth;
@@ -55,16 +56,17 @@ public class GuiHelper {
         RenderSystem.disableBlend();
     }
 
-    public static void drawSolidColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
-        guiGraphics.fill(left, top, right, bottom, color);
+    public static void drawSolidColor(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
+        GuiComponent.fill(poseStack, left, top, right, bottom, color);
     }
 
-    public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color) {
-        drawString(guiGraphics, string, left, top, color, true);
+    public static void drawString(PoseStack poseStack, String string, int left, int top, int color) {
+        drawString(poseStack, string, left, top, color, true);
     }
 
-    public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color, boolean shadow) {
-        guiGraphics.drawString(Minecraft.getInstance().font, string, left, top, color, shadow);
+    public static void drawString(PoseStack poseStack, String string, int left, int top, int color, boolean shadow) {
+        if (shadow) Minecraft.getInstance().font.drawShadow(poseStack, string, left, top, color);
+        else Minecraft.getInstance().font.draw(poseStack, string, left, top, color);
     }
 
     public static void drawSolidGradient(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
@@ -110,8 +112,7 @@ public class GuiHelper {
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, float left, float top, int color, boolean shadow) {
-        Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer,
-                Font.DisplayMode.NORMAL, 0, 0xF000F0);
+        Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer, false, 0, 0xF000F0);
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {

@@ -3,17 +3,17 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 public class AirLevelOverlay extends BaseOverlay {
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int air, boolean flip) {
+    private void draw(PoseStack poseStack, int left, int top, int right, int bottom, int air, boolean flip) {
         int airWidth = (right - left - 2) * air / 300;
-        drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.airBoundColor());
-        drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, airWidth, AsteorBar.config.airColor(), flip);
+        drawBound(poseStack, left, top, right, bottom, AsteorBar.config.airBoundColor());
+        drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, airWidth, AsteorBar.config.airColor(), flip);
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var player = gui.mc().player;
         if (player == null) return;
         int air = player.getAirSupply();

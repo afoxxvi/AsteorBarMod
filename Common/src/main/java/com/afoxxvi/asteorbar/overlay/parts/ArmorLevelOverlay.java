@@ -4,23 +4,23 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
-import net.minecraft.client.gui.GuiGraphics;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class ArmorLevelOverlay extends BaseOverlay {
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int armor, double armorToughness, boolean flip) {
+    private void draw(PoseStack poseStack, int left, int top, int right, int bottom, int armor, double armorToughness, boolean flip) {
         int armorWidth = (int) ((right - left - 2) * Math.min(1.0, armor / 20f));
-        drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.armorBoundColor());
+        drawBound(poseStack, left, top, right, bottom, AsteorBar.config.armorBoundColor());
         if (armor < 20) {
-            drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.armorEmptyColor());
+            drawEmptyFill(poseStack, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.armorEmptyColor());
         }
-        drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, armorWidth, AsteorBar.config.armorColor(), flip);
+        drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, armorWidth, AsteorBar.config.armorColor(), flip);
         if (armor > 20) {
             Overlays.addStringRender((left + right) / 2, top - 2, 0xFFFFFF, String.valueOf(armor), Overlays.ALIGN_CENTER, true);
         }
         if (armorToughness > 0) {
             int armorToughnessWidth = (int) ((right - left) * Math.min(1.0, armorToughness / 12.0));
-            drawBoundFlip(guiGraphics, left, top, right, bottom, AsteorBar.config.armorToughnessColor(), armorToughnessWidth, flip);
+            drawBoundFlip(poseStack, left, top, right, bottom, AsteorBar.config.armorToughnessColor(), armorToughnessWidth, flip);
             if (armorToughness > 12) {
                 if (flip) {
                     Overlays.addStringRender(right - 2, top - 2, 0xdeecff, Utils.formatNumber(armorToughness), Overlays.ALIGN_RIGHT, true);
@@ -33,7 +33,7 @@ public class ArmorLevelOverlay extends BaseOverlay {
 
     @SuppressWarnings("DuplicatedCode")
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (AsteorBar.config.overwriteVanillaArmorBar()) {
             var player = gui.mc().player;
             if (player == null) return;

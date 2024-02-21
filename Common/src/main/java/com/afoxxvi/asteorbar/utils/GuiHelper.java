@@ -112,7 +112,7 @@ public class GuiHelper {
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, float left, float top, int color, boolean shadow) {
-        Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer, false, 0, 0xF000F0);
+        Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, 0xF000F0);
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {

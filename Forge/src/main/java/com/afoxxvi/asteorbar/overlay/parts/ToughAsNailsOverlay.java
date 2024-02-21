@@ -39,7 +39,7 @@ public class ToughAsNailsOverlay extends BaseOverlay {
     @SuppressWarnings("DuplicatedCode")
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.toughAsNails) return;
+        if (!Overlays.toughAsNails || !AsteorBar.config.hookToughAsNails()) return;
         if (!ThirstHelper.isThirstEnabled()) return;
         var player = gui.mc().player;
         if (player == null) return;

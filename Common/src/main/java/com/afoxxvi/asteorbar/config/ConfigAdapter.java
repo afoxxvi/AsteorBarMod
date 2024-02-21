@@ -149,4 +149,12 @@ public interface ConfigAdapter {
     int healthBarHealthColorFull();
 
     int healthBarHealthColorEmpty();
+
+    boolean hookToughAsNails();
+
+    boolean hookThirstWasTaken();
+
+    boolean hookMekanism();
+
+    boolean hookDehydration();
 }

@@ -9,7 +9,6 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 
@@ -17,11 +16,10 @@ import org.slf4j.Logger;
 public class AsteorBarNeoForge {
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public AsteorBarNeoForge() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    public AsteorBarNeoForge(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup);
-        NeoForge.EVENT_BUS.register(NetworkHandler.class);
-        NetworkHandler.init();
+        modEventBus.addListener(NetworkHandler::register);
+        NeoForge.EVENT_BUS.addListener(NetworkHandler::onPlayerTick);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, NeoForgeConfigAdapter.Config.CONFIG);
         AsteorBar.platformAdapter = new NeoForgePlatformAdapter();
         AsteorBar.config = new NeoForgeConfigAdapter();

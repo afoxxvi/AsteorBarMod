@@ -1,7 +1,7 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.mixin.third.ToughAsNailsTemperatureMixin;
+import com.afoxxvi.asteorbar.mixin.thrid.ToughAsNailsTemperatureMixin;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
@@ -11,7 +11,6 @@ import toughasnails.api.potion.TANEffects;
 import toughasnails.api.thirst.IThirst;
 import toughasnails.api.thirst.ThirstHelper;
 import toughasnails.init.ModConfig;
-import toughasnails.temperature.TemperatureOverlayRenderer;
 
 public class ToughAsNailsOverlay extends BaseOverlay {
     private int thirstBlinkTime = 0;

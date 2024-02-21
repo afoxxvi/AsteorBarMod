@@ -3,7 +3,8 @@
   "package": "com.afoxxvi.asteorbar.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ServerPlayerMixin"
+    "ServerPlayerMixin",
+    "thrid.ToughAsNailsTemperatureMixin"
   ],
   "client": [
     "EntityMixin",

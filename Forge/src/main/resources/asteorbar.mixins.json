@@ -9,5 +9,8 @@
   "injectors": {
     "defaultRequire": 1
   },
-  "refmap": "asteorbar.mixins.refmap.json"
+  "refmap": "asteorbar.mixins.refmap.json",
+  "mixins": [
+    "third.ToughAsNailsTemperatureMixin"
+  ]
 }

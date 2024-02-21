@@ -11,7 +11,6 @@ import toughasnails.api.potion.TANEffects;
 import toughasnails.api.thirst.IThirst;
 import toughasnails.api.thirst.ThirstHelper;
 import toughasnails.init.ModConfig;
-import toughasnails.temperature.TemperatureOverlayRenderer;
 
 public class ToughAsNailsOverlay extends BaseOverlay {
     private int thirstBlinkTime = 0;

@@ -4,6 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarNeoForge;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.NeoForgeRenderGui;
+import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,6 +23,7 @@ public class ModEventListener {
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "player_health"), new NeoForgeRenderGui(PLAYER_HEALTH));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "food_level"), new NeoForgeRenderGui(FOOD_LEVEL));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "mount_health"), new NeoForgeRenderGui(MOUNT_HEALTH));
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "thirst_level"), new NeoForgeRenderGui(new ToughAsNailsOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "experience_bar"), new NeoForgeRenderGui(EXPERIENCE_BAR));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "armor_level"), new NeoForgeRenderGui(ARMOR_LEVEL));
         event.registerBelow(VanillaGuiOverlay.AIR_LEVEL.id(), new ResourceLocation(AsteorBar.MOD_ID, "air_level"), new NeoForgeRenderGui(AIR_LEVEL));

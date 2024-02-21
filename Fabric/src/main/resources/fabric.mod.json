@@ -17,6 +17,9 @@
     ],
     "main": [
       "com.afoxxvi.asteorbar.AsteorBarFabric"
+    ],
+    "modmenu": [
+      "com.afoxxvi.asteorbar.config.ModMenuIntegration"
     ]
   },
   "depends": {

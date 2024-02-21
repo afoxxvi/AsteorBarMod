@@ -47,7 +47,7 @@ public class DehydrationOverlay extends BaseOverlay {
 
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.dehydration) return;
+        if (!Overlays.dehydration || !AsteorBar.config.hookDehydration()) return;
         var player = gui.mc().player;
         if (player == null) return;
         ThirstManager thirstManager = ((ThirstManagerAccess) player).getThirstManager();

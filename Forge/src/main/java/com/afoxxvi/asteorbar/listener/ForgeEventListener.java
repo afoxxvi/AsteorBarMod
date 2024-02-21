@@ -41,9 +41,9 @@ public class ForgeEventListener {
                 || (AsteorBar.config.overwriteVanillaExperienceBar() && overlay == VanillaGuiOverlay.EXPERIENCE_BAR.type())
                 || overlay == VanillaGuiOverlay.MOUNT_HEALTH.type()
                 || (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type())
-                || Overlays.toughAsNails && overlay.id().equals(TOUGH_AS_NAILS_THIRST_LEVEL)
-                || Overlays.thirst && overlay.id().equals(THIRST_THIRST_LEVEL)
-                || Overlays.mekanism && overlay.id().equals(MEKANISM_ENERGY_LEVEL)
+                || Overlays.toughAsNails && AsteorBar.config.hookToughAsNails() && overlay.id().equals(TOUGH_AS_NAILS_THIRST_LEVEL)
+                || Overlays.thirst && AsteorBar.config.hookThirstWasTaken() && overlay.id().equals(THIRST_THIRST_LEVEL)
+                || Overlays.mekanism && AsteorBar.config.hookMekanism() && overlay.id().equals(MEKANISM_ENERGY_LEVEL)
         ) {
             event.setCanceled(true);
         }

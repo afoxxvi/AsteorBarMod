@@ -37,7 +37,7 @@ public class ThirstOverlay extends BaseOverlay {
     @SuppressWarnings("DuplicatedCode")
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.thirst) return;
+        if (!Overlays.thirst || !AsteorBar.config.hookThirstWasTaken()) return;
         var player = gui.mc().player;
         if (player == null) return;
         IThirst thirst = player.getCapability(ModCapabilities.PLAYER_THIRST).orElse((IThirst) null);

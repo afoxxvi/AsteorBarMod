@@ -23,7 +23,7 @@ public class MekanismOverlay extends BaseOverlay {
 
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!Overlays.mekanism) return;
+        if (!Overlays.mekanism || !AsteorBar.config.hookMekanism()) return;
         FloatingLong capacity = FloatingLong.ZERO;
         FloatingLong stored = FloatingLong.ZERO;
         var player = gui.mc().player;

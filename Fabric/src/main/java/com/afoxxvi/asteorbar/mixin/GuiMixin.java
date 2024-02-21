@@ -17,11 +17,11 @@ public abstract class GuiMixin {
 
     @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderPlayerHealth(Lcom/mojang/blaze3d/vertex/PoseStack;)V"), method = "render")
     public void renderPlayerHealth(Gui instance, PoseStack poseStack) {
+        Overlays.reset();
         if (Overlays.style == Overlays.STYLE_NONE) {
             renderPlayerHealthRaw(poseStack);
             return;
         }
-        Overlays.reset();
         var mc = Minecraft.getInstance();
         var tick = 0f;
         var width = mc.getWindow().getGuiScaledWidth();

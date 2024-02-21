@@ -34,6 +34,7 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
     include "me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}"
+    modApi "com.terraformersmc:modmenu:${project.mod_menu_version}"
     if (tough_as_nails_version_fabric != "0") {
         modImplementation "curse.maven:tough-as-nails-246391:${tough_as_nails_version_fabric}"
     }

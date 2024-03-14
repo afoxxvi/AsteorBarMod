@@ -37,10 +37,12 @@ public class Overlays {
     private static List<Render> stringRenders = new ArrayList<>();
     private static boolean initialized = false;
     public static boolean toughAsNails = false;
+    public static boolean lightShield = false;
 
     public static void init() {
         initialized = true;
         toughAsNails = AsteorBar.platformAdapter.isModLoaded("toughasnails");
+        lightShield = AsteorBar.platformAdapter.isModLoaded("lightshield");
     }
 
     public static void reset() {

@@ -107,6 +107,9 @@ dependencies {
     if (tough_as_nails_version_neoforge != "0") {
         compileOnly "curse.maven:tough-as-nails-246391:${tough_as_nails_version_neoforge}"
     }
+    if (light_shield_version_neoforge != "0") {
+        compileOnly "luoyu:light-shield:${light_shield_version_neoforge}"
+    }
 }
 
 compileJava {

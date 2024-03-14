@@ -36,7 +36,9 @@ public class NeoForgeEventListener {
                 || overlay == VanillaGuiOverlay.AIR_LEVEL.type()
                 || (AsteorBar.config.overwriteVanillaExperienceBar() && overlay == VanillaGuiOverlay.EXPERIENCE_BAR.type())
                 || overlay == VanillaGuiOverlay.MOUNT_HEALTH.type()
-                || (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type())) {
+                || (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type())
+                || overlay.id().getNamespace().equals("lightshield")
+        ) {
             event.setCanceled(true);
         }
     }

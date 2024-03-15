@@ -81,7 +81,9 @@ public class ExperienceBarOverlay extends BaseOverlay {
             int x = -1, y = -1;
             int len = 0;
             boolean inside = false;
-            switch (Overlays.style) {
+            int style = Overlays.style;
+            if (!AsteorBar.config.overwriteVanillaExperienceBar()) style = Overlays.STYLE_ABOVE_HOT_BAR_LONG;
+            switch (style) {
                 case Overlays.STYLE_NONE -> {
 
                 }

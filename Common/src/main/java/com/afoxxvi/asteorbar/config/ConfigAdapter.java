@@ -112,6 +112,8 @@ public interface ConfigAdapter {
 
     double maxDistance();
 
+    boolean showOnSelf();
+
     boolean showOnPlayers();
 
     boolean showOnBosses();

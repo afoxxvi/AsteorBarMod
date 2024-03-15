@@ -61,6 +61,7 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         //mob config
         public static final ForgeConfigSpec.BooleanValue ENABLE_HEALTH_BAR;
         public static final ForgeConfigSpec.DoubleValue MAX_DISTANCE;
+        public static final ForgeConfigSpec.BooleanValue SHOW_ON_SELF;
         public static final ForgeConfigSpec.BooleanValue SHOW_ON_PLAYERS;
         public static final ForgeConfigSpec.BooleanValue SHOW_ON_BOSSES;
         public static final ForgeConfigSpec.BooleanValue SHOW_ON_FULL_HEALTH_WITHOUT_ABSORPTION;
@@ -302,6 +303,10 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment("The maximum distance to display mob health bar.")
                     .translation("text.autoconfig.asteorbar.option.entity.maxDistance")
                     .defineInRange("maxDistance", DefaultConfigAdapter.I.maxDistance(), 0.0, 100.0);
+            SHOW_ON_SELF = BUILDER
+                    .comment("Whether to display health bar on self.")
+                    .translation("text.autoconfig.asteorbar.option.entity.showOnSelf")
+                    .define("showOnSelf", DefaultConfigAdapter.I.showOnSelf());
             SHOW_ON_PLAYERS = BUILDER
                     .comment("Whether to display health bar on players.")
                     .translation("text.autoconfig.asteorbar.option.entity.showOnPlayers")
@@ -681,6 +686,11 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     @Override
     public double maxDistance() {
         return Config.MAX_DISTANCE.get();
+    }
+
+    @Override
+    public boolean showOnSelf() {
+        return Config.SHOW_ON_SELF.get();
     }
 
     @Override

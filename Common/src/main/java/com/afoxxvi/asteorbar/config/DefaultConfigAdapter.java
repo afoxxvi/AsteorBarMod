@@ -278,6 +278,11 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean showOnSelf() {
+        return true;
+    }
+
+    @Override
     public boolean showOnPlayers() {
         return true;
     }

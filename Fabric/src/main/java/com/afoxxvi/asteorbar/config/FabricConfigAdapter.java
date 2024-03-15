@@ -289,6 +289,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean showOnSelf() {
+        return config.entity.showOnSelf;
+    }
+
+    @Override
     public boolean showOnPlayers() {
         return config.entity.showOnPlayers;
     }
@@ -535,6 +540,8 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean enableHealthBar = DefaultConfigAdapter.I.enableHealthBar();
             @Comment("The maximum distance to display mob health bar.")
             public double maxDistance = DefaultConfigAdapter.I.maxDistance();
+            @Comment("Whether to display health bar on self.")
+            public boolean showOnSelf = DefaultConfigAdapter.I.showOnSelf();
             @Comment("Whether to display health bar on players.")
             public boolean showOnPlayers = DefaultConfigAdapter.I.showOnPlayers();
             @Comment("Whether to display health bar on bosses.")

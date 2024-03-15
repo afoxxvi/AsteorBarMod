@@ -38,6 +38,46 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int fullFoodLevelValue() {
+        return config.overlay.fullFoodLevelValue;
+    }
+
+    @Override
+    public double fullSaturationValue() {
+        return config.overlay.fullSaturationValue;
+    }
+
+    @Override
+    public double fullExhaustionValue() {
+        return config.overlay.fullExhaustionValue;
+    }
+
+    @Override
+    public int fullArmorValue() {
+        return config.overlay.fullArmorValue;
+    }
+
+    @Override
+    public int fullArmorToughnessValue() {
+        return config.overlay.fullArmorToughnessValue;
+    }
+
+    @Override
+    public int fullHealthValue() {
+        return config.overlay.fullHealthValue;
+    }
+
+    @Override
+    public boolean enableStackHealthBar() {
+        return config.overlay.enableStackHealthBar;
+    }
+
+    @Override
+    public String stackHealthBarColors() {
+        return config.overlay.stackHealthBarColors;
+    }
+
+    @Override
     public int healthColorNormal() {
         return config.overlay.healthColorNormal;
     }
@@ -426,6 +466,7 @@ public class FabricConfigAdapter implements ConfigAdapter {
         EntityConfig entity = new EntityConfig();
         @ConfigEntry.Gui.CollapsibleObject
         HookConfig hook = new HookConfig();
+
         //overlay config
         static class OverlayConfig {
             @Comment("Whether to enable the overlay. If disabled, all other overlay options will be ignored.")
@@ -434,6 +475,25 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public int overlayLayoutStyle = DefaultConfigAdapter.I.overlayLayoutStyle();
             @Comment("The text scale of the overlay")
             public double overlayTextScale = DefaultConfigAdapter.I.overlayTextScale();
+            @Comment("Full food level value. If you are using a mod that changes the max food level, you may need to change this value.")
+            public int fullFoodLevelValue = DefaultConfigAdapter.I.fullFoodLevelValue();
+            @Comment("Full saturation value. If you are using a mod that changes the max saturation value, you may need to change this value.")
+            public double fullSaturationValue = DefaultConfigAdapter.I.fullSaturationValue();
+            @Comment("Full exhaustion value. If you are using a mod that changes the max exhaustion value, you may need to change this value.")
+            public double fullExhaustionValue = DefaultConfigAdapter.I.fullExhaustionValue();
+            @Comment("Full armor value. If you are using a mod that changes the max armor value, you may need to change this value.")
+            public int fullArmorValue = DefaultConfigAdapter.I.fullArmorValue();
+            @Comment("Full armor toughness value. If you are using a mod that changes the max armor toughness value, you may need to change this value.")
+            public int fullArmorToughnessValue = DefaultConfigAdapter.I.fullArmorToughnessValue();
+            @Comment("Full health value. Determines the amount single health bar represents. No effect while stack health bar is disabled.")
+            public int fullHealthValue = DefaultConfigAdapter.I.fullHealthValue();
+            @Comment("Whether to enable stack health bar. If enabled, the health bar will be displayed like multiple health bars with different colors stacked together. " +
+                    "Note that once enabled, the health bar color in specific conditions will be rendered half transparently on the health bar, " +
+                    "and if the absorption display mode is 0, it will be changed to 2  in game dynamically to avoid ambiguity.")
+            public boolean enableStackHealthBar = DefaultConfigAdapter.I.enableStackHealthBar();
+            @Comment("The color list of the stack health bar. Split by commas, each color must be in ARGB format, no space, no illegal characters, no tail comma. For example: '#FF00FF00,#FFFF0000,#FF0000FF', " +
+                    "the health bars will pick colors from the list sequentially, and return to the first color when the list is exhausted.")
+            public String stackHealthBarColors = DefaultConfigAdapter.I.stackHealthBarColors();
             @Comment("The color of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
             public int healthColorNormal = DefaultConfigAdapter.I.healthColorNormal();
             @Comment("The color of the poison health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
@@ -534,6 +594,7 @@ public class FabricConfigAdapter implements ConfigAdapter {
             @Comment("The vertical padding of the bars if using corner layout.")
             public int cornerVerticalPadding = DefaultConfigAdapter.I.cornerVerticalPadding();
         }
+
         //mob config
         static class EntityConfig {
             @Comment("Whether to enable health bar for entity. If disabled, all other health bar options will be ignored.")
@@ -584,6 +645,7 @@ public class FabricConfigAdapter implements ConfigAdapter {
             @Comment("The color of the health bar when the mob is low health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
             public int healthBarHealthColorEmpty = DefaultConfigAdapter.I.healthBarHealthColorEmpty();
         }
+
         static class HookConfig {
             @Comment("Whether to hook Tough As Nails. If enabled, the mod will display the thirst bar.")
             public boolean hookToughAsNails = DefaultConfigAdapter.I.hookToughAsNails();

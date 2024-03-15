@@ -11,6 +11,14 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue ENABLE_OVERLAY;
         public static final ModConfigSpec.IntValue OVERLAY_LAYOUT_STYLE;
         public static final ModConfigSpec.DoubleValue OVERLAY_TEXT_SCALE;
+        public static final ModConfigSpec.IntValue FULL_FOOD_LEVEL_VALUE;
+        public static final ModConfigSpec.DoubleValue FULL_SATURATION_VALUE;
+        public static final ModConfigSpec.DoubleValue FULL_EXHAUSTION_VALUE;
+        public static final ModConfigSpec.IntValue FULL_ARMOR_VALUE;
+        public static final ModConfigSpec.IntValue FULL_ARMOR_TOUGHNESS_VALUE;
+        public static final ModConfigSpec.IntValue FULL_HEALTH_VALUE;
+        public static final ModConfigSpec.BooleanValue ENABLE_STACK_HEALTH_BAR;
+        public static final ModConfigSpec.ConfigValue<String> STACK_HEALTH_BAR_COLORS;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_NORMAL;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_POISON;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_WITHER;
@@ -100,6 +108,41 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment("The scale of the overlay text.")
                     .translation("text.autoconfig.asteorbar.option.overlay.overlayTextScale")
                     .defineInRange("overlayTextScale", DefaultConfigAdapter.I.overlayTextScale(), 0.1, 10.0);
+            FULL_FOOD_LEVEL_VALUE = BUILDER
+                    .comment("Full food level value. If you are using a mod that changes the max food level, you may need to change this value.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullFoodLevelValue")
+                    .defineInRange("fullFoodLevelValue", DefaultConfigAdapter.I.fullFoodLevelValue(), 1, Integer.MAX_VALUE);
+            FULL_SATURATION_VALUE = BUILDER
+                    .comment("Full saturation value. If you are using a mod that changes the max saturation value, you may need to change this value.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullSaturationValue")
+                    .defineInRange("fullSaturationValue", DefaultConfigAdapter.I.fullSaturationValue(), 1.0, Double.MAX_VALUE);
+            FULL_EXHAUSTION_VALUE = BUILDER
+                    .comment("Full exhaustion value. If you are using a mod that changes the max exhaustion value, you may need to change this value.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullExhaustionValue")
+                    .defineInRange("fullExhaustionValue", DefaultConfigAdapter.I.fullExhaustionValue(), 1.0, Double.MAX_VALUE);
+            FULL_ARMOR_VALUE = BUILDER
+                    .comment("Full armor value. If you are using a mod that changes the max armor value, you may need to change this value.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullArmorValue")
+                    .defineInRange("fullArmorValue", DefaultConfigAdapter.I.fullArmorValue(), 1, Integer.MAX_VALUE);
+            FULL_ARMOR_TOUGHNESS_VALUE = BUILDER
+                    .comment("Full armor toughness value. If you are using a mod that changes the max armor toughness value, you may need to change this value.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullArmorToughnessValue")
+                    .defineInRange("fullArmorToughnessValue", DefaultConfigAdapter.I.fullArmorToughnessValue(), 1, Integer.MAX_VALUE);
+            FULL_HEALTH_VALUE = BUILDER
+                    .comment("Full health value. Determines the amount single health bar represents. No effect while stack health bar is disabled.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullHealthValue")
+                    .defineInRange("fullHealthValue", DefaultConfigAdapter.I.fullHealthValue(), 1, Integer.MAX_VALUE);
+            ENABLE_STACK_HEALTH_BAR = BUILDER
+                    .comment("Whether to enable stack health bar. If enabled, the health bar will be displayed like multiple health bars with different colors stacked together. " +
+                            "Note that once enabled, the health bar color in specific conditions will be rendered half transparently on the health bar, " +
+                            "and if the absorption display mode is 0, it will be changed to 2  in game dynamically to avoid ambiguity.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.enableStackHealthBar")
+                    .define("enableStackHealthBar", DefaultConfigAdapter.I.enableStackHealthBar());
+            STACK_HEALTH_BAR_COLORS = BUILDER
+                    .comment("The color list of the stack health bar. Split by commas, each color must be in ARGB format, no space, no illegal characters, no tail comma. For example: '#FF00FF00,#FFFF0000,#FF0000FF', " +
+                            "the health bars will pick colors from the list sequentially, and return to the first color when the list is exhausted.")
+                    .translation("text.autoconfig.asteorbar.option.overlay.stackHealthBarColors")
+                    .define("stackHealthBarColors", DefaultConfigAdapter.I.stackHealthBarColors());
             HEALTH_COLOR_NORMAL = BUILDER
                     .comment("The color of the health bar when the player is not affected by any status effect. 0x00000000 to 0xFFFFFFFF. ARGB format.")
                     .translation("text.autoconfig.asteorbar.option.overlay.healthColorNormal")
@@ -435,6 +478,46 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public double overlayTextScale() {
         return Config.OVERLAY_TEXT_SCALE.get();
+    }
+
+    @Override
+    public int fullFoodLevelValue() {
+        return Config.FULL_FOOD_LEVEL_VALUE.get();
+    }
+
+    @Override
+    public double fullSaturationValue() {
+        return Config.FULL_SATURATION_VALUE.get();
+    }
+
+    @Override
+    public double fullExhaustionValue() {
+        return Config.FULL_EXHAUSTION_VALUE.get();
+    }
+
+    @Override
+    public int fullArmorValue() {
+        return Config.FULL_ARMOR_VALUE.get();
+    }
+
+    @Override
+    public int fullArmorToughnessValue() {
+        return Config.FULL_ARMOR_TOUGHNESS_VALUE.get();
+    }
+
+    @Override
+    public int fullHealthValue() {
+        return Config.FULL_HEALTH_VALUE.get();
+    }
+
+    @Override
+    public boolean enableStackHealthBar() {
+        return Config.ENABLE_STACK_HEALTH_BAR.get();
+    }
+
+    @Override
+    public String stackHealthBarColors() {
+        return Config.STACK_HEALTH_BAR_COLORS.get();
     }
 
     @Override

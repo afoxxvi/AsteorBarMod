@@ -11,6 +11,22 @@ public interface ConfigAdapter {
 
     double overlayTextScale();
 
+    int fullFoodLevelValue();
+
+    double fullSaturationValue();
+
+    double fullExhaustionValue();
+
+    int fullArmorValue();
+
+    int fullArmorToughnessValue();
+
+    int fullHealthValue();
+
+    boolean enableStackHealthBar();
+
+    String stackHealthBarColors();
+
     int healthColorNormal();
 
     int healthColorPoison();

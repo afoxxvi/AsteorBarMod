@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.overlay;
 
 import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,6 +16,7 @@ public class FabricGuiRegistry {
         REGISTRY.add(Overlays.PLAYER_HEALTH);
         REGISTRY.add(Overlays.FOOD_LEVEL);
         REGISTRY.add(Overlays.MOUNT_HEALTH);
+        REGISTRY.add(new ToughAsNailsOverlay());
         REGISTRY.add(Overlays.AIR_LEVEL);
         REGISTRY.add(Overlays.EXPERIENCE_BAR);
         REGISTRY.add(Overlays.ARMOR_LEVEL);

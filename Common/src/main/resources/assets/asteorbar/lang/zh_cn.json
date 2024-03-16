@@ -11,7 +11,7 @@
   "text.autoconfig.asteorbar.option.overlay.overlayTextScale": "状态栏字体大小",
   "text.autoconfig.asteorbar.option.overlay.fullFoodLevelValue": "满饱食度值",
   "text.autoconfig.asteorbar.option.overlay.fullSaturationValue": "满饱和度值",
-  "text.autoconfig.asteorbar.option.overlay.fullExhaustion": "满疲劳度值",
+  "text.autoconfig.asteorbar.option.overlay.fullExhaustionValue": "满疲劳度值",
   "text.autoconfig.asteorbar.option.overlay.fullArmorValue": "满护甲值",
   "text.autoconfig.asteorbar.option.overlay.fullArmorToughnessValue": "满护甲韧性值",
   "text.autoconfig.asteorbar.option.overlay.fullHealthValue": "单条生命显示值",

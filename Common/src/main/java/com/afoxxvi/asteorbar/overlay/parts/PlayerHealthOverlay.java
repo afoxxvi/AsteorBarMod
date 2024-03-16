@@ -94,6 +94,7 @@ public class PlayerHealthOverlay extends BaseOverlay {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             if (absorb > fullAbsorb && (AsteorBar.config.enableStackHealthBar() || AsteorBar.config.displayAbsorptionDivMaxHealth())) {
                 int absorbTimes = (int) (absorb / fullAbsorb);
+                if (absorb % fullAbsorb == 0) absorbTimes--;
                 if (flip) {
                     Overlays.addStringRender(right, top - 2, 0xFFFF00, "×" + absorbTimes, Overlays.ALIGN_LEFT, true);
                 } else {

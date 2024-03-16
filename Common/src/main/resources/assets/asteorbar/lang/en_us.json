@@ -11,7 +11,7 @@
   "text.autoconfig.asteorbar.option.overlay.overlayTextScale": "Overlay Text Scale",
   "text.autoconfig.asteorbar.option.overlay.fullFoodLevelValue": "Full Food Level Value",
   "text.autoconfig.asteorbar.option.overlay.fullSaturationValue": "Full Food Saturation Value",
-  "text.autoconfig.asteorbar.option.overlay.fullExhaustion": "Full Food Exhaustion Value",
+  "text.autoconfig.asteorbar.option.overlay.fullExhaustionValue": "Full Food Exhaustion Value",
   "text.autoconfig.asteorbar.option.overlay.fullArmorValue": "Full Armor Value",
   "text.autoconfig.asteorbar.option.overlay.fullArmorToughnessValue": "Full Armor Toughness Value",
   "text.autoconfig.asteorbar.option.overlay.fullHealthValue": "Full Health Value",

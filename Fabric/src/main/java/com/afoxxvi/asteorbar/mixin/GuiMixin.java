@@ -1,5 +1,6 @@
 package com.afoxxvi.asteorbar.mixin;
 
+import com.afoxxvi.asteorbar.overlay.FabricGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.FabricRenderGui;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.Minecraft;
@@ -22,19 +23,7 @@ public abstract class GuiMixin {
             renderPlayerHealthRaw(poseStack);
             return;
         }
-        var mc = Minecraft.getInstance();
-        var tick = 0f;
-        var width = mc.getWindow().getGuiScaledWidth();
-        var height = mc.getWindow().getGuiScaledHeight();
-        var gui = new FabricRenderGui(instance);
-        Overlays.PLAYER_HEALTH.render(gui, poseStack, tick, width, height);
-        Overlays.FOOD_LEVEL.render(gui, poseStack, tick, width, height);
-        Overlays.MOUNT_HEALTH.render(gui, poseStack, tick, width, height);
-        FabricRenderGui.DEHYDRATION.render(gui, poseStack, tick, width, height);
-        Overlays.AIR_LEVEL.render(gui, poseStack, tick, width, height);
-        Overlays.EXPERIENCE_BAR.render(gui, poseStack, tick, width, height);
-        Overlays.ARMOR_LEVEL.render(gui, poseStack, tick, width, height);
-        Overlays.STRING.render(gui, poseStack, tick, width, height);
+        FabricGuiRegistry.startRender(instance, poseStack);
     }
 
     @Invoker("renderVehicleHealth")

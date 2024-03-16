@@ -7,9 +7,13 @@ import com.afoxxvi.asteorbar.utils.Utils;
 import net.minecraft.client.gui.GuiGraphics;
 
 public class LightShieldOverlay extends BaseOverlay {
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float shield, float maxShield, boolean flip) {
+    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float shield, float full, boolean flip) {
         final int innerWidth = right - left - 2;
-        var shieldWidth = (int) (shield * innerWidth / maxShield);
+        var displayShield = shield % full;
+        if (displayShield == 0 && shield > 0) {
+            displayShield = full;
+        }
+        var shieldWidth = (int) (displayShield * innerWidth / full);
         drawFillFlip(guiGraphics, left + 1, top + 3, right - 1, bottom - 1, shieldWidth, 0xff8cb3ca, flip);
         drawFillFlip(guiGraphics, left + 1, bottom - 1, right - 1, bottom, shieldWidth, 0xff7097ae, flip);
         var text = Utils.formatNumber(shield);
@@ -20,6 +24,15 @@ public class LightShieldOverlay extends BaseOverlay {
                 Overlays.addStringRender(right - 2, top - 2, 0xb6c8c1, text, Overlays.ALIGN_RIGHT, true);
             }
         }
+        if (shield > full) {
+            int absorbTimes = (int) (shield / full);
+            if (shield % full == 0) absorbTimes--;
+            if (flip) {
+                Overlays.addStringRender(left, top - 2, 0xb6c8c1, "×" + absorbTimes, Overlays.ALIGN_RIGHT, true);
+            } else {
+                Overlays.addStringRender(right, top - 2, 0xb6c8c1, absorbTimes + "×", Overlays.ALIGN_LEFT, true);
+            }
+        }
     }
 
     @Override
@@ -28,7 +41,7 @@ public class LightShieldOverlay extends BaseOverlay {
         var player = gui.mc().player;
         if (player == null) return;
         var shield = luoyu.lightshield.Api.getShieldAmount(player);
-        var maxShield = luoyu.lightshield.Api.getMaxShieldAmount(player);
+        var maxShield = AsteorBar.config.displayAbsorptionDivMaxHealth() ? player.getMaxHealth() : luoyu.lightshield.Api.getMaxShieldAmount(player);
         switch (Overlays.style) {
             case Overlays.STYLE_NONE -> {
 

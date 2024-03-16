@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.listener;
 
 import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.entity.LightShieldRenderer;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.Minecraft;
@@ -30,6 +31,7 @@ public class NeoForgeEventListener {
         NamedGuiOverlay overlay = event.getOverlay();
         if (overlay == VanillaGuiOverlay.VIGNETTE.type()) {
             Overlays.reset();
+            LightShieldRenderer.init();
         }
         if (overlay == VanillaGuiOverlay.PLAYER_HEALTH.type()
                 || overlay == VanillaGuiOverlay.FOOD_LEVEL.type()

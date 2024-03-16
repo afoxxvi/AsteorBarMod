@@ -28,6 +28,46 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int fullFoodLevelValue() {
+        return 20;
+    }
+
+    @Override
+    public double fullSaturationValue() {
+        return 20;
+    }
+
+    @Override
+    public double fullExhaustionValue() {
+        return 4;
+    }
+
+    @Override
+    public int fullArmorValue() {
+        return 20;
+    }
+
+    @Override
+    public int fullArmorToughnessValue() {
+        return 12;
+    }
+
+    @Override
+    public int fullHealthValue() {
+        return 20;
+    }
+
+    @Override
+    public boolean enableStackHealthBar() {
+        return false;
+    }
+
+    @Override
+    public String stackHealthBarColors() {
+        return "#ffff4545,#ffefa360,#ff966acc,#ffcc64a8,#ff1dc29b,#ff9acc64";
+    }
+
+    @Override
     public int healthColorNormal() {
         return 0xffff4545;
     }
@@ -275,6 +315,11 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     @Override
     public double maxDistance() {
         return 32;
+    }
+
+    @Override
+    public boolean showOnSelf() {
+        return true;
     }
 
     @Override

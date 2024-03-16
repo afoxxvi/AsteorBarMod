@@ -18,15 +18,15 @@ public class FoodLevelOverlay extends BaseOverlay {
         drawBound(guiGraphics, left, top, right, bottom, boundColor);
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.foodEmptyColor());
         final int innerWidth = right - left - 2;
-        int foodWidth = (int) (innerWidth * foodLevel / 20.0F);
+        int foodWidth = (int) (innerWidth * (double) foodLevel / AsteorBar.config.fullFoodLevelValue());
         drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, foodWidth, foodColor, flip);
         if (AsteorBar.config.displaySaturation()) {
-            int saturationWidth = (int) ((right - left) * (saturation / 20.0F));
+            int saturationWidth = (int) ((right - left) * (saturation / AsteorBar.config.fullSaturationValue()));
             drawBoundFlip(guiGraphics, left, top, right, bottom, saturationWidth, AsteorBar.config.saturationColor(), flip);
         }
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            int exhaustionWidth = (int) (innerWidth * (Math.min(4.0F, exhaustion) / 4.0F));
+            int exhaustionWidth = (int) (innerWidth * (Math.min(AsteorBar.config.fullExhaustionValue(), exhaustion) / AsteorBar.config.fullExhaustionValue()));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }

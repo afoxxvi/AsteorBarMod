@@ -1,7 +1,7 @@
 # Version History
 
 ## v1.3
-2024/02/19
+2024/02/22
 
 ### Features
 
@@ -9,11 +9,15 @@
 - Color of HUD bars customizable.
 - Display thirst info of Tough As Nails.
 - Display thirst info of Thirst Was Taken.
+- Display thirst info of Dehydration.
+- Display MekaSuit's energy level of Mekanism.
+- In-game configuration through ModMenu.
 
 ### Adjustments & Fixes
 
 - Armor bar now has same length with other bars.
 - Display numerical value of armor level and armor toughness.
+- Fabric configuration should be working correctly now.
 
 ## v1.2.2
 2024/02/14

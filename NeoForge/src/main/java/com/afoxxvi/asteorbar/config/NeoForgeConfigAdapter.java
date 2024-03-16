@@ -11,6 +11,14 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue ENABLE_OVERLAY;
         public static final ModConfigSpec.IntValue OVERLAY_LAYOUT_STYLE;
         public static final ModConfigSpec.DoubleValue OVERLAY_TEXT_SCALE;
+        public static final ModConfigSpec.IntValue FULL_FOOD_LEVEL_VALUE;
+        public static final ModConfigSpec.DoubleValue FULL_SATURATION_VALUE;
+        public static final ModConfigSpec.DoubleValue FULL_EXHAUSTION_VALUE;
+        public static final ModConfigSpec.IntValue FULL_ARMOR_VALUE;
+        public static final ModConfigSpec.IntValue FULL_ARMOR_TOUGHNESS_VALUE;
+        public static final ModConfigSpec.IntValue FULL_HEALTH_VALUE;
+        public static final ModConfigSpec.BooleanValue ENABLE_STACK_HEALTH_BAR;
+        public static final ModConfigSpec.ConfigValue<String> STACK_HEALTH_BAR_COLORS;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_NORMAL;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_POISON;
         public static final ModConfigSpec.IntValue HEALTH_COLOR_WITHER;
@@ -61,6 +69,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         //mob config
         public static final ModConfigSpec.BooleanValue ENABLE_HEALTH_BAR;
         public static final ModConfigSpec.DoubleValue MAX_DISTANCE;
+        public static final ModConfigSpec.BooleanValue SHOW_ON_SELF;
         public static final ModConfigSpec.BooleanValue SHOW_ON_PLAYERS;
         public static final ModConfigSpec.BooleanValue SHOW_ON_BOSSES;
         public static final ModConfigSpec.BooleanValue SHOW_ON_FULL_HEALTH_WITHOUT_ABSORPTION;
@@ -88,315 +97,343 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         static {
             BUILDER.push("overlay");
             ENABLE_OVERLAY = BUILDER
-                    .comment("Whether to enable the overlay. If disabled, all other overlay options will be ignored.")
+                    .comment(ConfigComment.enableOverlay)
                     .translation("text.autoconfig.asteorbar.option.overlay.enableOverlay")
                     .define("enableOverlay", DefaultConfigAdapter.I.enableOverlay());
             OVERLAY_LAYOUT_STYLE = BUILDER
-                    .comment("The layout style of the overlay. 0: none, 1: above hot bar long, 2: above hot bar short, 3: top left, 4: top right, 5: bottom left, 6: bottom right")
+                    .comment(ConfigComment.overlayLayoutStyle)
                     .translation("text.autoconfig.asteorbar.option.overlay.overlayLayoutStyle")
                     .defineInRange("overlayLayoutStyle", DefaultConfigAdapter.I.overlayLayoutStyle(), 0, Overlays.NUM_STYLES - 1);
             OVERLAY_TEXT_SCALE = BUILDER
-                    .comment("The scale of the overlay text.")
+                    .comment(ConfigComment.overlayTextScale)
                     .translation("text.autoconfig.asteorbar.option.overlay.overlayTextScale")
                     .defineInRange("overlayTextScale", DefaultConfigAdapter.I.overlayTextScale(), 0.1, 10.0);
+            FULL_FOOD_LEVEL_VALUE = BUILDER
+                    .comment(ConfigComment.fullFoodLevelValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullFoodLevelValue")
+                    .defineInRange("fullFoodLevelValue", DefaultConfigAdapter.I.fullFoodLevelValue(), 1, Integer.MAX_VALUE);
+            FULL_SATURATION_VALUE = BUILDER
+                    .comment(ConfigComment.fullSaturationValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullSaturationValue")
+                    .defineInRange("fullSaturationValue", DefaultConfigAdapter.I.fullSaturationValue(), 1, Double.MAX_VALUE);
+            FULL_EXHAUSTION_VALUE = BUILDER
+                    .comment(ConfigComment.fullExhaustionValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullExhaustionValue")
+                    .defineInRange("fullExhaustionValue", DefaultConfigAdapter.I.fullExhaustionValue(), 1, Double.MAX_VALUE);
+            FULL_ARMOR_VALUE = BUILDER
+                    .comment(ConfigComment.fullArmorValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullArmorValue")
+                    .defineInRange("fullArmorValue", DefaultConfigAdapter.I.fullArmorValue(), 1, Integer.MAX_VALUE);
+            FULL_ARMOR_TOUGHNESS_VALUE = BUILDER
+                    .comment(ConfigComment.fullArmorToughnessValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullArmorToughnessValue")
+                    .defineInRange("fullArmorToughnessValue", DefaultConfigAdapter.I.fullArmorToughnessValue(), 1, Integer.MAX_VALUE);
+            FULL_HEALTH_VALUE = BUILDER
+                    .comment(ConfigComment.fullHealthValue)
+                    .translation("text.autoconfig.asteorbar.option.overlay.fullHealthValue")
+                    .defineInRange("fullHealthValue", DefaultConfigAdapter.I.fullHealthValue(), 1, Integer.MAX_VALUE);
+            ENABLE_STACK_HEALTH_BAR = BUILDER
+                    .comment(ConfigComment.enableStackHealthBar)
+                    .translation("text.autoconfig.asteorbar.option.overlay.enableStackHealthBar")
+                    .define("enableStackHealthBar", DefaultConfigAdapter.I.enableStackHealthBar());
+            STACK_HEALTH_BAR_COLORS = BUILDER
+                    .comment(ConfigComment.stackHealthBarColors)
+                    .translation("text.autoconfig.asteorbar.option.overlay.stackHealthBarColors")
+                    .define("stackHealthBarColors", DefaultConfigAdapter.I.stackHealthBarColors());
             HEALTH_COLOR_NORMAL = BUILDER
-                    .comment("The color of the health bar when the player is not affected by any status effect. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthColorNormal)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthColorNormal")
                     .defineInRange("healthColorNormal", DefaultConfigAdapter.I.healthColorNormal(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_COLOR_POISON = BUILDER
-                    .comment("The color of the health bar when the player is poisoned. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthColorPoison)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthColorPoison")
                     .defineInRange("healthColorPoison", DefaultConfigAdapter.I.healthColorPoison(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_COLOR_WITHER = BUILDER
-                    .comment("The color of the health bar when the player is withered. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthColorWither)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthColorWither")
                     .defineInRange("healthColorWither", DefaultConfigAdapter.I.healthColorWither(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_COLOR_FROZEN = BUILDER
-                    .comment("The color of the health bar when the player is frozen. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthColorFrozen)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthColorFrozen")
                     .defineInRange("healthColorFrozen", DefaultConfigAdapter.I.healthColorFrozen(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BOUND_COLOR = BUILDER
-                    .comment("The color of the health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColor")
                     .defineInRange("healthBoundColor", DefaultConfigAdapter.I.healthBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BOUND_COLOR_BLINK = BUILDER
-                    .comment("The color of the health bar bound when the health rate is lower than the low health rate. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBoundColorBlink)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorBlink")
                     .defineInRange("healthBoundColorBlink", DefaultConfigAdapter.I.healthBoundColorBlink(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BOUND_COLOR_LOW = BUILDER
-                    .comment("The color of the health bar bound when the health rate is lower than the low health rate. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBoundColorLow)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorLow")
                     .defineInRange("healthBoundColorLow", DefaultConfigAdapter.I.healthBoundColorLow(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.healthEmptyColor")
                     .defineInRange("healthEmptyColor", DefaultConfigAdapter.I.healthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ABSORPTION_COLOR = BUILDER
-                    .comment("The color of the absorption bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.absorptionColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.absorptionColor")
                     .defineInRange("absorptionColor", DefaultConfigAdapter.I.absorptionColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ABSORPTION_BOUND_COLOR = BUILDER
-                    .comment("The color of the absorption bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.absorptionBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.absorptionBoundColor")
                     .defineInRange("absorptionBoundColor", DefaultConfigAdapter.I.absorptionBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             FOOD_COLOR_NORMAL = BUILDER
-                    .comment("The color of the food level bar when the player is not affected by any status effect. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.foodColorNormal)
                     .translation("text.autoconfig.asteorbar.option.overlay.foodColorNormal")
                     .defineInRange("foodColorNormal", DefaultConfigAdapter.I.foodColorNormal(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             FOOD_COLOR_HUNGER = BUILDER
-                    .comment("The color of the food level bar when the player is hungry. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.foodColorHunger)
                     .translation("text.autoconfig.asteorbar.option.overlay.foodColorHunger")
                     .defineInRange("foodColorHunger", DefaultConfigAdapter.I.foodColorHunger(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             FOOD_BOUND_COLOR = BUILDER
-                    .comment("The color of the food level bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.foodBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColor")
                     .defineInRange("foodBoundColor", DefaultConfigAdapter.I.foodBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             FOOD_BOUND_COLOR_BLINK = BUILDER
-                    .comment("The color of the food level bar bound when the food level is lower than the low food level. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.foodBoundColorBlink)
                     .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColorBlink")
                     .defineInRange("foodBoundColorBlink", DefaultConfigAdapter.I.foodBoundColorBlink(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             FOOD_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the food level bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.foodEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.foodEmptyColor")
                     .defineInRange("foodEmptyColor", DefaultConfigAdapter.I.foodEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             SATURATION_COLOR = BUILDER
-                    .comment("The color of the saturation bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.saturationColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.saturationColor")
                     .defineInRange("saturationColor", DefaultConfigAdapter.I.saturationColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             EXPERIENCE_COLOR = BUILDER
-                    .comment("The color of the experience bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.experienceColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.experienceColor")
                     .defineInRange("experienceColor", DefaultConfigAdapter.I.experienceColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             EXPERIENCE_BOUND_COLOR = BUILDER
-                    .comment("The color of the experience bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.experienceBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.experienceBoundColor")
                     .defineInRange("experienceBoundColor", DefaultConfigAdapter.I.experienceBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             EXPERIENCE_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the experience bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.experienceEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.experienceEmptyColor")
                     .defineInRange("experienceEmptyColor", DefaultConfigAdapter.I.experienceEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             AIR_COLOR = BUILDER
-                    .comment("The color of the air bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.airColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.airColor")
                     .defineInRange("airColor", DefaultConfigAdapter.I.airColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             AIR_BOUND_COLOR = BUILDER
-                    .comment("The color of the air bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.airBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.airBoundColor")
                     .defineInRange("airBoundColor", DefaultConfigAdapter.I.airBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             MOUNT_HEALTH_COLOR = BUILDER
-                    .comment("The color of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.mountHealthColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColor")
                     .defineInRange("mountHealthColor", DefaultConfigAdapter.I.mountHealthColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             MOUNT_HEALTH_COLOR_2 = BUILDER
-                    .comment("The color of the mount health bar when the mount is not tamed. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.mountHealthColor2)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColor2")
                     .defineInRange("mountHealthColor2", DefaultConfigAdapter.I.mountHealthColor2(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             MOUNT_HEALTH_BOUND_COLOR = BUILDER
-                    .comment("The color of the mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.mountHealthBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor")
                     .defineInRange("mountHealthBoundColor", DefaultConfigAdapter.I.mountHealthBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             MOUNT_HEALTH_BOUND_COLOR_2 = BUILDER
-                    .comment("The color of the mount health bar bound when the mount is not tamed. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.mountHealthBoundColor2)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor2")
                     .defineInRange("mountHealthBoundColor2", DefaultConfigAdapter.I.mountHealthBoundColor2(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             MOUNT_HEALTH_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.mountHealthEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor")
                     .defineInRange("mountHealthEmptyColor", DefaultConfigAdapter.I.mountHealthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ARMOR_COLOR = BUILDER
-                    .comment("The color of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.armorColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorColor")
                     .defineInRange("armorColor", DefaultConfigAdapter.I.armorColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ARMOR_BOUND_COLOR = BUILDER
-                    .comment("The color of the armor bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.armorBoundColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorBoundColor")
                     .defineInRange("armorBoundColor", DefaultConfigAdapter.I.armorBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ARMOR_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.armorEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorEmptyColor")
                     .defineInRange("armorEmptyColor", DefaultConfigAdapter.I.armorEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ARMOR_TOUGHNESS_COLOR = BUILDER
-                    .comment("The color of the armor toughness bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.armorToughnessColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorToughnessColor")
                     .defineInRange("armorToughnessColor", DefaultConfigAdapter.I.armorToughnessColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             ENABLE_HEALTH_BLINK = BUILDER
-                    .comment("Whether to enable health bar blink. This feature is designed to simulate the vanilla health icon blink.")
+                    .comment(ConfigComment.enableHealthBlink)
                     .translation("text.autoconfig.asteorbar.option.overlay.enableHealthBlink")
                     .define("enableHealthBlink", DefaultConfigAdapter.I.enableHealthBlink());
             LOW_HEALTH_RATE = BUILDER
-                    .comment("The health bar will start to flash when health rate is lower than this value. From 0.0-1.0. 0.0 means never flash.")
+                    .comment(ConfigComment.lowHealthRate)
                     .translation("text.autoconfig.asteorbar.option.overlay.lowHealthRate")
                     .defineInRange("lowHealthRate", DefaultConfigAdapter.I.lowHealthRate(), 0.0, 1.0);
             OVERWRITE_VANILLA_ARMOR_BAR = BUILDER
-                    .comment("Whether to overwrite vanilla armor bar. If you don't like the mod's armor bar, you can disable this option.")
+                    .comment(ConfigComment.overwriteVanillaArmorBar)
                     .translation("text.autoconfig.asteorbar.option.overlay.overwriteVanillaArmorBar")
                     .define("overwriteVanillaArmorBar", DefaultConfigAdapter.I.overwriteVanillaArmorBar());
             OVERWRITE_VANILLA_EXPERIENCE_BAR = BUILDER
-                    .comment("Whether to overwrite vanilla experience bar. If you don't like the mod's experience bar, you can disable this option, progress label won't be affected.")
+                    .comment(ConfigComment.overwriteVanillaExperienceBar)
                     .translation("text.autoconfig.asteorbar.option.overlay.overwriteVanillaExperienceBar")
                     .define("overwriteVanillaExperienceBar", DefaultConfigAdapter.I.overwriteVanillaExperienceBar());
             DISPLAY_EXPERIENCE_PROGRESS = BUILDER
-                    .comment("Whether to display experience progress on the side of the experience bar.")
+                    .comment(ConfigComment.displayExperienceProgress)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayExperienceProgress")
                     .define("displayExperienceProgress", DefaultConfigAdapter.I.displayExperienceProgress());
             DISPLAY_EXPERIENCE_LEVEL = BUILDER
-                    .comment("Whether to display experience level on the experience bar.")
+                    .comment(ConfigComment.displayExperienceLevel)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayExperienceLevel")
                     .define("displayExperienceLevel", DefaultConfigAdapter.I.displayExperienceLevel());
             DISPLAY_HEALTH_TEXT = BUILDER
-                    .comment("Whether to display health text.")
+                    .comment(ConfigComment.displayHealthText)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayHealthText")
                     .define("displayHealthText", DefaultConfigAdapter.I.displayHealthText());
             DISPLAY_ABSORPTION_METHOD = BUILDER
-                    .comment("0: Absorption will be displayed together with health bar. "
-                            + "1: Absorption will be displayed half transparently on the health bar. "
-                            + "2: Absorption will be displayed as bounds. "
-                            + "Note: Since the absorption value can be higher than the max health, an extra number will be displayed to indicate value of absorption/max health, you can turn it off by editing 'displayAbsorptionDivMaxHealth'.")
+                    .comment(ConfigComment.displayAbsorptionMethod)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayAbsorptionMethod")
                     .defineInRange("displayAbsorptionMethod", DefaultConfigAdapter.I.displayAbsorptionMethod(), 0, PlayerHealthOverlay.ABSORPTION_MODES - 1);
             DISPLAY_ABSORPTION_DIV_MAX_HEALTH = BUILDER
-                    .comment("Whether to display the value of (absorption / max health). To avoid ambiguity, turn it to true if you hide the health text and don't display absorption bar together with health bar, or you may not be able to get correct absorption value.")
+                    .comment(ConfigComment.displayAbsorptionDivMaxHealth)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayAbsorptionDivMaxHealth")
                     .define("displayAbsorptionDivMaxHealth", DefaultConfigAdapter.I.displayAbsorptionDivMaxHealth());
             DISPLAY_ABSORPTION_TEXT_METHOD = BUILDER
-                    .comment("0: Absorption text will be displayed together with health text. for example: 15(+10)/20. "
-                            + "1: Absorption text will be displayed separately. for example: 10 15/20. "
-                            + "Note: if 'displayHealthText' is false, absorption text will be disabled.")
+                    .comment(ConfigComment.displayAbsorptionTextMethod)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayAbsorptionTextMethod")
                     .defineInRange("displayAbsorptionTextMethod", DefaultConfigAdapter.I.displayAbsorptionTextMethod(), 0, PlayerHealthOverlay.ABSORPTION_TEXT_MODES - 1);
             ENABLE_FOOD_BLINK = BUILDER
-                    .comment("Whether to enable food level bar blink. This feature is designed to simulate the vanilla food icon shake.")
+                    .comment(ConfigComment.enableFoodBlink)
                     .translation("text.autoconfig.asteorbar.option.overlay.enableFoodBlink")
                     .define("enableFoodBlink", DefaultConfigAdapter.I.enableFoodBlink());
             DISPLAY_SATURATION = BUILDER
-                    .comment("Whether to display saturation bar.")
+                    .comment(ConfigComment.displaySaturation)
                     .translation("text.autoconfig.asteorbar.option.overlay.displaySaturation")
                     .define("displaySaturation", DefaultConfigAdapter.I.displaySaturation());
             DISPLAY_EXHAUSTION = BUILDER
-                    .comment("Whether to display exhaustion bar.")
+                    .comment(ConfigComment.displayExhaustion)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayExhaustion")
                     .define("displayExhaustion", DefaultConfigAdapter.I.displayExhaustion());
             DISPLAY_ARMOR_TOUGHNESS = BUILDER
-                    .comment("Whether to display armor toughness bar.")
+                    .comment(ConfigComment.displayArmorToughness)
                     .translation("text.autoconfig.asteorbar.option.overlay.displayArmorToughness")
                     .define("displayArmorToughness", DefaultConfigAdapter.I.displayArmorToughness());
             CORNER_BAR_LENGTH = BUILDER
-                    .comment("The length of the bars if using corner layout. Affected bars: health, food, experience.")
+                    .comment(ConfigComment.cornerBarLength)
                     .translation("text.autoconfig.asteorbar.option.overlay.cornerBarLength")
                     .defineInRange("cornerBarLength", DefaultConfigAdapter.I.cornerBarLength(), 40, 182);
             CORNER_HORIZONTAL_PADDING = BUILDER
-                    .comment("The horizontal padding of the bars if using corner layout.")
+                    .comment(ConfigComment.cornerHorizontalPadding)
                     .translation("text.autoconfig.asteorbar.option.overlay.cornerHorizontalPadding")
                     .defineInRange("cornerHorizontalPadding", DefaultConfigAdapter.I.cornerHorizontalPadding(), 0, 100);
             CORNER_VERTICAL_PADDING = BUILDER
-                    .comment("The vertical padding of the bars if using corner layout.")
+                    .comment(ConfigComment.cornerVerticalPadding)
                     .translation("text.autoconfig.asteorbar.option.overlay.cornerVerticalPadding")
                     .defineInRange("cornerVerticalPadding", DefaultConfigAdapter.I.cornerVerticalPadding(), 0, 100);
             BUILDER.pop();
             BUILDER.push("entity");
             ENABLE_HEALTH_BAR = BUILDER
-                    .comment("Whether to enable health bar for entity. If disabled, all other health bar options will be ignored.")
+                    .comment(ConfigComment.enableHealthBar)
                     .translation("text.autoconfig.asteorbar.option.entity.enableHealthBar")
                     .define("enableHealthBar", DefaultConfigAdapter.I.enableHealthBar());
             MAX_DISTANCE = BUILDER
-                    .comment("The maximum distance to display mob health bar.")
+                    .comment(ConfigComment.maxDistance)
                     .translation("text.autoconfig.asteorbar.option.entity.maxDistance")
                     .defineInRange("maxDistance", DefaultConfigAdapter.I.maxDistance(), 0.0, 100.0);
+            SHOW_ON_SELF = BUILDER
+                    .comment(ConfigComment.showOnSelf)
+                    .translation("text.autoconfig.asteorbar.option.entity.showOnSelf")
+                    .define("showOnSelf", DefaultConfigAdapter.I.showOnSelf());
             SHOW_ON_PLAYERS = BUILDER
-                    .comment("Whether to display health bar on players.")
+                    .comment(ConfigComment.showOnPlayers)
                     .translation("text.autoconfig.asteorbar.option.entity.showOnPlayers")
                     .define("showOnPlayers", DefaultConfigAdapter.I.showOnPlayers());
             SHOW_ON_BOSSES = BUILDER
-                    .comment("Whether to display health bar on bosses.")
+                    .comment(ConfigComment.showOnBosses)
                     .translation("text.autoconfig.asteorbar.option.entity.showOnBosses")
                     .define("showOnBosses", DefaultConfigAdapter.I.showOnBosses());
             SHOW_ON_FULL_HEALTH_WITHOUT_ABSORPTION = BUILDER
-                    .comment("Whether to display health bar on mobs with full health if the mob's absorption value is 0.")
+                    .comment(ConfigComment.showOnFullHealthWithoutAbsorption)
                     .translation("text.autoconfig.asteorbar.option.entity.showOnFullHealthWithoutAbsorption")
                     .define("showOnFullHealthWithoutAbsorption", DefaultConfigAdapter.I.showOnFullHealthWithoutAbsorption());
             SHOW_ON_FULL_HEALTH_WITH_ABSORPTION = BUILDER
-                    .comment("Whether to display health bar on mobs with full health if the mob's absorption value is not 0.")
+                    .comment(ConfigComment.showOnFullHealthWithAbsorption)
                     .translation("text.autoconfig.asteorbar.option.entity.showOnFullHealthWithAbsorption")
                     .define("showOnFullHealthWithAbsorption", DefaultConfigAdapter.I.showOnFullHealthWithAbsorption());
             HEALTH_BAR_HALF_WIDTH = BUILDER
-                    .comment("The half width of the health bar.")
+                    .comment(ConfigComment.healthBarHalfWidth)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHalfWidth")
                     .defineInRange("healthBarHalfWidth", DefaultConfigAdapter.I.healthBarHalfWidth(), 1, 1000);
             HEALTH_BAR_HALF_HEIGHT = BUILDER
-                    .comment("The half height of the health bar.")
+                    .comment(ConfigComment.healthBarHalfHeight)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHalfHeight")
                     .defineInRange("healthBarHalfHeight", DefaultConfigAdapter.I.healthBarHalfHeight(), 1, 200);
             HEALTH_BAR_OFFSET_Y = BUILDER
-                    .comment("The offset of the health bar on the Y axis.")
+                    .comment(ConfigComment.healthBarOffsetY)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarOffsetY")
                     .defineInRange("healthBarOffsetY", DefaultConfigAdapter.I.healthBarOffsetY(), -10, 10);
             HEALTH_BAR_SCALE = BUILDER
-                    .comment("The scale of the health bar.")
+                    .comment(ConfigComment.healthBarScale)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarScale")
                     .defineInRange("healthBarScale", DefaultConfigAdapter.I.healthBarScale(), 0.001, 0.1);
             HEALTH_BAR_TEXT_SCALE = BUILDER
-                    .comment("The scale of the health bar text.")
+                    .comment(ConfigComment.healthBarTextScale)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarTextScale")
                     .defineInRange("healthBarTextScale", DefaultConfigAdapter.I.healthBarTextScale(), 0.1, 1.0);
             HEALTH_BAR_TEXT_OFFSET_Y = BUILDER
-                    .comment("The offset of the health bar text on the Y axis.")
+                    .comment(ConfigComment.healthBarTextOffsetY)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarTextOffsetY")
                     .defineInRange("healthBarTextOffsetY", DefaultConfigAdapter.I.healthBarTextOffsetY(), -10, 10);
             HEALTH_BAR_BOUND_WIDTH = BUILDER
-                    .comment("The width of the health bar bound. 0 to 10. Hint: This value is a little hard to adjust. If you want to make the bounds looks thinner, " +
-                            "you can increase the health bar width&height and decrease the health bar scale. You may also need to change the text scale and offset. " +
-                            "This can be complicated, I highly recommend you to use some in-game config mod like 'configured'.")
+                    .comment(ConfigComment.healthBarBoundWidth)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundWidth")
                     .defineInRange("healthBarBoundWidth", DefaultConfigAdapter.I.healthBarBoundWidth(), 0, 10);
             HEALTH_BAR_BOUND_VERTEX = BUILDER
-                    .comment("Whether to render the vertex of the health bar bound.")
+                    .comment(ConfigComment.healthBarBoundVertex)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundVertex")
                     .define("healthBarBoundVertex", DefaultConfigAdapter.I.healthBarBoundVertex());
             HEALTH_BAR_HEALTH_COLOR = BUILDER
-                    .comment("The color of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarHealthColor)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColor")
                     .defineInRange("healthBarHealthColor", DefaultConfigAdapter.I.healthBarHealthColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BAR_ABSORPTION_COLOR = BUILDER
-                    .comment("The color of the absorption bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarAbsorptionColor)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarAbsorptionColor")
                     .defineInRange("healthBarAbsorptionColor", DefaultConfigAdapter.I.healthBarAbsorptionColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BAR_BOUND_COLOR = BUILDER
-                    .comment("The color of the health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarBoundColor)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundColor")
                     .defineInRange("healthBarBoundColor", DefaultConfigAdapter.I.healthBarBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BAR_EMPTY_COLOR = BUILDER
-                    .comment("The color of the empty part of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarEmptyColor")
                     .defineInRange("healthBarEmptyColor", DefaultConfigAdapter.I.healthBarEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BAR_HEALTH_COLOR_DYNAMIC = BUILDER
-                    .comment("Whether to use dynamic color for health bar. The color will be picked between healthBarHealthColorFull and healthBarHealthColorEmpty " +
-                            "based on the health rate. If disabled, the health bar will always be healthBarHealthColor")
+                    .comment(ConfigComment.healthBarHealthColorDynamic)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorDynamic")
                     .define("healthBarHealthColorDynamic", DefaultConfigAdapter.I.healthBarHealthColorDynamic());
             HEALTH_BAR_HEALTH_COLOR_FULL = BUILDER
-                    .comment("The color of the health bar when the mob is full health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarHealthColorFull)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorFull")
                     .defineInRange("healthBarHealthColorFull", DefaultConfigAdapter.I.healthBarHealthColorFull(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             HEALTH_BAR_HEALTH_COLOR_EMPTY = BUILDER
-                    .comment("The color of the health bar when the mob is low health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+                    .comment(ConfigComment.healthBarHealthColorEmpty)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorEmpty")
                     .defineInRange("healthBarHealthColorEmpty", DefaultConfigAdapter.I.healthBarHealthColorEmpty(), Integer.MIN_VALUE, Integer.MAX_VALUE);
             BUILDER.pop();
             BUILDER.push("hook");
             HOOK_TOUGH_AS_NAILS = BUILDER
-                    .comment("Whether to hook Tough As Nails mod.")
+                    .comment(ConfigComment.hookToughAsNails)
                     .translation("text.autoconfig.asteorbar.option.hook.hookToughAsNails")
                     .define("toughAsNails", DefaultConfigAdapter.I.hookToughAsNails());
             HOOK_THIRST_WAS_TAKEN = BUILDER
-                    .comment("Whether to hook Thirst mod.")
+                    .comment(ConfigComment.hookThirstWasTaken)
                     .translation("text.autoconfig.asteorbar.option.hook.hookThirstWasTaken")
                     .define("thirstWasTaken", DefaultConfigAdapter.I.hookThirstWasTaken());
             HOOK_MEKANISM = BUILDER
-                    .comment("Whether to hook Mekanism mod.")
+                    .comment(ConfigComment.hookMekanism)
                     .translation("text.autoconfig.asteorbar.option.hook.hookMekanism")
                     .define("mekanism", DefaultConfigAdapter.I.hookMekanism());
             HOOK_DEHYDRATION = BUILDER
-                    .comment("Whether to hook Dehydration mod.")
+                    .comment(ConfigComment.hookDehydration)
                     .translation("text.autoconfig.asteorbar.option.hook.hookDehydration")
                     .define("dehydration", DefaultConfigAdapter.I.hookDehydration());
             BUILDER.pop();
@@ -430,6 +467,46 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public double overlayTextScale() {
         return Config.OVERLAY_TEXT_SCALE.get();
+    }
+
+    @Override
+    public int fullFoodLevelValue() {
+        return Config.FULL_FOOD_LEVEL_VALUE.get();
+    }
+
+    @Override
+    public double fullSaturationValue() {
+        return Config.FULL_SATURATION_VALUE.get();
+    }
+
+    @Override
+    public double fullExhaustionValue() {
+        return Config.FULL_EXHAUSTION_VALUE.get();
+    }
+
+    @Override
+    public int fullArmorValue() {
+        return Config.FULL_ARMOR_VALUE.get();
+    }
+
+    @Override
+    public int fullArmorToughnessValue() {
+        return Config.FULL_ARMOR_TOUGHNESS_VALUE.get();
+    }
+
+    @Override
+    public int fullHealthValue() {
+        return Config.FULL_HEALTH_VALUE.get();
+    }
+
+    @Override
+    public boolean enableStackHealthBar() {
+        return Config.ENABLE_STACK_HEALTH_BAR.get();
+    }
+
+    @Override
+    public String stackHealthBarColors() {
+        return Config.STACK_HEALTH_BAR_COLORS.get();
     }
 
     @Override
@@ -681,6 +758,11 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public double maxDistance() {
         return Config.MAX_DISTANCE.get();
+    }
+
+    @Override
+    public boolean showOnSelf() {
+        return Config.SHOW_ON_SELF.get();
     }
 
     @Override

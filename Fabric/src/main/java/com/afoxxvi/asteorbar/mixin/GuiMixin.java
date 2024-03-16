@@ -1,8 +1,7 @@
 package com.afoxxvi.asteorbar.mixin;
 
-import com.afoxxvi.asteorbar.overlay.FabricRenderGui;
+import com.afoxxvi.asteorbar.overlay.FabricGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,19 +21,7 @@ public abstract class GuiMixin {
             renderPlayerHealthRaw(guiGraphics);
             return;
         }
-        var mc = Minecraft.getInstance();
-        var tick = 0f;
-        var width = mc.getWindow().getGuiScaledWidth();
-        var height = mc.getWindow().getGuiScaledHeight();
-        var gui = new FabricRenderGui(instance);
-        Overlays.PLAYER_HEALTH.render(gui, guiGraphics, tick, width, height);
-        Overlays.FOOD_LEVEL.render(gui, guiGraphics, tick, width, height);
-        Overlays.MOUNT_HEALTH.render(gui, guiGraphics, tick, width, height);
-        FabricRenderGui.TOUGH_AS_NAILS.render(gui, guiGraphics, tick, width, height);
-        Overlays.AIR_LEVEL.render(gui, guiGraphics, tick, width, height);
-        Overlays.EXPERIENCE_BAR.render(gui, guiGraphics, tick, width, height);
-        Overlays.ARMOR_LEVEL.render(gui, guiGraphics, tick, width, height);
-        Overlays.STRING.render(gui, guiGraphics, tick, width, height);
+        FabricGuiRegistry.startRender(instance, guiGraphics);
     }
 
     @Invoker("renderVehicleHealth")

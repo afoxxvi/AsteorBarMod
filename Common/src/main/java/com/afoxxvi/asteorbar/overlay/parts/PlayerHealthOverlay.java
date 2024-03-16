@@ -23,6 +23,13 @@ public class PlayerHealthOverlay extends BaseOverlay {
     private long lastHealthTime;
     private float lastHealth;
 
+    private int[] getStackColor(int low) {
+        final var colors = AsteorBar.config.stackHealthBarColors().split(",");
+        final var color1 = low == 0 ? "#00000000" : colors[(low - 1) % colors.length];
+        final var color2 = colors[low % colors.length];
+        return new int[]{Utils.parseHexColor(color1), Utils.parseHexColor(color2)};
+    }
+
     private void draw(PoseStack poseStack, int left, int top, int right, int bottom, boolean highlight, int healthColor, float health, float absorb, float maxHealth, float flashAlpha, int regenerationOffset, boolean flip) {
         //draw bound
         drawBound(poseStack, left, top, right, bottom, AsteorBar.config.healthBoundColor());
@@ -30,6 +37,9 @@ public class PlayerHealthOverlay extends BaseOverlay {
         final var outerLength = right - left;
         final var innerLength = outerLength - 2;
         int i = AsteorBar.config.displayAbsorptionMethod();
+        if (AsteorBar.config.enableStackHealthBar()) {
+            i = ABSORPTION_MODE_BOUND;
+        }
         if (i == ABSORPTION_MODE_TOGETHER) {
             //draw health
             int healthLength = (int) (innerLength * health / (maxHealth + absorb));
@@ -52,11 +62,25 @@ public class PlayerHealthOverlay extends BaseOverlay {
         } else {
             //draw health
             int healthLength = (int) (innerLength * health / maxHealth);
-            drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, healthLength, healthColor, flip);
+            if (AsteorBar.config.enableStackHealthBar()) {
+                final int unit = AsteorBar.config.fullHealthValue();
+                healthLength = (int) (innerLength * (health % unit) / unit);
+                final var colors = getStackColor((int) (health / unit));
+                if (colors[0] != 0) drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, innerLength, colors[0], flip);
+                if (colors[1] != 0) drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, healthLength, colors[1], flip);
+                if (healthColor != AsteorBar.config.healthColorNormal()) {
+                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.66F);
+                    drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, innerLength, healthColor, flip);
+                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                }
+            } else {
+                drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, healthLength, healthColor, flip);
+            }
             //draw absorption
-            var displayAbsorb = absorb % maxHealth;
+            final var fullAbsorb = AsteorBar.config.enableStackHealthBar() ? AsteorBar.config.fullHealthValue() : maxHealth;
+            var displayAbsorb = absorb % fullAbsorb;
             if (displayAbsorb == 0 && absorb > 0) {
-                displayAbsorb = maxHealth;
+                displayAbsorb = fullAbsorb;
             }
             if (i == ABSORPTION_MODE_STACK) {
                 RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.66F);
@@ -68,8 +92,9 @@ public class PlayerHealthOverlay extends BaseOverlay {
                 drawBoundFlip(poseStack, left, top, right, bottom, absorbLength, AsteorBar.config.absorptionColor(), flip);
             }
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            if (absorb > maxHealth && AsteorBar.config.displayAbsorptionDivMaxHealth()) {
-                int absorbTimes = (int) (absorb / maxHealth);
+            if (absorb > fullAbsorb && (AsteorBar.config.enableStackHealthBar() || AsteorBar.config.displayAbsorptionDivMaxHealth())) {
+                int absorbTimes = (int) (absorb / fullAbsorb);
+                if (absorb % fullAbsorb == 0) absorbTimes--;
                 if (flip) {
                     Overlays.addStringRender(right, top - 2, 0xFFFF00, "×" + absorbTimes, Overlays.ALIGN_LEFT, true);
                 } else {

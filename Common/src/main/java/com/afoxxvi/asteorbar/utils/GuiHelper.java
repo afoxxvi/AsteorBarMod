@@ -89,6 +89,41 @@ public class GuiHelper {
         RenderSystem.disableBlend();
     }
 
+    public static void renderBound(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int width, int boundWidth, int colorFill, int colorEmpty, boolean vertex, float z) {
+        int cut = 0;
+        int expand = vertex ? boundWidth : 0;
+        if (width > 0) {//left bound, vertex included
+            int part = Math.min(width, boundWidth);
+            cut += part;
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left - boundWidth, top - expand, left - boundWidth + part, bottom + expand, colorFill, z);
+            if (part < boundWidth) {
+                GuiHelper.renderSolid(vertexConsumer, poseStack, left - boundWidth + part, top - expand, left, bottom + expand, colorEmpty, z);
+            }
+        } else {
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left - boundWidth, top - expand, left, bottom + expand, colorEmpty, z);
+        }
+        if (width > right - left + boundWidth) {//right bound, vertex included
+            int part = Math.min(width, boundWidth);
+            cut += part;
+            GuiHelper.renderSolid(vertexConsumer, poseStack, right, top - expand, right + part, bottom + expand, colorFill, z);
+            if (part < boundWidth) {
+                GuiHelper.renderSolid(vertexConsumer, poseStack, right + part, top - expand, right + boundWidth, bottom + expand, colorEmpty, z);
+            }
+        } else {
+            GuiHelper.renderSolid(vertexConsumer, poseStack, right, top - expand, right + boundWidth, bottom + expand, colorEmpty, z);
+        }
+        width -= cut;
+        if (width > 0) {//upper and lower bound, vertex excluded
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left, top - boundWidth, left + width, top, colorFill, z);
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left, bottom, left + width, bottom + boundWidth, colorFill, z);
+        }
+        if (width < right - left) {
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left + width, top - boundWidth, right, top, colorEmpty, z);
+            GuiHelper.renderSolid(vertexConsumer, poseStack, left + width, bottom, right, bottom + boundWidth, colorEmpty, z);
+        }
+
+    }
+
     //left < right, top < bottom
     public static void renderSolid(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
         vertexConsumer.vertex(poseStack.last().pose(), left, top, z).color(color).uv(0, 0).endVertex();

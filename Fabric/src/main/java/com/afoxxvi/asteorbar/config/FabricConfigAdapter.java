@@ -38,6 +38,46 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int fullFoodLevelValue() {
+        return config.overlay.fullFoodLevelValue;
+    }
+
+    @Override
+    public double fullSaturationValue() {
+        return config.overlay.fullSaturationValue;
+    }
+
+    @Override
+    public double fullExhaustionValue() {
+        return config.overlay.fullExhaustionValue;
+    }
+
+    @Override
+    public int fullArmorValue() {
+        return config.overlay.fullArmorValue;
+    }
+
+    @Override
+    public int fullArmorToughnessValue() {
+        return config.overlay.fullArmorToughnessValue;
+    }
+
+    @Override
+    public int fullHealthValue() {
+        return config.overlay.fullHealthValue;
+    }
+
+    @Override
+    public boolean enableStackHealthBar() {
+        return config.overlay.enableStackHealthBar;
+    }
+
+    @Override
+    public String stackHealthBarColors() {
+        return config.overlay.stackHealthBarColors;
+    }
+
+    @Override
     public int healthColorNormal() {
         return config.overlay.healthColorNormal;
     }
@@ -289,6 +329,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean showOnSelf() {
+        return config.entity.showOnSelf;
+    }
+
+    @Override
     public boolean showOnPlayers() {
         return config.entity.showOnPlayers;
     }
@@ -421,170 +466,183 @@ public class FabricConfigAdapter implements ConfigAdapter {
         EntityConfig entity = new EntityConfig();
         @ConfigEntry.Gui.CollapsibleObject
         HookConfig hook = new HookConfig();
+
         //overlay config
         static class OverlayConfig {
-            @Comment("Whether to enable the overlay. If disabled, all other overlay options will be ignored.")
+            @Comment(ConfigComment.enableOverlay)
             public boolean enableOverlay = DefaultConfigAdapter.I.enableOverlay();
-            @Comment("The layout style of the overlay. 0: none, 1: above hot bar long, 2: above hot bar short, 3: top left, 4: top right, 5: bottom left, 6: bottom right")
+            @Comment(ConfigComment.overlayLayoutStyle)
             public int overlayLayoutStyle = DefaultConfigAdapter.I.overlayLayoutStyle();
-            @Comment("The text scale of the overlay")
+            @Comment(ConfigComment.overlayTextScale)
             public double overlayTextScale = DefaultConfigAdapter.I.overlayTextScale();
-            @Comment("The color of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.fullFoodLevelValue)
+            public int fullFoodLevelValue = DefaultConfigAdapter.I.fullFoodLevelValue();
+            @Comment(ConfigComment.fullSaturationValue)
+            public double fullSaturationValue = DefaultConfigAdapter.I.fullSaturationValue();
+            @Comment(ConfigComment.fullExhaustionValue)
+            public double fullExhaustionValue = DefaultConfigAdapter.I.fullExhaustionValue();
+            @Comment(ConfigComment.fullArmorValue)
+            public int fullArmorValue = DefaultConfigAdapter.I.fullArmorValue();
+            @Comment(ConfigComment.fullArmorToughnessValue)
+            public int fullArmorToughnessValue = DefaultConfigAdapter.I.fullArmorToughnessValue();
+            @Comment(ConfigComment.fullHealthValue)
+            public int fullHealthValue = DefaultConfigAdapter.I.fullHealthValue();
+            @Comment(ConfigComment.enableStackHealthBar)
+            public boolean enableStackHealthBar = DefaultConfigAdapter.I.enableStackHealthBar();
+            @Comment(ConfigComment.stackHealthBarColors)
+            public String stackHealthBarColors = DefaultConfigAdapter.I.stackHealthBarColors();
+            @Comment(ConfigComment.healthColorNormal)
             public int healthColorNormal = DefaultConfigAdapter.I.healthColorNormal();
-            @Comment("The color of the poison health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthColorPoison)
             public int healthColorPoison = DefaultConfigAdapter.I.healthColorPoison();
-            @Comment("The color of the wither health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthColorWither)
             public int healthColorWither = DefaultConfigAdapter.I.healthColorWither();
-            @Comment("The color of the frozen health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthColorFrozen)
             public int healthColorFrozen = DefaultConfigAdapter.I.healthColorFrozen();
-            @Comment("The color of the health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBoundColor)
             public int healthBoundColor = DefaultConfigAdapter.I.healthBoundColor();
-            @Comment("The color of the health bar bound when blinking. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBoundColorBlink)
             public int healthBoundColorBlink = DefaultConfigAdapter.I.healthBoundColorBlink();
-            @Comment("The color of the low health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBoundColorLow)
             public int healthBoundColorLow = DefaultConfigAdapter.I.healthBoundColor();
-            @Comment("The color of the empty part of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthEmptyColor)
             public int healthEmptyColor = DefaultConfigAdapter.I.healthEmptyColor();
-            @Comment("The color of the absorption bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.absorptionColor)
             public int absorptionColor = DefaultConfigAdapter.I.absorptionColor();
-            @Comment("The color of the absorption bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.absorptionBoundColor)
             public int absorptionBoundColor = DefaultConfigAdapter.I.absorptionBoundColor();
-            @Comment("The color of the normal food level bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.foodColorNormal)
             public int foodColorNormal = DefaultConfigAdapter.I.foodColorNormal();
-            @Comment("The color of the hunger food level bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.foodColorHunger)
             public int foodColorHunger = DefaultConfigAdapter.I.foodColorHunger();
-            @Comment("The color of the food level bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.foodBoundColor)
             public int foodBoundColor = DefaultConfigAdapter.I.foodBoundColor();
-            @Comment("The color of the food level bar bound when blinking. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.foodBoundColorBlink)
             public int foodBoundColorBlink = DefaultConfigAdapter.I.foodBoundColorBlink();
-            @Comment("The color of the empty part of the food level bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.foodEmptyColor)
             public int foodEmptyColor = DefaultConfigAdapter.I.foodEmptyColor();
-            @Comment("The color of the saturation bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.saturationColor)
             public int saturationColor = DefaultConfigAdapter.I.saturationColor();
-            @Comment("The color of the experience bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.experienceColor)
             public int experienceColor = DefaultConfigAdapter.I.experienceColor();
-            @Comment("The color of the experience bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.experienceBoundColor)
             public int experienceBoundColor = DefaultConfigAdapter.I.experienceBoundColor();
-            @Comment("The color of the empty part of the experience bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.experienceEmptyColor)
             public int experienceEmptyColor = DefaultConfigAdapter.I.experienceEmptyColor();
-            @Comment("The color of the air bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.airColor)
             public int airColor = DefaultConfigAdapter.I.airColor();
-            @Comment("The color of the air bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.airBoundColor)
             public int airBoundColor = DefaultConfigAdapter.I.airBoundColor();
-            @Comment("The color of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.mountHealthColor)
             public int mountHealthColor = DefaultConfigAdapter.I.mountHealthColor();
-            @Comment("The color of the second mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.mountHealthColor2)
             public int mountHealthColor2 = DefaultConfigAdapter.I.mountHealthColor2();
-            @Comment("The color of the mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.mountHealthBoundColor)
             public int mountHealthBoundColor = DefaultConfigAdapter.I.mountHealthBoundColor();
-            @Comment("The color of the second mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.mountHealthBoundColor2)
             public int mountHealthBoundColor2 = DefaultConfigAdapter.I.mountHealthBoundColor2();
-            @Comment("The color of the empty part of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.mountHealthEmptyColor)
             public int mountHealthEmptyColor = DefaultConfigAdapter.I.mountHealthEmptyColor();
-            @Comment("The color of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.armorColor)
             public int armorColor = DefaultConfigAdapter.I.armorColor();
-            @Comment("The color of the armor bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.armorBoundColor)
             public int armorBoundColor = DefaultConfigAdapter.I.armorBoundColor();
-            @Comment("The color of the empty part of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.armorEmptyColor)
             public int armorEmptyColor = DefaultConfigAdapter.I.armorEmptyColor();
-            @Comment("The color of the armor toughness bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.armorToughnessColor)
             public int armorToughnessColor = DefaultConfigAdapter.I.armorToughnessColor();
-            @Comment("Whether to enable health bar blink. This feature is designed to simulate the vanilla health icon blink.")
+            @Comment(ConfigComment.enableHealthBlink)
             public boolean enableHealthBlink = DefaultConfigAdapter.I.enableHealthBlink();
-            @Comment("The health bar will start to flash when health rate is lower than this value. From 0.0-1.0. 0.0 means never flash.")
+            @Comment(ConfigComment.lowHealthRate)
             public double lowHealthRate = DefaultConfigAdapter.I.lowHealthRate();
-            @Comment("Whether to overwrite vanilla armor bar. If you don't like the mod's armor bar, you can disable this option.")
+            @Comment(ConfigComment.overwriteVanillaArmorBar)
             public boolean overwriteVanillaArmorBar = DefaultConfigAdapter.I.overwriteVanillaArmorBar();
-            @Comment("Whether to overwrite vanilla experience bar. If you don't like the mod's experience bar, you can disable this option, progress label won't be affected.")
+            @Comment(ConfigComment.overwriteVanillaExperienceBar)
             public boolean overwriteVanillaExperienceBar = DefaultConfigAdapter.I.overwriteVanillaExperienceBar();
-            @Comment("Whether to display experience progress on the side of the experience bar.")
+            @Comment(ConfigComment.displayExperienceProgress)
             public boolean displayExperienceProgress = DefaultConfigAdapter.I.displayExperienceProgress();
-            @Comment("Whether to display experience level on the experience bar.")
+            @Comment(ConfigComment.displayExperienceLevel)
             public boolean displayExperienceLevel = DefaultConfigAdapter.I.displayExperienceLevel();
-            @Comment("Whether to display health text.")
+            @Comment(ConfigComment.displayHealthText)
             public boolean displayHealthText = DefaultConfigAdapter.I.displayHealthText();
-            @Comment("0: Absorption will be displayed together with health bar. "
-                    + "1: Absorption will be displayed half transparently on the health bar. "
-                    + "2: Absorption will be displayed as bounds. "
-                    + "Note: Since the absorption value can be higher than the max health, an extra number will be displayed to indicate value of absorption/max health, you can turn it off by editing 'displayAbsorptionDivMaxHealth'.")
+            @Comment(ConfigComment.displayAbsorptionMethod)
             public int displayAbsorptionMethod = DefaultConfigAdapter.I.displayAbsorptionMethod();
-            @Comment("Whether to display the value of (absorption / max health). To avoid ambiguity, turn it to true if you hide the health text and don't display absorption bar together with health bar, or you may not be able to get correct absorption value.")
+            @Comment(ConfigComment.displayAbsorptionDivMaxHealth)
             public boolean displayAbsorptionDivMaxHealth = DefaultConfigAdapter.I.displayAbsorptionDivMaxHealth();
-            @Comment("0: Absorption text will be displayed together with health text. for example: 15(+10)/20. "
-                    + "1: Absorption text will be displayed separately. for example: 10 15/20. "
-                    + "Note: if 'displayHealthText' is false, absorption text will be disabled.")
+            @Comment(ConfigComment.displayAbsorptionTextMethod)
             public int displayAbsorptionTextMethod = DefaultConfigAdapter.I.displayAbsorptionTextMethod();
-            @Comment("Whether to enable food level bar blink. This feature is designed to simulate the vanilla food icon shake.")
+            @Comment(ConfigComment.enableFoodBlink)
             public boolean enableFoodBlink = DefaultConfigAdapter.I.enableFoodBlink();
-            @Comment("Whether to display saturation bar.")
+            @Comment(ConfigComment.displaySaturation)
             public boolean displaySaturation = DefaultConfigAdapter.I.displaySaturation();
-            @Comment("Whether to display exhaustion bar.")
+            @Comment(ConfigComment.displayExhaustion)
             public boolean displayExhaustion = DefaultConfigAdapter.I.displayExhaustion();
-            @Comment("Whether to display armor toughness bar.")
+            @Comment(ConfigComment.displayArmorToughness)
             public boolean displayArmorToughness = DefaultConfigAdapter.I.displayArmorToughness();
-            @Comment("The length of the bars if using corner layout. Affected bars: health, food, experience.")
+            @Comment(ConfigComment.cornerBarLength)
             public int cornerBarLength = DefaultConfigAdapter.I.cornerBarLength();
-            @Comment("The horizontal padding of the bars if using corner layout.")
+            @Comment(ConfigComment.cornerHorizontalPadding)
             public int cornerHorizontalPadding = DefaultConfigAdapter.I.cornerHorizontalPadding();
-            @Comment("The vertical padding of the bars if using corner layout.")
+            @Comment(ConfigComment.cornerVerticalPadding)
             public int cornerVerticalPadding = DefaultConfigAdapter.I.cornerVerticalPadding();
         }
+
         //mob config
         static class EntityConfig {
-            @Comment("Whether to enable health bar for entity. If disabled, all other health bar options will be ignored.")
+            @Comment(ConfigComment.enableHealthBar)
             public boolean enableHealthBar = DefaultConfigAdapter.I.enableHealthBar();
-            @Comment("The maximum distance to display mob health bar.")
+            @Comment(ConfigComment.maxDistance)
             public double maxDistance = DefaultConfigAdapter.I.maxDistance();
-            @Comment("Whether to display health bar on players.")
+            @Comment(ConfigComment.showOnSelf)
+            public boolean showOnSelf = DefaultConfigAdapter.I.showOnSelf();
+            @Comment(ConfigComment.showOnPlayers)
             public boolean showOnPlayers = DefaultConfigAdapter.I.showOnPlayers();
-            @Comment("Whether to display health bar on bosses.")
+            @Comment(ConfigComment.showOnBosses)
             public boolean showOnBosses = DefaultConfigAdapter.I.showOnBosses();
-            @Comment("Whether to display health bar on mobs with full health if the mob's absorption value is 0.")
+            @Comment(ConfigComment.showOnFullHealthWithoutAbsorption)
             public boolean showOnFullHealthWithoutAbsorption = DefaultConfigAdapter.I.showOnFullHealthWithoutAbsorption();
-            @Comment("Whether to display health bar on mobs with full health if the mob's absorption value is not 0.")
+            @Comment(ConfigComment.showOnFullHealthWithAbsorption)
             public boolean showOnFullHealthWithAbsorption = DefaultConfigAdapter.I.showOnFullHealthWithAbsorption();
-            @Comment("The half width of the health bar.")
+            @Comment(ConfigComment.healthBarHalfWidth)
             public int healthBarHalfWidth = DefaultConfigAdapter.I.healthBarHalfWidth();
-            @Comment("The half height of the health bar.")
+            @Comment(ConfigComment.healthBarHalfHeight)
             public int healthBarHalfHeight = DefaultConfigAdapter.I.healthBarHalfHeight();
-            @Comment("The offset of the health bar on the Y axis.")
+            @Comment(ConfigComment.healthBarOffsetY)
             public double healthBarOffsetY = DefaultConfigAdapter.I.healthBarOffsetY();
-            @Comment("The scale of the health bar.")
+            @Comment(ConfigComment.healthBarScale)
             public double healthBarScale = DefaultConfigAdapter.I.healthBarScale();
-            @Comment("The scale of the health bar text.")
+            @Comment(ConfigComment.healthBarTextScale)
             public double healthBarTextScale = DefaultConfigAdapter.I.healthBarTextScale();
-            @Comment("The offset of the health bar text on the Y axis.")
+            @Comment(ConfigComment.healthBarTextOffsetY)
             public double healthBarTextOffsetY = DefaultConfigAdapter.I.healthBarTextOffsetY();
-            @Comment("The width of the health bar bound. 0 to 10. Hint: This value is a little hard to adjust. If you want to make the bounds looks thinner, " +
-                    "you can increase the health bar width&height and decrease the health bar scale. You may also need to change the text scale and offset. " +
-                    "This can be complicated, I highly recommend you to use some in-game config mod like 'configured'.")
+            @Comment(ConfigComment.healthBarBoundWidth)
             public int healthBarBoundWidth = DefaultConfigAdapter.I.healthBarBoundWidth();
-            @Comment("Whether to render the vertex of the health bar bound.")
+            @Comment(ConfigComment.healthBarBoundVertex)
             public boolean healthBarBoundVertex = DefaultConfigAdapter.I.healthBarBoundVertex();
-            @Comment("The color of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarHealthColor)
             public int healthBarHealthColor = DefaultConfigAdapter.I.healthBarHealthColor();
-            @Comment("The color of the absorption bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarAbsorptionColor)
             public int healthBarAbsorptionColor = DefaultConfigAdapter.I.healthBarAbsorptionColor();
-            @Comment("The color of the health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarBoundColor)
             public int healthBarBoundColor = DefaultConfigAdapter.I.healthBarBoundColor();
-            @Comment("The color of the empty part of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarEmptyColor)
             public int healthBarEmptyColor = DefaultConfigAdapter.I.healthBarEmptyColor();
-            @Comment("Whether to use dynamic color for health bar. The color will be picked between healthBarHealthColorFull and healthBarHealthColorEmpty " +
-                    "based on the health rate. If disabled, the health bar will always be healthBarHealthColor")
+            @Comment(ConfigComment.healthBarHealthColorDynamic)
             public boolean healthBarHealthColorDynamic = DefaultConfigAdapter.I.healthBarHealthColorDynamic();
-            @Comment("The color of the health bar when the mob is full health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarHealthColorFull)
             public int healthBarHealthColorFull = DefaultConfigAdapter.I.healthBarHealthColorFull();
-            @Comment("The color of the health bar when the mob is low health. 0x00000000 to 0xFFFFFFFF. ARGB format.")
+            @Comment(ConfigComment.healthBarHealthColorEmpty)
             public int healthBarHealthColorEmpty = DefaultConfigAdapter.I.healthBarHealthColorEmpty();
         }
+
         static class HookConfig {
-            @Comment("Whether to hook Tough As Nails. If enabled, the mod will display the thirst bar.")
+            @Comment(ConfigComment.hookToughAsNails)
             public boolean hookToughAsNails = DefaultConfigAdapter.I.hookToughAsNails();
-            @Comment("Whether to hook Thirst Was Taken. If enabled, the mod will display the thirst bar.")
+            @Comment(ConfigComment.hookThirstWasTaken)
             public boolean hookThirstWasTaken = DefaultConfigAdapter.I.hookThirstWasTaken();
-            @Comment("Whether to hook Mekanism. If enabled, the mod will display the energy bar.")
+            @Comment(ConfigComment.hookMekanism)
             public boolean hookMekanism = DefaultConfigAdapter.I.hookMekanism();
-            @Comment("Whether to hook Dehydration. If enabled, the mod will display the thirst bar.")
+            @Comment(ConfigComment.hookDehydration)
             public boolean hookDehydration = DefaultConfigAdapter.I.hookDehydration();
         }
     }

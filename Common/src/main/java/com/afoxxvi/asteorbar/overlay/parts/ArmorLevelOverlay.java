@@ -9,19 +9,19 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 public class ArmorLevelOverlay extends BaseOverlay {
     private void draw(PoseStack poseStack, int left, int top, int right, int bottom, int armor, double armorToughness, boolean flip) {
-        int armorWidth = (int) ((right - left - 2) * Math.min(1.0, armor / 20f));
+        int armorWidth = (int) ((right - left - 2) * Math.min(1.0, (double) armor / AsteorBar.config.fullArmorValue()));
         drawBound(poseStack, left, top, right, bottom, AsteorBar.config.armorBoundColor());
-        if (armor < 20) {
+        if (armor < AsteorBar.config.fullArmorValue()) {
             drawEmptyFill(poseStack, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.armorEmptyColor());
         }
         drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, armorWidth, AsteorBar.config.armorColor(), flip);
-        if (armor > 20) {
+        if (armor > AsteorBar.config.fullArmorValue()) {
             Overlays.addStringRender((left + right) / 2, top - 2, 0xFFFFFF, String.valueOf(armor), Overlays.ALIGN_CENTER, true);
         }
         if (armorToughness > 0) {
-            int armorToughnessWidth = (int) ((right - left) * Math.min(1.0, armorToughness / 12.0));
+            int armorToughnessWidth = (int) ((right - left) * Math.min(1.0, armorToughness / AsteorBar.config.fullArmorToughnessValue()));
             drawBoundFlip(poseStack, left, top, right, bottom, AsteorBar.config.armorToughnessColor(), armorToughnessWidth, flip);
-            if (armorToughness > 12) {
+            if (armorToughness > AsteorBar.config.fullArmorToughnessValue()) {
                 if (flip) {
                     Overlays.addStringRender(right - 2, top - 2, 0xdeecff, Utils.formatNumber(armorToughness), Overlays.ALIGN_RIGHT, true);
                 } else {

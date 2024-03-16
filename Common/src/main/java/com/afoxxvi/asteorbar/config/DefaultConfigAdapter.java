@@ -64,7 +64,7 @@ public class DefaultConfigAdapter implements ConfigAdapter {
 
     @Override
     public String stackHealthBarColors() {
-        return "#ffff4545,#ffcc834b,#ff966acc,#ffcc64a8,#ff1dc29b,#ff9acc64";
+        return "#ffff4545,#ffefa360,#ff966acc,#ffcc64a8,#ff1dc29b,#ff9acc64";
     }
 
     @Override

@@ -23,28 +23,11 @@ public class PlayerHealthOverlay extends BaseOverlay {
     private long lastHealthTime;
     private float lastHealth;
 
-    private int parseHexColor(String color) {
-        int value = 0;
-        for (int i = 0; i < color.length(); i++) {
-            if (i == 0 && color.charAt(i) == '#') continue;
-            value <<= 4;
-            char c = color.charAt(i);
-            if (c >= '0' && c <= '9') {
-                value += c - '0';
-            } else if (c >= 'A' && c <= 'F') {
-                value += c - 'A' + 10;
-            } else if (c >= 'a' && c <= 'f') {
-                value += c - 'a' + 10;
-            }
-        }
-        return value;
-    }
-
     private int[] getStackColor(int low) {
         final var colors = AsteorBar.config.stackHealthBarColors().split(",");
         final var color1 = low == 0 ? "#00000000" : colors[(low - 1) % colors.length];
         final var color2 = colors[low % colors.length];
-        return new int[]{parseHexColor(color1), parseHexColor(color2)};
+        return new int[]{Utils.parseHexColor(color1), Utils.parseHexColor(color2)};
     }
 
     private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int healthColor, float health, float absorb, float maxHealth, float flashAlpha, int regenerationOffset, boolean flip) {
@@ -109,7 +92,7 @@ public class PlayerHealthOverlay extends BaseOverlay {
                 drawBoundFlip(guiGraphics, left, top, right, bottom, absorbLength, AsteorBar.config.absorptionColor(), flip);
             }
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            if (absorb > fullAbsorb && AsteorBar.config.displayAbsorptionDivMaxHealth()) {
+            if (absorb > fullAbsorb && (AsteorBar.config.enableStackHealthBar() || AsteorBar.config.displayAbsorptionDivMaxHealth())) {
                 int absorbTimes = (int) (absorb / fullAbsorb);
                 if (flip) {
                     Overlays.addStringRender(right, top - 2, 0xFFFF00, "×" + absorbTimes, Overlays.ALIGN_LEFT, true);

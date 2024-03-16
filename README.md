@@ -1,5 +1,8 @@
 # AsteorBar
 
+[![](https://img.shields.io/curseforge/dt/959237?logo=curseforge&logoColor=%23000000&label=CurseForge&labelColor=%23f16436&color=%23555555)](https://www.curseforge.com/minecraft/mc-mods/asteorbar)
+[![](https://img.shields.io/modrinth/dt/QMWG8bVO?logo=modrinth&logoColor=%23000000&label=Modrinth&labelColor=%2300AF5C&color=%23555555)](https://modrinth.com/mod/asteorbar)
+
 A simple mod to display player's status using slim bars and display entity's status using bars.
 
 ## Features
@@ -25,6 +28,13 @@ A simple mod to display player's status using slim bars and display entity's sta
 - Highly configurable. You can change whether to display bars in many situations. And you can change many properties of the bars(e.g. color,
   scale, offset...).
 
+### Compatibility
+
+- Mekanism: Display MekaSuit's energy level.
+- Tough As Nails: Display thirst level(saturation and exhaustion included also).
+- Thirst Was Taken: Display thirst level(saturation and exhaustion included also).
+- Dehydration: Display thirst level(exhaustion included also) and thirst regen preview.
+
 ## Notes
 
 Only Chinese and English localization are guaranteed to be correct. If you want to help with the localization, you can create a pull
@@ -41,27 +51,16 @@ This [plugin](https://github.com/afoxxvi/AsteorBarServer) for Spigot/Paper serve
 ## Supported Minecraft versions and mod loaders
 
 | Version | Forge  | Fabric | NeoForge |
-|---------|--------|--------|----------|
+|---------|--------|--------|:--------:|
 | 1.18.2  | latest | latest |          |
 | 1.19.2  | latest | latest |          |
 | 1.19.3  | latest | latest |          |
 | 1.19.4  | latest | latest |          |
-| 1.20    | latest | latest |          |
+| 1.20    | v1.2.2 | v1.2   |          |
 | 1.20.1  | latest | latest |          |
-| 1.20.2  | latest | latest |          |
-| 1.20.4  | latest | latest |          |
-
-## Compatibility
-
-| Version | Tough As Nails | Thirst Was Taken |
-|---------|:--------------:|------------------|
-| 1.18.2  |                |                  |
-| 1.19.2  |                |                  |
-| 1.19.4  |                |                  |
-| 1.20    |                |                  |
-| 1.20.1  |                |                  |
-| 1.20.2  |     forge      |                  |
-| 1.20.4  |                |                  |
+| 1.20.2  | latest | latest |  latest  |
+| 1.20.3  | v1.2.2 | v1.2   |          |
+| 1.20.4  | latest | latest |  latest  |
 
 ## Screenshots
 

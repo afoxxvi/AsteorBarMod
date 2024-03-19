@@ -41,9 +41,6 @@ dependencies {
     if (dehydration_version_fabric != "0") {
         modImplementation "curse.maven:dehydration-410830:${dehydration_version_fabric}"
     }
-    if (paraglider_version_fabric != "0") {
-        modImplementation "curse.maven:paragliders-289240:${paraglider_version_fabric}"
-    }
 }
 
 compileJava {

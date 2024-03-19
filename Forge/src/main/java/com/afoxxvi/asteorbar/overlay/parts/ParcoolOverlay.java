@@ -1,5 +1,6 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
+import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.alrex.parcool.common.capability.IStamina;
@@ -42,7 +43,7 @@ public class ParcoolOverlay extends SimpleBarOverlay {
         RenderSystem.setShaderTexture(0, TEXTURE);
         if (flip) {
             drawTextureFillColor(guiGraphics, right - 1 - fillWidth, top, fillWidth, 5,
-                    10 + 81 - fillWidth, Y_RIGHT_DECORATION, fillWidth, 5, color);
+                    10 + 180 - fillWidth, Y_RIGHT_DECORATION, fillWidth, 5, color);
         } else {
             drawTextureFillColor(guiGraphics, left + 1, top, fillWidth, 5,
                     10, Y_LEFT_DECORATION, fillWidth, 5, color);
@@ -52,6 +53,6 @@ public class ParcoolOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
-        return Overlays.parcool;
+        return Overlays.parcool && AsteorBar.config.hookParcool();
     }
 }

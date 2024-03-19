@@ -43,7 +43,6 @@ public class Overlays {
     public static boolean parcool = false;
     public static boolean ironsSpellbooks = false;
     public static boolean feathers = false;
-    public static boolean paraglider = false;
 
     public static void init() {
         initialized = true;
@@ -54,7 +53,6 @@ public class Overlays {
         parcool = AsteorBar.platformAdapter.isModLoaded("parcool");
         ironsSpellbooks = AsteorBar.platformAdapter.isModLoaded("irons_spellbooks");
         feathers = AsteorBar.platformAdapter.isModLoaded("feathers");
-        paraglider = AsteorBar.platformAdapter.isModLoaded("paraglider");
     }
 
     public static void reset() {

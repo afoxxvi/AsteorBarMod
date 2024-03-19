@@ -463,11 +463,6 @@ public class FabricConfigAdapter implements ConfigAdapter {
         return config.hook.hookFeathers;
     }
 
-    @Override
-    public boolean hookParaglider() {
-        return config.hook.hookParaglider;
-    }
-
     public static void init() {
         AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, JanksonConfigSerializer::new);
         holder = AutoConfig.getConfigHolder(FabricConfigAdapter.AsteorBarConfig.class);
@@ -670,8 +665,6 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean hookIronsSpellbooks = DefaultConfigAdapter.I.hookIronsSpellbooks();
             @Comment(ConfigComment.hookFeathers)
             public boolean hookFeathers = DefaultConfigAdapter.I.hookFeathers();
-            @Comment(ConfigComment.hookParaglider)
-            public boolean hookParaglider = DefaultConfigAdapter.I.hookParaglider();
         }
     }
 }

@@ -96,7 +96,6 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.BooleanValue HOOK_PARCOOL;
         public static final ForgeConfigSpec.BooleanValue HOOK_IRONS_SPELLBOOKS;
         public static final ForgeConfigSpec.BooleanValue HOOK_FEATHERS;
-        public static final ForgeConfigSpec.BooleanValue HOOK_PARAGLIDER;
 
 
         static {
@@ -453,10 +452,6 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookFeathers)
                     .translation("text.autoconfig.asteorbar.option.hook.hookFeathers")
                     .define("feathers", DefaultConfigAdapter.I.hookFeathers());
-            HOOK_PARAGLIDER = BUILDER
-                    .comment(ConfigComment.hookParaglider)
-                    .translation("text.autoconfig.asteorbar.option.hook.hookParaglider")
-                    .define("paraglider", DefaultConfigAdapter.I.hookParaglider());
             BUILDER.pop();
         }
 
@@ -916,8 +911,4 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         return Config.HOOK_FEATHERS.get();
     }
 
-    @Override
-    public boolean hookParaglider() {
-        return Config.HOOK_PARAGLIDER.get();
-    }
 }

@@ -88,5 +88,4 @@ public class ConfigComment {
     public static final String hookParcool = "Whether to hook Parcool. If enabled, the mod will display the energy bar.";
     public static final String hookIronsSpellbooks = "Whether to hook Iron's Spellbooks. If enabled, the mod will display the mana bar.";
     public static final String hookFeathers = "Whether to hook Feathers. If enabled, the mod will display the energy bar.";
-    public static final String hookParaglider = "Whether to hook Paraglider. If enabled, the mod will display the energy bar.";
 }

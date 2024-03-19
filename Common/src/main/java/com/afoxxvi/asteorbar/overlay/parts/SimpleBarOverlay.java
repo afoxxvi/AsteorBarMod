@@ -41,6 +41,10 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     protected abstract boolean shouldRender(Player player);
 
+    protected boolean isLeftSide() {
+        return false;
+    }
+
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var player = gui.mc().player;
@@ -53,10 +57,17 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
             }
             case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
-                int left = screenWidth / 2 + 10;
-                int top = screenHeight - gui.rightHeight() + 4;
-                gui.rightHeight(6);
-                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, parameters, true);
+                if (isLeftSide()) {
+                    int left = screenWidth / 2 - 91;
+                    int top = screenHeight - gui.leftHeight() + 4;
+                    gui.leftHeight(6);
+                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, parameters, false);
+                } else {
+                    int left = screenWidth / 2 + 10;
+                    int top = screenHeight - gui.rightHeight() + 4;
+                    gui.rightHeight(6);
+                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, parameters, true);
+                }
             }
             case Overlays.STYLE_TOP_LEFT -> {
                 int top = Overlays.vertical;

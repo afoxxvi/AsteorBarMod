@@ -181,6 +181,4 @@ public interface ConfigAdapter {
     boolean hookIronsSpellbooks();
 
     boolean hookFeathers();
-
-    boolean hookParaglider();
 }

@@ -452,9 +452,4 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     public boolean hookFeathers() {
         return true;
     }
-
-    @Override
-    public boolean hookParaglider() {
-        return true;
-    }
 }

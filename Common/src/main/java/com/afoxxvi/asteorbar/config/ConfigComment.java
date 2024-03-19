@@ -85,4 +85,8 @@ public class ConfigComment {
     public static final String hookThirstWasTaken = "Whether to hook Thirst Was Taken. If enabled, the mod will display the thirst bar.";
     public static final String hookMekanism = "Whether to hook Mekanism. If enabled, the mod will display the energy bar.";
     public static final String hookDehydration = "Whether to hook Dehydration. If enabled, the mod will display the thirst bar.";
+    public static final String hookParcool = "Whether to hook Parcool. If enabled, the mod will display the energy bar.";
+    public static final String hookIronsSpellbooks = "Whether to hook Iron's Spellbooks. If enabled, the mod will display the mana bar.";
+    public static final String hookFeathers = "Whether to hook Feathers. If enabled, the mod will display the energy bar.";
+    public static final String hookParaglider = "Whether to hook Paraglider. If enabled, the mod will display the energy bar.";
 }

@@ -16,6 +16,8 @@ public abstract class BaseOverlay {
     public static final int Y_REGENERATION_FILL = 0;
     public static final int Y_FOOD_EXHAUSTION_FILL = 9;
     public static final int Y_EXPERIENCE_DECORATION = 18;
+    public static final int Y_RIGHT_DECORATION = 27;
+    public static final int Y_LEFT_DECORATION = 36;
 
     protected void drawTextureFill(GuiGraphics guiGraphics, int left, int top, int width, int height, int textureX, int textureY) {
         GuiHelper.drawTexturedRect(guiGraphics, left, top, textureX, textureY, width, height);

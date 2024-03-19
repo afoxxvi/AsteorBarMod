@@ -93,6 +93,10 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue HOOK_THIRST_WAS_TAKEN;
         public static final ModConfigSpec.BooleanValue HOOK_MEKANISM;
         public static final ModConfigSpec.BooleanValue HOOK_DEHYDRATION;
+        public static final ModConfigSpec.BooleanValue HOOK_PARCOOL;
+        public static final ModConfigSpec.BooleanValue HOOK_IRONS_SPELLBOOKS;
+        public static final ModConfigSpec.BooleanValue HOOK_FEATHERS;
+        public static final ModConfigSpec.BooleanValue HOOK_PARAGLIDER;
 
         static {
             BUILDER.push("overlay");
@@ -436,6 +440,22 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookDehydration)
                     .translation("text.autoconfig.asteorbar.option.hook.hookDehydration")
                     .define("dehydration", DefaultConfigAdapter.I.hookDehydration());
+            HOOK_PARCOOL = BUILDER
+                    .comment(ConfigComment.hookParcool)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookParcool")
+                    .define("parcool", DefaultConfigAdapter.I.hookParcool());
+            HOOK_IRONS_SPELLBOOKS = BUILDER
+                    .comment(ConfigComment.hookIronsSpellbooks)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookIronsSpellbooks")
+                    .define("ironsSpellbooks", DefaultConfigAdapter.I.hookIronsSpellbooks());
+            HOOK_FEATHERS = BUILDER
+                    .comment(ConfigComment.hookFeathers)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookFeathers")
+                    .define("feathers", DefaultConfigAdapter.I.hookFeathers());
+            HOOK_PARAGLIDER = BUILDER
+                    .comment(ConfigComment.hookParaglider)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookParaglider")
+                    .define("paraglider", DefaultConfigAdapter.I.hookParaglider());
             BUILDER.pop();
         }
 
@@ -878,5 +898,25 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean hookDehydration() {
         return Config.HOOK_DEHYDRATION.get();
+    }
+
+    @Override
+    public boolean hookParcool() {
+        return Config.HOOK_PARCOOL.get();
+    }
+
+    @Override
+    public boolean hookIronsSpellbooks() {
+        return Config.HOOK_IRONS_SPELLBOOKS.get();
+    }
+
+    @Override
+    public boolean hookFeathers() {
+        return Config.HOOK_FEATHERS.get();
+    }
+
+    @Override
+    public boolean hookParaglider() {
+        return Config.HOOK_PARAGLIDER.get();
     }
 }

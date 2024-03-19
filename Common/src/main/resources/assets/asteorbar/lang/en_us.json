@@ -89,5 +89,9 @@
   "text.autoconfig.asteorbar.option.hook.hookToughAsNails": "Tough As Nails",
   "text.autoconfig.asteorbar.option.hook.hookThirstWasTaken": "Thirst Was Taken",
   "text.autoconfig.asteorbar.option.hook.hookMekanism": "Mekanism",
-  "text.autoconfig.asteorbar.option.hook.hookDehydration": "Dehydration"
+  "text.autoconfig.asteorbar.option.hook.hookDehydration": "Dehydration",
+  "text.autoconfig.asteorbar.option.hook.hookParcool": "Parcool",
+  "text.autoconfig.asteorbar.option.hook.hookIronsSpellbooks": "Iron's Spellbooks",
+  "text.autoconfig.asteorbar.option.hook.hookFeathers": "Feathers",
+  "text.autoconfig.asteorbar.option.hook.hookParaglider": "Paraglider"
 }

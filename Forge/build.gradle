@@ -149,6 +149,18 @@ dependencies {
     if (mekanism_version_forge != "0") {
         compileOnly fg.deobf("curse.maven:mekanism-268560:${mekanism_version_forge}")
     }
+    if (parcool_version_forge != "0") {
+        compileOnly fg.deobf("curse.maven:parcool-482378:${parcool_version_forge}")
+    }
+    if (irons_spellbooks_version_forge != "0") {
+        compileOnly fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:${irons_spellbooks_version_forge}")
+    }
+    if (feathers_version_forge != "0") {
+        compileOnly fg.deobf("curse.maven:feathers-699933:${feathers_version_forge}")
+    }
+    if (paraglider_version_forge != "0") {
+        compileOnly fg.deobf("curse.maven:paragliders-289240:${paraglider_version_forge}")
+    }
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"

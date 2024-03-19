@@ -1,6 +1,21 @@
 # Version History
 
+## v1.4
+
+2024/03/16
+
+### Features
+
+- Colorful health bar.
+- The max value of armor and food level now configurable.
+- Compatible with Light Shield(NeoForge 1.20.4).
+
+### Adjustments & Fixes
+
+- Experience value now displays correctly.
+
 ## v1.3
+
 2024/02/22
 
 ### Features
@@ -20,13 +35,16 @@
 - Fabric configuration should be working correctly now.
 
 ## v1.2.2
+
 2024/02/14
 
 ### Adjustments & Fixes
+
 - Adjusted overlay display sequence.
 - Added more methods to display absorption.
 
 ## v1.2.1
+
 2024/02/07
 
 ### Adjustments & Fixes

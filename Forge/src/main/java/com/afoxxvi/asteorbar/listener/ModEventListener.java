@@ -6,6 +6,7 @@ import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.ForgeRenderGui;
 import com.afoxxvi.asteorbar.overlay.parts.MekanismOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ThirstOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.ParcoolOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -26,6 +27,8 @@ public class ModEventListener {
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mount_health", new ForgeRenderGui(MOUNT_HEALTH));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "tough_as_nails", new ForgeRenderGui(new ToughAsNailsOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "thirst", new ForgeRenderGui(new ThirstOverlay()));
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "thirst_level", new ForgeRenderGui(new ToughAsNailsOverlay()));
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "parcool_stamina", new ForgeRenderGui(new ParcoolOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "experience_bar", new ForgeRenderGui(EXPERIENCE_BAR));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "armor_level", new ForgeRenderGui(ARMOR_LEVEL));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mekanism", new ForgeRenderGui(new MekanismOverlay()));

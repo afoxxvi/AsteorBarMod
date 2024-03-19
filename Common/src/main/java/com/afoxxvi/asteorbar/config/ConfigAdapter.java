@@ -175,4 +175,12 @@ public interface ConfigAdapter {
     boolean hookMekanism();
 
     boolean hookDehydration();
+
+    boolean hookParcool();
+
+    boolean hookIronsSpellbooks();
+
+    boolean hookFeathers();
+
+    boolean hookParaglider();
 }

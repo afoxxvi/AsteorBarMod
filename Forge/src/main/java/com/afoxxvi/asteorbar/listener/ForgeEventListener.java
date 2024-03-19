@@ -20,6 +20,7 @@ public class ForgeEventListener {
     public static final ResourceLocation TOUGH_AS_NAILS_THIRST_LEVEL = new ResourceLocation("toughasnails", "thirst_level");
     public static final ResourceLocation THIRST_THIRST_LEVEL = new ResourceLocation("thirst", "thirst_level");
     public static final ResourceLocation MEKANISM_ENERGY_LEVEL = new ResourceLocation("mekanism", "energy_level");
+    public static final ResourceLocation PARCOOL_STAMINA = new ResourceLocation("parcool", "hud.stamina.host");
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -44,6 +45,7 @@ public class ForgeEventListener {
                 || Overlays.toughAsNails && AsteorBar.config.hookToughAsNails() && overlay.id().equals(TOUGH_AS_NAILS_THIRST_LEVEL)
                 || Overlays.thirst && AsteorBar.config.hookThirstWasTaken() && overlay.id().equals(THIRST_THIRST_LEVEL)
                 || Overlays.mekanism && AsteorBar.config.hookMekanism() && overlay.id().equals(MEKANISM_ENERGY_LEVEL)
+                || Overlays.parcool && AsteorBar.config.hookParcool() && overlay.id().equals(PARCOOL_STAMINA)
         ) {
             event.setCanceled(true);
         }

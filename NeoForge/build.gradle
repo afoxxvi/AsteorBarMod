@@ -107,6 +107,9 @@ dependencies {
     if (tough_as_nails_version_neoforge != "0") {
         compileOnly "curse.maven:tough-as-nails-246391:${tough_as_nails_version_neoforge}"
     }
+    if (appleskin_version_neoforge != "0") {
+        compileOnly "curse.maven:appleskin-248787:${appleskin_version_neoforge}"
+    }
 }
 
 compileJava {

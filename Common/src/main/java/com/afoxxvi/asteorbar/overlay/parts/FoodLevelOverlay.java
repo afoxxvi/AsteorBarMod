@@ -13,16 +13,40 @@ import net.minecraft.world.food.FoodData;
 public class FoodLevelOverlay extends BaseOverlay {
     private int foodBlinkTime = 0;
 
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int foodColor, int foodLevel, float saturation, float exhaustion, boolean flip) {
+    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int foodColor, int foodLevel, float saturation, float exhaustion, int foodIncrement, float saturationIncrement, int tick, boolean flip) {
+        RenderSystem.enableBlend();
         var boundColor = highlight ? AsteorBar.config.foodBoundColorBlink() : AsteorBar.config.foodBoundColor();
         drawBound(guiGraphics, left, top, right, bottom, boundColor);
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.foodEmptyColor());
         final int innerWidth = right - left - 2;
         int foodWidth = (int) (innerWidth * (double) foodLevel / AsteorBar.config.fullFoodLevelValue());
         drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, foodWidth, foodColor, flip);
+        float alpha = (float) Math.cos(tick % 40 / 40.0 * Math.PI * 2) * 0.5F + 0.5F;
+        if (foodIncrement > 0 && foodLevel < AsteorBar.config.fullFoodLevelValue()) {
+            int incrementWidth;
+            if (foodLevel + foodIncrement >= AsteorBar.config.fullFoodLevelValue()) {
+                incrementWidth = innerWidth - foodWidth;
+            } else {
+                incrementWidth = (int) (innerWidth * (double) foodIncrement / AsteorBar.config.fullFoodLevelValue());
+            }
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+            drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, foodWidth, incrementWidth, foodColor, flip);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        }
         if (AsteorBar.config.displaySaturation()) {
             int saturationWidth = (int) ((right - left) * (saturation / AsteorBar.config.fullSaturationValue()));
             drawBoundFlip(guiGraphics, left, top, right, bottom, saturationWidth, AsteorBar.config.saturationColor(), flip);
+            if (foodIncrement > 0 && saturationIncrement > 0 && saturation < AsteorBar.config.fullSaturationValue()) {
+                int incrementWidth;
+                if (saturation + saturationIncrement >= AsteorBar.config.fullSaturationValue()) {
+                    incrementWidth = right - left - saturationWidth;
+                } else {
+                    incrementWidth = (int) ((right - left) * (saturationIncrement / AsteorBar.config.fullSaturationValue()));
+                }
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+                drawBoundFlipConcat(guiGraphics, left, top, right, bottom, saturationWidth, incrementWidth, AsteorBar.config.saturationColor(), flip);
+                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            }
         }
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
@@ -30,6 +54,7 @@ public class FoodLevelOverlay extends BaseOverlay {
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
+        RenderSystem.disableBlend();
     }
 
     @Override
@@ -46,6 +71,15 @@ public class FoodLevelOverlay extends BaseOverlay {
             if (player.hasEffect(MobEffects.HUNGER)) {
                 foodType = AsteorBar.config.foodColorHunger();
             }
+            int foodIncrement = 0;
+            float saturationIncrement = 0F;
+            if (Overlays.appleskin) {
+                final var foodValues = AsteorBar.platformAdapter.getAppleSkinFoodValues(player);
+                if (foodValues != null) {
+                    foodIncrement = foodValues.hungerIncrement();
+                    saturationIncrement = foodValues.saturationIncrement();
+                }
+            }
             if (AsteorBar.config.enableFoodBlink()) {
                 if (player.getFoodData().getSaturationLevel() <= 0.0F && gui.gui().getGuiTicks() % (Math.max(4, level) * 3L + 1) == 0) {
                     foodBlinkTime = 2;
@@ -54,47 +88,53 @@ public class FoodLevelOverlay extends BaseOverlay {
                     foodBlinkTime--;
                 }
             }
+            int left, top, right;
+            boolean flip = false;
             switch (Overlays.style) {
-                case Overlays.STYLE_NONE -> {
-
+                default -> {
+                    return;
                 }
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG -> {
-                    int left = screenWidth / 2 - 91;
-                    int top = screenHeight - gui.rightHeight() + 4;
+                    left = screenWidth / 2 - 91;
+                    top = screenHeight - gui.rightHeight() + 4;
+                    right = left + BOUND_FULL_WIDTH_LONG;
                     gui.rightHeight(12);
-                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_LONG, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, false);
                 }
                 case Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
-                    int left = screenWidth / 2 + 10;
-                    int top = screenHeight - gui.rightHeight() + 4;
+                    left = screenWidth / 2 + 10;
+                    top = screenHeight - gui.rightHeight() + 4;
+                    right = left + BOUND_FULL_WIDTH_SHORT;
+                    flip = true;
                     gui.rightHeight(6);
-                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, true);
                 }
                 case Overlays.STYLE_TOP_LEFT -> {
-                    int top = Overlays.vertical;
-                    int left = Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, false);
+                    top = Overlays.vertical;
+                    left = Overlays.horizontal;
+                    right = left + Overlays.length;
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_TOP_RIGHT -> {
-                    int top = Overlays.vertical;
-                    int left = screenWidth - Overlays.length - Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, true);
+                    top = Overlays.vertical;
+                    left = screenWidth - Overlays.length - Overlays.horizontal;
+                    right = left + Overlays.length;
+                    flip = true;
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_BOTTOM_LEFT -> {
-                    int top = screenHeight - Overlays.vertical;
-                    int left = Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, false);
+                    top = screenHeight - Overlays.vertical;
+                    left = Overlays.horizontal;
+                    right = left + Overlays.length;
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_BOTTOM_RIGHT -> {
-                    int top = screenHeight - Overlays.vertical;
-                    int left = screenWidth - Overlays.length - Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, true);
+                    top = screenHeight - Overlays.vertical;
+                    left = screenWidth - Overlays.length - Overlays.horizontal;
+                    right = left + Overlays.length;
+                    flip = true;
                     Overlays.vertical += 6;
                 }
             }
+            draw(guiGraphics, left, top, right, top + 5, foodBlinkTime > 0, foodType, level, saturation, exhaustion, foodIncrement, saturationIncrement, gui.gui().getGuiTicks(), flip);
         }
     }
 }

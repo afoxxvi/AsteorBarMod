@@ -1,5 +1,16 @@
 # Version History
 
+## v1.4.1
+
+2024
+
+### Features
+
+- Preview health&hunger&saturation increment while AppleSkin is loaded.
+- Display stamina bar of Parcool.
+- Display feather bar of Feather.
+- Display mana bar of Iron's Spells 'n Spellbooks
+
 ## v1.4
 
 2024/03/16
@@ -8,7 +19,7 @@
 
 - Colorful health bar.
 - The max value of armor and food level now configurable.
-- Compatible with Light Shield(NeoForge 1.20.4).
+- Display shield info in hud and entity bar of Light Shield(NeoForge 1.20.4).
 
 ### Adjustments & Fixes
 

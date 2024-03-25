@@ -30,6 +30,11 @@ public class MountHealthOverlay extends SimpleBarOverlay {
     }
 
     @Override
+    protected boolean isLeftSide() {
+        return true;
+    }
+
+    @Override
     protected boolean shouldRender(Player player) {
         Entity tmp = player.getVehicle();
         if (tmp instanceof LivingEntity mount) {

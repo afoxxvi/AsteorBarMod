@@ -452,4 +452,19 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     public boolean hookFeathers() {
         return true;
     }
+
+    @Override
+    public boolean hookAppleSkin() {
+        return true;
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return true;
+    }
+
+    @Override
+    public boolean hookVampirism() {
+        return true;
+    }
 }

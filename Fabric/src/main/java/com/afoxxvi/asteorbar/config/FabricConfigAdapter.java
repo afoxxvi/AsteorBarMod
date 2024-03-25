@@ -463,6 +463,21 @@ public class FabricConfigAdapter implements ConfigAdapter {
         return config.hook.hookFeathers;
     }
 
+    @Override
+    public boolean hookAppleSkin() {
+        return config.hook.hookAppleSkin;
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return config.hook.hookSuperiorShields;
+    }
+
+    @Override
+    public boolean hookVampirism() {
+        return config.hook.hookVampirism;
+    }
+
     public static void init() {
         AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, JanksonConfigSerializer::new);
         holder = AutoConfig.getConfigHolder(FabricConfigAdapter.AsteorBarConfig.class);
@@ -665,6 +680,12 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean hookIronsSpellbooks = DefaultConfigAdapter.I.hookIronsSpellbooks();
             @Comment(ConfigComment.hookFeathers)
             public boolean hookFeathers = DefaultConfigAdapter.I.hookFeathers();
+            @Comment(ConfigComment.hookAppleSkin)
+            public boolean hookAppleSkin = DefaultConfigAdapter.I.hookAppleSkin();
+            @Comment(ConfigComment.hookSuperiorShields)
+            public boolean hookSuperiorShields = DefaultConfigAdapter.I.hookSuperiorShields();
+            @Comment(ConfigComment.hookVampirism)
+            public boolean hookVampirism = DefaultConfigAdapter.I.hookVampirism();
         }
     }
 }

@@ -37,18 +37,28 @@ public class Overlays {
     private static List<Render> stringRenders = new ArrayList<>();
     private static boolean initialized = false;
     public static boolean toughAsNails = false;
+    public static boolean thirst = false;
+    public static boolean mekanism = false;
+    public static boolean dehydration = false;
     public static boolean parcool = false;
     public static boolean ironsSpellbooks = false;
     public static boolean feathers = false;
     public static boolean appleskin = false;
+    public static boolean superiorshields = false;
+    public static boolean vampirism = false;
 
     public static void init() {
         initialized = true;
         toughAsNails = AsteorBar.platformAdapter.isModLoaded("toughasnails");
+        thirst = AsteorBar.platformAdapter.isModLoaded("thirst");
+        mekanism = AsteorBar.platformAdapter.isModLoaded("mekanism");
+        dehydration = AsteorBar.platformAdapter.isModLoaded("dehydration");
         parcool = AsteorBar.platformAdapter.isModLoaded("parcool");
         ironsSpellbooks = AsteorBar.platformAdapter.isModLoaded("irons_spellbooks");
         feathers = AsteorBar.platformAdapter.isModLoaded("feathers");
         appleskin = AsteorBar.platformAdapter.isModLoaded("appleskin");
+        superiorshields = AsteorBar.platformAdapter.isModLoaded("superiorshields");
+        vampirism = AsteorBar.platformAdapter.isModLoaded("vampirism");
     }
 
     public static void reset() {

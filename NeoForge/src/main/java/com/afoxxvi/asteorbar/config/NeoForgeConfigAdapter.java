@@ -96,6 +96,9 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue HOOK_PARCOOL;
         public static final ModConfigSpec.BooleanValue HOOK_IRONS_SPELLBOOKS;
         public static final ModConfigSpec.BooleanValue HOOK_FEATHERS;
+        public static final ModConfigSpec.BooleanValue HOOK_APPLE_SKIN;
+        public static final ModConfigSpec.BooleanValue HOOK_SUPERIOR_SHIELDS;
+        public static final ModConfigSpec.BooleanValue HOOK_VAMPIRISM;
 
         static {
             BUILDER.push("overlay");
@@ -451,6 +454,18 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookFeathers)
                     .translation("text.autoconfig.asteorbar.option.hook.hookFeathers")
                     .define("feathers", DefaultConfigAdapter.I.hookFeathers());
+            HOOK_APPLE_SKIN = BUILDER
+                    .comment(ConfigComment.hookAppleSkin)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookAppleSkin")
+                    .define("appleSkin", DefaultConfigAdapter.I.hookAppleSkin());
+            HOOK_SUPERIOR_SHIELDS = BUILDER
+                    .comment(ConfigComment.hookSuperiorShields)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookSuperiorShields")
+                    .define("superiorShields", DefaultConfigAdapter.I.hookSuperiorShields());
+            HOOK_VAMPIRISM = BUILDER
+                    .comment(ConfigComment.hookVampirism)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookVampirism")
+                    .define("vampirism", DefaultConfigAdapter.I.hookVampirism());
             BUILDER.pop();
         }
 
@@ -908,6 +923,21 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean hookFeathers() {
         return Config.HOOK_FEATHERS.get();
+    }
+
+    @Override
+    public boolean hookAppleSkin() {
+        return Config.HOOK_APPLE_SKIN.get();
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return Config.HOOK_SUPERIOR_SHIELDS.get();
+    }
+
+    @Override
+    public boolean hookVampirism() {
+        return Config.HOOK_VAMPIRISM.get();
     }
 
 }

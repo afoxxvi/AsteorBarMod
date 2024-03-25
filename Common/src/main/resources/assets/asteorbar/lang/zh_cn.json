@@ -72,6 +72,7 @@
   "text.autoconfig.asteorbar.option.entity.showOnBosses": "在Boss身上显示",
   "text.autoconfig.asteorbar.option.entity.showOnFullHealthWithoutAbsorption": "生命值满且没有吸收值时显示",
   "text.autoconfig.asteorbar.option.entity.showOnFullHealthWithAbsorption": "生命值满且有吸收值时显示",
+  "text.autoconfig.asteorbar.option.entity.healthBarAlpha": "生物信息条不透明度",
   "text.autoconfig.asteorbar.option.entity.healthBarHalfWidth": "生物信息条半宽度",
   "text.autoconfig.asteorbar.option.entity.healthBarHalfHeight": "生物信息条半高度",
   "text.autoconfig.asteorbar.option.entity.healthBarOffsetY": "生物信息条垂直偏移",

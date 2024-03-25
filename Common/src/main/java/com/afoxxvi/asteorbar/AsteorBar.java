@@ -32,5 +32,10 @@ public class AsteorBar {
         public boolean isModLoaded(String modId) {
             return false;
         }
+
+        @Override
+        public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
+            return new AppleSkinFoodValues(0, 0, 0);
+        }
     };
 }

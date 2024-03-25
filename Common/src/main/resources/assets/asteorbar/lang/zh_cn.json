@@ -43,6 +43,7 @@
   "text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor": "坐骑生命值边框颜色",
   "text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor2": "坐骑生命值底部边框颜色",
   "text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor": "坐骑生命值背景颜色",
+  "text.autoconfig.asteorbar.option.overlay.mountHealthOnLeftSide": "坐骑生命值左侧显示",
   "text.autoconfig.asteorbar.option.overlay.armorColor": "护甲值颜色",
   "text.autoconfig.asteorbar.option.overlay.armorBoundColor": "护甲值边框颜色",
   "text.autoconfig.asteorbar.option.overlay.armorEmptyColor": "护甲值背景颜色",

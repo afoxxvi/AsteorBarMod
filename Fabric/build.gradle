@@ -41,6 +41,9 @@ dependencies {
     if (dehydration_version_fabric != "0") {
         modImplementation "curse.maven:dehydration-410830:${dehydration_version_fabric}"
     }
+    if (appleskin_version_fabric != "0") {
+        modImplementation "curse.maven:appleskin-248787:${appleskin_version_fabric}"
+    }
 }
 
 compileJava {

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayer.class)
-public class ServerPlayerMixin extends Player {
+public abstract class ServerPlayerMixin extends Player {
 
     public ServerPlayerMixin(Level level, BlockPos blockPos, float f, GameProfile gameProfile, @Nullable ProfilePublicKey profilePublicKey) {
         super(level, blockPos, f, gameProfile, profilePublicKey);
@@ -24,15 +24,5 @@ public class ServerPlayerMixin extends Player {
     void onTick(CallbackInfo ci) {
         ServerPlayer player = (ServerPlayer) (Object) this;
         NetworkHandler.onPlayerTick(player);
-    }
-
-    @Override
-    public boolean isSpectator() {
-        return false;
-    }
-
-    @Override
-    public boolean isCreative() {
-        return false;
     }
 }

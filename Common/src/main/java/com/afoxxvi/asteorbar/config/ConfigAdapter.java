@@ -140,6 +140,8 @@ public interface ConfigAdapter {
 
     boolean showOnFullHealthWithAbsorption();
 
+    int healthBarAlpha();
+
     int healthBarHalfWidth();
 
     int healthBarHalfHeight();

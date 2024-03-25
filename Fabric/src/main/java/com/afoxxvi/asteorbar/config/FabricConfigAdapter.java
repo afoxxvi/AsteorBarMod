@@ -359,6 +359,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int healthBarAlpha() {
+        return config.entity.healthBarAlpha;
+    }
+
+    @Override
     public int healthBarHalfWidth() {
         return config.entity.healthBarHalfWidth;
     }
@@ -640,6 +645,8 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean showOnFullHealthWithoutAbsorption = DefaultConfigAdapter.I.showOnFullHealthWithoutAbsorption();
             @Comment(ConfigComment.showOnFullHealthWithAbsorption)
             public boolean showOnFullHealthWithAbsorption = DefaultConfigAdapter.I.showOnFullHealthWithAbsorption();
+            @Comment(ConfigComment.healthBarAlpha)
+            public int healthBarAlpha = DefaultConfigAdapter.I.healthBarAlpha();
             @Comment(ConfigComment.healthBarHalfWidth)
             public int healthBarHalfWidth = DefaultConfigAdapter.I.healthBarHalfWidth();
             @Comment(ConfigComment.healthBarHalfHeight)

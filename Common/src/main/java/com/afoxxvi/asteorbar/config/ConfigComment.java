@@ -38,6 +38,7 @@ public class ConfigComment {
     public static final String mountHealthBoundColor = "The color of the mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String mountHealthBoundColor2 = "The color of the second mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String mountHealthEmptyColor = "The color of the empty part of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
+    public static final String mountHealthOnLeftSide = "Whether to display the mount health bar on the left side. Or it will be displayed on the right side.";
     public static final String armorColor = "The color of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String armorBoundColor = "The color of the armor bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String armorEmptyColor = "The color of the empty part of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";

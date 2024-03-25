@@ -31,7 +31,7 @@ public class MountHealthOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean isLeftSide() {
-        return true;
+        return AsteorBar.config.mountHealthOnLeftSide();
     }
 
     @Override

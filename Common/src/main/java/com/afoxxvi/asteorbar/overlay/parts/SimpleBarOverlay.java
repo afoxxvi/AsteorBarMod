@@ -6,15 +6,24 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class SimpleBarOverlay extends BaseOverlay {
+    protected int tick = 0;
     public static class Parameters {
         public int fillColor = 0;
+        public int fillColor2 = 0;
         public int boundColor = 0;
+        public int boundColor2 = 0;
         public int emptyColor = 0;
         public double value = 0;
         public double capacity = 1;
         public int boundFillColor = 0;
         public double boundValue = 0;
         public double boundCapacity = 1;
+        public String centerText = null;
+        public String leftText = null;
+        public String rightText = null;
+        public int centerColor = 0;
+        public int leftColor = 0;
+        public int rightColor = 0;
 
         public Parameters() {
         }
@@ -25,14 +34,39 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
-        drawBound(guiGraphics, left, top, right, bottom, parameters.boundColor);
+        if (parameters.boundColor2 == 0) {
+            drawBound(guiGraphics, left, top, right, bottom, parameters.boundColor);
+        } else {
+            drawBound(guiGraphics, left, top, right, bottom, parameters.boundColor, parameters.boundColor2);
+        }
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, parameters.emptyColor);
         final int innerWidth = right - left - 2;
         final int fillWidth = (int) (innerWidth * parameters.value / parameters.capacity);
-        drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, parameters.fillColor, flip);
+        if (parameters.fillColor2 != 0) {
+            drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, parameters.fillColor, parameters.fillColor2, flip);
+        } else {
+            drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, parameters.fillColor, flip);
+        }
         if (parameters.boundFillColor != 0) {
             final int boundFillWidth = (int) (innerWidth * parameters.boundValue / parameters.boundCapacity);
             drawBoundFlip(guiGraphics, left, top, right, bottom, boundFillWidth, parameters.boundFillColor, flip);
+        }
+        if (parameters.centerText != null) {
+            Overlays.addStringRender((left + right) / 2, top - 2, parameters.centerColor, parameters.centerText, Overlays.ALIGN_CENTER, true);
+        }
+        if (parameters.leftText != null) {
+            if (flip) {
+                Overlays.addStringRender(right - 2, top - 2, parameters.leftColor, parameters.leftText, Overlays.ALIGN_RIGHT, true);
+            } else {
+                Overlays.addStringRender(left + 2, top - 2, parameters.leftColor, parameters.leftText, Overlays.ALIGN_LEFT, true);
+            }
+        }
+        if (parameters.rightText != null) {
+            if (flip) {
+                Overlays.addStringRender(left + 2, top - 2, parameters.rightColor, parameters.rightText, Overlays.ALIGN_LEFT, true);
+            } else {
+                Overlays.addStringRender(right - 2, top - 2, parameters.rightColor, parameters.rightText, Overlays.ALIGN_RIGHT, true);
+            }
         }
         drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
     }
@@ -45,16 +79,25 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         return false;
     }
 
+    protected boolean alwaysLow() {
+        return false;
+    }
+
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var player = gui.mc().player;
         if (player == null) return;
+        tick = gui.gui().getGuiTicks();
         if (!shouldRender(player)) return;
         var parameters = getParameters(player);
         if (parameters == null) return;
         int left, top, right;
         boolean flip;
-        switch (Overlays.style) {
+        int style = Overlays.style;
+        if (alwaysLow()) {
+            style = Overlays.STYLE_ABOVE_HOT_BAR_SHORT;
+        }
+        switch (style) {
             default -> {
                 return;
             }

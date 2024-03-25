@@ -79,6 +79,8 @@ public interface ConfigAdapter {
 
     int mountHealthEmptyColor();
 
+    boolean mountHealthOnLeftSide();
+
     int armorColor();
 
     int armorBoundColor();

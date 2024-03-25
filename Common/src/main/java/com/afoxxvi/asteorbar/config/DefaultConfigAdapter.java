@@ -199,6 +199,11 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean mountHealthOnLeftSide() {
+        return false;
+    }
+
+    @Override
     public int armorColor() {
         return 0xffe6e7f2;
     }

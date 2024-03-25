@@ -208,6 +208,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean mountHealthOnLeftSide() {
+        return false;
+    }
+
+    @Override
     public int armorColor() {
         return config.overlay.armorColor;
     }
@@ -573,6 +578,8 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public int mountHealthBoundColor2 = DefaultConfigAdapter.I.mountHealthBoundColor2();
             @Comment(ConfigComment.mountHealthEmptyColor)
             public int mountHealthEmptyColor = DefaultConfigAdapter.I.mountHealthEmptyColor();
+            @Comment(ConfigComment.mountHealthOnLeftSide)
+            public boolean mountHealthOnLeftSide = DefaultConfigAdapter.I.mountHealthOnLeftSide();
             @Comment(ConfigComment.armorColor)
             public int armorColor = DefaultConfigAdapter.I.armorColor();
             @Comment(ConfigComment.armorBoundColor)

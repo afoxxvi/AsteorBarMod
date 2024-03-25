@@ -45,6 +45,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR;
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR_2;
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_EMPTY_COLOR;
+        public static final ModConfigSpec.BooleanValue MOUNT_HEALTH_ON_LEFT_SIDE;
         public static final ModConfigSpec.IntValue ARMOR_COLOR;
         public static final ModConfigSpec.IntValue ARMOR_BOUND_COLOR;
         public static final ModConfigSpec.IntValue ARMOR_EMPTY_COLOR;
@@ -250,6 +251,10 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.mountHealthEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor")
                     .defineInRange("mountHealthEmptyColor", DefaultConfigAdapter.I.mountHealthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+            MOUNT_HEALTH_ON_LEFT_SIDE = BUILDER
+                    .comment(ConfigComment.mountHealthOnLeftSide)
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthOnLeftSide")
+                    .define("mountHealthOnLeftSide", DefaultConfigAdapter.I.mountHealthOnLeftSide());
             ARMOR_COLOR = BUILDER
                     .comment(ConfigComment.armorColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorColor")
@@ -667,6 +672,11 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public int mountHealthEmptyColor() {
         return Config.MOUNT_HEALTH_EMPTY_COLOR.get();
+    }
+
+    @Override
+    public boolean mountHealthOnLeftSide() {
+        return false;
     }
 
     @Override

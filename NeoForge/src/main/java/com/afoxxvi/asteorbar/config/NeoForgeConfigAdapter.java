@@ -676,7 +676,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
 
     @Override
     public boolean mountHealthOnLeftSide() {
-        return false;
+        return Config.MOUNT_HEALTH_ON_LEFT_SIDE.get();
     }
 
     @Override

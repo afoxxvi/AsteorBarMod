@@ -209,7 +209,7 @@ public class FabricConfigAdapter implements ConfigAdapter {
 
     @Override
     public boolean mountHealthOnLeftSide() {
-        return false;
+        return config.overlay.mountHealthOnLeftSide;
     }
 
     @Override

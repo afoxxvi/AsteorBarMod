@@ -79,6 +79,8 @@ public interface ConfigAdapter {
 
     int mountHealthEmptyColor();
 
+    boolean mountHealthOnLeftSide();
+
     int armorColor();
 
     int armorBoundColor();
@@ -175,4 +177,16 @@ public interface ConfigAdapter {
     boolean hookMekanism();
 
     boolean hookDehydration();
+
+    boolean hookParcool();
+
+    boolean hookIronsSpellbooks();
+
+    boolean hookFeathers();
+
+    boolean hookAppleSkin();
+
+    boolean hookSuperiorShields();
+
+    boolean hookVampirism();
 }

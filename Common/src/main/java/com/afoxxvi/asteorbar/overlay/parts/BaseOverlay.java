@@ -16,6 +16,14 @@ public abstract class BaseOverlay {
     public static final int Y_REGENERATION_FILL = 0;
     public static final int Y_FOOD_EXHAUSTION_FILL = 9;
     public static final int Y_EXPERIENCE_DECORATION = 18;
+    public static final int Y_RIGHT_DECORATION = 27;
+    public static final int Y_LEFT_DECORATION = 36;
+
+    public BaseOverlay overrideOverlay = null;
+
+    public boolean shouldOverride() {
+        return false;
+    }
 
     protected void drawTextureFill(PoseStack poseStack, int left, int top, int width, int height, int textureX, int textureY) {
         GuiHelper.drawTexturedRect(poseStack, left, top, textureX, textureY, width, height);
@@ -37,6 +45,19 @@ public abstract class BaseOverlay {
         GuiHelper.drawSolidGradient(poseStack, left, top, right, bottom, color);
     }
 
+    protected void drawFillFlipConcat(PoseStack poseStack, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+        if (has == 0) {
+            drawFillFlip(poseStack, left, top, right, bottom, width, color, flip);
+            return;
+        }
+        width = Math.max(0, Math.min(right - left - has, width));
+        if (flip) {
+            GuiHelper.drawSolidGradientUpDown(poseStack, right - has - width, top, right - has, bottom, color);
+        } else {
+            GuiHelper.drawSolidGradientUpDown(poseStack, left + has, top, left + has + width, bottom, color);
+        }
+    }
+
     protected void drawFillFlip(PoseStack poseStack, int left, int top, int right, int bottom, int width, int color, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         if (flip) {
@@ -53,6 +74,31 @@ public abstract class BaseOverlay {
             GuiHelper.drawSolidColor(poseStack, right - width, bottom - 1, right, bottom, color2);
         } else {
             GuiHelper.drawSolidColor(poseStack, left, bottom - 1, left + width, bottom, color2);
+        }
+    }
+
+    protected void drawBoundFlipConcat(PoseStack poseStack, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+        if (has == 0) {
+            drawBoundFlip(poseStack, left, top, right, bottom, width, color, flip);
+            return;
+        }
+        width = Math.max(0, Math.min(right - left - has, width));
+        if (width == 0) return;
+        if (flip) {
+            if (has + width >= right - left) {
+                GuiHelper.drawSolidColor(poseStack, left, top + 1, left + 1, bottom - 1, color);
+                width--;
+            }
+            //note that 1 pixel of 'has' is drawn as right bound
+            GuiHelper.drawSolidColor(poseStack, right - has - width, top, right - has, top + 1, color);
+            GuiHelper.drawSolidColor(poseStack, right - has - width, bottom - 1, right - has, bottom, color);
+        } else {
+            if (has + width >= right - left) {
+                GuiHelper.drawSolidColor(poseStack, right - 1, top + 1, right, bottom - 1, color);
+                width--;
+            }
+            GuiHelper.drawSolidColor(poseStack, left + has, top, left + has + width, top + 1, color);
+            GuiHelper.drawSolidColor(poseStack, left + has, bottom - 1, left + has + width, bottom, color);
         }
     }
 
@@ -78,28 +124,32 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawBound(PoseStack guiGraphics, int left, int top, int right, int bottom, int color) {
-        GuiHelper.drawSolidColor(guiGraphics, left, top + 1, left + 1, bottom - 1, color);
-        GuiHelper.drawSolidColor(guiGraphics, right - 1, top + 1, right, bottom - 1, color);
-        GuiHelper.drawSolidColor(guiGraphics, left + 1, top, right - 1, top + 1, color);
-        GuiHelper.drawSolidColor(guiGraphics, left + 1, bottom - 1, right - 1, bottom, color);
+    protected void drawBound(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
+        GuiHelper.drawSolidColor(poseStack, left, top + 1, left + 1, bottom - 1, color);
+        GuiHelper.drawSolidColor(poseStack, right - 1, top + 1, right, bottom - 1, color);
+        GuiHelper.drawSolidColor(poseStack, left + 1, top, right - 1, top + 1, color);
+        GuiHelper.drawSolidColor(poseStack, left + 1, bottom - 1, right - 1, bottom, color);
     }
 
-    protected void drawBound(PoseStack guiGraphics, int left, int top, int right, int bottom, int color, int color2) {
-        GuiHelper.drawSolidColor(guiGraphics, left, top + 1, left + 1, bottom - 2, color);
-        GuiHelper.drawSolidColor(guiGraphics, right - 1, top + 1, right, bottom - 2, color);
-        GuiHelper.drawSolidColor(guiGraphics, left + 1, top, right - 1, top + 1, color);
-        GuiHelper.drawSolidColor(guiGraphics, left, bottom - 2, left + 1, bottom - 1, color2);
-        GuiHelper.drawSolidColor(guiGraphics, right - 1, bottom - 2, right, bottom - 1, color2);
-        GuiHelper.drawSolidColor(guiGraphics, left + 1, bottom - 1, right - 1, bottom, color2);
+    protected void drawBound(PoseStack poseStack, int left, int top, int right, int bottom, int color, int color2) {
+        GuiHelper.drawSolidColor(poseStack, left, top + 1, left + 1, bottom - 2, color);
+        GuiHelper.drawSolidColor(poseStack, right - 1, top + 1, right, bottom - 2, color);
+        GuiHelper.drawSolidColor(poseStack, left + 1, top, right - 1, top + 1, color);
+        GuiHelper.drawSolidColor(poseStack, left, bottom - 2, left + 1, bottom - 1, color2);
+        GuiHelper.drawSolidColor(poseStack, right - 1, bottom - 2, right, bottom - 1, color2);
+        GuiHelper.drawSolidColor(poseStack, left + 1, bottom - 1, right - 1, bottom, color2);
     }
 
-    public void render(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void render(RenderGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
         if (AsteorBar.config.enableOverlay()) {
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
-            renderOverlay(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+            if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
+                overrideOverlay.render(gui, poseStack, partialTick, screenWidth, screenHeight);
+            } else {
+                renderOverlay(gui, poseStack, partialTick, screenWidth, screenHeight);
+            }
         }
     }
 
-    public abstract void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight);
+    public abstract void renderOverlay(RenderGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight);
 }

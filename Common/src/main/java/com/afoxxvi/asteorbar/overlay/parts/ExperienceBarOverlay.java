@@ -3,7 +3,6 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
-import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -28,7 +27,7 @@ public class ExperienceBarOverlay extends BaseOverlay {
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, PoseStack guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, PoseStack poseStack, float partialTick, int screenWidth, int screenHeight) {
         var mc = gui.mc();
         var player = mc.player;
         if (player == null || player.jumpableVehicle() != null || gui.mc().options.hideGui) {
@@ -46,30 +45,30 @@ public class ExperienceBarOverlay extends BaseOverlay {
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
                     int top = screenHeight - 29;
                     int left = screenWidth / 2 - 91;
-                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_LONG, top + 5, player.experienceProgress, levelStr, false);
+                    draw(poseStack, left, top, left + BOUND_FULL_WIDTH_LONG, top + 5, player.experienceProgress, levelStr, false);
                 }
                 case Overlays.STYLE_TOP_LEFT -> {
                     int top = Overlays.vertical;
                     int left = Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, false);
+                    draw(poseStack, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, false);
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_TOP_RIGHT -> {
                     int top = Overlays.vertical;
                     int left = screenWidth - Overlays.length - Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, true);
+                    draw(poseStack, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, true);
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_BOTTOM_LEFT -> {
                     int top = screenHeight - Overlays.vertical;
                     int left = Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, false);
+                    draw(poseStack, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, false);
                     Overlays.vertical += 6;
                 }
                 case Overlays.STYLE_BOTTOM_RIGHT -> {
                     int top = screenHeight - Overlays.vertical;
                     int left = screenWidth - Overlays.length - Overlays.horizontal;
-                    draw(guiGraphics, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, true);
+                    draw(poseStack, left, top, left + Overlays.length, top + 5, player.experienceProgress, levelStr, true);
                     Overlays.vertical += 6;
                 }
             }

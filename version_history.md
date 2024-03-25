@@ -1,6 +1,32 @@
 # Version History
 
+## v1.4.1
+
+2024
+
+### Features
+
+- Preview health&hunger&saturation increment while AppleSkin is loaded.
+- Display stamina bar of Parcool.
+- Display feather bar of Feather.
+- Display mana bar of Iron's Spells 'n Spellbooks
+
+## v1.4
+
+2024/03/16
+
+### Features
+
+- Colorful health bar.
+- The max value of armor and food level now configurable.
+- Display shield info in hud and entity bar of Light Shield(NeoForge 1.20.4).
+
+### Adjustments & Fixes
+
+- Experience value now displays correctly.
+
 ## v1.3
+
 2024/02/22
 
 ### Features
@@ -20,13 +46,16 @@
 - Fabric configuration should be working correctly now.
 
 ## v1.2.2
+
 2024/02/14
 
 ### Adjustments & Fixes
+
 - Adjusted overlay display sequence.
 - Added more methods to display absorption.
 
 ## v1.2.1
+
 2024/02/07
 
 ### Adjustments & Fixes

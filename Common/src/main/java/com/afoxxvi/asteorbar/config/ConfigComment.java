@@ -38,6 +38,7 @@ public class ConfigComment {
     public static final String mountHealthBoundColor = "The color of the mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String mountHealthBoundColor2 = "The color of the second mount health bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String mountHealthEmptyColor = "The color of the empty part of the mount health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
+    public static final String mountHealthOnLeftSide = "Whether to display the mount health bar on the left side. Or it will be displayed on the right side.";
     public static final String armorColor = "The color of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String armorBoundColor = "The color of the armor bar bound. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String armorEmptyColor = "The color of the empty part of the armor bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
@@ -85,4 +86,10 @@ public class ConfigComment {
     public static final String hookThirstWasTaken = "Whether to hook Thirst Was Taken. If enabled, the mod will display the thirst bar.";
     public static final String hookMekanism = "Whether to hook Mekanism. If enabled, the mod will display the energy bar.";
     public static final String hookDehydration = "Whether to hook Dehydration. If enabled, the mod will display the thirst bar.";
+    public static final String hookParcool = "Whether to hook Parcool. If enabled, the mod will display the energy bar.";
+    public static final String hookIronsSpellbooks = "Whether to hook Iron's Spellbooks. If enabled, the mod will display the mana bar.";
+    public static final String hookFeathers = "Whether to hook Feathers. If enabled, the mod will display the energy bar.";
+    public static final String hookAppleSkin = "Whether to hook AppleSkin. If enabled, the mod will display health and food preview.";
+    public static final String hookSuperiorShields = "Whether to hook Superior Shields. If enabled, the mod will display the shield bar.";
+    public static final String hookVampirism = "Whether to hook Vampirism. If enabled, the mod will display the blood bar.";
 }

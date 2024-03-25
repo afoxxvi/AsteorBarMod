@@ -19,6 +19,12 @@ public abstract class BaseOverlay {
     public static final int Y_RIGHT_DECORATION = 27;
     public static final int Y_LEFT_DECORATION = 36;
 
+    public BaseOverlay overrideOverlay = null;
+
+    public boolean shouldOverride() {
+        return false;
+    }
+
     protected void drawTextureFill(GuiGraphics guiGraphics, int left, int top, int width, int height, int textureX, int textureY) {
         GuiHelper.drawTexturedRect(guiGraphics, left, top, textureX, textureY, width, height);
     }
@@ -137,7 +143,11 @@ public abstract class BaseOverlay {
     public void render(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (AsteorBar.config.enableOverlay()) {
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
-            renderOverlay(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+            if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
+                overrideOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+            } else {
+                renderOverlay(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+            }
         }
     }
 

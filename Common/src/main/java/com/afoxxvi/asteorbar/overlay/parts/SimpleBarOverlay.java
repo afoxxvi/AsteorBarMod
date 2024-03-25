@@ -52,47 +52,57 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         if (!shouldRender(player)) return;
         var parameters = getParameters(player);
         if (parameters == null) return;
+        int left, top, right;
+        boolean flip;
         switch (Overlays.style) {
-            case Overlays.STYLE_NONE -> {
-
+            default -> {
+                return;
             }
             case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
                 if (isLeftSide()) {
-                    int left = screenWidth / 2 - 91;
-                    int top = screenHeight - gui.leftHeight() + 4;
+                    left = screenWidth / 2 - 91;
+                    top = screenHeight - gui.leftHeight() + 4;
+                    right = left + BOUND_FULL_WIDTH_SHORT;
+                    flip = false;
                     gui.leftHeight(6);
-                    draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, parameters, false);
                 } else {
-                    int left = screenWidth / 2 + 10;
-                    int top = screenHeight - gui.rightHeight() + 4;
+                    left = screenWidth / 2 + 10;
+                    top = screenHeight - gui.rightHeight() + 4;
+                    right = left + BOUND_FULL_WIDTH_SHORT;
+                    flip = true;
                     gui.rightHeight(6);
                     draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, parameters, true);
                 }
             }
             case Overlays.STYLE_TOP_LEFT -> {
-                int top = Overlays.vertical;
-                int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, parameters, false);
+                top = Overlays.vertical;
+                left = Overlays.horizontal;
+                right = left + Overlays.length;
+                flip = false;
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_TOP_RIGHT -> {
-                int top = Overlays.vertical;
-                int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, parameters, true);
+                top = Overlays.vertical;
+                left = screenWidth - Overlays.length - Overlays.horizontal;
+                right = left + Overlays.length;
+                flip = true;
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_LEFT -> {
-                int top = screenHeight - Overlays.vertical;
-                int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, parameters, false);
+                top = screenHeight - Overlays.vertical;
+                left = Overlays.horizontal;
+                right = left + Overlays.length;
+                flip = false;
                 Overlays.vertical += 6;
             }
             case Overlays.STYLE_BOTTOM_RIGHT -> {
-                int top = screenHeight - Overlays.vertical;
-                int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, parameters, true);
+                top = screenHeight - Overlays.vertical;
+                left = screenWidth - Overlays.length - Overlays.horizontal;
+                right = left + Overlays.length;
+                flip = true;
                 Overlays.vertical += 6;
             }
         }
+        draw(guiGraphics, left, top, right, top + 5, parameters, flip);
     }
 }

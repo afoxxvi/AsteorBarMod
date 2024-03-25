@@ -39,6 +39,19 @@ public abstract class BaseOverlay {
         GuiHelper.drawSolidGradient(guiGraphics.pose(), left, top, right, bottom, color);
     }
 
+    protected void drawFillFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+        if (has == 0) {
+            drawFillFlip(guiGraphics, left, top, right, bottom, width, color, flip);
+            return;
+        }
+        width = Math.max(0, Math.min(right - left - has, width));
+        if (flip) {
+            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), right - has - width, top, right - has, bottom, color);
+        } else {
+            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), left + has, top, left + has + width, bottom, color);
+        }
+    }
+
     protected void drawFillFlip(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         if (flip) {
@@ -55,6 +68,31 @@ public abstract class BaseOverlay {
             GuiHelper.drawSolidColor(guiGraphics, right - width, bottom - 1, right, bottom, color2);
         } else {
             GuiHelper.drawSolidColor(guiGraphics, left, bottom - 1, left + width, bottom, color2);
+        }
+    }
+
+    protected void drawBoundFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+        if (has == 0) {
+            drawBoundFlip(guiGraphics, left, top, right, bottom, width, color, flip);
+            return;
+        }
+        width = Math.max(0, Math.min(right - left - has, width));
+        if (width == 0) return;
+        if (flip) {
+            if (has + width >= right - left) {
+                GuiHelper.drawSolidColor(guiGraphics, left, top + 1, left + 1, bottom - 1, color);
+                width--;
+            }
+            //note that 1 pixel of 'has' is drawn as right bound
+            GuiHelper.drawSolidColor(guiGraphics, right - has - width, top, right - has, top + 1, color);
+            GuiHelper.drawSolidColor(guiGraphics, right - has - width, bottom - 1, right - has, bottom, color);
+        } else {
+            if (has + width >= right - left) {
+                GuiHelper.drawSolidColor(guiGraphics, right - 1, top + 1, right, bottom - 1, color);
+                width--;
+            }
+            GuiHelper.drawSolidColor(guiGraphics, left + has, top, left + has + width, top + 1, color);
+            GuiHelper.drawSolidColor(guiGraphics, left + has, bottom - 1, left + has + width, bottom, color);
         }
     }
 

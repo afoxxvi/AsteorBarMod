@@ -4,7 +4,6 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarForge;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.ForgeRenderGui;
-import com.afoxxvi.asteorbar.overlay.parts.ParcoolOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -24,7 +23,6 @@ public class ModEventListener {
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "food_level", new ForgeRenderGui(FOOD_LEVEL));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mount_health", new ForgeRenderGui(MOUNT_HEALTH));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "thirst_level", new ForgeRenderGui(new ToughAsNailsOverlay()));
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "parcool_stamina", new ForgeRenderGui(new ParcoolOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "experience_bar", new ForgeRenderGui(EXPERIENCE_BAR));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "armor_level", new ForgeRenderGui(ARMOR_LEVEL));
         event.registerBelow(VanillaGuiOverlay.AIR_LEVEL.id(), "air_level", new ForgeRenderGui(AIR_LEVEL));

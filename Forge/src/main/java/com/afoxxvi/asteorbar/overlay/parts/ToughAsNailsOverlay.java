@@ -1,7 +1,6 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.mixin.third.ToughAsNailsTemperatureMixin;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -11,7 +10,6 @@ import toughasnails.api.potion.TANEffects;
 import toughasnails.api.thirst.IThirst;
 import toughasnails.api.thirst.ThirstHelper;
 import toughasnails.init.ModConfig;
-import toughasnails.temperature.TemperatureOverlayRenderer;
 
 public class ToughAsNailsOverlay extends SimpleBarOverlay {
     private int thirstBlinkTime = 0;
@@ -26,7 +24,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
         exhaustion = thirst.getExhaustion();
         final Parameters parameters = new Parameters();
         parameters.fillColor = 0xff1c5ee4;
-        if (player.hasEffect(TANEffects.THIRST.get())) {
+        if (player.hasEffect(TANEffects.THIRST)) {
             parameters.fillColor = 0xff76db4c;
         }
         if (AsteorBar.config.enableFoodBlink()) {
@@ -55,7 +53,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            var cap = ThirstConfig.thirstExhaustionThreshold.get();
+            var cap = ModConfig.thirst.thirstExhaustionThreshold;
             int exhaustionWidth = (int) ((right - left - 2) * (Math.min(cap, exhaustion) / cap));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);

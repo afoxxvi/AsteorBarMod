@@ -6,6 +6,7 @@ import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.NeoForgeRenderGui;
 import com.afoxxvi.asteorbar.overlay.parts.LightShieldOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.VampirismOverlay;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -30,6 +31,7 @@ public class ModEventListener {
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), new ResourceLocation(AsteorBar.MOD_ID, "armor_level"), new NeoForgeRenderGui(ARMOR_LEVEL));
         event.registerBelow(VanillaGuiOverlay.AIR_LEVEL.id(), new ResourceLocation(AsteorBar.MOD_ID, "air_level"), new NeoForgeRenderGui(AIR_LEVEL));
         event.registerAbove(VanillaGuiOverlay.EXPERIENCE_BAR.id(), new ResourceLocation(AsteorBar.MOD_ID, "string"), new NeoForgeRenderGui(STRING));
+        FOOD_LEVEL.overrideOverlay = new VampirismOverlay();
     }
 
     @SubscribeEvent

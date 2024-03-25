@@ -44,6 +44,8 @@ public class Overlays {
     public static boolean ironsSpellbooks = false;
     public static boolean feathers = false;
     public static boolean appleskin = false;
+    public static boolean superiorshields = false;
+    public static boolean vampirism = false;
 
     public static void init() {
         initialized = true;
@@ -55,6 +57,8 @@ public class Overlays {
         ironsSpellbooks = AsteorBar.platformAdapter.isModLoaded("irons_spellbooks");
         feathers = AsteorBar.platformAdapter.isModLoaded("feathers");
         appleskin = AsteorBar.platformAdapter.isModLoaded("appleskin");
+        superiorshields = AsteorBar.platformAdapter.isModLoaded("superiorshields");
+        vampirism = AsteorBar.platformAdapter.isModLoaded("vampirism");
     }
 
     public static void reset() {

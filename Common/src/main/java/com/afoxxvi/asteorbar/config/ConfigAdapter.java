@@ -181,4 +181,10 @@ public interface ConfigAdapter {
     boolean hookIronsSpellbooks();
 
     boolean hookFeathers();
+
+    boolean hookAppleSkin();
+
+    boolean hookSuperiorShields();
+
+    boolean hookVampirism();
 }

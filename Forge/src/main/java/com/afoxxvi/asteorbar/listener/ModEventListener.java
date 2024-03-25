@@ -32,6 +32,7 @@ public class ModEventListener {
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "mekanism", new ForgeRenderGui(new MekanismOverlay()));
         event.registerBelow(VanillaGuiOverlay.AIR_LEVEL.id(), "air_level", new ForgeRenderGui(AIR_LEVEL));
         event.registerAbove(VanillaGuiOverlay.EXPERIENCE_BAR.id(), "string", new ForgeRenderGui(STRING));
+        FOOD_LEVEL.overrideOverlay = new VampirismOverlay();
     }
 
     @SubscribeEvent

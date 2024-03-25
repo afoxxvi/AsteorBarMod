@@ -23,6 +23,7 @@ public class ForgeEventListener {
     public static final ResourceLocation PARCOOL_STAMINA = new ResourceLocation("parcool", "hud.stamina.host");
     public static final ResourceLocation IRONS_SPELLBOOKS_MANA = new ResourceLocation("irons_spellbooks", "mana_overlay");
     public static final ResourceLocation FEATHERS_FEATHERS = new ResourceLocation("feathers", "feathers");
+    public static final ResourceLocation VAMPIRISM_BLOOD = new ResourceLocation("vampirism", "blood_bar");
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -50,6 +51,7 @@ public class ForgeEventListener {
                 || Overlays.parcool && AsteorBar.config.hookParcool() && overlay.id().equals(PARCOOL_STAMINA)
                 || Overlays.ironsSpellbooks && AsteorBar.config.hookIronsSpellbooks() && overlay.id().equals(IRONS_SPELLBOOKS_MANA)
                 || Overlays.feathers && AsteorBar.config.hookFeathers() && overlay.id().equals(FEATHERS_FEATHERS)
+                || Overlays.vampirism && AsteorBar.config.hookVampirism() && overlay.id().equals(VAMPIRISM_BLOOD)
         ) {
             event.setCanceled(true);
         }

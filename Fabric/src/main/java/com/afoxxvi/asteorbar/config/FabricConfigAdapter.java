@@ -208,6 +208,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean mountHealthOnLeftSide() {
+        return config.overlay.mountHealthOnLeftSide;
+    }
+
+    @Override
     public int armorColor() {
         return config.overlay.armorColor;
     }
@@ -448,6 +453,36 @@ public class FabricConfigAdapter implements ConfigAdapter {
         return config.hook.hookDehydration;
     }
 
+    @Override
+    public boolean hookParcool() {
+        return config.hook.hookParcool;
+    }
+
+    @Override
+    public boolean hookIronsSpellbooks() {
+        return config.hook.hookIronsSpellbooks;
+    }
+
+    @Override
+    public boolean hookFeathers() {
+        return config.hook.hookFeathers;
+    }
+
+    @Override
+    public boolean hookAppleSkin() {
+        return config.hook.hookAppleSkin;
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return config.hook.hookSuperiorShields;
+    }
+
+    @Override
+    public boolean hookVampirism() {
+        return config.hook.hookVampirism;
+    }
+
     public static void init() {
         AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, JanksonConfigSerializer::new);
         holder = AutoConfig.getConfigHolder(FabricConfigAdapter.AsteorBarConfig.class);
@@ -543,6 +578,8 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public int mountHealthBoundColor2 = DefaultConfigAdapter.I.mountHealthBoundColor2();
             @Comment(ConfigComment.mountHealthEmptyColor)
             public int mountHealthEmptyColor = DefaultConfigAdapter.I.mountHealthEmptyColor();
+            @Comment(ConfigComment.mountHealthOnLeftSide)
+            public boolean mountHealthOnLeftSide = DefaultConfigAdapter.I.mountHealthOnLeftSide();
             @Comment(ConfigComment.armorColor)
             public int armorColor = DefaultConfigAdapter.I.armorColor();
             @Comment(ConfigComment.armorBoundColor)
@@ -644,6 +681,18 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean hookMekanism = DefaultConfigAdapter.I.hookMekanism();
             @Comment(ConfigComment.hookDehydration)
             public boolean hookDehydration = DefaultConfigAdapter.I.hookDehydration();
+            @Comment(ConfigComment.hookParcool)
+            public boolean hookParcool = DefaultConfigAdapter.I.hookParcool();
+            @Comment(ConfigComment.hookIronsSpellbooks)
+            public boolean hookIronsSpellbooks = DefaultConfigAdapter.I.hookIronsSpellbooks();
+            @Comment(ConfigComment.hookFeathers)
+            public boolean hookFeathers = DefaultConfigAdapter.I.hookFeathers();
+            @Comment(ConfigComment.hookAppleSkin)
+            public boolean hookAppleSkin = DefaultConfigAdapter.I.hookAppleSkin();
+            @Comment(ConfigComment.hookSuperiorShields)
+            public boolean hookSuperiorShields = DefaultConfigAdapter.I.hookSuperiorShields();
+            @Comment(ConfigComment.hookVampirism)
+            public boolean hookVampirism = DefaultConfigAdapter.I.hookVampirism();
         }
     }
 }

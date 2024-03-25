@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.utils;
 
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
+import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
@@ -29,5 +30,14 @@ public class ForgePlatformAdapter implements PlatformAdapter {
     @Override
     public boolean isModLoaded(String modId) {
         return ModList.get().isLoaded(modId);
+    }
+
+    @Override
+    public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
+        if (!Overlays.appleskin) {
+            return null;
+        }
+        // if not using third adapter, the game will crash if appleskin is not loaded
+        return AppleSkinAdapter.getInstance().getAppleSkinFoodValues(player);
     }
 }

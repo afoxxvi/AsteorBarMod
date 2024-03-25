@@ -43,6 +43,7 @@
   "text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor": "Mount Health Bound Color",
   "text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor2": "Mount Health Bound Color (2)",
   "text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor": "Mount Health Empty Color",
+  "text.autoconfig.asteorbar.option.overlay.mountHealthOnLeftSide": "Mount Health Left Side",
   "text.autoconfig.asteorbar.option.overlay.armorColor": "Armor Color",
   "text.autoconfig.asteorbar.option.overlay.armorBoundColor": "Armor Bound Color",
   "text.autoconfig.asteorbar.option.overlay.armorEmptyColor": "Armor Empty Color",
@@ -89,5 +90,11 @@
   "text.autoconfig.asteorbar.option.hook.hookToughAsNails": "Tough As Nails",
   "text.autoconfig.asteorbar.option.hook.hookThirstWasTaken": "Thirst Was Taken",
   "text.autoconfig.asteorbar.option.hook.hookMekanism": "Mekanism",
-  "text.autoconfig.asteorbar.option.hook.hookDehydration": "Dehydration"
+  "text.autoconfig.asteorbar.option.hook.hookDehydration": "Dehydration",
+  "text.autoconfig.asteorbar.option.hook.hookParcool": "Parcool",
+  "text.autoconfig.asteorbar.option.hook.hookIronsSpellbooks": "Iron's Spellbooks",
+  "text.autoconfig.asteorbar.option.hook.hookFeathers": "Feathers",
+  "text.autoconfig.asteorbar.option.hook.hookAppleSkin": "AppleSkin",
+  "text.autoconfig.asteorbar.option.hook.hookSuperiorShields": "Superior Shields",
+  "text.autoconfig.asteorbar.option.hook.hookVampirism": "Vampirism"
 }

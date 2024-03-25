@@ -50,7 +50,6 @@ public class EntityRenderer {
             //AsteorBar.LOGGER.info("check failed" + check);
             return;
         }
-        RenderSystem.enableBlend();
         var dist = entity.distanceTo(player);
         //The layers will start to flash if too close
         var layerDist = Math.max(0.002F, dist * 0.002F);
@@ -132,7 +131,6 @@ public class EntityRenderer {
             poseStack.popPose();
         }
         poseStack.popPose();
-        RenderSystem.disableBlend();
     }
 
     public interface ExtraRenderer {

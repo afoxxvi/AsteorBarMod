@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.utils;
 
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
+import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.FluidTags;
@@ -28,5 +29,14 @@ public class FabricPlatformAdapter implements PlatformAdapter {
     @Override
     public boolean isModLoaded(String modId) {
         return FabricLoader.getInstance().isModLoaded(modId);
+    }
+
+    @Override
+    public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
+        if (!Overlays.appleskin) {
+            return null;
+        }
+        // if not using third adapter, the game will crash if appleskin is not loaded
+        return AppleSkinAdapter.getInstance().getAppleSkinFoodValues(player);
     }
 }

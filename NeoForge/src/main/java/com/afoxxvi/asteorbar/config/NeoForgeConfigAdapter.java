@@ -45,6 +45,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR;
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR_2;
         public static final ModConfigSpec.IntValue MOUNT_HEALTH_EMPTY_COLOR;
+        public static final ModConfigSpec.BooleanValue MOUNT_HEALTH_ON_LEFT_SIDE;
         public static final ModConfigSpec.IntValue ARMOR_COLOR;
         public static final ModConfigSpec.IntValue ARMOR_BOUND_COLOR;
         public static final ModConfigSpec.IntValue ARMOR_EMPTY_COLOR;
@@ -93,6 +94,12 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue HOOK_THIRST_WAS_TAKEN;
         public static final ModConfigSpec.BooleanValue HOOK_MEKANISM;
         public static final ModConfigSpec.BooleanValue HOOK_DEHYDRATION;
+        public static final ModConfigSpec.BooleanValue HOOK_PARCOOL;
+        public static final ModConfigSpec.BooleanValue HOOK_IRONS_SPELLBOOKS;
+        public static final ModConfigSpec.BooleanValue HOOK_FEATHERS;
+        public static final ModConfigSpec.BooleanValue HOOK_APPLE_SKIN;
+        public static final ModConfigSpec.BooleanValue HOOK_SUPERIOR_SHIELDS;
+        public static final ModConfigSpec.BooleanValue HOOK_VAMPIRISM;
 
         static {
             BUILDER.push("overlay");
@@ -244,6 +251,10 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.mountHealthEmptyColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor")
                     .defineInRange("mountHealthEmptyColor", DefaultConfigAdapter.I.mountHealthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+            MOUNT_HEALTH_ON_LEFT_SIDE = BUILDER
+                    .comment(ConfigComment.mountHealthOnLeftSide)
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthOnLeftSide")
+                    .define("mountHealthOnLeftSide", DefaultConfigAdapter.I.mountHealthOnLeftSide());
             ARMOR_COLOR = BUILDER
                     .comment(ConfigComment.armorColor)
                     .translation("text.autoconfig.asteorbar.option.overlay.armorColor")
@@ -436,6 +447,30 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookDehydration)
                     .translation("text.autoconfig.asteorbar.option.hook.hookDehydration")
                     .define("dehydration", DefaultConfigAdapter.I.hookDehydration());
+            HOOK_PARCOOL = BUILDER
+                    .comment(ConfigComment.hookParcool)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookParcool")
+                    .define("parcool", DefaultConfigAdapter.I.hookParcool());
+            HOOK_IRONS_SPELLBOOKS = BUILDER
+                    .comment(ConfigComment.hookIronsSpellbooks)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookIronsSpellbooks")
+                    .define("ironsSpellbooks", DefaultConfigAdapter.I.hookIronsSpellbooks());
+            HOOK_FEATHERS = BUILDER
+                    .comment(ConfigComment.hookFeathers)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookFeathers")
+                    .define("feathers", DefaultConfigAdapter.I.hookFeathers());
+            HOOK_APPLE_SKIN = BUILDER
+                    .comment(ConfigComment.hookAppleSkin)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookAppleSkin")
+                    .define("appleSkin", DefaultConfigAdapter.I.hookAppleSkin());
+            HOOK_SUPERIOR_SHIELDS = BUILDER
+                    .comment(ConfigComment.hookSuperiorShields)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookSuperiorShields")
+                    .define("superiorShields", DefaultConfigAdapter.I.hookSuperiorShields());
+            HOOK_VAMPIRISM = BUILDER
+                    .comment(ConfigComment.hookVampirism)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookVampirism")
+                    .define("vampirism", DefaultConfigAdapter.I.hookVampirism());
             BUILDER.pop();
         }
 
@@ -637,6 +672,11 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public int mountHealthEmptyColor() {
         return Config.MOUNT_HEALTH_EMPTY_COLOR.get();
+    }
+
+    @Override
+    public boolean mountHealthOnLeftSide() {
+        return Config.MOUNT_HEALTH_ON_LEFT_SIDE.get();
     }
 
     @Override
@@ -879,4 +919,35 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     public boolean hookDehydration() {
         return Config.HOOK_DEHYDRATION.get();
     }
+
+    @Override
+    public boolean hookParcool() {
+        return Config.HOOK_PARCOOL.get();
+    }
+
+    @Override
+    public boolean hookIronsSpellbooks() {
+        return Config.HOOK_IRONS_SPELLBOOKS.get();
+    }
+
+    @Override
+    public boolean hookFeathers() {
+        return Config.HOOK_FEATHERS.get();
+    }
+
+    @Override
+    public boolean hookAppleSkin() {
+        return Config.HOOK_APPLE_SKIN.get();
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return Config.HOOK_SUPERIOR_SHIELDS.get();
+    }
+
+    @Override
+    public boolean hookVampirism() {
+        return Config.HOOK_VAMPIRISM.get();
+    }
+
 }

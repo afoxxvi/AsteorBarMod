@@ -2,6 +2,7 @@ package com.afoxxvi.asteorbar.config;
 
 public class DefaultConfigAdapter implements ConfigAdapter {
     public static final DefaultConfigAdapter I = new DefaultConfigAdapter();
+
     @Override
     public boolean enableOverlay() {
         return true;
@@ -195,6 +196,11 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     @Override
     public int mountHealthEmptyColor() {
         return 0xff464646;
+    }
+
+    @Override
+    public boolean mountHealthOnLeftSide() {
+        return false;
     }
 
     @Override
@@ -434,6 +440,36 @@ public class DefaultConfigAdapter implements ConfigAdapter {
 
     @Override
     public boolean hookDehydration() {
+        return true;
+    }
+
+    @Override
+    public boolean hookParcool() {
+        return true;
+    }
+
+    @Override
+    public boolean hookIronsSpellbooks() {
+        return true;
+    }
+
+    @Override
+    public boolean hookFeathers() {
+        return true;
+    }
+
+    @Override
+    public boolean hookAppleSkin() {
+        return true;
+    }
+
+    @Override
+    public boolean hookSuperiorShields() {
+        return true;
+    }
+
+    @Override
+    public boolean hookVampirism() {
         return true;
     }
 }

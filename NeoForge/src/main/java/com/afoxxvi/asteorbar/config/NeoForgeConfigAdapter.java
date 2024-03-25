@@ -75,6 +75,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue SHOW_ON_BOSSES;
         public static final ModConfigSpec.BooleanValue SHOW_ON_FULL_HEALTH_WITHOUT_ABSORPTION;
         public static final ModConfigSpec.BooleanValue SHOW_ON_FULL_HEALTH_WITH_ABSORPTION;
+        public static final ModConfigSpec.IntValue HEALTH_BAR_ALPHA;
         public static final ModConfigSpec.IntValue HEALTH_BAR_HALF_WIDTH;
         public static final ModConfigSpec.IntValue HEALTH_BAR_HALF_HEIGHT;
         public static final ModConfigSpec.DoubleValue HEALTH_BAR_OFFSET_Y;
@@ -369,6 +370,10 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.showOnFullHealthWithAbsorption)
                     .translation("text.autoconfig.asteorbar.option.entity.showOnFullHealthWithAbsorption")
                     .define("showOnFullHealthWithAbsorption", DefaultConfigAdapter.I.showOnFullHealthWithAbsorption());
+            HEALTH_BAR_ALPHA = BUILDER
+                    .comment(ConfigComment.healthBarAlpha)
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarAlpha")
+                    .defineInRange("healthBarAlpha", DefaultConfigAdapter.I.healthBarAlpha(), 0, 255);
             HEALTH_BAR_HALF_WIDTH = BUILDER
                     .comment(ConfigComment.healthBarHalfWidth)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHalfWidth")
@@ -823,6 +828,11 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean showOnFullHealthWithAbsorption() {
         return Config.SHOW_ON_FULL_HEALTH_WITH_ABSORPTION.get();
+    }
+
+    @Override
+    public int healthBarAlpha() {
+        return Config.HEALTH_BAR_ALPHA.get();
     }
 
     @Override

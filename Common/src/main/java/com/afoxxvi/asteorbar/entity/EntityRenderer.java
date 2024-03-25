@@ -3,7 +3,6 @@ package com.afoxxvi.asteorbar.entity;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -50,7 +49,6 @@ public class EntityRenderer {
             //AsteorBar.LOGGER.info("check failed" + check);
             return;
         }
-        RenderSystem.enableBlend();
         var dist = entity.distanceTo(player);
         //The layers will start to flash if too close
         var layerDist = Math.max(0.002F, dist * 0.002F);
@@ -132,7 +130,6 @@ public class EntityRenderer {
             poseStack.popPose();
         }
         poseStack.popPose();
-        RenderSystem.disableBlend();
     }
 
     public interface ExtraRenderer {

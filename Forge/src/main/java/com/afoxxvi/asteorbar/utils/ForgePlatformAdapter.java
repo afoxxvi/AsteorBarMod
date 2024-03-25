@@ -7,8 +7,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.ForgeMod;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
 
 public class ForgePlatformAdapter implements PlatformAdapter {

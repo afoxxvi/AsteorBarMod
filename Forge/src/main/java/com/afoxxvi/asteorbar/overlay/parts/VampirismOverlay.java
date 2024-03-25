@@ -5,8 +5,8 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
-import de.teamlapen.vampirism.entity.player.vampire.VampirePlayer;
 import de.teamlapen.vampirism.modcompat.IMCHandler;
+import de.teamlapen.vampirism.player.vampire.VampirePlayer;
 import de.teamlapen.vampirism.util.Helper;
 import net.minecraft.client.Minecraft;
 

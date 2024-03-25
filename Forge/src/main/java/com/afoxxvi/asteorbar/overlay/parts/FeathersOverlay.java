@@ -9,6 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.world.entity.player.Player;
 
+//technically not able to be compatible with the current version of the mod
 public class FeathersOverlay extends SimpleBarOverlay {
     int times = 0;
     int regenerationOffset = -1;
@@ -27,10 +28,10 @@ public class FeathersOverlay extends SimpleBarOverlay {
         parameters.fillColor = ClientFeathersData.isCold() ? 0xffa8f7ff : 0xff22a5f0;
         parameters.emptyColor = ClientFeathersData.isCold() ? 0xff265d6c : 0xff083d5a;
         parameters.value = ClientFeathersData.getFeathers();
-        parameters.capacity = ClientFeathersData.getMaxFeathers();
+        parameters.capacity = 20;
         if (ClientFeathersData.getEnduranceFeathers() > 0) {
             parameters.boundFillColor = 0xffd4af37;
-            int capacity = ClientFeathersData.getMaxFeathers();
+            int capacity = 20;
             int value = ClientFeathersData.getEnduranceFeathers();
             if (capacity < value) {
                 if (value % capacity == 0) {
@@ -58,7 +59,7 @@ public class FeathersOverlay extends SimpleBarOverlay {
     protected void drawDecorations(PoseStack poseStack, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         super.drawDecorations(poseStack, left, top, right, bottom, parameters, flip);
         final int innerWidth = right - left - 2;
-        final int fillWidth = innerWidth * ClientFeathersData.getWeight() / ClientFeathersData.getMaxFeathers();
+        final int fillWidth = innerWidth * ClientFeathersData.getWeight() / 20;
         drawFillFlip(poseStack, left + 1, top + 1, right - 1, bottom - 1, fillWidth, 0xffb8b9c4, flip);
         if (times > 0) {
             if (flip) {
@@ -83,6 +84,6 @@ public class FeathersOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
-        return Overlays.feathers && AsteorBar.config.hookFeathers() && !(ClientFeathersData.getMaxFeathers() <= 0 & ClientFeathersData.getEnduranceFeathers() == 0);
+        return Overlays.feathers && AsteorBar.config.hookFeathers();
     }
 }

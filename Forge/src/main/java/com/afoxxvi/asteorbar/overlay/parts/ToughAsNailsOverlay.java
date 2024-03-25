@@ -24,7 +24,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
         exhaustion = thirst.getExhaustion();
         final Parameters parameters = new Parameters();
         parameters.fillColor = 0xff1c5ee4;
-        if (player.hasEffect(TANEffects.THIRST.get())) {
+        if (player.hasEffect(TANEffects.THIRST)) {
             parameters.fillColor = 0xff76db4c;
         }
         if (AsteorBar.config.enableFoodBlink()) {

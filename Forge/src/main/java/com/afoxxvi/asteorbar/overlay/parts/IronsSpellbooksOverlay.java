@@ -5,12 +5,13 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.config.ClientConfigs;
 import io.redspace.ironsspellbooks.gui.overlays.ManaBarOverlay;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
+import io.redspace.ironsspellbooks.registries.AttributeRegistry;
 import net.minecraft.world.entity.player.Player;
 
+//technically not able to be compatible with the current version of the mod
 public class IronsSpellbooksOverlay extends SimpleBarOverlay {
     @Override
     protected Parameters getParameters(Player player) {

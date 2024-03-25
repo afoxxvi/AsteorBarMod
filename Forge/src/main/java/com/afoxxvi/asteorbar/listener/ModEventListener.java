@@ -3,15 +3,6 @@ package com.afoxxvi.asteorbar.listener;
 import com.afoxxvi.asteorbar.AsteorBarForge;
 import com.afoxxvi.asteorbar.overlay.ForgeRenderGui;
 import com.afoxxvi.asteorbar.overlay.parts.*;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import com.afoxxvi.asteorbar.overlay.parts.MekanismOverlay;
-import com.afoxxvi.asteorbar.overlay.parts.ThirstOverlay;
-import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.OverlayRegistry;
 
@@ -19,6 +10,7 @@ import static com.afoxxvi.asteorbar.overlay.Overlays.*;
 
 public class ModEventListener {
     public static boolean registerOverlay = false;
+
     public static void registerOverlays() {
         AsteorBarForge.LOGGER.info("Registering Overlays");
         OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "player_health", new ForgeRenderGui(PLAYER_HEALTH));
@@ -35,6 +27,7 @@ public class ModEventListener {
         OverlayRegistry.registerOverlayBelow(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, "superiorshields", new ForgeRenderGui(new SuperiorShieldsOverlay()));
         OverlayRegistry.registerOverlayBelow(ForgeIngameGui.AIR_LEVEL_ELEMENT, "air_level", new ForgeRenderGui(AIR_LEVEL));
         OverlayRegistry.registerOverlayAbove(ForgeIngameGui.EXPERIENCE_BAR_ELEMENT, "string", new ForgeRenderGui(STRING));
+        FOOD_LEVEL.overrideOverlay = new VampirismOverlay();
         registerOverlay = true;
     }
 }

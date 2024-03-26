@@ -41,6 +41,11 @@ public class EntityRenderer {
         return 0;
     }
 
+    private static int modifyAlpha(int color, int alpha) {
+        if (alpha == 0) return color;
+        return (color & 0x00ffffff) | (alpha << 24);
+    }
+
     public static void render(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource) {
         var player = Minecraft.getInstance().player;
         if (player == null) return;
@@ -52,6 +57,7 @@ public class EntityRenderer {
         var dist = entity.distanceTo(player);
         //The layers will start to flash if too close
         var layerDist = Math.max(0.002F, dist * 0.002F);
+        final var alpha = AsteorBar.config.healthBarAlpha();
         poseStack.pushPose();
         poseStack.translate(0, entity.getBbHeight() + AsteorBar.config.healthBarOffsetY(), 0);
         poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
@@ -71,7 +77,8 @@ public class EntityRenderer {
                 } else {
                     colorHealth = AsteorBar.config.healthBarHealthColor();
                 }
-                final var colorEmpty = AsteorBar.config.healthBarEmptyColor();
+                colorHealth = modifyAlpha(colorHealth, alpha);
+                final var colorEmpty = modifyAlpha(AsteorBar.config.healthBarEmptyColor(), alpha);
                 if (healthWidth > 0) {
                     GuiHelper.renderSolidGradient(bufferBuilder, poseStack, -halfWidth, -halfHeight, -halfWidth + healthWidth, halfHeight, colorHealth, layerDist);
                 }
@@ -82,8 +89,8 @@ public class EntityRenderer {
             int renderAbsorptionMultiplier = -1;
             final var boundWidth = AsteorBar.config.healthBarBoundWidth();
             {//render absorption bar and bound
-                final var colorAbsorption = AsteorBar.config.healthBarAbsorptionColor();
-                final var colorBound = AsteorBar.config.healthBarBoundColor();
+                final var colorAbsorption = modifyAlpha(AsteorBar.config.healthBarAbsorptionColor(), alpha);
+                final var colorBound = modifyAlpha(AsteorBar.config.healthBarBoundColor(), alpha);
                 final var includeVertex = AsteorBar.config.healthBarBoundVertex();
                 var absorptionRate = entity.getAbsorptionAmount() / entity.getMaxHealth();
                 var absorptionNum = Math.floor(absorptionRate);

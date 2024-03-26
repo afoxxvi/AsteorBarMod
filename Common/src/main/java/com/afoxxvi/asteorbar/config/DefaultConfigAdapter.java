@@ -405,12 +405,12 @@ public class DefaultConfigAdapter implements ConfigAdapter {
 
     @Override
     public int healthBarBoundColor() {
-        return 0x55000000;
+        return 0x55606060;
     }
 
     @Override
     public int healthBarEmptyColor() {
-        return 0x33000000;
+        return 0x33404040;
     }
 
     @Override

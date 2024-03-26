@@ -236,6 +236,7 @@ public class PlayerHealthOverlay extends BaseOverlay {
             if (foodValues != null) {
                 healthIncrement = foodValues.healthIncrement();
             }
+            healthIncrement = Math.min(healthIncrement, maxHealth - health);
         }
         int left, top, right;
         boolean flip = false;

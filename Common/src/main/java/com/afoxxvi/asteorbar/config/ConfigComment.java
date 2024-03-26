@@ -67,6 +67,7 @@ public class ConfigComment {
     public static final String showOnBosses = "Whether to display health bar on bosses.";
     public static final String showOnFullHealthWithoutAbsorption = "Whether to display health bar on mobs with full health if the mob's absorption value is 0.";
     public static final String showOnFullHealthWithAbsorption = "Whether to display health bar on mobs with full health if the mob's absorption value is not 0.";
+    public static final String healthBarAlpha = "The alpha of the health bar. 0 to 255. The alpha part of the color will be replaced by this value unless this value is 0.";
     public static final String healthBarHalfWidth = "The half width of the health bar.";
     public static final String healthBarHalfHeight = "The half height of the health bar.";
     public static final String healthBarOffsetY = "The offset of the health bar on the Y axis.";

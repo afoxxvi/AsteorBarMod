@@ -72,6 +72,7 @@
   "text.autoconfig.asteorbar.option.entity.showOnBosses": "Show on Bosses",
   "text.autoconfig.asteorbar.option.entity.showOnFullHealthWithoutAbsorption": "Show on Full Health without Absorption",
   "text.autoconfig.asteorbar.option.entity.showOnFullHealthWithAbsorption": "Show on Full Health with Absorption",
+  "text.autoconfig.asteorbar.option.entity.healthBarAlpha": "Health Bar Alpha",
   "text.autoconfig.asteorbar.option.entity.healthBarHalfWidth": "Health Bar Half Width",
   "text.autoconfig.asteorbar.option.entity.healthBarHalfHeight": "Health Bar Half Height",
   "text.autoconfig.asteorbar.option.entity.healthBarOffsetY": "Health Bar Offset Y",

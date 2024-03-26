@@ -349,6 +349,11 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int healthBarAlpha() {
+        return 180;
+    }
+
+    @Override
     public int healthBarHalfWidth() {
         return 50;
     }

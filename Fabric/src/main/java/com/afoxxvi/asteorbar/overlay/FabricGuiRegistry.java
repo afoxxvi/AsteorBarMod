@@ -11,19 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FabricGuiRegistry {
-    public static final List<BaseOverlay> REGISTRY = new ArrayList<>();
+    private static final List<BaseOverlay> REGISTRY = new ArrayList<>();
 
     static {
-        REGISTRY.add(Overlays.PLAYER_HEALTH);
-        REGISTRY.add(Overlays.FOOD_LEVEL);
-        REGISTRY.add(Overlays.MOUNT_HEALTH);
-        REGISTRY.add(new DehydrationOverlay());
-        REGISTRY.add(Overlays.AIR_LEVEL);
-        REGISTRY.add(Overlays.EXPERIENCE_BAR);
-        REGISTRY.add(Overlays.ARMOR_LEVEL);
-        REGISTRY.add(new OriginsOverlay());
-        REGISTRY.add(Overlays.STRING);
-
+        register(Overlays.PLAYER_HEALTH);
+        register(Overlays.FOOD_LEVEL);
+        register(Overlays.MOUNT_HEALTH);
+        register(new DehydrationOverlay());
+        register(Overlays.AIR_LEVEL);
+        register(Overlays.EXPERIENCE_BAR);
+        register(Overlays.ARMOR_LEVEL);
+        register(new OriginsOverlay());
     }
 
     public static void startRender(Gui instance, GuiGraphics guiGraphics) {
@@ -33,5 +31,10 @@ public class FabricGuiRegistry {
         var height = mc.getWindow().getGuiScaledHeight();
         var gui = new FabricRenderGui(instance);
         REGISTRY.forEach(baseOverlay -> baseOverlay.render(gui, guiGraphics, tick, width, height));
+        Overlays.STRING.render(gui, guiGraphics, tick, width, height);// This overlay must be rendered at last.
+    }
+
+    public static void register(BaseOverlay overlay) {
+        REGISTRY.add(overlay);
     }
 }

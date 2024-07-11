@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar.overlay;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.*;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
+import com.afoxxvi.asteorbar.utils.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -26,7 +27,8 @@ public class Overlays {
     public static final ArmorLevelOverlay ARMOR_LEVEL = new ArmorLevelOverlay();
     public static final StringOverlay STRING = new StringOverlay();
     public static int style = 0;
-    public static int vertical = 0;
+    public static int verticalLeft = 0;
+    public static int verticalRight = 0;
     public static int horizontal = 0;
     public static int length = 10;
     public static int leftHeight = 39;
@@ -36,6 +38,88 @@ public class Overlays {
     public static final int ALIGN_RIGHT = 2;
     private static List<Render> stringRenders = new ArrayList<>();
     private static boolean initialized = false;
+    public static final List<Pair<SimpleBarOverlay, Position>> NONE = List.of();
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_ABOVE_HOT_BAR_LONG = List.of(
+            new Pair<>(EXPERIENCE_BAR, Position.FULL_BOTTOM),
+            new Pair<>(FOOD_LEVEL, Position.FULL_BOTTOM),
+            new Pair<>(PLAYER_HEALTH, Position.FULL_BOTTOM),
+            new Pair<>(MOUNT_HEALTH, Position.HALF_BOTTOM_RIGHT),
+            new Pair<>(ARMOR_LEVEL, Position.HALF_BOTTOM_LEFT),
+            new Pair<>(AIR_LEVEL, Position.HALF_BOTTOM_RIGHT)
+    );
+
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_ABOVE_HOT_BAR_SHORT = List.of(
+            new Pair<>(EXPERIENCE_BAR, Position.FULL_BOTTOM),
+            new Pair<>(PLAYER_HEALTH, Position.HALF_BOTTOM_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.HALF_BOTTOM_RIGHT),
+            new Pair<>(MOUNT_HEALTH, Position.HALF_BOTTOM_RIGHT),
+            new Pair<>(ARMOR_LEVEL, Position.HALF_BOTTOM_LEFT),
+            new Pair<>(AIR_LEVEL, Position.HALF_BOTTOM_RIGHT)
+    );
+
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_TOP_LEFT = List.of(
+            new Pair<>(PLAYER_HEALTH, Position.TOP_LEFT),
+            new Pair<>(MOUNT_HEALTH, Position.TOP_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.TOP_LEFT),
+            new Pair<>(EXPERIENCE_BAR, Position.TOP_LEFT),
+            new Pair<>(ARMOR_LEVEL, Position.TOP_LEFT),
+            new Pair<>(AIR_LEVEL, Position.TOP_LEFT)
+    );
+
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_TOP_RIGHT = List.of(
+            new Pair<>(PLAYER_HEALTH, Position.TOP_RIGHT),
+            new Pair<>(MOUNT_HEALTH, Position.TOP_RIGHT),
+            new Pair<>(FOOD_LEVEL, Position.TOP_RIGHT),
+            new Pair<>(EXPERIENCE_BAR, Position.TOP_RIGHT),
+            new Pair<>(ARMOR_LEVEL, Position.TOP_RIGHT),
+            new Pair<>(AIR_LEVEL, Position.TOP_RIGHT)
+    );
+
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_BOTTOM_LEFT = List.of(
+            new Pair<>(PLAYER_HEALTH, Position.BOTTOM_LEFT),
+            new Pair<>(MOUNT_HEALTH, Position.BOTTOM_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.BOTTOM_LEFT),
+            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_LEFT),
+            new Pair<>(ARMOR_LEVEL, Position.BOTTOM_LEFT),
+            new Pair<>(AIR_LEVEL, Position.BOTTOM_LEFT)
+    );
+
+    public static final List<Pair<SimpleBarOverlay, Position>> ORDER_BOTTOM_RIGHT = List.of(
+            new Pair<>(PLAYER_HEALTH, Position.BOTTOM_RIGHT),
+            new Pair<>(MOUNT_HEALTH, Position.BOTTOM_RIGHT),
+            new Pair<>(FOOD_LEVEL, Position.BOTTOM_RIGHT),
+            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_RIGHT),
+            new Pair<>(ARMOR_LEVEL, Position.BOTTOM_RIGHT),
+            new Pair<>(AIR_LEVEL, Position.BOTTOM_RIGHT)
+    );
+
+    public static final List<List<Pair<SimpleBarOverlay, Position>>> ORDER = List.of(
+            NONE,
+            ORDER_ABOVE_HOT_BAR_LONG,
+            ORDER_ABOVE_HOT_BAR_SHORT,
+            ORDER_TOP_LEFT,
+            ORDER_TOP_RIGHT,
+            ORDER_BOTTOM_LEFT,
+            ORDER_BOTTOM_RIGHT
+    );
+
+    public enum Position {
+        TOP_LEFT(false),
+        TOP_RIGHT(true),
+        BOTTOM_LEFT(false),
+        BOTTOM_RIGHT(true),
+        FULL_BOTTOM(false),
+        HALF_BOTTOM_LEFT(false),
+        HALF_BOTTOM_RIGHT(true),
+        UNSPECIFIED(false),
+        ;
+
+        public final boolean flip;
+
+        Position(boolean flip) {
+            this.flip = flip;
+        }
+    }
 
     public static void init() {
         initialized = true;
@@ -46,7 +130,8 @@ public class Overlays {
         if (!initialized) {
             init();
         }
-        vertical = AsteorBar.config.cornerVerticalPadding();
+        verticalLeft = AsteorBar.config.cornerVerticalPadding();
+        verticalRight = AsteorBar.config.cornerVerticalPadding();
         horizontal = AsteorBar.config.cornerHorizontalPadding();
         length = AsteorBar.config.cornerBarLength();
         style = AsteorBar.config.overlayLayoutStyle();

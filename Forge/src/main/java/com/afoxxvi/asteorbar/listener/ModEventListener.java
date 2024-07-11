@@ -9,6 +9,7 @@ import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCExperienceOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCFoodOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCHealthOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCThirstOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.MainOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -16,13 +17,12 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static com.afoxxvi.asteorbar.overlay.Overlays.*;
-
 @Mod.EventBusSubscriber(modid = AsteorBar.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ModEventListener {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
         AsteorBarForge.LOGGER.info("Registering Overlays");
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "main", new ForgeRenderGui(new MainOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "player_health", new ForgeRenderGui(PLAYER_HEALTH));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "light_shield", new ForgeRenderGui(new LightShieldOverlay()));
         event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "food_level", new ForgeRenderGui(FOOD_LEVEL));

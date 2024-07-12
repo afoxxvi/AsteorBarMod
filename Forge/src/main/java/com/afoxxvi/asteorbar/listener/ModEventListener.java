@@ -9,6 +9,7 @@ import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCExperienceOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCFoodOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCHealthOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCThirstOverlay;
+import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.parts.MainOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -46,6 +47,7 @@ public class ModEventListener {
         PLAYER_HEALTH.overrideOverlay.add(new TFCHealthOverlay());
         FOOD_LEVEL.overrideOverlay.add(new TFCFoodOverlay());
         EXPERIENCE_BAR.overrideOverlay.add(new TFCExperienceOverlay());
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "main", new ForgeRenderGui(Overlays.MAIN));
     }
 
     @SubscribeEvent

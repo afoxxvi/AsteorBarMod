@@ -138,10 +138,15 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     protected abstract boolean shouldRender(Player player);
 
+    /**
+     * Only takes effect when the bar's position is unspecified.
+     * {@link Overlays.Position#UNSPECIFIED}
+     */
     protected boolean isLeftSide() {
         return false;
     }
 
+    @Deprecated
     protected boolean alwaysLow() {
         return false;
     }

@@ -4,6 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarForge;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.ForgeRenderGui;
+import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.parts.MainOverlay;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -17,7 +18,7 @@ public class ModEventListener {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
         AsteorBarForge.LOGGER.info("Registering Overlays");
-        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "main", new ForgeRenderGui(new MainOverlay()));
+        event.registerBelow(VanillaGuiOverlay.PLAYER_HEALTH.id(), "main", new ForgeRenderGui(Overlays.MAIN));
     }
 
     @SubscribeEvent

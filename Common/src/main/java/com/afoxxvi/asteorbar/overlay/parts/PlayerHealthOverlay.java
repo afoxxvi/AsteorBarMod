@@ -9,9 +9,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
 
 
-public class PlayerHealthOverlay extends BaseOverlay {
+public class PlayerHealthOverlay extends SimpleBarOverlay {
     public static final int ABSORPTION_MODE_TOGETHER = 0;
     public static final int ABSORPTION_MODE_STACK = 1;
     public static final int ABSORPTION_MODE_BOUND = 2;
@@ -22,6 +23,9 @@ public class PlayerHealthOverlay extends BaseOverlay {
     private long healthBlinkTime = 0;
     private long lastHealthTime;
     private float lastHealth;
+    private boolean highlight;
+    private int regenerationOffset;
+    private float flashAlpha;
     private final int[] shift = new int[]{0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
 
     private int[] getStackColor(int low, int num) {
@@ -32,95 +36,103 @@ public class PlayerHealthOverlay extends BaseOverlay {
         return new int[]{Utils.parseHexColor(color1), Utils.parseHexColor(color2), Utils.parseHexColor(colors[(low + 1) % colors.length])};
     }
 
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, boolean highlight, int healthColor, float health, float absorb, float maxHealth, float flashAlpha, int regenerationOffset, double healthIncrement, long tick, boolean flip) {
-        int verticalShift = 0;
-        if (health < maxHealth * AsteorBar.config.lowHealthRate()) {
-            verticalShift = shift[(int) (tick % shift.length)];
-            top += verticalShift;
-            bottom += verticalShift;
+    @Override
+    protected Parameters getParameters(Player player) {
+        float health = player.getHealth();
+        highlight = false;
+        if (AsteorBar.config.enableHealthBlink()) {
+            highlight = (healthBlinkTime > tick) && ((healthBlinkTime - tick) / 3L % 2L == 1L);
+            if (health < lastHealth && player.invulnerableTime > 0) {
+                lastHealthTime = Util.getMillis();
+                healthBlinkTime = tick + 20L;
+            } else if (health > lastHealth && player.invulnerableTime > 0) {
+                lastHealthTime = Util.getMillis();
+                healthBlinkTime = tick + 10L;
+            }
+            if (Util.getMillis() - lastHealthTime > 1000L) {
+                lastHealth = health;
+                lastHealthTime = Util.getMillis();
+            }
+            lastHealth = health;
         }
-        //draw bound
-        drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.healthBoundColor());
-        drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, AsteorBar.config.healthEmptyColor());
-        final var outerLength = right - left;
-        final var innerLength = outerLength - 2;
+        regenerationOffset = -1;
+        if (player.hasEffect(MobEffects.REGENERATION)) {
+            regenerationOffset = tick % 30 * 6;
+        }
+        float maxHealth = player.getMaxHealth();
+        float absorb = player.getAbsorptionAmount();
+        flashAlpha = -1F;
+        if (health < maxHealth * AsteorBar.config.lowHealthRate() && !highlight) {
+            int margin = Math.abs(tick % 20 - 10);
+            flashAlpha = 0.08F * margin;
+        }
+        Parameters parameters = new Parameters();
+        if (health < maxHealth * AsteorBar.config.lowHealthRate()) {
+            parameters.verticalShift = shift[tick % shift.length];
+        }
+        parameters.boundColor = AsteorBar.config.healthBoundColor();
+        parameters.emptyColor = AsteorBar.config.healthEmptyColor();
+        int healthColor = AsteorBar.config.healthColorNormal();
+        if (player.hasEffect(MobEffects.POISON)) {
+            healthColor = AsteorBar.config.healthColorPoison();
+        } else if (player.hasEffect(MobEffects.WITHER)) {
+            healthColor = AsteorBar.config.healthColorWither();
+        } else if (player.isFullyFrozen()) {
+            healthColor = AsteorBar.config.healthColorFrozen();
+        }
+        parameters.fillColor = healthColor;
+        parameters.boundFillColor = AsteorBar.config.absorptionColor();
+        parameters.secondFillColor = AsteorBar.config.absorptionColor();
         int i = AsteorBar.config.displayAbsorptionMethod();
         if (AsteorBar.config.enableStackHealthBar()) {
             i = ABSORPTION_MODE_BOUND;
         }
-        float alpha = (float) Math.cos(tick % 40 / 40.0 * Math.PI * 2) * 0.5F + 0.5F;
+        double healthIncrement = 0;
+        if (AsteorBar.compatibility.appleskin) {
+            final var foodValues = AsteorBar.platformAdapter.getAppleSkinFoodValues(player);
+            if (foodValues != null) {
+                healthIncrement = foodValues.healthIncrement();
+            }
+            healthIncrement = Math.min(healthIncrement, maxHealth - health);
+        }
         if (i == ABSORPTION_MODE_TOGETHER) {
             //draw health
-            int healthLength = (int) (innerLength * health / (maxHealth + absorb));
-            int emptyLength = (int) (innerLength * (maxHealth - health) / (maxHealth + absorb));
-            int absorbLength = innerLength - healthLength - emptyLength;
-            if (absorb <= 0.0F) {
-                healthLength += absorbLength;
-                absorbLength = 0;
-            }
-            healthLength += innerLength - emptyLength - absorbLength - healthLength;
-            drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, healthColor, flip);
-            if (healthIncrement > 0 && health < maxHealth) {
-                int incrementLength;
-                if (health + healthIncrement >= maxHealth) {
-                    incrementLength = emptyLength;
-                } else {
-                    incrementLength = (int) (innerLength * healthIncrement / (maxHealth + absorb));
-                }
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
-                drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, incrementLength, healthColor, flip);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            }
-            //draw absorption
-            if (absorbLength > 0) {
-                if (flip) {
-                    drawFillFlip(guiGraphics, left + 1, top + 1, right - 1 - healthLength, bottom - 1, absorbLength, AsteorBar.config.absorptionColor(), true);
-                } else {
-                    drawFillFlip(guiGraphics, left + 1 + healthLength, top + 1, right - 1, bottom - 1, absorbLength, AsteorBar.config.absorptionColor(), false);
-                }
-            }
+            double full = maxHealth + absorb;
+            parameters.value = 1 - (maxHealth - health) / full - parameters.secondValue;
+            parameters.valueIncrement = healthIncrement / full;
+            parameters.secondValue = absorb / full;
+            parameters.secondValueOffset = parameters.value;
+            parameters.secondFillColor = AsteorBar.config.absorptionColor();
+            parameters.secondFillAlpha = 0.66F;
         } else {
             //draw health
-            int healthLength = (int) (innerLength * health / maxHealth);
+            parameters.value = health / maxHealth;
             if (AsteorBar.config.enableStackHealthBar()) {
                 final int unit = AsteorBar.config.fullHealthValue();
-                healthLength = (int) (innerLength * (health % unit) / unit);
-                int incrementLengthA = 0, incrementLengthB = 0;
+                parameters.value = (health % unit) / unit;
+                parameters.secondValue = 0;
                 if (healthIncrement > 0 && health < maxHealth) {
                     if ((health % unit) + healthIncrement >= unit) {
-                        incrementLengthA = innerLength - healthLength;
-                        incrementLengthB = (int) (innerLength * (healthIncrement - (unit - health % unit)) / unit);
+                        parameters.valueIncrement = 1 - parameters.value;
+                        parameters.secondValueIncrement = (parameters.value + healthIncrement / unit) % 1;
                     } else {
                         healthIncrement = Math.min(healthIncrement, maxHealth - health);
-                        incrementLengthA = (int) (innerLength * healthIncrement / unit);
+                        parameters.valueIncrement = healthIncrement / unit;
                     }
                 }
-                final var colors = getStackColor((int) (health / unit), incrementLengthB > 0 ? 3 : 2);
-                if (colors[0] != 0) drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, innerLength, colors[0], flip);
-                if (colors[1] != 0) drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, colors[1], flip);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
-                if (incrementLengthA > 0)
-                    drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, incrementLengthA, colors[1], flip);
-                if (incrementLengthB > 0)
-                    drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, 0, incrementLengthB, colors[2], flip);
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                final var colors = getStackColor((int) (health / unit), parameters.secondValueIncrement > 0 ? 3 : 2);
+                if (health >= unit) parameters.emptyColor = colors[0];
+                parameters.fillColor = colors[1];
+                parameters.secondFillColor = colors[2];
                 if (healthColor != AsteorBar.config.healthColorNormal()) {//might be with poison or wither
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.66F);
-                    drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, innerLength, healthColor, flip);
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                    parameters.emptyColor = Utils.mixColor(parameters.emptyColor, healthColor, 0.33F);
+                    parameters.fillColor = Utils.mixColor(parameters.fillColor, healthColor, 0.33F);
+                    parameters.secondFillColor = Utils.mixColor(parameters.secondFillColor, healthColor, 0.33F);
                 }
             } else {
-                drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, healthColor, flip);
+                parameters.value = health / maxHealth;
                 if (healthIncrement > 0 && health < maxHealth) {
-                    int incrementLength;
-                    if (health + healthIncrement >= maxHealth) {
-                        incrementLength = innerLength - healthLength;
-                    } else {
-                        incrementLength = (int) (innerLength * healthIncrement / maxHealth);
-                    }
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
-                    drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, healthLength, incrementLength, healthColor, flip);
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+                    parameters.valueIncrement = Math.min(maxHealth - health, healthIncrement) / maxHealth;
                 }
             }
             //draw absorption
@@ -130,26 +142,42 @@ public class PlayerHealthOverlay extends BaseOverlay {
                 displayAbsorb = fullAbsorb;
             }
             if (i == ABSORPTION_MODE_STACK) {
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.66F);
-                int absorbLength = (int) (innerLength * displayAbsorb / fullAbsorb);
-                drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, absorbLength, AsteorBar.config.absorptionColor(), flip);
+                parameters.secondValue = displayAbsorb / fullAbsorb;
+                parameters.secondFillColor = AsteorBar.config.absorptionColor();
+                parameters.secondFillAlpha = 0.66F;
             } else if (i == ABSORPTION_MODE_BOUND) {
-                RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.9F);
-                int absorbLength = (int) (outerLength * displayAbsorb / fullAbsorb);
-                drawBoundFlip(guiGraphics, left, top, right, bottom, absorbLength, AsteorBar.config.absorptionColor(), flip);
+                parameters.boundFillColor = AsteorBar.config.absorptionColor();
+                parameters.boundValue = displayAbsorb / fullAbsorb;
+                parameters.boundAlpha = 0.9F;
             }
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             if (absorb > fullAbsorb && (AsteorBar.config.enableStackHealthBar() || AsteorBar.config.displayAbsorptionDivMaxHealth())) {
                 int absorbTimes = (int) (absorb / fullAbsorb);
                 if (absorb % fullAbsorb == 0) absorbTimes--;
-                if (flip) {
-                    Overlays.addStringRender(right, top - 2, 0xFFFF00, "×" + absorbTimes, Overlays.ALIGN_LEFT, true);
-                } else {
-                    Overlays.addStringRender(left, top - 2, 0xFFFF00, absorbTimes + "×", Overlays.ALIGN_RIGHT, true);
-                }
+                parameters.leftOuterText = "×" + absorbTimes;
+                parameters.leftOuterColor = 0xFFFF00;
             }
         }
-        //draw regeneration
+        if (AsteorBar.config.displayHealthText()) {
+            String hp;
+            if (AsteorBar.config.displayAbsorptionTextMethod() == ABSORPTION_TEXT_MODE_TOGETHER && absorb > 0.0F) {
+                hp = (Utils.formatNumber(health) + "(+" + Utils.formatNumber(absorb) + ")/" + Utils.formatNumber(maxHealth));
+            } else {
+                hp = (Utils.formatNumber(health) + "/" + Utils.formatNumber(maxHealth));
+            }
+            parameters.centerText = hp;
+            parameters.centerColor = 0xFFFFFF;
+            if (AsteorBar.config.displayAbsorptionTextMethod() == ABSORPTION_TEXT_MODE_SEPARATE && absorb > 0.0F) {
+                parameters.leftText = Utils.formatNumber(absorb);
+                parameters.leftColor = 0xFFFF00;
+            }
+        }
+        return parameters;
+    }
+
+    @Override
+    protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+        super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         if (regenerationOffset >= 0) {
             int textureLeft;
             int textureRight;
@@ -168,24 +196,6 @@ public class PlayerHealthOverlay extends BaseOverlay {
             }
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
-        if (AsteorBar.config.displayHealthText()) {
-            String hp;
-            if (AsteorBar.config.displayAbsorptionTextMethod() == ABSORPTION_TEXT_MODE_TOGETHER && absorb > 0.0F) {
-                hp = (Utils.formatNumber(health) + "(+" + Utils.formatNumber(absorb) + ")/" + Utils.formatNumber(maxHealth));
-            } else {
-                hp = (Utils.formatNumber(health) + "/" + Utils.formatNumber(maxHealth));
-            }
-            top -= verticalShift;
-            Overlays.addStringRender((left + right) / 2, top - 2, 0xFFFFFF, hp, Overlays.ALIGN_CENTER, true);
-            if (AsteorBar.config.displayAbsorptionTextMethod() == ABSORPTION_TEXT_MODE_SEPARATE && absorb > 0.0F) {
-                if (flip) {
-                    Overlays.addStringRender(right - 2, top - 2, 0xFFFF00, Utils.formatNumber(absorb), Overlays.ALIGN_RIGHT, true);
-                } else {
-                    Overlays.addStringRender(left + 2, top - 2, 0xFFFF00, Utils.formatNumber(absorb), Overlays.ALIGN_LEFT, true);
-                }
-            }
-            top += verticalShift;
-        }
         if (highlight) {
             drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.healthBoundColorBlink());
         } else if (flashAlpha > 0) {
@@ -196,102 +206,7 @@ public class PlayerHealthOverlay extends BaseOverlay {
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        RenderSystem.enableBlend();
-        var mc = gui.mc();
-        var player = mc.player;
-        if (player == null) return;
-        float health = player.getHealth();
-        boolean highlight = false;
-        long tickCount = gui.gui().getGuiTicks();
-        if (AsteorBar.config.enableHealthBlink()) {
-            highlight = healthBlinkTime > tickCount && (healthBlinkTime - tickCount) / 3L % 2L == 1L;
-            if (health < lastHealth && player.invulnerableTime > 0) {
-                lastHealthTime = Util.getMillis();
-                healthBlinkTime = tickCount + 20L;
-            } else if (health > lastHealth && player.invulnerableTime > 0) {
-                lastHealthTime = Util.getMillis();
-                healthBlinkTime = tickCount + 10L;
-            }
-            if (Util.getMillis() - lastHealthTime > 1000L) {
-                lastHealth = health;
-                lastHealthTime = Util.getMillis();
-            }
-            lastHealth = health;
-        }
-        float maxHealth = player.getMaxHealth();
-        float absorb = player.getAbsorptionAmount();
-        int healthType = AsteorBar.config.healthColorNormal();
-        if (player.hasEffect(MobEffects.POISON)) {
-            healthType = AsteorBar.config.healthColorPoison();
-        } else if (player.hasEffect(MobEffects.WITHER)) {
-            healthType = AsteorBar.config.healthColorWither();
-        } else if (player.isFullyFrozen()) {
-            healthType = AsteorBar.config.healthColorFrozen();
-        }
-        var flashAlpha = -1F;
-        if (health < maxHealth * AsteorBar.config.lowHealthRate() && !highlight) {
-            int margin = Math.abs((int) tickCount % 20 - 10);
-            flashAlpha = 0.08F * margin;
-        }
-        var regenerationOffset = -1;
-        if (player.hasEffect(MobEffects.REGENERATION)) {
-            regenerationOffset = (int) (tickCount % 30 * 6);
-        }
-        double healthIncrement = 0;
-        if (AsteorBar.compatibility.appleskin) {
-            final var foodValues = AsteorBar.platformAdapter.getAppleSkinFoodValues(player);
-            if (foodValues != null) {
-                healthIncrement = foodValues.healthIncrement();
-            }
-            healthIncrement = Math.min(healthIncrement, maxHealth - health);
-        }
-        int left, top, right;
-        boolean flip = false;
-        switch (Overlays.style) {
-            default -> {
-                return;
-            }
-            case Overlays.STYLE_ABOVE_HOT_BAR_LONG -> {
-                top = screenHeight - gui.leftHeight() - 2;
-                left = screenWidth / 2 - 91;
-                right = left + BOUND_FULL_WIDTH_LONG;
-                gui.leftHeight(12);
-            }
-            case Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
-                top = screenHeight - gui.leftHeight() + 4;
-                left = screenWidth / 2 - 91;
-                right = left + BOUND_FULL_WIDTH_SHORT;
-                gui.leftHeight(6);
-            }
-            case Overlays.STYLE_TOP_LEFT -> {
-                top = Overlays.vertical;
-                left = Overlays.horizontal;
-                right = left + Overlays.length;
-                Overlays.vertical += 6;
-            }
-            case Overlays.STYLE_TOP_RIGHT -> {
-                top = Overlays.vertical;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
-                right = left + Overlays.length;
-                flip = true;
-                Overlays.vertical += 6;
-            }
-            case Overlays.STYLE_BOTTOM_LEFT -> {
-                top = screenHeight - Overlays.vertical;
-                left = Overlays.horizontal;
-                right = left + Overlays.length;
-                Overlays.vertical += 6;
-            }
-            case Overlays.STYLE_BOTTOM_RIGHT -> {
-                top = screenHeight - Overlays.vertical;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
-                right = left + Overlays.length;
-                flip = true;
-                Overlays.vertical += 6;
-            }
-        }
-        draw(guiGraphics, left, top, right, top + 5, highlight, healthType, health, absorb, maxHealth, flashAlpha, regenerationOffset, healthIncrement, tickCount, flip);
-        RenderSystem.disableBlend();
+    protected boolean shouldRender(Player player) {
+        return true;
     }
 }

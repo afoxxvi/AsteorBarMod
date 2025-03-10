@@ -31,9 +31,9 @@ public class Overlays {
     public static final ArmorLevelOverlay ARMOR_LEVEL = new ArmorLevelOverlay();
     public static final StringOverlay STRING = new StringOverlay();
     public static int style = 0;
-    public static int verticalLeft = 0;
-    public static int verticalRight = 0;
-    public static int horizontal = 0;
+    public static int cornerLeftHeight = 0;
+    public static int cornerRightHeight = 0;
+    public static int horizontalOffset = 0;
     public static int length = 10;
     public static int leftHeight = 39;
     public static int rightHeight = 39;
@@ -182,9 +182,9 @@ public class Overlays {
         if (!initialized) {
             init();
         }
-        verticalLeft = AsteorBar.config.cornerVerticalPadding();
-        verticalRight = AsteorBar.config.cornerVerticalPadding();
-        horizontal = AsteorBar.config.cornerHorizontalPadding();
+        cornerLeftHeight = AsteorBar.config.cornerVerticalPadding();
+        cornerRightHeight = AsteorBar.config.cornerVerticalPadding();
+        horizontalOffset = AsteorBar.config.cornerHorizontalPadding();
         length = AsteorBar.config.cornerBarLength();
         style = AsteorBar.config.overlayLayoutStyle();
         stringRenders.clear();

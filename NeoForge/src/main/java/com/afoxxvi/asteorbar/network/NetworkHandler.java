@@ -2,7 +2,6 @@ package com.afoxxvi.asteorbar.network;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarNeoForge;
-import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

@@ -7,11 +7,16 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 public abstract class SimpleBarOverlay extends BaseOverlay {
     protected long lastChangeMillis = 0;
     private Parameters lastParameters = new Parameters();
+    private Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
+    private Map<String, Layer> layers = new LinkedHashMap<>();
 
     public static class Parameters {
         public int fillColor = 0;
@@ -50,6 +55,10 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         public boolean valueEquals(Parameters other) {
             return value == other.value && capacity == other.capacity && boundValue == other.boundValue && boundCapacity == other.boundCapacity && Objects.equals(centerText, other.centerText) && Objects.equals(leftText, other.leftText) && Objects.equals(rightText, other.rightText);
         }
+    }
+
+    public interface Layer {
+        void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip);
     }
 
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
@@ -138,6 +147,30 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     protected abstract boolean shouldRender(Player player);
 
+    public void addParametersProcessor(String key, BiConsumer<Player, Parameters> processor) {
+        postProcessors.put(key, processor);
+    }
+
+    public void removeParametersProcessor(String key) {
+        postProcessors.remove(key);
+    }
+
+    public void getAllParametersProcessors(Map<String, BiConsumer<Player, Parameters>> map) {
+        map.putAll(postProcessors);
+    }
+
+    public void addLayer(String key, Layer layer) {
+        layers.put(key, layer);
+    }
+
+    public void removeLayer(String key) {
+        layers.remove(key);
+    }
+
+    public void getAllLayers(Map<String, Layer> map) {
+        map.putAll(layers);
+    }
+
     /**
      * Only takes effect when the bar's position is unspecified.
      * {@link Overlays.Position#UNSPECIFIED}
@@ -175,6 +208,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         if (!shouldRender(player)) return;
         var parameters = getParameters(player);
         if (parameters == null) return;
+        postProcessors.forEach((key, processor) -> processor.accept(player, parameters));
         boolean recoverShaderColor = false;
         if (canHide()) {
             if (!parameters.valueEquals(lastParameters)) {
@@ -190,7 +224,9 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
                 }
             }
         }
-        int left, top, right;
+        int left;
+        int top;
+        int right;
         if (position == Overlays.Position.UNSPECIFIED) {
             switch (Overlays.style) {
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT ->
@@ -225,34 +261,35 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
                 gui.rightHeight(6);
             }
             case TOP_LEFT -> {
-                top = Overlays.verticalLeft;
-                left = Overlays.horizontal;
+                top = Overlays.cornerLeftHeight;
+                left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalLeft += 6;
+                Overlays.cornerLeftHeight += 6;
             }
             case TOP_RIGHT -> {
-                top = Overlays.verticalRight;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
+                top = Overlays.cornerRightHeight;
+                left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalRight += 6;
+                Overlays.cornerRightHeight += 6;
             }
             case BOTTOM_LEFT -> {
-                top = screenHeight - Overlays.verticalLeft;
-                left = Overlays.horizontal;
+                top = screenHeight - Overlays.cornerLeftHeight;
+                left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalLeft += 6;
+                Overlays.cornerLeftHeight += 6;
             }
             case BOTTOM_RIGHT -> {
-                top = screenHeight - Overlays.verticalRight;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
+                top = screenHeight - Overlays.cornerRightHeight;
+                left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalRight += 6;
+                Overlays.cornerRightHeight += 6;
             }
             default -> {
                 return;
             }
         }
         draw(guiGraphics, left, top, right, top + 5, parameters, flip);
+        layers.forEach((key, layer) -> layer.drawLayer(player, guiGraphics, left, top, right, top + 5, parameters, flip));
         lastParameters = parameters;
         if (recoverShaderColor) {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

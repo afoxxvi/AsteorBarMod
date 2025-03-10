@@ -7,6 +7,7 @@ import com.afoxxvi.asteorbar.utils.PlatformAdapter;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import org.slf4j.Logger;
 
 public class AsteorBar {
     public static final String MOD_ID = "asteorbar";
@@ -15,6 +16,11 @@ public class AsteorBar {
     public static Compatibility compatibility = new Compatibility();
 
     public static PlatformAdapter platformAdapter = new PlatformAdapter() {
+        @Override
+        public Logger getLogger() {
+            return null;
+        }
+
         @Override
         public boolean isBoss(LivingEntity livingEntity) {
             return false;

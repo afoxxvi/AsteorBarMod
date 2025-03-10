@@ -5,15 +5,19 @@ import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.entity.player.Player;
 
-public class LightShieldOverlay extends BaseOverlay {
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float shield, float full, boolean flip) {
+public class LightShieldOverlay extends BaseOverlay implements SimpleBarOverlay.Layer {
+    @Override
+    public void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, SimpleBarOverlay.Parameters parameters, boolean flip) {
+        var shield = luoyu.lightshield.Api.getShieldAmount(player);
+        var maxShield = AsteorBar.config.displayAbsorptionDivMaxHealth() ? player.getMaxHealth() : luoyu.lightshield.Api.getMaxShieldAmount(player);
         final int innerWidth = right - left - 2;
-        var displayShield = shield % full;
+        var displayShield = shield % maxShield;
         if (displayShield == 0 && shield > 0) {
-            displayShield = full;
+            displayShield = maxShield;
         }
-        var shieldWidth = (int) (displayShield * innerWidth / full);
+        var shieldWidth = (int) (displayShield * innerWidth / maxShield);
         drawFillFlip(guiGraphics, left + 1, top + 3, right - 1, bottom - 1, shieldWidth, 0xff8cb3ca, flip);
         drawFillFlip(guiGraphics, left + 1, bottom - 1, right - 1, bottom, shieldWidth, 0xff7097ae, flip);
         var text = Utils.formatNumber(shield);
@@ -24,9 +28,9 @@ public class LightShieldOverlay extends BaseOverlay {
                 Overlays.addStringRender(right - 2, top - 2, 0xb6c8c1, text, Overlays.ALIGN_RIGHT, true);
             }
         }
-        if (shield > full) {
-            int absorbTimes = (int) (shield / full);
-            if (shield % full == 0) absorbTimes--;
+        if (shield > maxShield) {
+            int absorbTimes = (int) (shield / maxShield);
+            if (shield % maxShield == 0) absorbTimes--;
             if (flip) {
                 Overlays.addStringRender(left, top - 2, 0xb6c8c1, "×" + absorbTimes, Overlays.ALIGN_RIGHT, true);
             } else {
@@ -37,45 +41,5 @@ public class LightShieldOverlay extends BaseOverlay {
 
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        if (!AsteorBar.compatibility.lightshield) return;
-        var player = gui.mc().player;
-        if (player == null) return;
-        var shield = luoyu.lightshield.Api.getShieldAmount(player);
-        var maxShield = AsteorBar.config.displayAbsorptionDivMaxHealth() ? player.getMaxHealth() : luoyu.lightshield.Api.getMaxShieldAmount(player);
-        switch (Overlays.style) {
-            case Overlays.STYLE_NONE -> {
-
-            }
-            case Overlays.STYLE_ABOVE_HOT_BAR_LONG -> {
-                int top = screenHeight - (gui.leftHeight() - 12) - 2;
-                int left = screenWidth / 2 - 91;
-                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_LONG, top + 5, shield, maxShield, false);
-            }
-            case Overlays.STYLE_ABOVE_HOT_BAR_SHORT -> {
-                int top = screenHeight - (gui.leftHeight() - 6) + 4;
-                int left = screenWidth / 2 - 91;
-                draw(guiGraphics, left, top, left + BOUND_FULL_WIDTH_SHORT, top + 5, shield, maxShield, false);
-            }
-            case Overlays.STYLE_TOP_LEFT -> {
-                int top = Overlays.vertical - 6;
-                int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, shield, maxShield, false);
-            }
-            case Overlays.STYLE_TOP_RIGHT -> {
-                int top = Overlays.vertical - 6;
-                int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, shield, maxShield, true);
-            }
-            case Overlays.STYLE_BOTTOM_LEFT -> {
-                int top = screenHeight - (Overlays.vertical - 6);
-                int left = Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, shield, maxShield, false);
-            }
-            case Overlays.STYLE_BOTTOM_RIGHT -> {
-                int top = screenHeight - (Overlays.vertical - 6);
-                int left = screenWidth - Overlays.length - Overlays.horizontal;
-                draw(guiGraphics, left, top, left + Overlays.length, top + 5, shield, maxShield, true);
-            }
-        }
     }
 }

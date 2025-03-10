@@ -3,17 +3,17 @@ package com.afoxxvi.asteorbar.overlay;
 import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.DehydrationOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.OriginsOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FabricGuiRegistry {
-    public static final List<BaseOverlay> REGISTRY = new ArrayList<>();
+    private FabricGuiRegistry() {
+    }
 
     static {
+        Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
         REGISTRY.add(Overlays.PLAYER_HEALTH);
         REGISTRY.add(Overlays.FOOD_LEVEL);
         REGISTRY.add(Overlays.MOUNT_HEALTH);
@@ -32,6 +32,6 @@ public class FabricGuiRegistry {
         var width = mc.getWindow().getGuiScaledWidth();
         var height = mc.getWindow().getGuiScaledHeight();
         var gui = new FabricRenderGui(instance);
-        REGISTRY.forEach(baseOverlay -> baseOverlay.render(gui, guiGraphics, tick, width, height));
+        Overlays.MAIN.renderOverlay(gui, guiGraphics, tick, width, height);
     }
 }

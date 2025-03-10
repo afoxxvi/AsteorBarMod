@@ -1,10 +1,7 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.Overlays;
-import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;

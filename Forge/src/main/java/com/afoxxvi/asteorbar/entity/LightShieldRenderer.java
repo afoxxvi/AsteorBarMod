@@ -1,7 +1,6 @@
 package com.afoxxvi.asteorbar.entity;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
 import luoyu.lightshield.Api;

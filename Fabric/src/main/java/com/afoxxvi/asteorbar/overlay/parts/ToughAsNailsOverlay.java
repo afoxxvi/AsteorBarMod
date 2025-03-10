@@ -11,7 +11,6 @@ import toughasnails.api.thirst.IThirst;
 import toughasnails.api.thirst.ThirstHelper;
 import toughasnails.init.ModConfig;
 import toughasnails.temperature.TemperatureOverlayRenderer;
-import toughasnails.config.ThirstConfig;
 
 public class ToughAsNailsOverlay extends SimpleBarOverlay {
     private int thirstBlinkTime = 0;
@@ -61,6 +60,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
     protected boolean shouldRender(Player player) {
         return ThirstHelper.isThirstEnabled();
     }
+
 
     @Override
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {

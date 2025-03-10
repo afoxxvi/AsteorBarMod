@@ -2,7 +2,6 @@ package com.afoxxvi.asteorbar.network;
 
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.Overlays;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.dehydration.access.ThirstManagerAccess;

@@ -25,6 +25,10 @@ public abstract class BaseOverlay {
     public List<BaseOverlay> overrideOverlay = new ArrayList<>();
     protected int tick = 0;
 
+    public void setOverrideOverlay(BaseOverlay overrideOverlay) {
+        this.overrideOverlay = overrideOverlay;
+    }
+
     public boolean shouldOverride() {
         return false;
     }

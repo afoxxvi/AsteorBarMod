@@ -3,15 +3,14 @@ package com.afoxxvi.asteorbar.listener;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.entity.LightShieldRenderer;
 import com.afoxxvi.asteorbar.key.KeyBinding;
+import com.afoxxvi.asteorbar.overlay.ForgeGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.NamedGuiOverlay;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -37,20 +36,23 @@ public class ForgeEventListener {
 
 
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event) {
-        if (!Minecraft.getInstance().isPaused()) {
-            tickCount++;
-        }
-    }
-
-    @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiOverlayEvent.Pre event) {
         if (!AsteorBar.config.enableOverlay()) return;
         NamedGuiOverlay overlay = event.getOverlay();
         if (overlay == VanillaGuiOverlay.VIGNETTE.type()) {
             Overlays.reset();
             LightShieldRenderer.init();
+            ForgeGuiRegistry.init();
         }
+        if (overlay == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (overlay == VanillaGuiOverlay.FOOD_LEVEL.type()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (overlay == VanillaGuiOverlay.AIR_LEVEL.type()) {
         if (overlay == VanillaGuiOverlay.PLAYER_HEALTH.type()
                 || overlay == VanillaGuiOverlay.FOOD_LEVEL.type()
                 || overlay == VanillaGuiOverlay.AIR_LEVEL.type()
@@ -71,6 +73,23 @@ public class ForgeEventListener {
                 || AsteorBar.compatibility.tfc && AsteorBar.config.hookTFC() && (overlay.id().equals(TFC_HEALTH) || overlay.id().equals(TFC_MOUNT_HEALTH) || overlay.id().equals(TFC_FOOD) || overlay.id().equals(TFC_THIRST))
         ) {
             event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.config.overwriteVanillaExperienceBar() && overlay == VanillaGuiOverlay.EXPERIENCE_BAR.type()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (overlay == VanillaGuiOverlay.MOUNT_HEALTH.type()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type()) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.parcool && AsteorBar.config.hookParcool() && overlay.id().equals(PARCOOL_STAMINA)) {
+            event.setCanceled(true);
+            return;
         }
     }
 

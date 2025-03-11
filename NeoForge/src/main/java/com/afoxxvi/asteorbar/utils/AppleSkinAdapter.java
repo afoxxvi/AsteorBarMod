@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar.utils;
 import com.afoxxvi.asteorbar.mixin.third.AppleSkinMixin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
+import squeek.appleskin.helpers.ConsumableFood;
 import squeek.appleskin.helpers.FoodHelper;
 
 public class AppleSkinAdapter {
@@ -22,7 +23,7 @@ public class AppleSkinAdapter {
         }
         int foodHunger = result.modifiedFoodProperties.nutrition();
         float foodSaturationIncrement = result.modifiedFoodProperties.saturation();
-        float foodHealthIncrement = FoodHelper.getEstimatedHealthIncrement(player, result.modifiedFoodProperties);
+        float foodHealthIncrement = FoodHelper.getEstimatedHealthIncrement(player, new ConsumableFood(result.modifiedFoodProperties, result.consumable));
         return new PlatformAdapter.AppleSkinFoodValues(foodHunger, foodSaturationIncrement, foodHealthIncrement);
     }
 }

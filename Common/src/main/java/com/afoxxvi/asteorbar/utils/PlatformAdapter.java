@@ -20,6 +20,10 @@ public interface PlatformAdapter {
     @Nullable
     AppleSkinFoodValues getAppleSkinFoodValues(Player player);
 
+    float getExhaustion(Player player);
+
+    void setExhaustion(Player player, float exhaustion);
+
     record AppleSkinFoodValues(int hungerIncrement, float saturationIncrement, float healthIncrement) {
     }
 }

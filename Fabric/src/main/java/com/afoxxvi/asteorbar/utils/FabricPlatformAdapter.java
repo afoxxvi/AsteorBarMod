@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar.utils;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarFabric;
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
+import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.FluidTags;
@@ -45,5 +46,15 @@ public class FabricPlatformAdapter implements PlatformAdapter {
         }
         // if not using third adapter, the game will crash if appleskin is not loaded
         return AppleSkinAdapter.getInstance().getAppleSkinFoodValues(player);
+    }
+
+    @Override
+    public float getExhaustion(Player player) {
+        return ((FoodDataMixin) player.getFoodData()).getExhaustionLevel();
+    }
+
+    @Override
+    public void setExhaustion(Player player, float exhaustion) {
+        ((FoodDataMixin) player.getFoodData()).setExhaustionLevel(exhaustion);
     }
 }

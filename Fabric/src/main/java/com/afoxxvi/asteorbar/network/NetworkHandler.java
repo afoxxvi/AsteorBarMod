@@ -45,7 +45,7 @@ public class NetworkHandler {
                     float exhaustion = payload.buf().readFloat();
                     client.execute(() -> {
                         if (client.player != null) {
-                            client.player.getFoodData().setExhaustion(exhaustion);
+                            AsteorBar.platformAdapter.setExhaustion(client.player, exhaustion);
                         }
                     });
                 }
@@ -124,7 +124,7 @@ public class NetworkHandler {
 
     public static void onPlayerTick(ServerPlayer player) {
         var foodStats = player.getFoodData();
-        float exhaustionLevel = foodStats.getExhaustionLevel();
+        float exhaustionLevel = AsteorBar.platformAdapter.getExhaustion(player);
         Float oldExhaustion = EXHAUSTION.get(player.getUUID());
         if (oldExhaustion == null || Math.abs(oldExhaustion - exhaustionLevel) >= 0.01F) {
             EXHAUSTION.put(player.getUUID(), exhaustionLevel);

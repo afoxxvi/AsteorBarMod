@@ -11,6 +11,7 @@
   },
   "refmap": "asteorbar.mixins.refmap.json",
   "mixins": [
-    "third.AppleSkinMixin"
+    "third.AppleSkinMixin",
+    "FoodDataMixin"
   ]
 }

@@ -4,9 +4,14 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @SuppressWarnings("DuplicatedCode")
 public class FoodLevelOverlay extends SimpleBarOverlay {
@@ -21,7 +26,7 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         FoodData stats = player.getFoodData();
         int level = stats.getFoodLevel();
         saturation = stats.getSaturationLevel();
-        exhaustion = stats.getExhaustionLevel();
+        exhaustion = AsteorBar.platformAdapter.getExhaustion(player);
         int foodType = AsteorBar.config.foodColorNormal();
         if (player.hasEffect(MobEffects.HUNGER)) {
             foodType = AsteorBar.config.foodColorHunger();

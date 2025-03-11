@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 import squeek.appleskin.api.event.HUDOverlayEvent;
 import squeek.appleskin.client.HUDOverlayHandler;
+import squeek.appleskin.helpers.ConsumableFood;
 import squeek.appleskin.helpers.FoodHelper;
 
 public class AppleSkinAdapter {
@@ -27,7 +28,7 @@ public class AppleSkinAdapter {
         HUDOverlayEvent.HungerRestored.EVENT.invoker().interact(hungerRenderEvent);
         int foodHunger = result.modifiedFoodComponent.nutrition();
         float foodSaturationIncrement = result.modifiedFoodComponent.saturation();
-        float foodHealthIncrement = FoodHelper.getEstimatedHealthIncrement(player, result.modifiedFoodComponent);
+        float foodHealthIncrement = FoodHelper.getEstimatedHealthIncrement(player, new ConsumableFood(result.modifiedFoodComponent, result.consumableComponent));
         return new PlatformAdapter.AppleSkinFoodValues(foodHunger, foodSaturationIncrement, foodHealthIncrement);
     }
 }

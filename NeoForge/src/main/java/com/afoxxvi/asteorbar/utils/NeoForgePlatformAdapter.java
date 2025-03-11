@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar.utils;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarNeoForge;
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
+import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -44,5 +45,16 @@ public class NeoForgePlatformAdapter implements PlatformAdapter {
         }
         // if not using third adapter, the game will crash if appleskin is not loaded
         return AppleSkinAdapter.getInstance().getAppleSkinFoodValues(player);
+    }
+
+
+    @Override
+    public float getExhaustion(Player player) {
+        return ((FoodDataMixin) player.getFoodData()).getExhaustionLevel();
+    }
+
+    @Override
+    public void setExhaustion(Player player, float exhaustion) {
+        ((FoodDataMixin) player.getFoodData()).setExhaustionLevel(exhaustion);
     }
 }

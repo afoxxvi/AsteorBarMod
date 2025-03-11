@@ -1,9 +1,7 @@
 package com.afoxxvi.asteorbar.overlay;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.parts.ThirstWasTakenOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
-import com.afoxxvi.asteorbar.overlay.parts.VampirismOverlay;
 
 public class NeoforgeGuiRegistry {
     private NeoforgeGuiRegistry() {
@@ -16,12 +14,6 @@ public class NeoforgeGuiRegistry {
         initialized = true;
         if (AsteorBar.compatibility.toughAsNails) {
             Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
-        }
-        if (AsteorBar.compatibility.thirst) {
-            Overlays.registerOverlayAtRecommended(new ThirstWasTakenOverlay(), Overlays.Position.UNSPECIFIED);
-        }
-        if (AsteorBar.compatibility.vampirism) {
-            Overlays.FOOD_LEVEL.setOverrideOverlay(new VampirismOverlay());
         }
     }
 }

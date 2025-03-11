@@ -46,6 +46,16 @@ public class AsteorBar {
         public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
             return new AppleSkinFoodValues(0, 0, 0);
         }
+
+        @Override
+        public float getExhaustion(Player player) {
+            return 0;
+        }
+
+        @Override
+        public void setExhaustion(Player player, float exhaustion) {
+
+        }
     };
 
     public static class Compatibility {

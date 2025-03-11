@@ -58,7 +58,7 @@ public class NetworkHandler {
         switch (index) {
             case INDEX_EXHAUSTION: {
                 float exhaustion = payload.f1;
-                context.enqueueWork(() -> context.player().getFoodData().setExhaustion(exhaustion));
+                context.enqueueWork(() -> AsteorBar.platformAdapter.setExhaustion(context.player(), exhaustion));
             }
             break;
             case INDEX_SATURATION:
@@ -106,7 +106,7 @@ public class NetworkHandler {
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             var foodStats = player.getFoodData();
-            float exhaustionLevel = foodStats.getExhaustionLevel();
+            float exhaustionLevel = AsteorBar.platformAdapter.getExhaustion(player);
             Float oldExhaustion = EXHAUSTION.get(player.getUUID());
             if (oldExhaustion == null || Math.abs(oldExhaustion - exhaustionLevel) >= 0.01F) {
                 EXHAUSTION.put(player.getUUID(), exhaustionLevel);

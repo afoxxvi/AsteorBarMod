@@ -18,7 +18,7 @@ public class ModEventListener {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiLayersEvent event) {
         AsteorBarNeoForge.LOGGER.info("Registering Overlays");
-        event.registerBelow(VanillaGuiLayers.PLAYER_HEALTH, new ResourceLocation(AsteorBar.MOD_ID, "main"), new NeoForgeRenderGui(Overlays.MAIN));
+        event.registerBelow(VanillaGuiLayers.PLAYER_HEALTH, ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "main"), new NeoForgeRenderGui(Overlays.MAIN));
     }
 
     @SubscribeEvent

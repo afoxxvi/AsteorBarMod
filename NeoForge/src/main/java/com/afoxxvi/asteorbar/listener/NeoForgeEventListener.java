@@ -14,6 +14,9 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(modid = AsteorBar.MOD_ID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
 public class NeoForgeEventListener {
+    private static final ResourceLocation THIRST_SATURATION = ResourceLocation.fromNamespaceAndPath("thirst", "saturation_overlay");
+    private static final ResourceLocation THIRST_EXHAUSTION = ResourceLocation.fromNamespaceAndPath("thirst", "exhaustion_overlay");
+
     @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiLayerEvent.Pre event) {
         if (!AsteorBar.config.enableOverlay()) return;
@@ -43,6 +46,10 @@ public class NeoForgeEventListener {
             return;
         }
         if (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiLayers.ARMOR_LEVEL) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.thirst && AsteorBar.config.hookThirstWasTaken() && (overlay.equals(THIRST_SATURATION) || overlay.equals(THIRST_EXHAUSTION))) {
             event.setCanceled(true);
             return;
         }

@@ -1,6 +1,5 @@
 package com.afoxxvi.asteorbar.overlay;
 
-import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;

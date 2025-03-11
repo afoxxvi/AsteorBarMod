@@ -43,11 +43,6 @@ public class AsteorBar {
         }
 
         @Override
-        public Logger getLogger() {
-            return null;
-        }
-
-        @Override
         public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
             return new AppleSkinFoodValues(0, 0, 0);
         }

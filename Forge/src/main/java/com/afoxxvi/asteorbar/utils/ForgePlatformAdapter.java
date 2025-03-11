@@ -39,11 +39,6 @@ public class ForgePlatformAdapter implements PlatformAdapter {
     }
 
     @Override
-    public Logger getLogger() {
-        return AsteorBarForge.LOGGER;
-    }
-
-    @Override
     public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
         return null;
     }

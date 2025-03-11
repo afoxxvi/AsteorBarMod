@@ -19,8 +19,12 @@ public abstract class BaseOverlay {
     public static final int Y_RIGHT_DECORATION = 27;
     public static final int Y_LEFT_DECORATION = 36;
 
-    public BaseOverlay overrideOverlay = null;
+    protected BaseOverlay overrideOverlay = null;
     protected int tick = 0;
+
+    public void setOverrideOverlay(BaseOverlay overrideOverlay) {
+        this.overrideOverlay = overrideOverlay;
+    }
 
     public boolean shouldOverride() {
         return false;

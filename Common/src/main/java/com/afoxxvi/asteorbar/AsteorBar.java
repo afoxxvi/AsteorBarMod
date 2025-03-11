@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar;
 
 import com.afoxxvi.asteorbar.config.ConfigAdapter;
 import com.afoxxvi.asteorbar.config.DefaultConfigAdapter;
+import com.afoxxvi.asteorbar.overlay.parts.compat.AppleSkinCompat;
 import com.afoxxvi.asteorbar.utils.PlatformAdapter;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.entity.LivingEntity;
@@ -82,12 +83,13 @@ public class AsteorBar {
             superiorshields = platformAdapter.isModLoaded("superiorshields");
             vampirism = platformAdapter.isModLoaded("vampirism");
             lightshield = platformAdapter.isModLoaded("lightshield");
-            initialized = true;
             botania = platformAdapter.isModLoaded("botania");
             origins = platformAdapter.isModLoaded("origins");
             tfc = platformAdapter.isModLoaded("tfc");
             arsNouveau = platformAdapter.isModLoaded("ars_nouveau");
             apoli = platformAdapter.isModLoaded("apoli");
+            AppleSkinCompat.init();
+            initialized = true;
         }
     }
 }

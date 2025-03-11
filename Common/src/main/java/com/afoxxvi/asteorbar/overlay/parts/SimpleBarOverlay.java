@@ -15,8 +15,9 @@ import java.util.function.BiConsumer;
 public abstract class SimpleBarOverlay extends BaseOverlay {
     protected long lastChangeMillis = 0;
     private Parameters lastParameters = new Parameters();
-    private Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
-    private Map<String, Layer> layers = new LinkedHashMap<>();
+    private Overlays.Position definedPosition = Overlays.Position.UNSPECIFIED;
+    private final Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
+    private final Map<String, Layer> layers = new LinkedHashMap<>();
 
     public static class Parameters {
         public int fillColor = 0;
@@ -66,6 +67,8 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
+        RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
+        guiGraphics.flush();
         top += parameters.verticalShift;
         bottom += parameters.verticalShift;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, parameters.boundAlpha);
@@ -147,6 +150,10 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     protected abstract boolean shouldRender(Player player);
 
+    public void setDefinedPosition(Overlays.Position position) {
+        definedPosition = position;
+    }
+
     public void addParametersProcessor(String key, BiConsumer<Player, Parameters> processor) {
         postProcessors.put(key, processor);
     }
@@ -190,7 +197,11 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, Overlays.Position.UNSPECIFIED);
+        var position = definedPosition;
+        if (position == null) {
+            position = Overlays.Position.UNSPECIFIED;
+        }
+        renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, position);
     }
 
     public void renderAtPosition(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight, Overlays.Position position) {
@@ -231,6 +242,9 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
             switch (Overlays.style) {
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT ->
                         position = isLeftSide() ? Overlays.Position.HALF_BOTTOM_LEFT : Overlays.Position.HALF_BOTTOM_RIGHT;
+                case Overlays.STYLE_TOP_BOTH_SIDES -> position = isLeftSide() ? Overlays.Position.TOP_LEFT : Overlays.Position.TOP_RIGHT;
+                case Overlays.STYLE_BOTTOM_BOTH_SIDES ->
+                        position = isLeftSide() ? Overlays.Position.BOTTOM_LEFT : Overlays.Position.BOTTOM_RIGHT;
                 case Overlays.STYLE_TOP_LEFT -> position = Overlays.Position.TOP_LEFT;
                 case Overlays.STYLE_TOP_RIGHT -> position = Overlays.Position.TOP_RIGHT;
                 case Overlays.STYLE_BOTTOM_LEFT -> position = Overlays.Position.BOTTOM_LEFT;

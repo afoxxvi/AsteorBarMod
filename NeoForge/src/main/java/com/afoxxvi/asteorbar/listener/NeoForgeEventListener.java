@@ -21,11 +21,8 @@ public class NeoForgeEventListener {
         NamedGuiOverlay overlay = event.getOverlay();
         if (overlay == VanillaGuiOverlay.VIGNETTE.type()) {
             Overlays.reset();
-            LightShieldRenderer.init();
-        }
-        if (overlay == VanillaGuiOverlay.VIGNETTE.type()) {
-            Overlays.reset();
             NeoforgeGuiRegistry.init();
+            LightShieldRenderer.init();
         }
         if (overlay == VanillaGuiOverlay.PLAYER_HEALTH.type()) {
             event.setCanceled(true);

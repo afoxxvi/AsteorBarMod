@@ -1,5 +1,6 @@
 package com.afoxxvi.asteorbar.overlay;
 
+import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -10,7 +11,9 @@ public class FabricGuiRegistry {
     }
 
     static {
-        Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
+        if (AsteorBar.compatibility.toughAsNails) {
+            Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
+        }
     }
 
     public static void startRender(Gui instance, GuiGraphics guiGraphics) {

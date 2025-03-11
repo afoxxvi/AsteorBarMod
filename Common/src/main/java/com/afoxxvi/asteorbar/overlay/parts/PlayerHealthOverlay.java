@@ -84,19 +84,10 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         if (AsteorBar.config.enableStackHealthBar()) {
             i = ABSORPTION_MODE_BOUND;
         }
-        double healthIncrement = 0;
-        if (AsteorBar.compatibility.appleskin) {
-            final var foodValues = AsteorBar.platformAdapter.getAppleSkinFoodValues(player);
-            if (foodValues != null) {
-                healthIncrement = foodValues.healthIncrement();
-            }
-            healthIncrement = Math.min(healthIncrement, maxHealth - health);
-        }
         if (i == ABSORPTION_MODE_TOGETHER) {
             //draw health
             double full = maxHealth + absorb;
             parameters.value = 1 - (maxHealth - health) / full - parameters.secondValue;
-            parameters.valueIncrement = healthIncrement / full;
             parameters.secondValue = absorb / full;
             parameters.secondValueOffset = parameters.value;
             parameters.secondFillColor = AsteorBar.config.absorptionColor();
@@ -108,15 +99,6 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 final int unit = AsteorBar.config.fullHealthValue();
                 parameters.value = (health % unit) / unit;
                 parameters.secondValue = 0;
-                if (healthIncrement > 0 && health < maxHealth) {
-                    if ((health % unit) + healthIncrement >= unit) {
-                        parameters.valueIncrement = 1 - parameters.value;
-                        parameters.secondValueIncrement = (parameters.value + healthIncrement / unit) % 1;
-                    } else {
-                        healthIncrement = Math.min(healthIncrement, maxHealth - health);
-                        parameters.valueIncrement = healthIncrement / unit;
-                    }
-                }
                 final var colors = getStackColor((int) (health / unit), parameters.secondValueIncrement > 0 ? 3 : 2);
                 if (health >= unit) parameters.emptyColor = colors[0];
                 parameters.fillColor = colors[1];
@@ -128,9 +110,6 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 }
             } else {
                 parameters.value = health / maxHealth;
-                if (healthIncrement > 0 && health < maxHealth) {
-                    parameters.valueIncrement = Math.min(maxHealth - health, healthIncrement) / maxHealth;
-                }
             }
             //draw absorption
             final var fullAbsorb = AsteorBar.config.enableStackHealthBar() ? AsteorBar.config.fullHealthValue() : maxHealth;

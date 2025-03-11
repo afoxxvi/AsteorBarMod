@@ -13,10 +13,9 @@ public class MainOverlay extends BaseOverlay {
         final var list = Overlays.getCurrentOrder();
         list.forEach(pair -> {
             if (pair.getA() instanceof SimpleBarOverlay simpleBarOverlay) {
-                simpleBarOverlay.renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, pair.getB());
-            } else {
-                pair.getA().render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+                simpleBarOverlay.setDefinedPosition(pair.getB());
             }
+            pair.getA().render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
         });
         Overlays.STRING.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
     }

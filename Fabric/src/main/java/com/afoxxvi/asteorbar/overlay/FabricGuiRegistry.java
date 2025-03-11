@@ -3,6 +3,7 @@ package com.afoxxvi.asteorbar.overlay;
 import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.DehydrationOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.OriginsOverlay;
+import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -13,6 +14,9 @@ public class FabricGuiRegistry {
     }
 
     static {
+        if (AsteorBar.compatibility.toughAsNails) {
+            Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
+        }
         Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
         REGISTRY.add(Overlays.PLAYER_HEALTH);
         REGISTRY.add(Overlays.FOOD_LEVEL);

@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -45,7 +46,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
         parameters.capacity = 20;
         parameters.value = level;
         if (AsteorBar.config.displaySaturation()) {
-            parameters.boundColor = 0xff2d65d6;
+            parameters.boundFillColor = 0xff2d65d6;
             parameters.boundValue = hydration;
             parameters.boundCapacity = 10;
         }
@@ -58,7 +59,7 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
-        return ThirstHelper.isThirstEnabled();
+        return AsteorBar.compatibility.toughAsNails && AsteorBar.config.hookToughAsNails() && ThirstHelper.isThirstEnabled();
     }
 
 

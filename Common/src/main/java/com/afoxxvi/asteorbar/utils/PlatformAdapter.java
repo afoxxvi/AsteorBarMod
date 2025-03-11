@@ -17,8 +17,6 @@ public interface PlatformAdapter {
 
     boolean isModLoaded(String modId);
 
-    Logger getLogger();
-
     @Nullable
     AppleSkinFoodValues getAppleSkinFoodValues(Player player);
 

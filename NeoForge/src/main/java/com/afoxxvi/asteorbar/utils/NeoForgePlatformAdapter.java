@@ -38,11 +38,6 @@ public class NeoForgePlatformAdapter implements PlatformAdapter {
     }
 
     @Override
-    public Logger getLogger() {
-        return AsteorBarNeoForge.LOGGER;
-    }
-
-    @Override
     public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
         if (!AsteorBar.compatibility.appleskin) {
             return null;

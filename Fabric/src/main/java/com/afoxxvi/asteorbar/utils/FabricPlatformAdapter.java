@@ -39,11 +39,6 @@ public class FabricPlatformAdapter implements PlatformAdapter {
     }
 
     @Override
-    public Logger getLogger() {
-        return AsteorBarFabric.LOGGER;
-    }
-
-    @Override
     public AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
         if (!AsteorBar.compatibility.appleskin) {
             return null;

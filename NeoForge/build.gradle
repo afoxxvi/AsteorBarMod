@@ -112,8 +112,8 @@ dependencies {
     if (vampirism_version_neoforge != "0") {
         compileOnly "curse.maven:vampirism-become-a-vampire-233029:${vampirism_version_neoforge}"
     }
-    if (light_shield_version_neoforge != "0") {
-        compileOnly "curse.maven:lightshield-996730:${light_shield_version_neoforge}"
+    if (thirst_was_taken_version_neoforge != "0") {
+        compileOnly "curse.maven:thirst-was-taken-679270:${thirst_was_taken_version_neoforge}"
     }
 }
 

@@ -13,6 +13,11 @@ import org.slf4j.Logger;
 
 public class FabricPlatformAdapter implements PlatformAdapter {
     @Override
+    public Logger getLogger() {
+        return AsteorBarFabric.LOGGER;
+    }
+
+    @Override
     public boolean isBoss(LivingEntity livingEntity) {
         var type = livingEntity.getType();
         return type == EntityType.ENDER_DRAGON || type == EntityType.WITHER;

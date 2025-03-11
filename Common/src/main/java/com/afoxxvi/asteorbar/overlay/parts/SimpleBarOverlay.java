@@ -7,11 +7,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.BiConsumer;
 
 public abstract class SimpleBarOverlay extends BaseOverlay {
     protected long lastChangeMillis = 0;
     private Parameters lastParameters = new Parameters();
+    private Overlays.Position definedPosition = Overlays.Position.UNSPECIFIED;
+    private final Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
+    private final Map<String, Layer> layers = new LinkedHashMap<>();
 
     public static class Parameters {
         public int fillColor = 0;
@@ -52,11 +58,17 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         }
     }
 
+    public interface Layer {
+        void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip);
+    }
+
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
     }
 
     private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
+        RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
+        guiGraphics.flush();
         top += parameters.verticalShift;
         bottom += parameters.verticalShift;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, parameters.boundAlpha);
@@ -138,6 +150,34 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     protected abstract boolean shouldRender(Player player);
 
+    public void setDefinedPosition(Overlays.Position position) {
+        definedPosition = position;
+    }
+
+    public void addParametersProcessor(String key, BiConsumer<Player, Parameters> processor) {
+        postProcessors.put(key, processor);
+    }
+
+    public void removeParametersProcessor(String key) {
+        postProcessors.remove(key);
+    }
+
+    public void getAllParametersProcessors(Map<String, BiConsumer<Player, Parameters>> map) {
+        map.putAll(postProcessors);
+    }
+
+    public void addLayer(String key, Layer layer) {
+        layers.put(key, layer);
+    }
+
+    public void removeLayer(String key) {
+        layers.remove(key);
+    }
+
+    public void getAllLayers(Map<String, Layer> map) {
+        map.putAll(layers);
+    }
+
     /**
      * Only takes effect when the bar's position is unspecified.
      * {@link Overlays.Position#UNSPECIFIED}
@@ -157,7 +197,11 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     @Override
     public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-        renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, Overlays.Position.UNSPECIFIED);
+        var position = definedPosition;
+        if (position == null) {
+            position = Overlays.Position.UNSPECIFIED;
+        }
+        renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, position);
     }
 
     public void renderAtPosition(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight, Overlays.Position position) {
@@ -175,6 +219,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         if (!shouldRender(player)) return;
         var parameters = getParameters(player);
         if (parameters == null) return;
+        postProcessors.forEach((key, processor) -> processor.accept(player, parameters));
         boolean recoverShaderColor = false;
         if (canHide()) {
             if (!parameters.valueEquals(lastParameters)) {
@@ -190,11 +235,16 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
                 }
             }
         }
-        int left, top, right;
+        int left;
+        int top;
+        int right;
         if (position == Overlays.Position.UNSPECIFIED) {
             switch (Overlays.style) {
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT ->
                         position = isLeftSide() ? Overlays.Position.HALF_BOTTOM_LEFT : Overlays.Position.HALF_BOTTOM_RIGHT;
+                case Overlays.STYLE_TOP_BOTH_SIDES -> position = isLeftSide() ? Overlays.Position.TOP_LEFT : Overlays.Position.TOP_RIGHT;
+                case Overlays.STYLE_BOTTOM_BOTH_SIDES ->
+                        position = isLeftSide() ? Overlays.Position.BOTTOM_LEFT : Overlays.Position.BOTTOM_RIGHT;
                 case Overlays.STYLE_TOP_LEFT -> position = Overlays.Position.TOP_LEFT;
                 case Overlays.STYLE_TOP_RIGHT -> position = Overlays.Position.TOP_RIGHT;
                 case Overlays.STYLE_BOTTOM_LEFT -> position = Overlays.Position.BOTTOM_LEFT;
@@ -225,34 +275,35 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
                 gui.rightHeight(6);
             }
             case TOP_LEFT -> {
-                top = Overlays.verticalLeft;
-                left = Overlays.horizontal;
+                top = Overlays.cornerLeftHeight;
+                left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalLeft += 6;
+                Overlays.cornerLeftHeight += 6;
             }
             case TOP_RIGHT -> {
-                top = Overlays.verticalRight;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
+                top = Overlays.cornerRightHeight;
+                left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalRight += 6;
+                Overlays.cornerRightHeight += 6;
             }
             case BOTTOM_LEFT -> {
-                top = screenHeight - Overlays.verticalLeft;
-                left = Overlays.horizontal;
+                top = screenHeight - Overlays.cornerLeftHeight;
+                left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalLeft += 6;
+                Overlays.cornerLeftHeight += 6;
             }
             case BOTTOM_RIGHT -> {
-                top = screenHeight - Overlays.verticalRight;
-                left = screenWidth - Overlays.length - Overlays.horizontal;
+                top = screenHeight - Overlays.cornerRightHeight;
+                left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.verticalRight += 6;
+                Overlays.cornerRightHeight += 6;
             }
             default -> {
                 return;
             }
         }
         draw(guiGraphics, left, top, right, top + 5, parameters, flip);
+        layers.forEach((key, layer) -> layer.drawLayer(player, guiGraphics, left, top, right, top + 5, parameters, flip));
         lastParameters = parameters;
         if (recoverShaderColor) {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

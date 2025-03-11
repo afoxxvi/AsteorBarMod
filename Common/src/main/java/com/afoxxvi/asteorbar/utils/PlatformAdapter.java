@@ -7,6 +7,8 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public interface PlatformAdapter {
+    Logger getLogger();
+
     boolean isBoss(LivingEntity livingEntity);
 
     boolean isEyeInFluid(Player player);

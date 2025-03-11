@@ -15,7 +15,7 @@ public class DefaultConfigAdapter implements ConfigAdapter {
 
     @Override
     public int overlayLayoutStyle() {
-        return 1;
+        return 2;
     }
 
     @Override

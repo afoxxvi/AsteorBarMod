@@ -13,6 +13,11 @@ import org.slf4j.Logger;
 
 public class NeoForgePlatformAdapter implements PlatformAdapter {
     @Override
+    public Logger getLogger() {
+        return AsteorBarNeoForge.LOGGER;
+    }
+
+    @Override
     public boolean isBoss(LivingEntity livingEntity) {
         return livingEntity.getType().is(Tags.EntityTypes.BOSSES);
     }

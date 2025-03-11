@@ -17,11 +17,13 @@ public class Overlays {
     public static final int STYLE_NONE = 0;
     public static final int STYLE_ABOVE_HOT_BAR_LONG = 1;
     public static final int STYLE_ABOVE_HOT_BAR_SHORT = 2;
-    public static final int STYLE_TOP_LEFT = 3;
-    public static final int STYLE_TOP_RIGHT = 4;
-    public static final int STYLE_BOTTOM_LEFT = 5;
-    public static final int STYLE_BOTTOM_RIGHT = 6;
-    public static final int NUM_STYLES = 7;
+    public static final int STYLE_TOP_BOTH_SIDES = 3;
+    public static final int STYLE_BOTTOM_BOTH_SIDES = 4;
+    public static final int STYLE_TOP_LEFT = 5;
+    public static final int STYLE_TOP_RIGHT = 6;
+    public static final int STYLE_BOTTOM_LEFT = 7;
+    public static final int STYLE_BOTTOM_RIGHT = 8;
+    public static final int NUM_STYLES = 9;
     public static final MainOverlay MAIN = new MainOverlay();
     public static final PlayerHealthOverlay PLAYER_HEALTH = new PlayerHealthOverlay();
     public static final FoodLevelOverlay FOOD_LEVEL = new FoodLevelOverlay();
@@ -31,9 +33,9 @@ public class Overlays {
     public static final ArmorLevelOverlay ARMOR_LEVEL = new ArmorLevelOverlay();
     public static final StringOverlay STRING = new StringOverlay();
     public static int style = 0;
-    public static int verticalLeft = 0;
-    public static int verticalRight = 0;
-    public static int horizontal = 0;
+    public static int cornerLeftHeight = 0;
+    public static int cornerRightHeight = 0;
+    public static int horizontalOffset = 0;
     public static int length = 10;
     public static int leftHeight = 39;
     public static int rightHeight = 39;
@@ -61,6 +63,24 @@ public class Overlays {
             new Pair<>(AIR_LEVEL, Position.HALF_BOTTOM_RIGHT)
     );
 
+    private static final List<Pair<BaseOverlay, Position>> ORDER_TOP_BOTH_SIDES = Arrays.asList(
+            new Pair<>(PLAYER_HEALTH, Position.TOP_LEFT),
+            new Pair<>(MOUNT_HEALTH, Position.TOP_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.TOP_RIGHT),
+            new Pair<>(EXPERIENCE_BAR, Position.TOP_LEFT),
+            new Pair<>(ARMOR_LEVEL, Position.TOP_LEFT),
+            new Pair<>(AIR_LEVEL, Position.TOP_RIGHT)
+    );
+
+    private static final List<Pair<BaseOverlay, Position>> ORDER_BOTTOM_BOTH_SIDES = Arrays.asList(
+            new Pair<>(PLAYER_HEALTH, Position.BOTTOM_LEFT),
+            new Pair<>(MOUNT_HEALTH, Position.BOTTOM_LEFT),
+            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.BOTTOM_RIGHT),
+            new Pair<>(ARMOR_LEVEL, Position.BOTTOM_LEFT),
+            new Pair<>(AIR_LEVEL, Position.BOTTOM_RIGHT)
+    );
+
     private static final List<Pair<BaseOverlay, Position>> ORDER_TOP_LEFT = Arrays.asList(
             new Pair<>(PLAYER_HEALTH, Position.TOP_LEFT),
             new Pair<>(MOUNT_HEALTH, Position.TOP_LEFT),
@@ -80,31 +100,33 @@ public class Overlays {
     );
 
     private static final List<Pair<BaseOverlay, Position>> ORDER_BOTTOM_LEFT = Arrays.asList(
+            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_LEFT),
+            new Pair<>(FOOD_LEVEL, Position.BOTTOM_LEFT),
             new Pair<>(PLAYER_HEALTH, Position.BOTTOM_LEFT),
             new Pair<>(MOUNT_HEALTH, Position.BOTTOM_LEFT),
-            new Pair<>(FOOD_LEVEL, Position.BOTTOM_LEFT),
-            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_LEFT),
             new Pair<>(ARMOR_LEVEL, Position.BOTTOM_LEFT),
             new Pair<>(AIR_LEVEL, Position.BOTTOM_LEFT)
     );
 
     private static final List<Pair<BaseOverlay, Position>> ORDER_BOTTOM_RIGHT = Arrays.asList(
+            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_RIGHT),
+            new Pair<>(FOOD_LEVEL, Position.BOTTOM_RIGHT),
             new Pair<>(PLAYER_HEALTH, Position.BOTTOM_RIGHT),
             new Pair<>(MOUNT_HEALTH, Position.BOTTOM_RIGHT),
-            new Pair<>(FOOD_LEVEL, Position.BOTTOM_RIGHT),
-            new Pair<>(EXPERIENCE_BAR, Position.BOTTOM_RIGHT),
             new Pair<>(ARMOR_LEVEL, Position.BOTTOM_RIGHT),
             new Pair<>(AIR_LEVEL, Position.BOTTOM_RIGHT)
     );
 
     private static final List<List<Pair<BaseOverlay, Position>>> ORDER = Arrays.asList(
-            NONE,
-            ORDER_ABOVE_HOT_BAR_LONG,
-            ORDER_ABOVE_HOT_BAR_SHORT,
-            ORDER_TOP_LEFT,
-            ORDER_TOP_RIGHT,
-            ORDER_BOTTOM_LEFT,
-            ORDER_BOTTOM_RIGHT
+            new ArrayList<>(NONE),
+            new ArrayList<>(ORDER_ABOVE_HOT_BAR_LONG),
+            new ArrayList<>(ORDER_ABOVE_HOT_BAR_SHORT),
+            new ArrayList<>(ORDER_TOP_BOTH_SIDES),
+            new ArrayList<>(ORDER_BOTTOM_BOTH_SIDES),
+            new ArrayList<>(ORDER_TOP_LEFT),
+            new ArrayList<>(ORDER_TOP_RIGHT),
+            new ArrayList<>(ORDER_BOTTOM_LEFT),
+            new ArrayList<>(ORDER_BOTTOM_RIGHT)
     );
 
     public enum Position {
@@ -182,9 +204,9 @@ public class Overlays {
         if (!initialized) {
             init();
         }
-        verticalLeft = AsteorBar.config.cornerVerticalPadding();
-        verticalRight = AsteorBar.config.cornerVerticalPadding();
-        horizontal = AsteorBar.config.cornerHorizontalPadding();
+        cornerLeftHeight = AsteorBar.config.cornerVerticalPadding();
+        cornerRightHeight = AsteorBar.config.cornerVerticalPadding();
+        horizontalOffset = AsteorBar.config.cornerHorizontalPadding();
         length = AsteorBar.config.cornerBarLength();
         style = AsteorBar.config.overlayLayoutStyle();
         stringRenders.clear();

@@ -11,12 +11,10 @@ import net.minecraft.world.food.FoodData;
 @SuppressWarnings("DuplicatedCode")
 public class FoodLevelOverlay extends SimpleBarOverlay {
     private int foodBlinkTime = 0;
-    private final int[] shift = new int[]{0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
+    public static final int[] SHIFT = new int[]{0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
 
     float saturation;
     float exhaustion;
-    int foodIncrement;
-    float saturationIncrement;
 
     @Override
     protected Parameters getParameters(Player player) {
@@ -28,15 +26,6 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         if (player.hasEffect(MobEffects.HUNGER)) {
             foodType = AsteorBar.config.foodColorHunger();
         }
-        foodIncrement = 0;
-        saturationIncrement = 0F;
-        if (AsteorBar.compatibility.appleskin) {
-            final var foodValues = AsteorBar.platformAdapter.getAppleSkinFoodValues(player);
-            if (foodValues != null) {
-                foodIncrement = foodValues.hungerIncrement();
-                saturationIncrement = foodValues.saturationIncrement();
-            }
-        }
         if (AsteorBar.config.enableFoodBlink()) {
             if (player.getFoodData().getSaturationLevel() <= 0.0F && tick % (Math.max(4, level) * 3L + 1) == 0) {
                 foodBlinkTime = 2;
@@ -47,7 +36,7 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         }
         Parameters parameters = new Parameters();
         if (level <= 4) {
-            parameters.verticalShift = shift[tick / (level + 1) % shift.length];
+            parameters.verticalShift = SHIFT[tick / (level + 1) % SHIFT.length];
         }
         parameters.boundColor = foodBlinkTime > 0 ? AsteorBar.config.foodBoundColorBlink() : AsteorBar.config.foodBoundColor();
         parameters.emptyColor = AsteorBar.config.foodEmptyColor();
@@ -57,23 +46,9 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         }
         parameters.value = (double) level / AsteorBar.config.fullFoodLevelValue();
         parameters.fillColor = foodType;
-        if (foodIncrement > 0 && level < AsteorBar.config.fullFoodLevelValue()) {
-            if (level + foodIncrement >= AsteorBar.config.fullFoodLevelValue()) {
-                parameters.valueIncrement = (level + foodIncrement) / (double) AsteorBar.config.fullFoodLevelValue() % 1;
-            } else {
-                parameters.valueIncrement = foodIncrement / (double) AsteorBar.config.fullFoodLevelValue();
-            }
-        }
         if (AsteorBar.config.displaySaturation()) {
             parameters.boundValue = saturation / AsteorBar.config.fullSaturationValue();
             parameters.boundFillColor = AsteorBar.config.saturationColor();
-            if (foodIncrement > 0 && saturationIncrement > 0 && saturation < AsteorBar.config.fullSaturationValue()) {
-                if (saturation + saturationIncrement >= AsteorBar.config.fullSaturationValue()) {
-                    parameters.boundValueIncrement = (saturation + saturationIncrement) / AsteorBar.config.fullSaturationValue() % 1;
-                } else {
-                    parameters.boundValueIncrement = saturationIncrement / AsteorBar.config.fullSaturationValue();
-                }
-            }
         }
         return parameters;
     }

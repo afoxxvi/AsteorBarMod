@@ -55,6 +55,9 @@ dependencies {
     if (appleskin_version_fabric != "0") {
         modImplementation "curse.maven:appleskin-248787:${appleskin_version_fabric}"
     }
+    if (meal_api_version_fabric != "0") {
+        modImplementation "curse.maven:meal-api-404410:${meal_api_version_fabric}"
+    }
     if (origins_apoli_version_fabric != "0") {
         modImplementation("com.github.apace100:apoli:${origins_apoli_version_fabric}") {
             exclude(group: "org.quiltmc.parsers")

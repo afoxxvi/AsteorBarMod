@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(EntityRenderDispatcher.class)
+@Mixin(value = EntityRenderDispatcher.class, remap = false)
 public abstract class EntityMixin {
     @Shadow
     public abstract <T extends Entity> EntityRenderer<? super T, ?> getRenderer(T entity);

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.CoreShaders;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 
@@ -19,7 +20,8 @@ public class GuiHelper {
     }
 
     public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight) {
-        //RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        var compiledShaderProgram = RenderSystem.setShader(CoreShaders.POSITION_TEX_COLOR);
+        compiledShaderProgram.clear();
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
         var matrix = guiGraphics.pose().last().pose();
@@ -37,7 +39,8 @@ public class GuiHelper {
     }
 
     public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
-        //RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        var compiledShaderProgram = RenderSystem.setShader(CoreShaders.POSITION_TEX_COLOR);
+        compiledShaderProgram.clear();
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
         var matrix = guiGraphics.pose().last().pose();
@@ -66,7 +69,8 @@ public class GuiHelper {
     }
 
     public static void drawSolidGradient(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
-        //RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        var compiledShaderProgram = RenderSystem.setShader(CoreShaders.POSITION_TEX_COLOR);
+        compiledShaderProgram.clear();
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
         renderSolidGradient(builder, poseStack, left, top, right, bottom, color, 0);
@@ -75,7 +79,8 @@ public class GuiHelper {
     }
 
     public static void drawSolidGradientUpDown(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
-        //RenderSystem.setShader(GameRenderer::getPositionTexColorShader);
+        var compiledShaderProgram = RenderSystem.setShader(CoreShaders.POSITION_TEX_COLOR);
+        compiledShaderProgram.clear();
         RenderSystem.enableBlend();
         BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX_COLOR);
         renderSolidGradientUpDown(builder, poseStack, left, top, right, bottom, color, 0);

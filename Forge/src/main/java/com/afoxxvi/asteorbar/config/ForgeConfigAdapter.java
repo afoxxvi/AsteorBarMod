@@ -114,6 +114,7 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.BooleanValue HOOK_ARS_NOUVEAU;
         public static final ForgeConfigSpec.BooleanValue HOOK_APOLI;
         public static final ForgeConfigSpec.BooleanValue HOOK_THERMOO;
+        public static final ForgeConfigSpec.BooleanValue HOOK_MEAL_API;
 
 
         static {
@@ -542,6 +543,10 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookThermoo)
                     .translation("text.autoconfig.asteorbar.option.hook.hookThermoo")
                     .define("thermoo", DefaultConfigAdapter.I.hookThermoo());
+            HOOK_MEAL_API = BUILDER
+                    .comment(ConfigComment.hookMealAPI)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookMealApi")
+                    .define("mealAPI", DefaultConfigAdapter.I.hookMealApi());
             BUILDER.pop();
         }
 
@@ -1089,6 +1094,11 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean hookThermoo() {
         return Config.HOOK_THERMOO.get();
+    }
+
+    @Override
+    public boolean hookMealApi() {
+        return Config.HOOK_MEAL_API.get();
     }
 
 }

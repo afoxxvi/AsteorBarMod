@@ -553,6 +553,11 @@ public class FabricConfigAdapter implements ConfigAdapter {
         return config.hook.hookThermoo;
     }
 
+    @Override
+    public boolean hookMealApi() {
+        return config.hook.hookMealApi;
+    }
+
     public static void init() {
         AutoConfig.register(FabricConfigAdapter.AsteorBarConfig.class, JanksonConfigSerializer::new);
         holder = AutoConfig.getConfigHolder(FabricConfigAdapter.AsteorBarConfig.class);
@@ -791,6 +796,8 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean hookApoli = DefaultConfigAdapter.I.hookApoli();
             @Comment(ConfigComment.hookThermoo)
             public boolean hookThermoo = DefaultConfigAdapter.I.hookThermoo();
+            @Comment(ConfigComment.hookMealAPI)
+            public boolean hookMealApi = DefaultConfigAdapter.I.hookMealApi();
         }
     }
 }

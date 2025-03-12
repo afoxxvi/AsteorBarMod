@@ -65,7 +65,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
     }
 
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
         RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         guiGraphics.flush();

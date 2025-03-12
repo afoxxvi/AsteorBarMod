@@ -49,6 +49,7 @@ public class AsteorBar {
     };
 
     public static class Compatibility {
+        public boolean initialized = false;
         public boolean toughAsNails = false;
         public boolean thirst = false;
         public boolean mekanism = false;
@@ -69,6 +70,7 @@ public class AsteorBar {
 
 
         public void init() {
+            if (initialized) return;
             toughAsNails = platformAdapter.isModLoaded("toughasnails");
             thirst = platformAdapter.isModLoaded("thirst");
             mekanism = platformAdapter.isModLoaded("mekanism");

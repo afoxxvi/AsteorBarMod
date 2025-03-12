@@ -22,11 +22,11 @@ public abstract class BaseOverlay {
     public static final int Y_RIGHT_DECORATION = 27;
     public static final int Y_LEFT_DECORATION = 36;
 
-    public List<BaseOverlay> overrideOverlay = new ArrayList<>();
+    protected List<BaseOverlay> overrideOverlay = new ArrayList<>();
     protected int tick = 0;
 
-    public void setOverrideOverlay(BaseOverlay overrideOverlay) {
-        this.overrideOverlay = overrideOverlay;
+    public void addOverrideOverlay(BaseOverlay overrideOverlay) {
+        this.overrideOverlay.add(overrideOverlay);
     }
 
     public boolean shouldOverride() {

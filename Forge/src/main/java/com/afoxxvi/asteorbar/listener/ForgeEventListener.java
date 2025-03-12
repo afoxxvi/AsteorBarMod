@@ -53,25 +53,6 @@ public class ForgeEventListener {
             return;
         }
         if (overlay == VanillaGuiOverlay.AIR_LEVEL.type()) {
-        if (overlay == VanillaGuiOverlay.PLAYER_HEALTH.type()
-                || overlay == VanillaGuiOverlay.FOOD_LEVEL.type()
-                || overlay == VanillaGuiOverlay.AIR_LEVEL.type()
-                || (AsteorBar.config.overwriteVanillaExperienceBar() && overlay == VanillaGuiOverlay.EXPERIENCE_BAR.type())
-                || overlay == VanillaGuiOverlay.MOUNT_HEALTH.type()
-                || (AsteorBar.config.overwriteVanillaArmorBar() && overlay == VanillaGuiOverlay.ARMOR_LEVEL.type())
-                || AsteorBar.compatibility.toughAsNails && AsteorBar.config.hookToughAsNails() && overlay.id().equals(TOUGH_AS_NAILS_THIRST_LEVEL)
-                || AsteorBar.compatibility.thirst && AsteorBar.config.hookThirstWasTaken() && overlay.id().equals(THIRST_THIRST_LEVEL)
-                || AsteorBar.compatibility.mekanism && AsteorBar.config.hookMekanism() && overlay.id().equals(MEKANISM_ENERGY_LEVEL)
-                || AsteorBar.compatibility.parcool && AsteorBar.config.hookParcool() && overlay.id().equals(PARCOOL_STAMINA)
-                || AsteorBar.compatibility.ironsSpellbooks && AsteorBar.config.hookIronsSpellbooks() && overlay.id().equals(IRONS_SPELLBOOKS_MANA)
-                || AsteorBar.compatibility.feathers && AsteorBar.config.hookFeathers() && overlay.id().equals(FEATHERS_FEATHERS)
-                || AsteorBar.compatibility.vampirism && AsteorBar.config.hookVampirism() && overlay.id().equals(VAMPIRISM_BLOOD)
-                || AsteorBar.compatibility.superiorshields && AsteorBar.config.hookSuperiorShields() && overlay.id().equals(SUPERIOR_SHIELDS_SHIELD)
-                || AsteorBar.compatibility.lightshield && AsteorBar.config.hookLightShield() && overlay.id().getNamespace().equals("lightshield")
-                || AsteorBar.compatibility.homeostatic && AsteorBar.config.hookHomeostatic() && (overlay.id().equals(HOMEOSTATIC_WATER) || overlay.id().equals(HOMEOSTATIC_HYDRATION))
-                || AsteorBar.compatibility.arsNouveau && AsteorBar.config.hookArsNouveau() && overlay.id().equals(ARS_NOUVEAU_MANA)
-                || AsteorBar.compatibility.tfc && AsteorBar.config.hookTFC() && (overlay.id().equals(TFC_HEALTH) || overlay.id().equals(TFC_MOUNT_HEALTH) || overlay.id().equals(TFC_FOOD) || overlay.id().equals(TFC_THIRST))
-        ) {
             event.setCanceled(true);
             return;
         }
@@ -87,7 +68,52 @@ public class ForgeEventListener {
             event.setCanceled(true);
             return;
         }
+        if (AsteorBar.compatibility.toughAsNails && AsteorBar.config.hookToughAsNails() && overlay.id()
+                .equals(TOUGH_AS_NAILS_THIRST_LEVEL)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.thirst && AsteorBar.config.hookThirstWasTaken() && overlay.id().equals(THIRST_THIRST_LEVEL)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.mekanism && AsteorBar.config.hookMekanism() && overlay.id().equals(MEKANISM_ENERGY_LEVEL)) {
+            event.setCanceled(true);
+            return;
+        }
         if (AsteorBar.compatibility.parcool && AsteorBar.config.hookParcool() && overlay.id().equals(PARCOOL_STAMINA)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.ironsSpellbooks && AsteorBar.config.hookIronsSpellbooks() && overlay.id().equals(IRONS_SPELLBOOKS_MANA)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.feathers && AsteorBar.config.hookFeathers() && overlay.id().equals(FEATHERS_FEATHERS)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.vampirism && AsteorBar.config.hookVampirism() && overlay.id().equals(VAMPIRISM_BLOOD)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.superiorshields && AsteorBar.config.hookSuperiorShields() && overlay.id().equals(SUPERIOR_SHIELDS_SHIELD)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.lightshield && AsteorBar.config.hookLightShield() && overlay.id().getNamespace().equals("lightshield")) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.homeostatic && AsteorBar.config.hookHomeostatic() && (overlay.id().equals(HOMEOSTATIC_WATER) || overlay.id().equals(HOMEOSTATIC_HYDRATION))) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.arsNouveau && AsteorBar.config.hookArsNouveau() && overlay.id().equals(ARS_NOUVEAU_MANA)) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.tfc && AsteorBar.config.hookTFC() && (overlay.id().equals(TFC_HEALTH) || overlay.id().equals(TFC_MOUNT_HEALTH) || overlay.id().equals(TFC_FOOD) || overlay.id().equals(TFC_THIRST) || overlay.id().equals(TFC_EXPERIENCE))) {
             event.setCanceled(true);
             return;
         }

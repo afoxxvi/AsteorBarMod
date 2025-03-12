@@ -17,16 +17,12 @@ public class FabricGuiRegistry {
         if (AsteorBar.compatibility.toughAsNails) {
             Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
         }
-        Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
-        REGISTRY.add(Overlays.PLAYER_HEALTH);
-        REGISTRY.add(Overlays.FOOD_LEVEL);
-        REGISTRY.add(Overlays.MOUNT_HEALTH);
-        REGISTRY.add(new DehydrationOverlay());
-        REGISTRY.add(Overlays.AIR_LEVEL);
-        REGISTRY.add(Overlays.EXPERIENCE_BAR);
-        REGISTRY.add(Overlays.ARMOR_LEVEL);
-        REGISTRY.add(new OriginsOverlay());
-        REGISTRY.add(Overlays.STRING);
+        if (AsteorBar.compatibility.dehydration) {
+            Overlays.registerOverlayAtRecommended(new DehydrationOverlay(), Overlays.Position.UNSPECIFIED);
+        }
+        if (AsteorBar.compatibility.apoli) {
+            Overlays.registerOverlayAtRecommended(new OriginsOverlay(), Overlays.Position.UNSPECIFIED);
+        }
 
     }
 

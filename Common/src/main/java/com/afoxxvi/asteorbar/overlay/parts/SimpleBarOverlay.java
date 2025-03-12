@@ -206,13 +206,15 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     public void renderAtPosition(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight, Overlays.Position position) {
         tick = gui.gui().getGuiTicks();
-        if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
-            if (overrideOverlay instanceof SimpleBarOverlay simpleBarOverlay) {
-                simpleBarOverlay.renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, position);
-            } else {
-                overrideOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+        for (var overrideOverlay : overrideOverlay) {
+            if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
+                if (overrideOverlay instanceof SimpleBarOverlay simpleBarOverlay) {
+                    simpleBarOverlay.renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, position);
+                } else {
+                    overrideOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+                }
+                return;
             }
-            return;
         }
         var player = gui.mc().player;
         if (player == null) return;

@@ -16,8 +16,6 @@ import java.util.UUID;
 @SuppressWarnings("DuplicatedCode")
 public class FoodLevelOverlay extends SimpleBarOverlay {
     private int foodBlinkTime = 0;
-    public static final int[] SHIFT = new int[]{0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
-
     float saturation;
     float exhaustion;
 
@@ -41,7 +39,7 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         }
         Parameters parameters = new Parameters();
         if (level <= 4) {
-            parameters.verticalShift = SHIFT[tick / (level + 1) % SHIFT.length];
+            applyShakeEffect(parameters, level);
         }
         parameters.boundColor = foodBlinkTime > 0 ? AsteorBar.config.foodBoundColorBlink() : AsteorBar.config.foodBoundColor();
         parameters.emptyColor = AsteorBar.config.foodEmptyColor();

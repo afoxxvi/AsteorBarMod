@@ -211,4 +211,6 @@ public interface ConfigAdapter {
     boolean hookArsNouveau();
 
     boolean hookApoli();
+
+    boolean hookThermoo();
 }

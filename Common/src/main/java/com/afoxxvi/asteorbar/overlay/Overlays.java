@@ -191,7 +191,7 @@ public class Overlays {
                 list.add(shift * list.size(), new Pair<>(baseOverlay, position));
                 continue;
             }
-            for (int j = 0; j < ORDER.size(); j++) {
+            for (int j = 0; j < list.size(); j++) {
                 if (list.get(j).getA().getClass().equals(target.getClass())) {
                     list.add(j + shift, new Pair<>(baseOverlay, position));
                     break;

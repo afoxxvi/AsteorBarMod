@@ -23,6 +23,9 @@ public class FabricGuiRegistry {
         if (AsteorBar.compatibility.thermoo) {
             Overlays.registerOverlayAfter(new ThermooOverlays.Independent(), Overlays.PLAYER_HEALTH, Overlays.Position.UNSPECIFIED);
         }
+        if (AsteorBar.compatibility.mealApi) {
+            Overlays.FOOD_LEVEL.addLayer("afoxxvi:mealapi", new MealAPIOverlay());
+        }
 
     }
 

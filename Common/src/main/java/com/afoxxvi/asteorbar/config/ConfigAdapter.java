@@ -213,4 +213,6 @@ public interface ConfigAdapter {
     boolean hookApoli();
 
     boolean hookThermoo();
+
+    boolean hookMealApi();
 }

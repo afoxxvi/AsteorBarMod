@@ -105,4 +105,5 @@ public class ConfigComment {
     public static final String hookTFC = "Whether to hook TFC.";
     public static final String hookArsNouveau = "Whether to hook Ars Nouveau.";
     public static final String hookApoli = "Whether to hook Apoli(Origins).";
+    public static final String hookThermoo = "Whether to hook Thermoo(Scorchful & Frostiful).";
 }

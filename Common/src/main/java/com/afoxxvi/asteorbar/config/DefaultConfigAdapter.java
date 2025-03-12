@@ -537,4 +537,9 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     public boolean hookApoli() {
         return true;
     }
+
+    @Override
+    public boolean hookThermoo() {
+        return true;
+    }
 }

@@ -1,10 +1,7 @@
 package com.afoxxvi.asteorbar.overlay;
 
-import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
-import com.afoxxvi.asteorbar.overlay.parts.DehydrationOverlay;
-import com.afoxxvi.asteorbar.overlay.parts.OriginsOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.*;
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,6 +19,9 @@ public class FabricGuiRegistry {
         }
         if (AsteorBar.compatibility.apoli) {
             Overlays.registerOverlayAtRecommended(new OriginsOverlay(), Overlays.Position.UNSPECIFIED);
+        }
+        if (AsteorBar.compatibility.thermoo) {
+            Overlays.registerOverlayAfter(new ThermooOverlays.Independent(), Overlays.PLAYER_HEALTH, Overlays.Position.UNSPECIFIED);
         }
 
     }

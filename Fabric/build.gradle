@@ -62,6 +62,9 @@ dependencies {
             exclude(group: "com.jamieswhiteshirt")
         }
     }
+    if (thermoo_version_fabric != "0") {
+        modImplementation "maven.modrinth:thermoo:${thermoo_version_fabric}"
+    }
 }
 
 compileJava {

@@ -1,5 +1,20 @@
 # Version History
 
+## v1.4.6
+
+2024/07/04
+
+This will be the last version that includes Minecraft 1.18.2, 1.19.4 and 1.20.2.
+
+### Features
+
+- Support Minecraft 1.21.
+- Compatibility with Origins on Fabric 1.19.2 & 1.20.1.
+
+### Adjustments & Fixes
+
+- Fixed rendering issue with Oculus Shader.
+
 ## v1.4.5
 
 2024/05/26

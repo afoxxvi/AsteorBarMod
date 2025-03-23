@@ -14,17 +14,8 @@ public class FabricGuiRegistry {
         if (AsteorBar.compatibility.toughAsNails) {
             Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
         }
-        if (AsteorBar.compatibility.dehydration) {
-            Overlays.registerOverlayAtRecommended(new DehydrationOverlay(), Overlays.Position.UNSPECIFIED);
-        }
-        if (AsteorBar.compatibility.apoli) {
-            Overlays.registerOverlayAtRecommended(new OriginsOverlay(), Overlays.Position.UNSPECIFIED);
-        }
         if (AsteorBar.compatibility.thermoo) {
             Overlays.registerOverlayAfter(new ThermooOverlays.Independent(), Overlays.PLAYER_HEALTH, Overlays.Position.UNSPECIFIED);
-        }
-        if (AsteorBar.compatibility.mealApi) {
-            Overlays.FOOD_LEVEL.addLayer("afoxxvi:mealapi", new MealAPIOverlay());
         }
 
     }

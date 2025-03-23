@@ -107,5 +107,8 @@
   "text.autoconfig.asteorbar.option.hook.hookOrigins": "Origins",
   "text.autoconfig.asteorbar.option.hook.hookTFC": "TerraFirmaCraft",
   "text.autoconfig.asteorbar.option.hook.hookArsNouveau": "Ars Nouveau",
-  "text.autoconfig.asteorbar.option.hook.hookApoli": "Apoli(Origins)"
+  "text.autoconfig.asteorbar.option.hook.hookApoli": "Apoli(Origins)",
+  "text.autoconfig.asteorbar.option.hook.hookThermoo": "Thermoo(Scorchful & Frostiful)",
+  "text.autoconfig.asteorbar.option.hook.hookMealApi": "Meal API",
+  "asteorbar.json.lastPlaceholder": "Last Placeholder"
 }

@@ -14,6 +14,17 @@ repositories {
     maven { url "https://cursemaven.com" }
     maven { url "https://jitpack.io" }
     maven { url 'https://maven.ladysnake.org/releases' }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 loom {
@@ -43,6 +54,16 @@ dependencies {
     }
     if (appleskin_version_fabric != "0") {
         modImplementation "curse.maven:appleskin-248787:${appleskin_version_fabric}"
+    }
+    if (origins_apoli_version_fabric != "0") {
+        modImplementation("com.github.apace100:apoli:${origins_apoli_version_fabric}") {
+            exclude(group: "org.quiltmc.parsers")
+            exclude(group: "maven.modrinth")
+            exclude(group: "com.jamieswhiteshirt")
+        }
+    }
+    if (thermoo_version_fabric != "0") {
+        modImplementation "maven.modrinth:thermoo:${thermoo_version_fabric}"
     }
 }
 

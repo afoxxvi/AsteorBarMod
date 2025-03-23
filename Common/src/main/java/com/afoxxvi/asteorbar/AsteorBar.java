@@ -76,6 +76,8 @@ public class AsteorBar {
         public boolean tfc = false;
         public boolean arsNouveau = false;
         public boolean apoli = false;
+        public boolean thermoo = false;
+        public boolean mealApi = false;
 
 
         public void init() {
@@ -98,6 +100,8 @@ public class AsteorBar {
             tfc = platformAdapter.isModLoaded("tfc");
             arsNouveau = platformAdapter.isModLoaded("ars_nouveau");
             apoli = platformAdapter.isModLoaded("apoli");
+            thermoo = platformAdapter.isModLoaded("thermoo");
+            mealApi = platformAdapter.isModLoaded("mealapi");
             AppleSkinCompat.init();
             initialized = true;
         }

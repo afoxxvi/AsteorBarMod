@@ -19,6 +19,8 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     private final Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
     private final Map<String, Layer> layers = new LinkedHashMap<>();
 
+    public static final int[] SHIFT = new int[]{0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
+
     public static class Parameters {
         public int fillColor = 0;
         public int fillColor2 = 0;
@@ -62,10 +64,14 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip);
     }
 
+    public void applyShakeEffect(Parameters parameters, int level) {
+        parameters.verticalShift = SHIFT[tick / (Math.max(0, level) + 1) % SHIFT.length];
+    }
+
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
     }
 
-    private void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
         guiGraphics.flush();
         RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);

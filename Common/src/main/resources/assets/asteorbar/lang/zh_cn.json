@@ -88,8 +88,5 @@
   "text.autoconfig.asteorbar.option.entity.healthBarHealthColorDynamic": "生物信息条生命值动态颜色",
   "text.autoconfig.asteorbar.option.entity.healthBarHealthColorFull": "生物信息条生命值颜色（满血）",
   "text.autoconfig.asteorbar.option.entity.healthBarHealthColorEmpty": "生物信息条生命值颜色（空血）",
-  "text.autoconfig.asteorbar.option.hook.hookToughAsNails": "Tough As Nails",
-  "text.autoconfig.asteorbar.option.hook.hookThirstWasTaken": "Thirst Was Taken",
-  "text.autoconfig.asteorbar.option.hook.hookMekanism": "Mekanism",
-  "text.autoconfig.asteorbar.option.hook.hookDehydration": "Dehydration"
+  "asteorbar.json.lastPlaceholder": "Last Placeholder"
 }

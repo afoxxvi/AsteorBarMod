@@ -14,9 +14,6 @@ public class FabricGuiRegistry {
         if (AsteorBar.compatibility.toughAsNails) {
             Overlays.registerOverlayAtRecommended(new ToughAsNailsOverlay(), Overlays.Position.UNSPECIFIED);
         }
-        if (AsteorBar.compatibility.thermoo) {
-            Overlays.registerOverlayAfter(new ThermooOverlays.Independent(), Overlays.PLAYER_HEALTH, Overlays.Position.UNSPECIFIED);
-        }
 
     }
 

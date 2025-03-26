@@ -33,7 +33,7 @@ public class NetworkHandler {
 
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlerEvent event) {
-        final IPayloadRegistrar registrar = event.registrar(AsteorBar.MOD_ID);
+        final IPayloadRegistrar registrar = event.registrar(AsteorBar.MOD_ID).optional();
         registrar.play(ActivatePacket.ID, ActivatePacket::new, ActivatePacket::handle);
         registrar.play(SaturationPacket.ID, SaturationPacket::new, SaturationPacket::handle);
         registrar.play(ExhaustionPacket.ID, ExhaustionPacket::new, ExhaustionPacket::handle);

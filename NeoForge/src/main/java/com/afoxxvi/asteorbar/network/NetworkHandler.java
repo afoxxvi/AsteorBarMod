@@ -98,7 +98,7 @@ public class NetworkHandler {
 
     @SubscribeEvent
     public static void register(final RegisterPayloadHandlersEvent event) {
-        final PayloadRegistrar registrar = event.registrar(AsteorBar.MOD_ID);
+        final PayloadRegistrar registrar = event.registrar(AsteorBar.MOD_ID).optional();
         registrar.playToClient(NetworkPayload.ID, NetworkPayload.PAYLOAD_CODEC, NetworkHandler::handle);
     }
 

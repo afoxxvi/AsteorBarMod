@@ -22,6 +22,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
     private float lastHealth;
     private boolean highlight;
     private int regenerationOffset;
+    private boolean fullHealth;
     private float flashAlpha;
     private final int[] shift = new int[]{0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
 
@@ -57,6 +58,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
             regenerationOffset = tick % 30 * 6;
         }
         float maxHealth = player.getMaxHealth();
+        fullHealth = health >= maxHealth;
         float absorb = player.getAbsorptionAmount();
         flashAlpha = -1F;
         if (health < maxHealth * AsteorBar.config.lowHealthRate() && !highlight) {
@@ -155,6 +157,8 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         if (regenerationOffset >= 0) {
+            float alpha = (float) AsteorBar.config.healthRegenerationOpacity();
+            if (fullHealth) alpha = (float) AsteorBar.config.healthRegenerationOpacityOnFull();
             int textureLeft;
             int textureRight;
             if (flip) {
@@ -164,12 +168,15 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
             }
             textureRight = textureLeft + right - left - 2;
             RenderSystem.setShaderTexture(0, TEXTURE);
+            alpha = Math.clamp(alpha, 0.0F, 1.0F);
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
             if (textureRight > 0) {
                 drawTextureFill(guiGraphics, left + 1, top, -textureLeft, 5, 10 + 180 + textureLeft, Y_REGENERATION_FILL);
                 drawTextureFill(guiGraphics, left + 1 - textureLeft, top, textureRight, 5, 10, Y_REGENERATION_FILL);
             } else {
                 drawTextureFill(guiGraphics, left + 1, top, right - left - 2, 5, 10 + 180 + textureLeft, Y_REGENERATION_FILL);
             }
+            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
         if (highlight) {
@@ -183,6 +190,11 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
+        return true;
+    }
+
+    @Override
+    protected boolean showFadeEffect() {
         return true;
     }
 }

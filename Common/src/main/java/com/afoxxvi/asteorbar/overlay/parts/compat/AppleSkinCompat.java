@@ -63,19 +63,13 @@ public class AppleSkinCompat {
             }
         }
         if (foodIncrement > 0 && level < AsteorBar.config.fullFoodLevelValue()) {
-            if (level + foodIncrement >= AsteorBar.config.fullFoodLevelValue()) {
-                parameters.valueIncrement = (level + foodIncrement) / (double) AsteorBar.config.fullFoodLevelValue() % 1;
-            } else {
-                parameters.valueIncrement = foodIncrement / (double) AsteorBar.config.fullFoodLevelValue();
-            }
+            final var fullFood = AsteorBar.config.fullFoodLevelValue();
+            parameters.valueIncrement = Math.min(fullFood - level, (double) foodIncrement) / fullFood;
         }
         if (AsteorBar.config.displaySaturation()) {
             if (foodIncrement > 0 && saturationIncrement > 0 && saturation < AsteorBar.config.fullSaturationValue()) {
-                if (saturation + saturationIncrement >= AsteorBar.config.fullSaturationValue()) {
-                    parameters.boundValueIncrement = (saturation + saturationIncrement) / AsteorBar.config.fullSaturationValue() % 1;
-                } else {
-                    parameters.boundValueIncrement = saturationIncrement / AsteorBar.config.fullSaturationValue();
-                }
+                final var fullSaturation = AsteorBar.config.fullSaturationValue();
+                parameters.boundValueIncrement = Math.min(fullSaturation - saturation, saturationIncrement) / fullSaturation;
             }
         }
     };

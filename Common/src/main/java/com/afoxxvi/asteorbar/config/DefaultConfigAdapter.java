@@ -29,6 +29,26 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int overlayBarInnerHeight() {
+        return 3;
+    }
+
+    @Override
+    public int overlayBarVerticalMargin() {
+        return 1;
+    }
+
+    @Override
+    public int overlayBarTextOffsetY() {
+        return -2;
+    }
+
+    @Override
+    public double hideDecimalWhenEqualOrMoreThan() {
+        return 100.0;
+    }
+
+    @Override
     public int fullFoodLevelValue() {
         return 20;
     }
@@ -66,6 +86,16 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     @Override
     public String stackHealthBarColors() {
         return "#ffff4545,#ffefa360,#ff966acc,#ffcc64a8,#ff1dc29b,#ff9acc64";
+    }
+
+    @Override
+    public double healthRegenerationOpacity() {
+        return 1.0;
+    }
+
+    @Override
+    public double healthRegenerationOpacityOnFull() {
+        return 0.33;
     }
 
     @Override

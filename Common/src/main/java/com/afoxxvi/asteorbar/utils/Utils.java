@@ -1,7 +1,12 @@
 package com.afoxxvi.asteorbar.utils;
 
+import com.afoxxvi.asteorbar.AsteorBar;
+
 public class Utils {
     public static String formatNumber(double val) {
+        if (val >= AsteorBar.config.hideDecimalWhenEqualOrMoreThan()) {
+            return String.valueOf((int) val);
+        }
         String str = String.format("%.1f", val);
         if (str.endsWith(".0")) {
             str = str.substring(0, str.length() - 2);

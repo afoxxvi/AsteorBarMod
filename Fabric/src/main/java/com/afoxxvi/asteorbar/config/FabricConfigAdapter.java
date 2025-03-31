@@ -38,6 +38,26 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int overlayBarInnerHeight() {
+        return config.overlay.overlayBarInnerHeight;
+    }
+
+    @Override
+    public int overlayBarVerticalMargin() {
+        return config.overlay.overlayBarVerticalMargin;
+    }
+
+    @Override
+    public int overlayBarTextOffsetY() {
+        return config.overlay.overlayBarTextOffsetY;
+    }
+
+    @Override
+    public double hideDecimalWhenEqualOrMoreThan() {
+        return config.overlay.hideDecimalWhenEqualOrMoreThan;
+    }
+
+    @Override
     public int fullFoodLevelValue() {
         return config.overlay.fullFoodLevelValue;
     }
@@ -75,6 +95,16 @@ public class FabricConfigAdapter implements ConfigAdapter {
     @Override
     public String stackHealthBarColors() {
         return config.overlay.stackHealthBarColors;
+    }
+
+    @Override
+    public double healthRegenerationOpacity() {
+        return config.overlay.healthRegenerationOpacity;
+    }
+
+    @Override
+    public double healthRegenerationOpacityOnFull() {
+        return config.overlay.healthRegenerationOpacityOnFull;
     }
 
     @Override
@@ -575,6 +605,14 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public int overlayLayoutStyle = DefaultConfigAdapter.I.overlayLayoutStyle();
             @Comment(ConfigComment.overlayTextScale)
             public double overlayTextScale = DefaultConfigAdapter.I.overlayTextScale();
+            @Comment(ConfigComment.overlayBarInnerHeight)
+            public int overlayBarInnerHeight = DefaultConfigAdapter.I.overlayBarInnerHeight();
+            @Comment(ConfigComment.overlayBarVerticalMargin)
+            public int overlayBarVerticalMargin = DefaultConfigAdapter.I.overlayBarVerticalMargin();
+            @Comment(ConfigComment.overlayBarTextOffsetY)
+            public int overlayBarTextOffsetY = DefaultConfigAdapter.I.overlayBarTextOffsetY();
+            @Comment(ConfigComment.hideDecimalWhenEqualOrMoreThan)
+            public double hideDecimalWhenEqualOrMoreThan = DefaultConfigAdapter.I.hideDecimalWhenEqualOrMoreThan();
             @Comment(ConfigComment.fullFoodLevelValue)
             public int fullFoodLevelValue = DefaultConfigAdapter.I.fullFoodLevelValue();
             @Comment(ConfigComment.fullSaturationValue)
@@ -591,6 +629,10 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public boolean enableStackHealthBar = DefaultConfigAdapter.I.enableStackHealthBar();
             @Comment(ConfigComment.stackHealthBarColors)
             public String stackHealthBarColors = DefaultConfigAdapter.I.stackHealthBarColors();
+            @Comment(ConfigComment.healthRegenerationOpacity)
+            public double healthRegenerationOpacity = DefaultConfigAdapter.I.healthRegenerationOpacity();
+            @Comment(ConfigComment.healthRegenerationOpacityOnFull)
+            public double healthRegenerationOpacityOnFull = DefaultConfigAdapter.I.healthRegenerationOpacityOnFull();
             @Comment(ConfigComment.hideUnchangingBarAfterSeconds)
             public int hideUnchangingBarAfterSeconds = DefaultConfigAdapter.I.hideUnchangingBarAfterSeconds();
             @Comment(ConfigComment.healthColorNormal)

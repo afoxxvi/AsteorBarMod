@@ -19,6 +19,17 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     private final Map<String, BiConsumer<Player, Parameters>> postProcessors = new LinkedHashMap<>();
     private final Map<String, Layer> layers = new LinkedHashMap<>();
 
+    private double lastValue = 0;
+    private double lastFadeValue = 0;
+    private double valueFadeFrom = 0;
+    private double valueFadeTo = 0;
+    private long valueFadeStartMillis = 0;
+    private long valueFadeDuration = 500;
+
+    private static final long VALUE_FADE_START_DELAY = 200;
+    private static final long VALUE_FADE_DURATION_MIN = 200;
+    private static final long VALUE_FADE_DURATION_MAX = 800;
+
     public static final int[] SHIFT = new int[]{0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1};
 
     public static class Parameters {
@@ -71,6 +82,35 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
     }
 
+    private void drawFadeEffect(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+        if (!showFadeEffect()) return;
+        if (parameters.value < lastValue) {
+            valueFadeFrom = lastFadeValue;
+            valueFadeTo = parameters.value;
+            valueFadeStartMillis = System.currentTimeMillis();
+            double valueFadeRate = Math.clamp((valueFadeFrom - valueFadeTo) / parameters.capacity, 0, 1);
+            // 0-> MIN  1-> MAX
+            valueFadeDuration = (long) (VALUE_FADE_DURATION_MIN + (VALUE_FADE_DURATION_MAX - VALUE_FADE_DURATION_MIN) * valueFadeRate);
+        }
+        lastValue = parameters.value;
+        if (valueFadeTo < parameters.value) valueFadeTo = parameters.value;
+        final var passed = System.currentTimeMillis() - valueFadeStartMillis;
+        if (passed < VALUE_FADE_START_DELAY) {
+            lastFadeValue = valueFadeFrom;
+        } else if (passed < VALUE_FADE_START_DELAY + valueFadeDuration) {
+            lastFadeValue = valueFadeFrom + (valueFadeTo - valueFadeFrom) * (passed - VALUE_FADE_START_DELAY) / valueFadeDuration;
+        } else {
+            lastFadeValue = valueFadeTo;
+        }
+        if (lastFadeValue <= parameters.value) {
+            lastFadeValue = parameters.value;
+            return;
+        }
+        final int innerWidth = right - left - 2;
+        final int fillWidth = (int) (innerWidth * lastFadeValue / parameters.capacity);
+        drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, 0xbfffffff, flip);
+    }
+
     public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
         RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
@@ -85,9 +125,9 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         }
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, parameters.emptyColor);
+        drawFadeEffect(guiGraphics, left, top, right, bottom, parameters, flip);
         final int innerWidth = right - left - 2;
         final int fillWidth = (int) (innerWidth * parameters.value / parameters.capacity);
-        final float alpha = (float) Math.cos(tick / 40.0);
         if (parameters.fillColor2 != 0) {
             drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, parameters.fillColor, parameters.fillColor2, flip);
         } else {
@@ -104,49 +144,51 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         if (parameters.boundFillColor != 0) {
             drawBoundFlip(guiGraphics, left, top, right, bottom, boundFillWidth, parameters.boundFillColor, flip);
         }
+        final float alpha = (float) Math.cos(tick / 32.0 * 2 * Math.PI) * 0.5F + 0.5F;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
         if (parameters.valueIncrement > 0) {
-            final int incrementWidth = (int) (innerWidth * parameters.valueIncrement);
+            final int incrementWidth = (int) Math.round(innerWidth * parameters.valueIncrement);
             drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, incrementWidth, parameters.fillColor, flip);
         }
         if (parameters.secondValueIncrement > 0) {
-            final int incrementWidth = (int) (innerWidth * parameters.secondValueIncrement);
+            final int incrementWidth = (int) Math.round(innerWidth * parameters.secondValueIncrement);
             drawFillFlipConcat(guiGraphics, left + 1 + secondFillOffset, top + 1, right - 1, bottom - 1, secondFillWidth, incrementWidth, parameters.secondFillColor, flip);
         }
         if (parameters.boundValueIncrement > 0) {
-            final int incrementWidth = (int) ((right - left) * parameters.boundValueIncrement);
+            final int incrementWidth = (int) Math.round((right - left) * parameters.boundValueIncrement);
             drawBoundFlipConcat(guiGraphics, left, top, right, bottom, boundFillWidth, incrementWidth, parameters.boundFillColor, flip);
         }
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        final int stringOffsetY = AsteorBar.config.overlayBarTextOffsetY();
         if (parameters.centerText != null) {
-            Overlays.addStringRender((left + right) / 2, top - 2, parameters.centerColor, parameters.centerText, Overlays.ALIGN_CENTER, true);
+            Overlays.addStringRender((left + right) / 2, top + stringOffsetY, parameters.centerColor, parameters.centerText, Overlays.ALIGN_CENTER, true);
         }
         if (parameters.leftText != null) {
             if (flip) {
-                Overlays.addStringRender(right - 2, top - 2, parameters.leftColor, parameters.leftText, Overlays.ALIGN_RIGHT, true);
+                Overlays.addStringRender(right - 2, top + stringOffsetY, parameters.leftColor, parameters.leftText, Overlays.ALIGN_RIGHT, true);
             } else {
-                Overlays.addStringRender(left + 2, top - 2, parameters.leftColor, parameters.leftText, Overlays.ALIGN_LEFT, true);
+                Overlays.addStringRender(left + 2, top + stringOffsetY, parameters.leftColor, parameters.leftText, Overlays.ALIGN_LEFT, true);
             }
         }
         if (parameters.rightText != null) {
             if (flip) {
-                Overlays.addStringRender(left + 2, top - 2, parameters.rightColor, parameters.rightText, Overlays.ALIGN_LEFT, true);
+                Overlays.addStringRender(left + 2, top + stringOffsetY, parameters.rightColor, parameters.rightText, Overlays.ALIGN_LEFT, true);
             } else {
-                Overlays.addStringRender(right - 2, top - 2, parameters.rightColor, parameters.rightText, Overlays.ALIGN_RIGHT, true);
+                Overlays.addStringRender(right - 2, top + stringOffsetY, parameters.rightColor, parameters.rightText, Overlays.ALIGN_RIGHT, true);
             }
         }
         if (parameters.leftOuterText != null) {
             if (flip) {
-                Overlays.addStringRender(right + 2, top - 2, parameters.leftOuterColor, parameters.leftOuterText, Overlays.ALIGN_LEFT, true);
+                Overlays.addStringRender(right + 2, top + stringOffsetY, parameters.leftOuterColor, parameters.leftOuterText, Overlays.ALIGN_LEFT, true);
             } else {
-                Overlays.addStringRender(left - 2, top - 2, parameters.leftOuterColor, parameters.leftOuterText, Overlays.ALIGN_RIGHT, true);
+                Overlays.addStringRender(left - 2, top + stringOffsetY, parameters.leftOuterColor, parameters.leftOuterText, Overlays.ALIGN_RIGHT, true);
             }
         }
         if (parameters.rightOuterText != null) {
             if (flip) {
-                Overlays.addStringRender(left - 2, top - 2, parameters.rightOuterColor, parameters.rightOuterText, Overlays.ALIGN_RIGHT, true);
+                Overlays.addStringRender(left - 2, top + stringOffsetY, parameters.rightOuterColor, parameters.rightOuterText, Overlays.ALIGN_RIGHT, true);
             } else {
-                Overlays.addStringRender(right + 2, top - 2, parameters.rightOuterColor, parameters.rightOuterText, Overlays.ALIGN_LEFT, true);
+                Overlays.addStringRender(right + 2, top + stringOffsetY, parameters.rightOuterColor, parameters.rightOuterText, Overlays.ALIGN_LEFT, true);
             }
         }
         drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
@@ -155,6 +197,10 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     protected abstract Parameters getParameters(Player player);
 
     protected abstract boolean shouldRender(Player player);
+
+    protected boolean showFadeEffect() {
+        return false;
+    }
 
     public void setDefinedPosition(Overlays.Position position) {
         definedPosition = position;
@@ -258,58 +304,60 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
             }
         }
         boolean flip = position.flip;
+        final int barFullHeight = AsteorBar.config.overlayBarInnerHeight() + 2;
+        final int shiftAfterDraw = barFullHeight + AsteorBar.config.overlayBarVerticalMargin();
         switch (position) {
             case FULL_BOTTOM -> {
                 left = screenWidth / 2 - 91;
                 right = left + BOUND_FULL_WIDTH_LONG;
                 int higher = Math.max(gui.leftHeight(), gui.rightHeight());
-                top = screenHeight - higher + 4;
-                higher += 6;
+                top = screenHeight - higher + 9 - barFullHeight;
+                higher += shiftAfterDraw;
                 gui.leftHeight(higher - gui.leftHeight());
                 gui.rightHeight(higher - gui.rightHeight());
             }
             case HALF_BOTTOM_LEFT -> {
                 left = screenWidth / 2 - 91;
                 right = left + BOUND_FULL_WIDTH_SHORT;
-                top = screenHeight - gui.leftHeight() + 4;
-                gui.leftHeight(6);
+                top = screenHeight - gui.leftHeight() + 9 - barFullHeight;
+                gui.leftHeight(shiftAfterDraw);
             }
             case HALF_BOTTOM_RIGHT -> {
                 left = screenWidth / 2 + 10;
                 right = left + BOUND_FULL_WIDTH_SHORT;
-                top = screenHeight - gui.rightHeight() + 4;
-                gui.rightHeight(6);
+                top = screenHeight - gui.rightHeight() + 9 - barFullHeight;
+                gui.rightHeight(shiftAfterDraw);
             }
             case TOP_LEFT -> {
                 top = Overlays.cornerLeftHeight;
                 left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.cornerLeftHeight += 6;
+                Overlays.cornerLeftHeight += shiftAfterDraw;
             }
             case TOP_RIGHT -> {
                 top = Overlays.cornerRightHeight;
                 left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.cornerRightHeight += 6;
+                Overlays.cornerRightHeight += shiftAfterDraw;
             }
             case BOTTOM_LEFT -> {
                 top = screenHeight - Overlays.cornerLeftHeight;
                 left = Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.cornerLeftHeight += 6;
+                Overlays.cornerLeftHeight += shiftAfterDraw;
             }
             case BOTTOM_RIGHT -> {
                 top = screenHeight - Overlays.cornerRightHeight;
                 left = screenWidth - Overlays.length - Overlays.horizontalOffset;
                 right = left + Overlays.length;
-                Overlays.cornerRightHeight += 6;
+                Overlays.cornerRightHeight += shiftAfterDraw;
             }
             default -> {
                 return;
             }
         }
-        draw(guiGraphics, left, top, right, top + 5, parameters, flip);
-        layers.forEach((key, layer) -> layer.drawLayer(player, guiGraphics, left, top, right, top + 5, parameters, flip));
+        draw(guiGraphics, left, top, right, top + barFullHeight, parameters, flip);
+        layers.forEach((key, layer) -> layer.drawLayer(player, guiGraphics, left, top, right, top + barFullHeight, parameters, flip));
         lastParameters = parameters;
         if (recoverShaderColor) {
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);

@@ -34,7 +34,7 @@ public class NeoForgeEventListener {
             event.setCanceled(true);
             return;
         }
-        if (AsteorBar.config.overwriteVanillaExperienceBar() && overlay == VanillaGuiLayers.EXPERIENCE_BAR) {
+        if (AsteorBar.config.overwriteVanillaExperienceBar() && (overlay == VanillaGuiLayers.EXPERIENCE_BAR || overlay == VanillaGuiLayers.EXPERIENCE_LEVEL)) {
             event.setCanceled(true);
             return;
         }

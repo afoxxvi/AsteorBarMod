@@ -11,6 +11,10 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.BooleanValue ENABLE_OVERLAY;
         public static final ForgeConfigSpec.IntValue OVERLAY_LAYOUT_STYLE;
         public static final ForgeConfigSpec.DoubleValue OVERLAY_TEXT_SCALE;
+        public static final ForgeConfigSpec.IntValue OVERLAY_BAR_INNER_HEIGHT;
+        public static final ForgeConfigSpec.IntValue OVERLAY_BAR_VERTICAL_MARGIN;
+        public static final ForgeConfigSpec.IntValue OVERLAY_BAR_TEXT_OFFSET_Y;
+        public static final ForgeConfigSpec.DoubleValue HIDE_DECIMAL_WHEN_EQUAL_OR_MORE_THAN;
         public static final ForgeConfigSpec.IntValue FULL_FOOD_LEVEL_VALUE;
         public static final ForgeConfigSpec.DoubleValue FULL_SATURATION_VALUE;
         public static final ForgeConfigSpec.DoubleValue FULL_EXHAUSTION_VALUE;
@@ -19,6 +23,8 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.IntValue FULL_HEALTH_VALUE;
         public static final ForgeConfigSpec.BooleanValue ENABLE_STACK_HEALTH_BAR;
         public static final ForgeConfigSpec.ConfigValue<String> STACK_HEALTH_BAR_COLORS;
+        public static final ForgeConfigSpec.DoubleValue HEALTH_REGENERATION_OPACITY;
+        public static final ForgeConfigSpec.DoubleValue HEALTH_REGENERATION_OPACITY_ON_FULL;
         public static final ForgeConfigSpec.IntValue HIDE_UNCHANGING_BAR_AFTER_SECONDS;
         public static final ForgeConfigSpec.IntValue HEALTH_COLOR_NORMAL;
         public static final ForgeConfigSpec.IntValue HEALTH_COLOR_POISON;
@@ -131,6 +137,22 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.overlayTextScale)
                     .translation("text.autoconfig.asteorbar.option.overlay.overlayTextScale")
                     .defineInRange("overlayTextScale", DefaultConfigAdapter.I.overlayTextScale(), 0.1, 10.0);
+            OVERLAY_BAR_INNER_HEIGHT = BUILDER
+                    .comment(ConfigComment.overlayBarInnerHeight)
+                    .translation("text.autoconfig.asteorbar.option.overlay.overlayBarInnerHeight")
+                    .defineInRange("overlayBarInnerHeight", DefaultConfigAdapter.I.overlayBarInnerHeight(), 1, Integer.MAX_VALUE);
+            OVERLAY_BAR_VERTICAL_MARGIN = BUILDER
+                    .comment(ConfigComment.overlayBarVerticalMargin)
+                    .translation("text.autoconfig.asteorbar.option.overlay.overlayBarVerticalMargin")
+                    .defineInRange("overlayBarVerticalMargin", DefaultConfigAdapter.I.overlayBarVerticalMargin(), 0, Integer.MAX_VALUE);
+            OVERLAY_BAR_TEXT_OFFSET_Y = BUILDER
+                    .comment(ConfigComment.overlayBarTextOffsetY)
+                    .translation("text.autoconfig.asteorbar.option.overlay.overlayBarTextOffsetY")
+                    .defineInRange("overlayBarTextOffsetY", DefaultConfigAdapter.I.overlayBarTextOffsetY(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+            HIDE_DECIMAL_WHEN_EQUAL_OR_MORE_THAN = BUILDER
+                    .comment(ConfigComment.hideDecimalWhenEqualOrMoreThan)
+                    .translation("text.autoconfig.asteorbar.option.overlay.hideDecimalWhenEqualOrMoreThan")
+                    .defineInRange("hideDecimalWhenEqualOrMoreThan", DefaultConfigAdapter.I.hideDecimalWhenEqualOrMoreThan(), 0.0, Double.MAX_VALUE);
             FULL_FOOD_LEVEL_VALUE = BUILDER
                     .comment(ConfigComment.fullFoodLevelValue)
                     .translation("text.autoconfig.asteorbar.option.overlay.fullFoodLevelValue")
@@ -163,6 +185,14 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.stackHealthBarColors)
                     .translation("text.autoconfig.asteorbar.option.overlay.stackHealthBarColors")
                     .define("stackHealthBarColors", DefaultConfigAdapter.I.stackHealthBarColors());
+            HEALTH_REGENERATION_OPACITY = BUILDER
+                    .comment(ConfigComment.healthRegenerationOpacity)
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthRegenerationOpacity")
+                    .defineInRange("healthRegenerationOpacity", DefaultConfigAdapter.I.healthRegenerationOpacity(), 0.0, 1.0);
+            HEALTH_REGENERATION_OPACITY_ON_FULL = BUILDER
+                    .comment(ConfigComment.healthRegenerationOpacityOnFull)
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthRegenerationOpacityOnFull")
+                    .defineInRange("healthRegenerationOpacityOnFull", DefaultConfigAdapter.I.healthRegenerationOpacityOnFull(), 0.0, 1.0);
             HIDE_UNCHANGING_BAR_AFTER_SECONDS = BUILDER
                     .comment(ConfigComment.hideUnchangingBarAfterSeconds)
                     .translation("text.autoconfig.asteorbar.option.overlay.hideUnchangingBarAfterSeconds")
@@ -581,6 +611,26 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public int overlayBarInnerHeight() {
+        return Config.OVERLAY_BAR_INNER_HEIGHT.get();
+    }
+
+    @Override
+    public int overlayBarVerticalMargin() {
+        return Config.OVERLAY_BAR_VERTICAL_MARGIN.get();
+    }
+
+    @Override
+    public int overlayBarTextOffsetY() {
+        return Config.OVERLAY_BAR_TEXT_OFFSET_Y.get();
+    }
+
+    @Override
+    public double hideDecimalWhenEqualOrMoreThan() {
+        return Config.HIDE_DECIMAL_WHEN_EQUAL_OR_MORE_THAN.get();
+    }
+
+    @Override
     public int fullFoodLevelValue() {
         return Config.FULL_FOOD_LEVEL_VALUE.get();
     }
@@ -618,6 +668,16 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     @Override
     public String stackHealthBarColors() {
         return Config.STACK_HEALTH_BAR_COLORS.get();
+    }
+
+    @Override
+    public double healthRegenerationOpacity() {
+        return Config.HEALTH_REGENERATION_OPACITY.get();
+    }
+
+    @Override
+    public double healthRegenerationOpacityOnFull() {
+        return Config.HEALTH_REGENERATION_OPACITY_ON_FULL.get();
     }
 
     @Override

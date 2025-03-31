@@ -4,6 +4,10 @@ public class ConfigComment {
     public static final String enableOverlay = "Whether to enable the overlay. If disabled, all other overlay options will be ignored.";
     public static final String overlayLayoutStyle = "The layout style of the overlay. 0: none, 1: above hot bar long, 2: above hot bar short, 3: top left, 4: top right, 5: bottom left, 6: bottom right";
     public static final String overlayTextScale = "The text scale of the overlay";
+    public static final String overlayBarInnerHeight = "The inner height of the overlay bar, the full height will be inner height + 2.";
+    public static final String overlayBarVerticalMargin = "The vertical margin of the overlay bar";
+    public static final String overlayBarTextOffsetY = "The offset of the overlay bar text on the Y axis";
+    public static final String hideDecimalWhenEqualOrMoreThan = "Hide decimal when the value is equal to or more than this value. 0 to hide all decimals.";
     public static final String fullFoodLevelValue = "Full food level value. If you are using a mod that changes the max food level, you may need to change this value.";
     public static final String fullSaturationValue = "Full saturation value. If you are using a mod that changes the max saturation value, you may need to change this value.";
     public static final String fullExhaustionValue = "Full exhaustion value. If you are using a mod that changes the max exhaustion value, you may need to change this value.";
@@ -12,6 +16,8 @@ public class ConfigComment {
     public static final String fullHealthValue = "Full health value. Determines the amount single health bar represents. No effect while stack health bar is disabled.";
     public static final String enableStackHealthBar = "Whether to enable stack health bar. If enabled, the health bar will be displayed like multiple health bars with different colors stacked together. Note that once enabled, the health bar color in specific conditions will be rendered half transparently on the health bar, and if the absorption display mode is 0, it will be changed to 2  in game dynamically to avoid ambiguity.";
     public static final String stackHealthBarColors = "The color list of the stack health bar. Split by commas, each color must be in ARGB format, no space, no illegal characters, no tail comma. For example: '#FF00FF00,#FFFF0000,#FF0000FF', the health bars will pick colors from the list sequentially, and return to the first color when the list is exhausted.";
+    public static final String healthRegenerationOpacity = "The opacity of the health bar when the entity is regenerating health. 0 to 1.";
+    public static final String healthRegenerationOpacityOnFull = "The opacity of the health bar when the entity is regenerating health and the health is full. 0 to 1.";
     public static final String hideUnchangingBarAfterSeconds = "If a bar value is not changing in some seconds, then hide them. 0 to disable.";
     public static final String healthColorNormal = "The color of the health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";
     public static final String healthColorPoison = "The color of the poison health bar. 0x00000000 to 0xFFFFFFFF. ARGB format.";

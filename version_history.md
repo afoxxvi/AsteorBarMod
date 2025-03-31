@@ -1,19 +1,53 @@
 # Version History
 
-## v1.4.6
-
-2024/07/04
-
-This will be the last version that includes Minecraft 1.18.2, 1.19.4 and 1.20.2.
+## v1.5.2-DEV
 
 ### Features
 
-- Support Minecraft 1.21.
-- Compatibility with Origins on Fabric 1.19.2 & 1.20.1.
+- Add option to change the height and margin of the HUD bars.
+- Add option to lower the opacity of regeneration effect.
+- Health bar now has a fade effect on health loss.
+- Add option to hide decimal part of the numbers, or adjust the hide threshold.
 
 ### Adjustments & Fixes
 
-- Fixed rendering issue with Oculus Shader.
+- Fixed the food value increment preview from AppleSkin not accurate.
+- Fixed vanilla experience level not hidden when the experience bar is disabled.
+
+## v1.5.1
+
+This update is NeoForge only.
+
+### Adjustments & Fixes
+
+- Fixed the network channel not optional, which prevents the client from joining the server without the mod.
+
+## v1.5
+
+After this update, Minecraft versions below 1.20 and 1.20.2 will no longer be supported.
+
+### Features
+
+- Support Minecraft 1.21.3 and 1.21.4.
+- All bars now extends SimpleBarOverlay.
+- Add 2 new layout styles for HUD bars: TOP_BOTH_SIDES and BOTTOM_BOTH_SIDES.
+- Add `Overlays.registerOverlayXXX()`-related method to allow third-party mods to register their own overlay.
+- Mod compatibility: Thermoo and Meal API.
+
+### Adjustments & Fixes
+
+- Re-organized third-party mod support.
+- Fixed the compatibility issue with newer versions of Tough As Nails and Thirst Was Taken.
+
+## v1.4.6
+
+### Features
+
+- Support Minecraft 1.21 and 1.21.1.
+
+### Adjustments & Fixes
+
+- Fix render issue with oculus shader.
 
 ## v1.4.5
 

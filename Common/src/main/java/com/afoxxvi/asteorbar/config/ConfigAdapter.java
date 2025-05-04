@@ -11,6 +11,14 @@ public interface ConfigAdapter {
 
     double overlayTextScale();
 
+    int overlayBarInnerHeight();
+
+    int overlayBarVerticalMargin();
+
+    int overlayBarTextOffsetY();
+
+    double hideDecimalWhenEqualOrMoreThan();
+
     int fullFoodLevelValue();
 
     double fullSaturationValue();
@@ -26,6 +34,10 @@ public interface ConfigAdapter {
     boolean enableStackHealthBar();
 
     String stackHealthBarColors();
+
+    double healthRegenerationOpacity();
+
+    double healthRegenerationOpacityOnFull();
 
     int hideUnchangingBarAfterSeconds();
 

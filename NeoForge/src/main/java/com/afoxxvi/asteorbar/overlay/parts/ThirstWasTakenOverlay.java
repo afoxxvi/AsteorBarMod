@@ -7,7 +7,6 @@ import dev.ghen.thirst.foundation.common.capability.IThirst;
 import dev.ghen.thirst.foundation.common.capability.ModAttachment;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
-import toughasnails.init.ModConfig;
 
 public class ThirstWasTakenOverlay extends SimpleBarOverlay {
     private int thirstBlinkTime = 0;
@@ -56,7 +55,7 @@ public class ThirstWasTakenOverlay extends SimpleBarOverlay {
         int innerWidth = right - left - 2;
         if (AsteorBar.config.displayExhaustion()) {
             RenderSystem.setShaderTexture(0, TEXTURE);
-            var cap = ModConfig.thirst.thirstExhaustionThreshold;
+            var cap = 4.0F;
             int exhaustionWidth = (int) (innerWidth * (Math.min(cap, exhaustion) / cap));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);

@@ -101,7 +101,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 final int unit = AsteorBar.config.fullHealthValue();
                 parameters.value = (health % unit) / unit;
                 parameters.secondValue = 0;
-                final var colors = getStackColor((int) (health / unit), parameters.secondValueIncrement > 0 ? 3 : 2);
+                final var colors = getStackColor((int) (health / unit), 3);
                 if (health >= unit) parameters.emptyColor = colors[0];
                 parameters.fillColor = colors[1];
                 parameters.secondFillColor = colors[2];

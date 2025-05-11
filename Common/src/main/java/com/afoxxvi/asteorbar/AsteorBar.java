@@ -69,6 +69,7 @@ public class AsteorBar {
         public boolean apoli = false;
         public boolean thermoo = false;
         public boolean mealApi = false;
+        public boolean walkJogRun = false;
 
 
         public void init() {
@@ -92,6 +93,7 @@ public class AsteorBar {
             apoli = platformAdapter.isModLoaded("apoli");
             thermoo = platformAdapter.isModLoaded("thermoo");
             mealApi = platformAdapter.isModLoaded("mealapi");
+            walkJogRun = platformAdapter.isModLoaded("walk-jog-run");
             AppleSkinCompat.init();
             initialized = true;
         }

@@ -68,6 +68,9 @@ dependencies {
     if (thermoo_version_fabric != "0") {
         modImplementation "maven.modrinth:thermoo:${thermoo_version_fabric}"
     }
+    if (walk_jog_run_version_fabric != "0") {
+        modImplementation "maven.modrinth:walk-jog-run:${walk_jog_run_version_fabric}"
+    }
 }
 
 compileJava {

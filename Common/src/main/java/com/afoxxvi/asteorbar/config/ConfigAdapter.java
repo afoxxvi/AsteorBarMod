@@ -231,4 +231,6 @@ public interface ConfigAdapter {
     boolean hookThermoo();
 
     boolean hookMealApi();
+
+    boolean hookLegendarySurvivalOverhaul();
 }

@@ -2,11 +2,13 @@ package com.afoxxvi.asteorbar.overlay;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.parts.*;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulFoodOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulHealthOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulThirstOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCExperienceOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCFoodOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCHealthOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.tfc.TFCThirstOverlay;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 
 public class ForgeGuiRegistry {
     private ForgeGuiRegistry() {
@@ -33,6 +35,11 @@ public class ForgeGuiRegistry {
         }
         if (AsteorBar.compatibility.homeostatic) {
             Overlays.registerOverlayAtRecommended(new HomeostaticOverlay(), Overlays.Position.UNSPECIFIED);
+        }
+        if (AsteorBar.compatibility.legendarySurvivalOverhaul) {
+            Overlays.registerOverlayAtRecommended(new LegendarySurvivalOverhaulThirstOverlay(), Overlays.Position.UNSPECIFIED);
+            Overlays.PLAYER_HEALTH.addOverrideOverlay(new LegendarySurvivalOverhaulHealthOverlay());
+            Overlays.FOOD_LEVEL.addOverrideOverlay(new LegendarySurvivalOverhaulFoodOverlay());
         }
         if (AsteorBar.compatibility.feathers) {
             Overlays.registerOverlayAtRecommended(new FeathersOverlay(), Overlays.Position.UNSPECIFIED);

@@ -59,6 +59,7 @@ public class AsteorBar {
         public boolean feathers = false;
         public boolean appleskin = false;
         public boolean superiorshields = false;
+        public boolean legendarySurvivalOverhaul = false;
         public boolean vampirism = false;
         public boolean lightshield = false;
         public boolean homeostatic = false;
@@ -94,6 +95,7 @@ public class AsteorBar {
             thermoo = platformAdapter.isModLoaded("thermoo");
             mealApi = platformAdapter.isModLoaded("mealapi");
             walkJogRun = platformAdapter.isModLoaded("walk-jog-run");
+            legendarySurvivalOverhaul = platformAdapter.isModLoaded("legendarysurvivaloverhaul");
             AppleSkinCompat.init();
             initialized = true;
         }

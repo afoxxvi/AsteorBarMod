@@ -33,6 +33,8 @@ public class ForgeEventListener {
     public static final ResourceLocation TFC_FOOD = new ResourceLocation("tfc", "food");
     public static final ResourceLocation TFC_THIRST = new ResourceLocation("tfc", "thirst");
     public static final ResourceLocation TFC_EXPERIENCE = new ResourceLocation("tfc", "experience");
+    public static final ResourceLocation LSO_THIRST = new ResourceLocation("legendarysurvivaloverhaul", "thirst");
+    public static final ResourceLocation LSO_COLD_HUNGER = new ResourceLocation("legendarysurvivaloverhaul", "cold_hunger");
 
 
     @SubscribeEvent
@@ -116,6 +118,9 @@ public class ForgeEventListener {
         if (AsteorBar.compatibility.tfc && AsteorBar.config.hookTFC() && (overlay.id().equals(TFC_HEALTH) || overlay.id().equals(TFC_MOUNT_HEALTH) || overlay.id().equals(TFC_FOOD) || overlay.id().equals(TFC_THIRST) || overlay.id().equals(TFC_EXPERIENCE))) {
             event.setCanceled(true);
             return;
+        }
+        if (AsteorBar.compatibility.legendarySurvivalOverhaul && AsteorBar.config.hookLegendarySurvivalOverhaul() && (overlay.id().equals(LSO_THIRST) || overlay.id().equals(LSO_COLD_HUNGER))) {
+            event.setCanceled(true);
         }
     }
 

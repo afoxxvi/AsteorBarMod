@@ -2,16 +2,10 @@ package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.utils.Utils;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 @SuppressWarnings("DuplicatedCode")
 public class FoodLevelOverlay extends SimpleBarOverlay {
@@ -61,10 +55,8 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         int innerWidth = right - left - 2;
         if (AsteorBar.config.displayExhaustion()) {
-            RenderSystem.setShaderTexture(0, TEXTURE);
             int exhaustionWidth = (int) (innerWidth * (Math.min(AsteorBar.config.fullExhaustionValue(), exhaustion) / AsteorBar.config.fullExhaustionValue()));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
-            RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
     }
 

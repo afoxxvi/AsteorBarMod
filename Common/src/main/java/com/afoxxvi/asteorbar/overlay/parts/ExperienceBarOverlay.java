@@ -2,7 +2,6 @@ package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 
@@ -29,9 +28,7 @@ public class ExperienceBarOverlay extends SimpleBarOverlay {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         int innerWidth = right - left - 2;
         int textureWidth = Math.min(179, Math.max(0, (innerWidth + 5) / 10 - 1) * 10 + 9);
-        RenderSystem.setShaderTexture(0, TEXTURE);
         drawTextureFillColor(guiGraphics, left + 1, top, innerWidth, 5, 10, Y_EXPERIENCE_DECORATION, textureWidth, 5, AsteorBar.config.experienceColor());
-        RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         if (AsteorBar.config.displayExperienceLevel()) {
             int x = (right + left) / 2;
             int y = top - 2;

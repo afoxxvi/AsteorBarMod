@@ -3,7 +3,6 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
@@ -148,7 +147,6 @@ public abstract class BaseOverlay {
     public void render(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (AsteorBar.config.enableOverlay()) {
             tick = gui.gui().getGuiTicks();
-            RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
             if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
                 overrideOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
             } else {

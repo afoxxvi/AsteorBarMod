@@ -114,7 +114,6 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
         guiGraphics.flush();
-        RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         top += parameters.verticalShift;
         bottom += parameters.verticalShift;
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, parameters.boundAlpha);

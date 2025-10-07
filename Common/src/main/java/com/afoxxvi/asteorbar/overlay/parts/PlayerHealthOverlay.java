@@ -167,7 +167,6 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 textureLeft = -regenerationOffset;
             }
             textureRight = textureLeft + right - left - 2;
-            RenderSystem.setShaderTexture(0, TEXTURE);
             alpha = Math.clamp(alpha, 0.0F, 1.0F);
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
             if (textureRight > 0) {
@@ -177,7 +176,6 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 drawTextureFill(guiGraphics, left + 1, top, right - left - 2, 5, 10 + 180 + textureLeft, Y_REGENERATION_FILL);
             }
             RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-            RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
         if (highlight) {
             drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.healthBoundColorBlink());

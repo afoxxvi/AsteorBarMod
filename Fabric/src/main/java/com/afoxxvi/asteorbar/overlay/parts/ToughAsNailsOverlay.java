@@ -1,10 +1,8 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.Utils;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 import toughasnails.api.potion.TANEffects;
@@ -68,11 +66,9 @@ public class ToughAsNailsOverlay extends SimpleBarOverlay {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         int innerWidth = right - left - 2;
         if (AsteorBar.config.displayExhaustion()) {
-            RenderSystem.setShaderTexture(0, TEXTURE);
             var cap = ModConfig.thirst.thirstExhaustionThreshold;
             int exhaustionWidth = (int) (innerWidth * (Math.min(cap, exhaustion) / cap));
             drawTextureFillFlip(guiGraphics, left + 1, top, right - 1, exhaustionWidth, 5, 10, Y_FOOD_EXHAUSTION_FILL, FILL_FULL_WIDTH_LONG, flip);
-            RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
         }
     }
 

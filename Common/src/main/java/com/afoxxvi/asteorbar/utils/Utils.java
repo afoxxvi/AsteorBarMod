@@ -46,4 +46,15 @@ public class Utils {
         short a = (short) ((color >> 24 & 0xFF));
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
+
+    public static int modifyAlpha(int color, float alpha) {
+        if (alpha == 0) return color;
+        int alphaInt = (int) (alpha * 255);
+        return (color & 0x00ffffff) | (alphaInt << 24);
+    }
+
+    public static int getWhiteAlpha(float alpha) {
+        int alphaInt = (int) (alpha * 255);
+        return (alphaInt << 24) | 0x00ffffff;
+    }
 }

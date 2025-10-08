@@ -3,7 +3,7 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.afoxxvi.asteorbar.utils.GuiHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.entity.player.Player;
 
@@ -113,16 +113,15 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
 
     public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
-        guiGraphics.flush();
         top += parameters.verticalShift;
         bottom += parameters.verticalShift;
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, parameters.boundAlpha);
+        GuiHelper.setGlobalAlpha(parameters.boundAlpha);
         if (parameters.boundColor2 == 0) {
             drawBound(guiGraphics, left, top, right, bottom, parameters.boundColor);
         } else {
             drawBound(guiGraphics, left, top, right, bottom, parameters.boundColor, parameters.boundColor2);
         }
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        GuiHelper.setGlobalAlpha(1.0F);
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, parameters.emptyColor);
         drawFadeEffect(guiGraphics, left, top, right, bottom, parameters, flip);
         final int innerWidth = right - left - 2;
@@ -135,16 +134,16 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         final int secondFillWidth = (int) (innerWidth * parameters.secondValue / parameters.capacity);
         final int secondFillOffset = (int) (innerWidth * parameters.secondValueOffset);
         if (parameters.secondFillColor != 0) {
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, parameters.secondFillAlpha);
+            GuiHelper.setGlobalAlpha(parameters.secondFillAlpha);
             drawFillFlip(guiGraphics, left + 1 + secondFillOffset, top + 1, right - 1, bottom - 1, secondFillWidth, parameters.secondFillColor, flip);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiHelper.setGlobalAlpha(1.0F);
         }
         final int boundFillWidth = (int) ((right - left) * parameters.boundValue / parameters.boundCapacity);
         if (parameters.boundFillColor != 0) {
             drawBoundFlip(guiGraphics, left, top, right, bottom, boundFillWidth, parameters.boundFillColor, flip);
         }
         final float alpha = (float) Math.cos(tick / 32.0 * 2 * Math.PI) * 0.5F + 0.5F;
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+        GuiHelper.setGlobalAlpha(alpha);
         if (parameters.valueIncrement > 0) {
             final int incrementWidth = (int) Math.round(innerWidth * parameters.valueIncrement);
             drawFillFlipConcat(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, incrementWidth, parameters.fillColor, flip);
@@ -157,7 +156,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
             final int incrementWidth = (int) Math.round((right - left) * parameters.boundValueIncrement);
             drawBoundFlipConcat(guiGraphics, left, top, right, bottom, boundFillWidth, incrementWidth, parameters.boundFillColor, flip);
         }
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        GuiHelper.setGlobalAlpha(1.0F);
         final int stringOffsetY = AsteorBar.config.overlayBarTextOffsetY();
         if (parameters.centerText != null) {
             Overlays.addStringRender((left + right) / 2, top + stringOffsetY, parameters.centerColor, parameters.centerText, Overlays.ALIGN_CENTER, true);
@@ -281,7 +280,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
                 if (System.currentTimeMillis() - lastChangeMillis > wait + 1000) {
                     return;
                 } else if (System.currentTimeMillis() - lastChangeMillis > wait) {
-                    RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F - (System.currentTimeMillis() - lastChangeMillis - wait) / 1000.0F);
+                    GuiHelper.setGlobalAlpha(1.0F - (System.currentTimeMillis() - lastChangeMillis - wait) / 1000.0F);
                     recoverShaderColor = true;
                 }
             }
@@ -359,7 +358,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         layers.forEach((key, layer) -> layer.drawLayer(player, guiGraphics, left, top, right, top + barFullHeight, parameters, flip));
         lastParameters = parameters;
         if (recoverShaderColor) {
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiHelper.setGlobalAlpha(1.0F);
         }
     }
 }

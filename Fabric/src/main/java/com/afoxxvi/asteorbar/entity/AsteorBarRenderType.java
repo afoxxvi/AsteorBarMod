@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.TriState;
 
 public class AsteorBarRenderType extends RenderStateShard {
     //If no texture, the bar is not rendered while using shader packs
@@ -20,7 +19,7 @@ public class AsteorBarRenderType extends RenderStateShard {
             RenderType.CompositeState.builder()
                     //.setShaderState(RenderStateShard.POSITION_COLOR_TEX_LIGHTMAP_SHADER)
                     //.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setTextureState(new TextureStateShard(LIGHTMAP_TEXTURE, TriState.FALSE, false))
+                    .setTextureState(new TextureStateShard(LIGHTMAP_TEXTURE, false))
                     .setLightmapState(LIGHTMAP)
                     .createCompositeState(false)
     );

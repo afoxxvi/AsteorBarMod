@@ -5,10 +5,9 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
-public class NeoForgeRenderGui extends RenderGui implements LayeredDraw.Layer {
+public class NeoForgeRenderGui extends RenderGui implements GuiLayer {
     private Gui gui;
     private final BaseOverlay overlay;
     private final boolean survival;

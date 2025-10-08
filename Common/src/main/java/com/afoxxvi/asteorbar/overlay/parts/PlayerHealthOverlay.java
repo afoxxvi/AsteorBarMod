@@ -1,8 +1,8 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.effect.MobEffects;
@@ -128,7 +128,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 parameters.boundValue = displayAbsorb / fullAbsorb;
                 parameters.boundAlpha = 0.9F;
             }
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiHelper.setGlobalAlpha(1.0F);
             if (absorb > fullAbsorb && (AsteorBar.config.enableStackHealthBar() || AsteorBar.config.displayAbsorptionDivMaxHealth())) {
                 int absorbTimes = (int) (absorb / fullAbsorb);
                 if (absorb % fullAbsorb == 0) absorbTimes--;
@@ -167,22 +167,21 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
                 textureLeft = -regenerationOffset;
             }
             textureRight = textureLeft + right - left - 2;
-            alpha = Math.clamp(alpha, 0.0F, 1.0F);
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+            GuiHelper.setGlobalAlpha(alpha);
             if (textureRight > 0) {
                 drawTextureFill(guiGraphics, left + 1, top, -textureLeft, 5, 10 + 180 + textureLeft, Y_REGENERATION_FILL);
                 drawTextureFill(guiGraphics, left + 1 - textureLeft, top, textureRight, 5, 10, Y_REGENERATION_FILL);
             } else {
                 drawTextureFill(guiGraphics, left + 1, top, right - left - 2, 5, 10 + 180 + textureLeft, Y_REGENERATION_FILL);
             }
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiHelper.setGlobalAlpha(1.0F);
         }
         if (highlight) {
             drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.healthBoundColorBlink());
         } else if (flashAlpha > 0) {
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, flashAlpha);
+            GuiHelper.setGlobalAlpha(flashAlpha);
             drawBound(guiGraphics, left, top, right, bottom, AsteorBar.config.healthBoundColorLow());
-            RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+            GuiHelper.setGlobalAlpha(1.0F);
         }
     }
 

@@ -34,7 +34,7 @@ public class AsteorBar {
 
         @Override
         public RenderType getRenderType() {
-            return RenderType.translucent();
+            return RenderType.solid();
         }
 
         @Override

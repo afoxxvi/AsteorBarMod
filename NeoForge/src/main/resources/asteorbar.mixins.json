@@ -3,7 +3,9 @@
   "package": "com.afoxxvi.asteorbar.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "EntityMixin"
+    "ContextualBarRendererMixin",
+    "EntityMixin",
+    "ExperienceBarRendererMixin"
   ],
   "server": [],
   "injectors": {
@@ -11,7 +13,7 @@
   },
   "refmap": "asteorbar.mixins.refmap.json",
   "mixins": [
-    "third.AppleSkinMixin",
-    "FoodDataMixin"
+    "FoodDataMixin",
+    "third.AppleSkinMixin"
   ]
 }

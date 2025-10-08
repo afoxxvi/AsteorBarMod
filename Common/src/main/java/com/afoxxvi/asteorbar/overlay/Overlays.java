@@ -216,9 +216,9 @@ public class Overlays {
 
     public static void renderString(GuiGraphics guiGraphics) {
         if (stringRenders == null) return;
-        guiGraphics.pose().pushPose();
+        guiGraphics.pose().pushMatrix();
         float scale = (float) AsteorBar.config.overlayTextScale();
-        guiGraphics.pose().scale(scale, scale, 1);
+        guiGraphics.pose().scale(scale);
         var font = Minecraft.getInstance().font;
         for (var render : stringRenders) {
             var width = font.width(render.text);
@@ -232,7 +232,7 @@ public class Overlays {
             }
             GuiHelper.drawString(guiGraphics, render.text, (int) x, (int) y, render.color, render.shadow);
         }
-        guiGraphics.pose().popPose();
+        guiGraphics.pose().popMatrix();
         stringRenders.clear();
     }
 

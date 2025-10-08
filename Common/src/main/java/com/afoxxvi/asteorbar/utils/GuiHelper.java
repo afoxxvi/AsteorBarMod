@@ -1,12 +1,13 @@
 package com.afoxxvi.asteorbar.utils;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.mojang.blaze3d.vertex.*;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
@@ -15,15 +16,17 @@ public class GuiHelper {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/gui/overlay.png");
     public static final ResourceLocation LIGHTMAP_TEXTURE = ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/ui/lightmap.png");
     public static final int LIGHT = 0xFF00FF;
+    private static float globalAlpha = 1.0f;
 
-    public static VertexConsumer getVertexConsumer() {
-        RenderType renderType = RenderType.guiTextured(LIGHTMAP_TEXTURE);
-        return Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
+    public static void setGlobalAlpha(float alpha) {
+        globalAlpha = Math.clamp(alpha, 0, 1);
     }
 
-    public static VertexConsumer getTexturedVertexConsumer() {
-        RenderType renderType = RenderType.guiTextured(TEXTURE);
-        return Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(renderType);
+    private static int applyAlpha(int color) {
+        if (globalAlpha >= 0.999f) return color;
+        int alpha = (color >>> 24) & 0xFF;
+        alpha = (int) (alpha * globalAlpha);
+        return (color & 0x00FFFFFF) | (alpha << 24);
     }
 
     public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int textureX, int textureY, int width, int height) {
@@ -39,41 +42,41 @@ public class GuiHelper {
     }
 
     public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
-        VertexConsumer vertexConsumer = getTexturedVertexConsumer();
-        var matrix = guiGraphics.pose().last().pose();
-        var uv_left = uvLeft / textureWidth;
-        var uv_top = uvTop / textureHeight;
-        var uv_right = uvRight / textureWidth;
-        var uv_bottom = uvBottom / textureHeight;
-        vertexConsumer.addVertex(matrix, left, top, 0).setColor(color).setUv(uv_left, uv_top);
-        vertexConsumer.addVertex(matrix, left, bottom, 0).setColor(color).setUv(uv_left, uv_bottom);
-        vertexConsumer.addVertex(matrix, right, bottom, 0).setColor(color).setUv(uv_right, uv_bottom);
-        vertexConsumer.addVertex(matrix, right, top, 0).setColor(color).setUv(uv_right, uv_top);
+        color = applyAlpha(color);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, left, top, uvLeft, uvTop, right - left, bottom - top, (int) (uvRight - uvLeft), (int) (uvBottom - uvTop), textureWidth, textureHeight, color);
+    }
+
+    public static void drawLightmapRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int color) {
+        color = applyAlpha(color);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, LIGHTMAP_TEXTURE, left, top, uvLeft, uvTop, right - left, bottom - top, (int) (uvRight - uvLeft), (int) (uvBottom - uvTop), 32, 32, color);
     }
 
     public static void drawSolidColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+        color = applyAlpha(color);
         guiGraphics.fill(left, top, right, bottom, color);
     }
 
     public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color) {
+        color = applyAlpha(color);
         drawString(guiGraphics, string, left, top, color, true);
     }
 
     public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color, boolean shadow) {
+        color = applyAlpha(color);
         guiGraphics.drawString(Minecraft.getInstance().font, string, left, top, color, shadow);
     }
 
-    public static void drawSolidGradient(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
-        VertexConsumer vertexConsumer = getVertexConsumer();
-        renderSolidGradient(vertexConsumer, poseStack, left, top, right, bottom, color, 0);
+    public static void drawSolidGradient(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+        drawLightmapRectColor(guiGraphics, left, top, right, bottom, 0, 20, 32, 32, color);
     }
 
-    public static void drawSolidGradientUpDown(PoseStack poseStack, int left, int top, int right, int bottom, int color) {
-        VertexConsumer vertexConsumer = getVertexConsumer();
-        renderSolidGradientUpDown(vertexConsumer, poseStack, left, top, right, bottom, color, 0);
+    public static void drawSolidGradientUpDown(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+        drawLightmapRectColor(guiGraphics, left, top, right, bottom, 0, 0, 32, 12, color);
     }
 
     public static void renderBound(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int width, int boundWidth, int colorFill, int colorEmpty, boolean vertex, float z) {
+        colorFill = applyAlpha(colorFill);
+        colorEmpty = applyAlpha(colorEmpty);
         int cut = 0;
         int expand = vertex ? boundWidth : 0;
         if (width > 0) {//left bound, vertex included
@@ -110,6 +113,7 @@ public class GuiHelper {
 
     //left < right, top < bottom
     public static void renderSolid(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
         vertexConsumer.addVertex(poseStack.last().pose(), left, top, z).setColor(color).setUv(0, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), left, bottom, z).setColor(color).setUv(0, 0.125f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), right, bottom, z).setColor(color).setUv(1, 0.125f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
@@ -117,6 +121,7 @@ public class GuiHelper {
     }
 
     public static void renderSolidGradient(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
         vertexConsumer.addVertex(poseStack.last().pose(), left, top, z).setColor(color).setUv(0, 0.625f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), left, bottom, z).setColor(color).setUv(0, 1).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), right, bottom, z).setColor(color).setUv(1, 1).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
@@ -124,6 +129,7 @@ public class GuiHelper {
     }
 
     public static void renderSolidGradientUpDown(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
         vertexConsumer.addVertex(poseStack.last().pose(), left, top, z).setColor(color).setUv(0, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), left, bottom, z).setColor(color).setUv(0, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), right, bottom, z).setColor(color).setUv(1, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
@@ -131,6 +137,7 @@ public class GuiHelper {
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, float left, float top, int color, boolean shadow) {
+        color = applyAlpha(color);
         Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, 0xF000F0);
     }
 

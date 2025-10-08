@@ -4,8 +4,6 @@ import com.afoxxvi.asteorbar.config.ForgeConfigAdapter;
 import com.afoxxvi.asteorbar.network.NetworkHandler;
 import com.afoxxvi.asteorbar.utils.ForgePlatformAdapter;
 import com.mojang.logging.LogUtils;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -17,10 +15,8 @@ public class AsteorBarForge {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public AsteorBarForge(FMLJavaModLoadingContext context) {
-        IEventBus modEventBus = context.getModEventBus();
-        modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(NetworkHandler.class);
+        var modBusGroup = context.getModBusGroup();
+        FMLCommonSetupEvent.getBus(modBusGroup).addListener(this::commonSetup);
         NetworkHandler.init();
         context.registerConfig(ModConfig.Type.CLIENT, ForgeConfigAdapter.Config.CONFIG);
         AsteorBar.platformAdapter = new ForgePlatformAdapter();

@@ -1,8 +1,7 @@
 package com.afoxxvi.asteorbar.mixin;
 
-import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.overlay.ForgeGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,7 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import com.afoxxvi.asteorbar.overlay.ForgeGuiRegistry;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Gui.class, remap = false)
@@ -31,20 +29,6 @@ public abstract class GuiMixin {
     @Inject(method = "renderVehicleHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At("HEAD"), cancellable = true)
     public void injectVehicle(GuiGraphics p_283368_, CallbackInfo ci) {
         if (Overlays.style != Overlays.STYLE_NONE) {
-            ci.cancel();
-        }
-    }
-
-    @Inject(method = "renderExperienceBar(Lnet/minecraft/client/gui/GuiGraphics;I)V", at = @At("HEAD"), cancellable = true)
-    public void injectExp(GuiGraphics p_281906_, int p_282731_, CallbackInfo ci) {
-        if (Overlays.style != Overlays.STYLE_NONE && AsteorBar.config.overwriteVanillaExperienceBar()) {
-            ci.cancel();
-        }
-    }
-
-    @Inject(method = "renderExperienceLevel(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V", at = @At("HEAD"), cancellable = true)
-    public void injectExpLevel(GuiGraphics p_335340_, DeltaTracker p_344840_, CallbackInfo ci) {
-        if (Overlays.style != Overlays.STYLE_NONE && AsteorBar.config.overwriteVanillaExperienceBar()) {
             ci.cancel();
         }
     }

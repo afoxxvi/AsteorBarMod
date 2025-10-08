@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-@EventBusSubscriber(modid = AsteorBar.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = AsteorBar.MOD_ID, value = Dist.CLIENT)
 public class ModEventListener {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiLayersEvent event) {

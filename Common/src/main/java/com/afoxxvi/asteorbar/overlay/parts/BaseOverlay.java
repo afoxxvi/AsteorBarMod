@@ -46,7 +46,7 @@ public abstract class BaseOverlay {
     }
 
     protected void drawEmptyFill(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
-        GuiHelper.drawSolidGradient(guiGraphics.pose(), left, top, right, bottom, color);
+        GuiHelper.drawSolidGradient(guiGraphics, left, top, right, bottom, color);
     }
 
     protected void drawFillFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
@@ -56,18 +56,18 @@ public abstract class BaseOverlay {
         }
         width = Math.max(0, Math.min(right - left - has, width));
         if (flip) {
-            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), right - has - width, top, right - has, bottom, color);
+            GuiHelper.drawSolidGradientUpDown(guiGraphics, right - has - width, top, right - has, bottom, color);
         } else {
-            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), left + has, top, left + has + width, bottom, color);
+            GuiHelper.drawSolidGradientUpDown(guiGraphics, left + has, top, left + has + width, bottom, color);
         }
     }
 
     protected void drawFillFlip(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         if (flip) {
-            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), right - width, top, right, bottom, color);
+            GuiHelper.drawSolidGradientUpDown(guiGraphics, right - width, top, right, bottom, color);
         } else {
-            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), left, top, left + width, bottom, color);
+            GuiHelper.drawSolidGradientUpDown(guiGraphics, left, top, left + width, bottom, color);
         }
     }
 

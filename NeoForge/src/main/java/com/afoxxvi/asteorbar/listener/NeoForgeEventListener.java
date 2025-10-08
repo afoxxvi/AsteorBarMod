@@ -16,6 +16,7 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 public class NeoForgeEventListener {
     private static final ResourceLocation THIRST_SATURATION = ResourceLocation.fromNamespaceAndPath("thirst", "saturation_overlay");
     private static final ResourceLocation THIRST_EXHAUSTION = ResourceLocation.fromNamespaceAndPath("thirst", "exhaustion_overlay");
+    private static final ResourceLocation VAMPIRISM_BLOOD = ResourceLocation.fromNamespaceAndPath("vampirism", "blood_bar");
 
     @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiLayerEvent.Pre event) {
@@ -50,6 +51,10 @@ public class NeoForgeEventListener {
             return;
         }
         if (AsteorBar.compatibility.thirst && AsteorBar.config.hookThirstWasTaken() && (overlay.equals(THIRST_SATURATION) || overlay.equals(THIRST_EXHAUSTION))) {
+            event.setCanceled(true);
+            return;
+        }
+        if (AsteorBar.compatibility.vampirism && AsteorBar.config.hookVampirism() && overlay.equals(VAMPIRISM_BLOOD)) {
             event.setCanceled(true);
             return;
         }

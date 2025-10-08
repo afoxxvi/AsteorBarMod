@@ -17,6 +17,7 @@ public class NeoForgeEventListener {
     private static final ResourceLocation THIRST_SATURATION = ResourceLocation.fromNamespaceAndPath("thirst", "saturation_overlay");
     private static final ResourceLocation THIRST_EXHAUSTION = ResourceLocation.fromNamespaceAndPath("thirst", "exhaustion_overlay");
     private static final ResourceLocation VAMPIRISM_BLOOD = ResourceLocation.fromNamespaceAndPath("vampirism", "blood_bar");
+    private static final ResourceLocation IRONS_SPELLBOOKS_MANA = ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "mana_overlay");
 
     @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiLayerEvent.Pre event) {
@@ -57,6 +58,9 @@ public class NeoForgeEventListener {
         if (AsteorBar.compatibility.vampirism && AsteorBar.config.hookVampirism() && overlay.equals(VAMPIRISM_BLOOD)) {
             event.setCanceled(true);
             return;
+        }
+        if (AsteorBar.compatibility.ironsSpellbooks && AsteorBar.config.hookIronsSpellbooks() && overlay.equals(IRONS_SPELLBOOKS_MANA)) {
+            event.setCanceled(true);
         }
     }
 

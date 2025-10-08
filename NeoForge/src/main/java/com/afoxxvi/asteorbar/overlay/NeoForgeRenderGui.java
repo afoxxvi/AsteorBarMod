@@ -6,7 +6,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
-import org.jetbrains.annotations.NotNull;
 
 public class NeoForgeRenderGui extends RenderGui implements LayeredDraw.Layer {
     private Gui gui;

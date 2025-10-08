@@ -112,6 +112,9 @@ dependencies {
     if (vampirism_version_neoforge != "0") {
         compileOnly "curse.maven:vampirism-become-a-vampire-233029:${vampirism_version_neoforge}"
     }
+    if (irons_spellbooks_version_neoforge != "0") {
+        compileOnly "curse.maven:irons-spells-n-spellbooks-855414:${irons_spellbooks_version_neoforge}"
+    }
     if (thirst_was_taken_version_neoforge != "0") {
         compileOnly "curse.maven:thirst-was-taken-679270:${thirst_was_taken_version_neoforge}"
     }

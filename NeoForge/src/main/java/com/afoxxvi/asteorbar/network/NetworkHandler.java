@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
@@ -78,7 +79,7 @@ public class NetworkHandler {
             break;
             case INDEX_ACTIVATE: {
                 boolean activate = payload.i1 != 0;
-                context.enqueueWork(() -> PacketDistributor.sendToServer(new NetworkPayload(INDEX_ACTIVATE, 0F, 0F, activate ? 1 : 0)));
+                context.enqueueWork(() -> ClientPacketDistributor.sendToServer(new NetworkPayload(INDEX_ACTIVATE, 0F, 0F, activate ? 1 : 0)));
             }
             break;
             case INDEX_TOUGH_AS_NAILS: {

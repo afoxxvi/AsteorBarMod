@@ -6,7 +6,9 @@
     "ContextualBarRendererMixin",
     "EntityMixin",
     "ExperienceBarRendererMixin",
-    "GuiMixin"
+    "GuiMixin",
+    "LivingEntityRendererMixin",
+    "LivingEntityRenderStateMixin"
   ],
   "server": [],
   "injectors": {

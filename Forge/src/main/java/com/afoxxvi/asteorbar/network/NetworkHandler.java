@@ -61,8 +61,8 @@ public class NetworkHandler {
     }
 
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.player instanceof ServerPlayer player) {
+    public static void onPlayerTick(TickEvent.PlayerTickEvent.Post event) {
+        if (event.player() instanceof ServerPlayer player) {
             var foodStats = player.getFoodData();
             float exhaustionLevel = AsteorBar.platformAdapter.getExhaustion(player);
             Float oldExhaustion = EXHAUSTION.get(player.getUUID());

@@ -2,6 +2,7 @@
   "asteorbar.key.toggle_overlay": "Toggle HUD Overlays",
   "asteorbar.key.toggle_mob_bar": "Toggle Mob Bar",
   "asteorbar.key.category": "AsteorBar Settings",
+  "key.category.asteorbar.key_bindings": "AsteorBar Settings",
   "text.autoconfig.asteorbar.title": "AsteorBar Settings",
   "text.autoconfig.asteorbar.option.overlay": "HUD/Overlay Settings",
   "text.autoconfig.asteorbar.option.entity": "Entity/Mob Bar Settings",

@@ -11,6 +11,8 @@
     "EntityMixin",
     "ExperienceBarRendererMixin",
     "GuiMixin",
+    "LivingEntityRendererMixin",
+    "LivingEntityRenderStateMixin",
     "RenderTypeMixin"
   ],
   "server": [],

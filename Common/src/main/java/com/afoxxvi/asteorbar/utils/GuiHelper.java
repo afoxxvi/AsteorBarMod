@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import org.joml.Matrix4f;
 
 @SuppressWarnings("unused")
 public class GuiHelper {
@@ -120,6 +121,14 @@ public class GuiHelper {
         vertexConsumer.addVertex(poseStack.last().pose(), right, top, z).setColor(color).setUv(1, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
     }
 
+    public static void renderSolid(VertexConsumer vertexConsumer, Matrix4f matrix4f, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
+        vertexConsumer.addVertex(matrix4f, left, top, z).setColor(color).setUv(0, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, left, bottom, z).setColor(color).setUv(0, 0.125f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, bottom, z).setColor(color).setUv(1, 0.125f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, top, z).setColor(color).setUv(1, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+    }
+
     public static void renderSolidGradient(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
         color = applyAlpha(color);
         vertexConsumer.addVertex(poseStack.last().pose(), left, top, z).setColor(color).setUv(0, 0.625f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
@@ -128,12 +137,28 @@ public class GuiHelper {
         vertexConsumer.addVertex(poseStack.last().pose(), right, top, z).setColor(color).setUv(1, 0.625f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
     }
 
+    public static void renderSolidGradient(VertexConsumer vertexConsumer, Matrix4f matrix4f, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
+        vertexConsumer.addVertex(matrix4f, left, top, z).setColor(color).setUv(0, 0.625f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, left, bottom, z).setColor(color).setUv(0, 1).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, bottom, z).setColor(color).setUv(1, 1).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, top, z).setColor(color).setUv(1, 0.625f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+    }
+
     public static void renderSolidGradientUpDown(VertexConsumer vertexConsumer, PoseStack poseStack, int left, int top, int right, int bottom, int color, float z) {
         color = applyAlpha(color);
         vertexConsumer.addVertex(poseStack.last().pose(), left, top, z).setColor(color).setUv(0, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), left, bottom, z).setColor(color).setUv(0, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), right, bottom, z).setColor(color).setUv(1, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
         vertexConsumer.addVertex(poseStack.last().pose(), right, top, z).setColor(color).setUv(1, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(poseStack.last(), 0, 0, 0);
+    }
+
+    public static void renderSolidGradientUpDown(VertexConsumer vertexConsumer, Matrix4f matrix4f, int left, int top, int right, int bottom, int color, float z) {
+        color = applyAlpha(color);
+        vertexConsumer.addVertex(matrix4f, left, top, z).setColor(color).setUv(0, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, left, bottom, z).setColor(color).setUv(0, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, bottom, z).setColor(color).setUv(1, 0.375f).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
+        vertexConsumer.addVertex(matrix4f, right, top, z).setColor(color).setUv(1, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 0);
     }
 
     public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, float left, float top, int color, boolean shadow) {

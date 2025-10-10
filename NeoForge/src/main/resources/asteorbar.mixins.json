@@ -5,7 +5,9 @@
   "client": [
     "ContextualBarRendererMixin",
     "EntityMixin",
-    "ExperienceBarRendererMixin"
+    "ExperienceBarRendererMixin",
+    "LivingEntityRendererMixin",
+    "LivingEntityRenderStateMixin"
   ],
   "server": [],
   "injectors": {

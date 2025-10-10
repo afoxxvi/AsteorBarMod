@@ -1,11 +1,13 @@
 package com.afoxxvi.asteorbar.entity;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.utils.GuiHelper;
+import com.afoxxvi.asteorbar.render.IHealthBarFeature;
+import com.afoxxvi.asteorbar.utils.RenderHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
@@ -20,12 +22,17 @@ public class EntityRenderer {
     public static final List<ExtraRenderer> EXTRA_RENDERERS = new ArrayList<>();
     public static final List<ExtraTextRenderer> EXTRA_TEXT_RENDERERS = new ArrayList<>();
 
-    public static void extraRender(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource, float halfWidth, float halfHeight, float boundWidth) {
-        EXTRA_RENDERERS.forEach(extraRenderer -> extraRenderer.render(entity, poseStack, multiBufferSource, halfWidth, halfHeight, boundWidth));
+    public static void extraSubmit(LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, float halfWidth, float halfHeight, float boundWidth) {
+        EXTRA_RENDERERS.forEach(extraRenderer -> extraRenderer.render(renderState, poseStack, nodeCollector, halfWidth, halfHeight, boundWidth));
     }
 
-    public static void extraTextRender(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource, float halfWidth, float halfHeight, float boundWidth, float textScale) {
-        EXTRA_TEXT_RENDERERS.forEach(extraTextRenderer -> extraTextRenderer.render(entity, poseStack, multiBufferSource, halfWidth, halfHeight, boundWidth, textScale));
+    public static void extraTextSubmit(LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, float halfWidth, float halfHeight, float boundWidth, float textScale) {
+        EXTRA_TEXT_RENDERERS.forEach(extraTextRenderer -> extraTextRenderer.render(renderState, poseStack, nodeCollector, halfWidth, halfHeight, boundWidth, textScale));
+    }
+
+    public static boolean shouldRender(LivingEntity entity, Player player) {
+        if (entity == null || player == null) return false;
+        return check(entity, player) == 0;
     }
 
     private static int check(LivingEntity entity, Player player) {
@@ -50,27 +57,20 @@ public class EntityRenderer {
         return (color & 0x00ffffff) | (alpha << 24);
     }
 
-    public static void render(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource) {
-        var player = Minecraft.getInstance().player;
-        if (player == null) return;
-        var check = check(entity, player);
-        if (check > 0) {
-            //AsteorBar.LOGGER.info("check failed" + check);
-            return;
-        }
-        var dist = entity.distanceTo(player);
+    public static void submit(IHealthBarFeature feature, LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector) {
+        var dist = Math.sqrt(renderState.distanceToCameraSq);
         //The layers will start to flash if too close
-        var layerDist = Math.max(0.002F, dist * 0.002F);
+        var layerDist = Math.max(0.002F, (float) dist * 0.002F);
         final var alpha = AsteorBar.config.healthBarAlpha();
         poseStack.pushPose();
-        poseStack.translate(0, entity.getBbHeight() + AsteorBar.config.healthBarOffsetY(), 0);
+        poseStack.translate(0, renderState.boundingBoxHeight + AsteorBar.config.healthBarOffsetY(), 0);
         /*
          * What's wrong with rotation?
          * Old code:
          * poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
          */
         // Start Of Rotation
-        final var cameraEuler = Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation().getEulerAnglesXYZ(new Vector3f());
+        final var cameraEuler = Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation().getEulerAnglesXYZ(new Vector3f());
         poseStack.mulPose(new Quaternionf().rotationXYZ(0, (float) Math.PI, 0));
         poseStack.mulPose(new Quaternionf().rotationXYZ(-cameraEuler.x, cameraEuler.y, -cameraEuler.z));
         // End Of Rotation
@@ -81,9 +81,8 @@ public class EntityRenderer {
             var halfWidth = AsteorBar.config.healthBarHalfWidth();
             var halfHeight = AsteorBar.config.healthBarHalfHeight();
             poseStack.scale(-scale, -scale, scale);
-            var bufferBuilder = multiBufferSource.getBuffer(AsteorBar.platformAdapter.getRenderType());
             {//render health bar
-                var healthRate = Math.min(entity.getHealth() / entity.getMaxHealth(), 1.0);
+                var healthRate = Math.min(feature.asteorBar$getHealth() / feature.asteorBar$getMaxHealth(), 1.0);
                 var healthWidth = (int) (halfWidth * 2 * healthRate);
                 int colorHealth;
                 if (AsteorBar.config.healthBarHealthColorDynamic()) {
@@ -94,10 +93,10 @@ public class EntityRenderer {
                 colorHealth = modifyAlpha(colorHealth, alpha);
                 final var colorEmpty = modifyAlpha(AsteorBar.config.healthBarEmptyColor(), alpha);
                 if (healthWidth > 0) {
-                    GuiHelper.renderSolidGradient(bufferBuilder, poseStack, -halfWidth, -halfHeight, -halfWidth + healthWidth, halfHeight, colorHealth, layerDist);
+                    RenderHelper.submitSolidGradient(nodeCollector, poseStack, -halfWidth, -halfHeight, -halfWidth + healthWidth, halfHeight, colorHealth, layerDist);
                 }
                 if (healthWidth < 2 * halfWidth) {
-                    GuiHelper.renderSolidGradientUpDown(bufferBuilder, poseStack, -halfWidth + healthWidth, -halfHeight, halfWidth, halfHeight, colorEmpty, layerDist);
+                    RenderHelper.submitSolidGradientUpDown(nodeCollector, poseStack, -halfWidth + healthWidth, -halfHeight, halfWidth, halfHeight, colorEmpty, layerDist);
                 }
             }
             int renderAbsorptionMultiplier = -1;
@@ -106,26 +105,25 @@ public class EntityRenderer {
                 final var colorAbsorption = modifyAlpha(AsteorBar.config.healthBarAbsorptionColor(), alpha);
                 final var colorBound = modifyAlpha(AsteorBar.config.healthBarBoundColor(), alpha);
                 final var includeVertex = AsteorBar.config.healthBarBoundVertex();
-                var absorptionRate = entity.getAbsorptionAmount() / entity.getMaxHealth();
+                var absorptionRate = feature.asteorBar$getAbsorptionAmount() / feature.asteorBar$getMaxHealth();
                 var absorptionNum = Math.floor(absorptionRate);
                 absorptionRate -= (float) absorptionNum;
-                var absorptionWidth = Math.round((halfWidth * 2 + boundWidth * 2) * absorptionRate);
+                var absorptionWidth = (int) Math.round((halfWidth * 2 + boundWidth * 2) * absorptionRate);
                 if (absorptionWidth == 0 && absorptionNum > 0) {//special situation: absorption is equal to max health
                     absorptionWidth = 2 * halfWidth + boundWidth * 2;
                     absorptionNum--;
                 }
-                GuiHelper.renderBound(bufferBuilder, poseStack, -halfWidth, -halfHeight, halfWidth, halfHeight, absorptionWidth, boundWidth, colorAbsorption, colorBound, includeVertex, layerDist);
+                RenderHelper.submitBound(nodeCollector, poseStack, -halfWidth, -halfHeight, halfWidth, halfHeight, absorptionWidth, boundWidth, colorAbsorption, colorBound, includeVertex, layerDist);
                 if (absorptionNum * 2 * boundWidth > halfWidth) {//too long while using dot, use multiplier number
                     renderAbsorptionMultiplier = (int) absorptionNum;
-                    //GuiHelper.renderSolid(bufferBuilder, poseStack, -halfWidth - expand, halfHeight + boundWidth * 2, -halfWidth - expand + boundWidth, halfHeight + boundWidth * 3, colorAbsorption, layerDist);
                 } else {
                     final var expand = includeVertex ? boundWidth : 0;
                     for (int i = 0; i < absorptionNum; i++) {//render absorption / max health
-                        GuiHelper.renderSolid(bufferBuilder, poseStack, -halfWidth - expand + i * boundWidth * 2, halfHeight + boundWidth * 2, -halfWidth - expand + i * boundWidth * 2 + boundWidth, halfHeight + boundWidth * 3, colorAbsorption, layerDist);
+                        RenderHelper.submitSolid(nodeCollector, poseStack, -halfWidth - expand + i * boundWidth * 2, halfHeight + boundWidth * 2, -halfWidth - expand + i * boundWidth * 2 + boundWidth, halfHeight + boundWidth * 3, colorAbsorption, layerDist);
                     }
                 }
             }
-            extraRender(entity, poseStack, multiBufferSource, halfWidth, halfHeight, boundWidth);
+            extraSubmit(renderState, poseStack, nodeCollector, halfWidth, halfHeight, boundWidth);
             {//render text
                 float textScale = (float) AsteorBar.config.healthBarTextScale();
                 var textOffset = AsteorBar.config.healthBarTextOffsetY();
@@ -134,18 +132,18 @@ public class EntityRenderer {
                 poseStack.scale(textScale, textScale, textScale);
                 var font = Minecraft.getInstance().font;
                 //health
-                var healthStr = Utils.formatNumber(entity.getHealth()) + "/" + Utils.formatNumber(entity.getMaxHealth());
-                GuiHelper.renderCenteredString(poseStack, multiBufferSource, healthStr, 0, 0, 0xffffffff);
+                var healthStr = Utils.formatNumber(feature.asteorBar$getHealth()) + "/" + Utils.formatNumber(feature.asteorBar$getMaxHealth());
+                RenderHelper.submitCenteredString(nodeCollector, poseStack, healthStr, 0, 0, 0xffffffff);
                 //absorption
-                if (entity.getAbsorptionAmount() > 0) {
-                    var absStr = Utils.formatNumber(entity.getAbsorptionAmount());
-                    GuiHelper.renderString(poseStack, multiBufferSource, absStr, (int) ((-halfWidth + 1) / textScale), 0, 0xffffff00);
+                if (feature.asteorBar$getAbsorptionAmount() > 0) {
+                    var absStr = Utils.formatNumber(feature.asteorBar$getAbsorptionAmount());
+                    RenderHelper.submitString(nodeCollector, poseStack, absStr, (int) ((-halfWidth + 1) / textScale), 0, 0xffffff00);
                 }
                 if (renderAbsorptionMultiplier > 0) {
                     var absStr = renderAbsorptionMultiplier + "×";
-                    GuiHelper.renderString(poseStack, multiBufferSource, absStr, (int) ((-halfWidth - 1 - font.width(absStr)) / textScale), 0, 0xffffff00);
+                    RenderHelper.submitString(nodeCollector, poseStack, absStr, (int) ((-halfWidth - 1 - font.width(absStr)) / textScale), 0, 0xffffff00);
                 }
-                extraTextRender(entity, poseStack, multiBufferSource, halfWidth, halfHeight, boundWidth, textScale);
+                extraTextSubmit(renderState, poseStack, nodeCollector, halfWidth, halfHeight, boundWidth, textScale);
                 poseStack.popPose();
             }
             poseStack.popPose();
@@ -154,11 +152,11 @@ public class EntityRenderer {
     }
 
     public interface ExtraRenderer {
-        void render(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource, float halfWidth, float halfHeight, float boundWidth);
+        void render(LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, float halfWidth, float halfHeight, float boundWidth);
     }
 
     public interface ExtraTextRenderer {
-        void render(LivingEntity entity, PoseStack poseStack, MultiBufferSource multiBufferSource, float halfWidth, float halfHeight, float boundWidth, float textScale);
+        void render(LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, float halfWidth, float halfHeight, float boundWidth, float textScale);
     }
 
 }

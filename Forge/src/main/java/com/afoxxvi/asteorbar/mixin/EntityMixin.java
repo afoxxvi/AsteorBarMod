@@ -1,44 +1,35 @@
 package com.afoxxvi.asteorbar.mixin;
 
-import com.afoxxvi.asteorbar.AsteorBar;
+import com.afoxxvi.asteorbar.render.IHealthBarFeature;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(value = EntityRenderDispatcher.class, remap = false)
+@Mixin(EntityRenderDispatcher.class)
 public abstract class EntityMixin {
     @Shadow
-    public abstract <T extends Entity> EntityRenderer<? super T, ?> getRenderer(T entity);
+    public abstract <S extends EntityRenderState> EntityRenderer<?, ? super S> getRenderer(S entityRenderState);
 
-    @Inject(method = "render(Lnet/minecraft/world/entity/Entity;DDDFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+    @Inject(method = "submit(Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lnet/minecraft/client/renderer/state/CameraRenderState;DDDLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;)V",
             at = @At("TAIL"))
-    private <E extends Entity> void render(E entity, double x, double y, double z, float p, PoseStack poseStack, MultiBufferSource multiBufferSource, int i, CallbackInfo ci) {
-        if (entity instanceof LivingEntity && AsteorBar.config.enableHealthBar()) {
-            EntityRenderer<? super E, ?> renderer = getRenderer(entity);
-            second(entity, x, y, z, p, poseStack, multiBufferSource, renderer);
+    private <S extends EntityRenderState> void submit(S entityRenderState, CameraRenderState cameraRenderState, double x, double y, double z, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CallbackInfo ci) {
+        if (!(entityRenderState instanceof IHealthBarFeature feat) || feat.asteorBar$getMaxHealth() <= 0 || !(entityRenderState instanceof LivingEntityRenderState)) {
+            return;
         }
-    }
-
-    @Unique
-    private <E extends Entity, S extends EntityRenderState> void second(E entity, double x, double y, double z, float p, PoseStack poseStack, MultiBufferSource multiBufferSource, EntityRenderer<? super E, S> renderer) {
-        var state = renderer.createRenderState(entity, p);
-        var vec3 = renderer.getRenderOffset(state);
+        var entityRenderer = getRenderer(entityRenderState);
+        var vec3 = entityRenderer.getRenderOffset(entityRenderState);
         poseStack.pushPose();
         poseStack.translate(x + vec3.x(), y + vec3.y(), z + vec3.z());
-        if (entity instanceof LivingEntity livingEntity) {
-            com.afoxxvi.asteorbar.entity.EntityRenderer.render(livingEntity, poseStack, multiBufferSource);
-        }
+        com.afoxxvi.asteorbar.entity.EntityRenderer.submit(feat, (LivingEntityRenderState) entityRenderState, poseStack, submitNodeCollector);
         poseStack.popPose();
     }
 }

@@ -10,7 +10,7 @@
   },
   "license": "All-Rights-Reserved",
   "icon": "assets/asteorbar/icon.png",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
     "client": [
       "com.afoxxvi.asteorbar.AsteorBarFabricClient"

@@ -11,6 +11,8 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -120,5 +122,10 @@ public class NetworkHandler {
                 }
             }
         }
+    }
+
+    public static Packet<ClientGamePacketListener> createAbsorptionPacket(int entityId, float absorption) {
+        ByteBuf buf = PacketByteBufs.create().writeByte(INDEX_ABSORPTION).writeInt(entityId).writeFloat(absorption);
+        return ServerPlayNetworking.createS2CPacket(CHANNEL, PacketByteBufs.duplicate(buf));
     }
 }

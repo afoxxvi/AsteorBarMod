@@ -16,7 +16,7 @@ public class AsteorBarRenderType extends RenderStateShard {
             1536,
             true,
             false,
-            RenderPipelines.TRANSLUCENT,
+            RenderPipelines.ENTITY_TRANSLUCENT,
             RenderType.CompositeState.builder()
                     //.setShaderState(RenderStateShard.POSITION_COLOR_TEX_LIGHTMAP_SHADER)
                     //.setTransparencyState(TRANSLUCENT_TRANSPARENCY)

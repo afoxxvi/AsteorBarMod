@@ -26,37 +26,37 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.DoubleValue HEALTH_REGENERATION_OPACITY;
         public static final ForgeConfigSpec.DoubleValue HEALTH_REGENERATION_OPACITY_ON_FULL;
         public static final ForgeConfigSpec.IntValue HIDE_UNCHANGING_BAR_AFTER_SECONDS;
-        public static final ForgeConfigSpec.IntValue HEALTH_COLOR_NORMAL;
-        public static final ForgeConfigSpec.IntValue HEALTH_COLOR_POISON;
-        public static final ForgeConfigSpec.IntValue HEALTH_COLOR_WITHER;
-        public static final ForgeConfigSpec.IntValue HEALTH_COLOR_FROZEN;
-        public static final ForgeConfigSpec.IntValue HEALTH_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue HEALTH_BOUND_COLOR_BLINK;
-        public static final ForgeConfigSpec.IntValue HEALTH_BOUND_COLOR_LOW;
-        public static final ForgeConfigSpec.IntValue HEALTH_EMPTY_COLOR;
-        public static final ForgeConfigSpec.IntValue ABSORPTION_COLOR;
-        public static final ForgeConfigSpec.IntValue ABSORPTION_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue FOOD_COLOR_NORMAL;
-        public static final ForgeConfigSpec.IntValue FOOD_COLOR_HUNGER;
-        public static final ForgeConfigSpec.IntValue FOOD_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue FOOD_BOUND_COLOR_BLINK;
-        public static final ForgeConfigSpec.IntValue FOOD_EMPTY_COLOR;
-        public static final ForgeConfigSpec.IntValue SATURATION_COLOR;
-        public static final ForgeConfigSpec.IntValue EXPERIENCE_COLOR;
-        public static final ForgeConfigSpec.IntValue EXPERIENCE_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue EXPERIENCE_EMPTY_COLOR;
-        public static final ForgeConfigSpec.IntValue AIR_COLOR;
-        public static final ForgeConfigSpec.IntValue AIR_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue MOUNT_HEALTH_COLOR;
-        public static final ForgeConfigSpec.IntValue MOUNT_HEALTH_COLOR_2;
-        public static final ForgeConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue MOUNT_HEALTH_BOUND_COLOR_2;
-        public static final ForgeConfigSpec.IntValue MOUNT_HEALTH_EMPTY_COLOR;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_COLOR_NORMAL_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_COLOR_POISON_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_COLOR_WITHER_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_COLOR_FROZEN_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BOUND_COLOR_BLINK_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BOUND_COLOR_LOW_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_EMPTY_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> ABSORPTION_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> ABSORPTION_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> FOOD_COLOR_NORMAL_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> FOOD_COLOR_HUNGER_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> FOOD_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> FOOD_BOUND_COLOR_BLINK_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> FOOD_EMPTY_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> SATURATION_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> EXPERIENCE_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> EXPERIENCE_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> EXPERIENCE_EMPTY_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> AIR_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> AIR_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> MOUNT_HEALTH_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> MOUNT_HEALTH_COLOR_2_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> MOUNT_HEALTH_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> MOUNT_HEALTH_BOUND_COLOR_2_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> MOUNT_HEALTH_EMPTY_COLOR_ARGB;
         public static final ForgeConfigSpec.BooleanValue MOUNT_HEALTH_ON_LEFT_SIDE;
-        public static final ForgeConfigSpec.IntValue ARMOR_COLOR;
-        public static final ForgeConfigSpec.IntValue ARMOR_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue ARMOR_EMPTY_COLOR;
-        public static final ForgeConfigSpec.IntValue ARMOR_TOUGHNESS_COLOR;
+        public static final ForgeConfigSpec.ConfigValue<String> ARMOR_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> ARMOR_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> ARMOR_EMPTY_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> ARMOR_TOUGHNESS_COLOR_ARGB;
         public static final ForgeConfigSpec.BooleanValue ENABLE_HEALTH_BLINK;
         public static final ForgeConfigSpec.DoubleValue LOW_HEALTH_RATE;
         public static final ForgeConfigSpec.BooleanValue SHAKE_HEALTH_AND_FOOD_WHILE_LOW;
@@ -95,13 +95,13 @@ public class ForgeConfigAdapter implements ConfigAdapter {
         public static final ForgeConfigSpec.DoubleValue HEALTH_BAR_TEXT_OFFSET_Y;
         public static final ForgeConfigSpec.IntValue HEALTH_BAR_BOUND_WIDTH;
         public static final ForgeConfigSpec.BooleanValue HEALTH_BAR_BOUND_VERTEX;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_HEALTH_COLOR;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_ABSORPTION_COLOR;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_BOUND_COLOR;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_EMPTY_COLOR;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_HEALTH_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_ABSORPTION_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_BOUND_COLOR_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_EMPTY_COLOR_ARGB;
         public static final ForgeConfigSpec.BooleanValue HEALTH_BAR_HEALTH_COLOR_DYNAMIC;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_HEALTH_COLOR_FULL;
-        public static final ForgeConfigSpec.IntValue HEALTH_BAR_HEALTH_COLOR_EMPTY;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_HEALTH_COLOR_FULL_ARGB;
+        public static final ForgeConfigSpec.ConfigValue<String> HEALTH_BAR_HEALTH_COLOR_EMPTY_ARGB;
         public static final ForgeConfigSpec.BooleanValue HOOK_TOUGH_AS_NAILS;
         public static final ForgeConfigSpec.BooleanValue HOOK_THIRST_WAS_TAKEN;
         public static final ForgeConfigSpec.BooleanValue HOOK_MEKANISM;
@@ -195,130 +195,130 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hideUnchangingBarAfterSeconds)
                     .translation("text.autoconfig.asteorbar.option.overlay.hideUnchangingBarAfterSeconds")
                     .defineInRange("hideUnchangingBarAfterSeconds", DefaultConfigAdapter.I.hideUnchangingBarAfterSeconds(), 0, Integer.MAX_VALUE);
-            HEALTH_COLOR_NORMAL = BUILDER
+            HEALTH_COLOR_NORMAL_ARGB = BUILDER
                     .comment(ConfigComment.healthColorNormal)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorNormal")
-                    .defineInRange("healthColorNormal", DefaultConfigAdapter.I.healthColorNormal(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_COLOR_POISON = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorNormalARGB")
+                    .define("healthColorNormalARGB", DefaultConfigAdapter.I.healthColorNormalARGB());
+            HEALTH_COLOR_POISON_ARGB = BUILDER
                     .comment(ConfigComment.healthColorPoison)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorPoison")
-                    .defineInRange("healthColorPoison", DefaultConfigAdapter.I.healthColorPoison(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_COLOR_WITHER = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorPoisonARGB")
+                    .define("healthColorPoisonARGB", DefaultConfigAdapter.I.healthColorPoisonARGB());
+            HEALTH_COLOR_WITHER_ARGB = BUILDER
                     .comment(ConfigComment.healthColorWither)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorWither")
-                    .defineInRange("healthColorWither", DefaultConfigAdapter.I.healthColorWither(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_COLOR_FROZEN = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorWitherARGB")
+                    .define("healthColorWitherARGB", DefaultConfigAdapter.I.healthColorWitherARGB());
+            HEALTH_COLOR_FROZEN_ARGB = BUILDER
                     .comment(ConfigComment.healthColorFrozen)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorFrozen")
-                    .defineInRange("healthColorFrozen", DefaultConfigAdapter.I.healthColorFrozen(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthColorFrozenARGB")
+                    .define("healthColorFrozenARGB", DefaultConfigAdapter.I.healthColorFrozenARGB());
+            HEALTH_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColor")
-                    .defineInRange("healthBoundColor", DefaultConfigAdapter.I.healthBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BOUND_COLOR_BLINK = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorARGB")
+                    .define("healthBoundColorARGB", DefaultConfigAdapter.I.healthBoundColorARGB());
+            HEALTH_BOUND_COLOR_BLINK_ARGB = BUILDER
                     .comment(ConfigComment.healthBoundColorBlink)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorBlink")
-                    .defineInRange("healthBoundColorBlink", DefaultConfigAdapter.I.healthBoundColorBlink(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BOUND_COLOR_LOW = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorBlinkARGB")
+                    .define("healthBoundColorBlinkARGB", DefaultConfigAdapter.I.healthBoundColorBlinkARGB());
+            HEALTH_BOUND_COLOR_LOW_ARGB = BUILDER
                     .comment(ConfigComment.healthBoundColorLow)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorLow")
-                    .defineInRange("healthBoundColorLow", DefaultConfigAdapter.I.healthBoundColorLow(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthBoundColorLowARGB")
+                    .define("healthBoundColorLowARGB", DefaultConfigAdapter.I.healthBoundColorLowARGB());
+            HEALTH_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.healthEmptyColor")
-                    .defineInRange("healthEmptyColor", DefaultConfigAdapter.I.healthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            ABSORPTION_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.healthEmptyColorARGB")
+                    .define("healthEmptyColorARGB", DefaultConfigAdapter.I.healthEmptyColorARGB());
+            ABSORPTION_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.absorptionColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.absorptionColor")
-                    .defineInRange("absorptionColor", DefaultConfigAdapter.I.absorptionColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            ABSORPTION_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.absorptionColorARGB")
+                    .define("absorptionColorARGB", DefaultConfigAdapter.I.absorptionColorARGB());
+            ABSORPTION_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.absorptionBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.absorptionBoundColor")
-                    .defineInRange("absorptionBoundColor", DefaultConfigAdapter.I.absorptionBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            FOOD_COLOR_NORMAL = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.absorptionBoundColorARGB")
+                    .define("absorptionBoundColorARGB", DefaultConfigAdapter.I.absorptionBoundColorARGB());
+            FOOD_COLOR_NORMAL_ARGB = BUILDER
                     .comment(ConfigComment.foodColorNormal)
-                    .translation("text.autoconfig.asteorbar.option.overlay.foodColorNormal")
-                    .defineInRange("foodColorNormal", DefaultConfigAdapter.I.foodColorNormal(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            FOOD_COLOR_HUNGER = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.foodColorNormalARGB")
+                    .define("foodColorNormalARGB", DefaultConfigAdapter.I.foodColorNormalARGB());
+            FOOD_COLOR_HUNGER_ARGB = BUILDER
                     .comment(ConfigComment.foodColorHunger)
-                    .translation("text.autoconfig.asteorbar.option.overlay.foodColorHunger")
-                    .defineInRange("foodColorHunger", DefaultConfigAdapter.I.foodColorHunger(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            FOOD_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.foodColorHungerARGB")
+                    .define("foodColorHungerARGB", DefaultConfigAdapter.I.foodColorHungerARGB());
+            FOOD_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.foodBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColor")
-                    .defineInRange("foodBoundColor", DefaultConfigAdapter.I.foodBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            FOOD_BOUND_COLOR_BLINK = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColorARGB")
+                    .define("foodBoundColorARGB", DefaultConfigAdapter.I.foodBoundColorARGB());
+            FOOD_BOUND_COLOR_BLINK_ARGB = BUILDER
                     .comment(ConfigComment.foodBoundColorBlink)
-                    .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColorBlink")
-                    .defineInRange("foodBoundColorBlink", DefaultConfigAdapter.I.foodBoundColorBlink(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            FOOD_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.foodBoundColorBlinkARGB")
+                    .define("foodBoundColorBlinkARGB", DefaultConfigAdapter.I.foodBoundColorBlinkARGB());
+            FOOD_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.foodEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.foodEmptyColor")
-                    .defineInRange("foodEmptyColor", DefaultConfigAdapter.I.foodEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            SATURATION_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.foodEmptyColorARGB")
+                    .define("foodEmptyColorARGB", DefaultConfigAdapter.I.foodEmptyColorARGB());
+            SATURATION_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.saturationColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.saturationColor")
-                    .defineInRange("saturationColor", DefaultConfigAdapter.I.saturationColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            EXPERIENCE_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.saturationColorARGB")
+                    .define("saturationColorARGB", DefaultConfigAdapter.I.saturationColorARGB());
+            EXPERIENCE_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.experienceColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.experienceColor")
-                    .defineInRange("experienceColor", DefaultConfigAdapter.I.experienceColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            EXPERIENCE_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.experienceColorARGB")
+                    .define("experienceColorARGB", DefaultConfigAdapter.I.experienceColorARGB());
+            EXPERIENCE_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.experienceBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.experienceBoundColor")
-                    .defineInRange("experienceBoundColor", DefaultConfigAdapter.I.experienceBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            EXPERIENCE_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.experienceBoundColorARGB")
+                    .define("experienceBoundColorARGB", DefaultConfigAdapter.I.experienceBoundColorARGB());
+            EXPERIENCE_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.experienceEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.experienceEmptyColor")
-                    .defineInRange("experienceEmptyColor", DefaultConfigAdapter.I.experienceEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            AIR_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.experienceEmptyColorARGB")
+                    .define("experienceEmptyColorARGB", DefaultConfigAdapter.I.experienceEmptyColorARGB());
+            AIR_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.airColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.airColor")
-                    .defineInRange("airColor", DefaultConfigAdapter.I.airColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            AIR_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.airColorARGB")
+                    .define("airColorARGB", DefaultConfigAdapter.I.airColorARGB());
+            AIR_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.airBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.airBoundColor")
-                    .defineInRange("airBoundColor", DefaultConfigAdapter.I.airBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            MOUNT_HEALTH_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.airBoundColorARGB")
+                    .define("airBoundColorARGB", DefaultConfigAdapter.I.airBoundColorARGB());
+            MOUNT_HEALTH_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.mountHealthColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColor")
-                    .defineInRange("mountHealthColor", DefaultConfigAdapter.I.mountHealthColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            MOUNT_HEALTH_COLOR_2 = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColorARGB")
+                    .define("mountHealthColorARGB", DefaultConfigAdapter.I.mountHealthColorARGB());
+            MOUNT_HEALTH_COLOR_2_ARGB = BUILDER
                     .comment(ConfigComment.mountHealthColor2)
-                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColor2")
-                    .defineInRange("mountHealthColor2", DefaultConfigAdapter.I.mountHealthColor2(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            MOUNT_HEALTH_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthColor2ARGB")
+                    .define("mountHealthColor2ARGB", DefaultConfigAdapter.I.mountHealthColor2ARGB());
+            MOUNT_HEALTH_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.mountHealthBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor")
-                    .defineInRange("mountHealthBoundColor", DefaultConfigAdapter.I.mountHealthBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            MOUNT_HEALTH_BOUND_COLOR_2 = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColorARGB")
+                    .define("mountHealthBoundColorARGB", DefaultConfigAdapter.I.mountHealthBoundColorARGB());
+            MOUNT_HEALTH_BOUND_COLOR_2_ARGB = BUILDER
                     .comment(ConfigComment.mountHealthBoundColor2)
-                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor2")
-                    .defineInRange("mountHealthBoundColor2", DefaultConfigAdapter.I.mountHealthBoundColor2(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            MOUNT_HEALTH_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthBoundColor2ARGB")
+                    .define("mountHealthBoundColor2ARGB", DefaultConfigAdapter.I.mountHealthBoundColor2ARGB());
+            MOUNT_HEALTH_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.mountHealthEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColor")
-                    .defineInRange("mountHealthEmptyColor", DefaultConfigAdapter.I.mountHealthEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    .translation("text.autoconfig.asteorbar.option.overlay.mountHealthEmptyColorARGB")
+                    .define("mountHealthEmptyColorARGB", DefaultConfigAdapter.I.mountHealthEmptyColorARGB());
             MOUNT_HEALTH_ON_LEFT_SIDE = BUILDER
                     .comment(ConfigComment.mountHealthOnLeftSide)
                     .translation("text.autoconfig.asteorbar.option.overlay.mountHealthOnLeftSide")
                     .define("mountHealthOnLeftSide", DefaultConfigAdapter.I.mountHealthOnLeftSide());
-            ARMOR_COLOR = BUILDER
+            ARMOR_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.armorColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.armorColor")
-                    .defineInRange("armorColor", DefaultConfigAdapter.I.armorColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            ARMOR_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.armorColorARGB")
+                    .define("armorColorARGB", DefaultConfigAdapter.I.armorColorARGB());
+            ARMOR_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.armorBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.armorBoundColor")
-                    .defineInRange("armorBoundColor", DefaultConfigAdapter.I.armorBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            ARMOR_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.armorBoundColorARGB")
+                    .define("armorBoundColorARGB", DefaultConfigAdapter.I.armorBoundColorARGB());
+            ARMOR_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.armorEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.armorEmptyColor")
-                    .defineInRange("armorEmptyColor", DefaultConfigAdapter.I.armorEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            ARMOR_TOUGHNESS_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.overlay.armorEmptyColorARGB")
+                    .define("armorEmptyColorARGB", DefaultConfigAdapter.I.armorEmptyColorARGB());
+            ARMOR_TOUGHNESS_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.armorToughnessColor)
-                    .translation("text.autoconfig.asteorbar.option.overlay.armorToughnessColor")
-                    .defineInRange("armorToughnessColor", DefaultConfigAdapter.I.armorToughnessColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    .translation("text.autoconfig.asteorbar.option.overlay.armorToughnessColorARGB")
+                    .define("armorToughnessColorARGB", DefaultConfigAdapter.I.armorToughnessColorARGB());
             ENABLE_HEALTH_BLINK = BUILDER
                     .comment(ConfigComment.enableHealthBlink)
                     .translation("text.autoconfig.asteorbar.option.overlay.enableHealthBlink")
@@ -469,34 +469,34 @@ public class ForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.healthBarBoundVertex)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundVertex")
                     .define("healthBarBoundVertex", DefaultConfigAdapter.I.healthBarBoundVertex());
-            HEALTH_BAR_HEALTH_COLOR = BUILDER
+            HEALTH_BAR_HEALTH_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthBarHealthColor)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColor")
-                    .defineInRange("healthBarHealthColor", DefaultConfigAdapter.I.healthBarHealthColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BAR_ABSORPTION_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorARGB")
+                    .define("healthBarHealthColorARGB", DefaultConfigAdapter.I.healthBarHealthColorARGB());
+            HEALTH_BAR_ABSORPTION_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthBarAbsorptionColor)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarAbsorptionColor")
-                    .defineInRange("healthBarAbsorptionColor", DefaultConfigAdapter.I.healthBarAbsorptionColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BAR_BOUND_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarAbsorptionColorARGB")
+                    .define("healthBarAbsorptionColorARGB", DefaultConfigAdapter.I.healthBarAbsorptionColorARGB());
+            HEALTH_BAR_BOUND_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthBarBoundColor)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundColor")
-                    .defineInRange("healthBarBoundColor", DefaultConfigAdapter.I.healthBarBoundColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BAR_EMPTY_COLOR = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarBoundColorARGB")
+                    .define("healthBarBoundColorARGB", DefaultConfigAdapter.I.healthBarBoundColorARGB());
+            HEALTH_BAR_EMPTY_COLOR_ARGB = BUILDER
                     .comment(ConfigComment.healthBarEmptyColor)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarEmptyColor")
-                    .defineInRange("healthBarEmptyColor", DefaultConfigAdapter.I.healthBarEmptyColor(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarEmptyColorARGB")
+                    .define("healthBarEmptyColorARGB", DefaultConfigAdapter.I.healthBarEmptyColorARGB());
             HEALTH_BAR_HEALTH_COLOR_DYNAMIC = BUILDER
                     .comment(ConfigComment.healthBarHealthColorDynamic)
                     .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorDynamic")
                     .define("healthBarHealthColorDynamic", DefaultConfigAdapter.I.healthBarHealthColorDynamic());
-            HEALTH_BAR_HEALTH_COLOR_FULL = BUILDER
+            HEALTH_BAR_HEALTH_COLOR_FULL_ARGB = BUILDER
                     .comment(ConfigComment.healthBarHealthColorFull)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorFull")
-                    .defineInRange("healthBarHealthColorFull", DefaultConfigAdapter.I.healthBarHealthColorFull(), Integer.MIN_VALUE, Integer.MAX_VALUE);
-            HEALTH_BAR_HEALTH_COLOR_EMPTY = BUILDER
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorFullARGB")
+                    .define("healthBarHealthColorFullARGB", DefaultConfigAdapter.I.healthBarHealthColorFullARGB());
+            HEALTH_BAR_HEALTH_COLOR_EMPTY_ARGB = BUILDER
                     .comment(ConfigComment.healthBarHealthColorEmpty)
-                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorEmpty")
-                    .defineInRange("healthBarHealthColorEmpty", DefaultConfigAdapter.I.healthBarHealthColorEmpty(), Integer.MIN_VALUE, Integer.MAX_VALUE);
+                    .translation("text.autoconfig.asteorbar.option.entity.healthBarHealthColorEmptyARGB")
+                    .define("healthBarHealthColorEmptyARGB", DefaultConfigAdapter.I.healthBarHealthColorEmptyARGB());
             BUILDER.pop();
             BUILDER.push("hook");
             HOOK_TOUGH_AS_NAILS = BUILDER
@@ -676,133 +676,133 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthColorNormal() {
-        return Config.HEALTH_COLOR_NORMAL.get();
+    public String healthColorNormalARGB() {
+        return Config.HEALTH_COLOR_NORMAL_ARGB.get();
     }
 
     @Override
-    public int healthColorPoison() {
-        return Config.HEALTH_COLOR_POISON.get();
+    public String healthColorPoisonARGB() {
+        return Config.HEALTH_COLOR_POISON_ARGB.get();
     }
 
     @Override
-    public int healthColorWither() {
-        return Config.HEALTH_COLOR_WITHER.get();
+    public String healthColorWitherARGB() {
+        return Config.HEALTH_COLOR_WITHER_ARGB.get();
     }
 
     @Override
-    public int healthColorFrozen() {
-        return Config.HEALTH_COLOR_FROZEN.get();
+    public String healthColorFrozenARGB() {
+        return Config.HEALTH_COLOR_FROZEN_ARGB.get();
     }
 
     @Override
-    public int healthBoundColor() {
-        return Config.HEALTH_BOUND_COLOR.get();
+    public String healthBoundColorARGB() {
+        return Config.HEALTH_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int healthBoundColorBlink() {
-        return Config.HEALTH_BOUND_COLOR_BLINK.get();
+    public String healthBoundColorBlinkARGB() {
+        return Config.HEALTH_BOUND_COLOR_BLINK_ARGB.get();
     }
 
     @Override
-    public int healthBoundColorLow() {
-        return Config.HEALTH_BOUND_COLOR_LOW.get();
+    public String healthBoundColorLowARGB() {
+        return Config.HEALTH_BOUND_COLOR_LOW_ARGB.get();
     }
 
     @Override
-    public int healthEmptyColor() {
-        return Config.HEALTH_EMPTY_COLOR.get();
+    public String healthEmptyColorARGB() {
+        return Config.HEALTH_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
-    public int absorptionColor() {
-        return Config.ABSORPTION_COLOR.get();
+    public String absorptionColorARGB() {
+        return Config.ABSORPTION_COLOR_ARGB.get();
     }
 
     @Override
-    public int absorptionBoundColor() {
-        return Config.ABSORPTION_BOUND_COLOR.get();
+    public String absorptionBoundColorARGB() {
+        return Config.ABSORPTION_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int foodColorNormal() {
-        return Config.FOOD_COLOR_NORMAL.get();
+    public String foodColorNormalARGB() {
+        return Config.FOOD_COLOR_NORMAL_ARGB.get();
     }
 
     @Override
-    public int foodColorHunger() {
-        return Config.FOOD_COLOR_HUNGER.get();
+    public String foodColorHungerARGB() {
+        return Config.FOOD_COLOR_HUNGER_ARGB.get();
     }
 
     @Override
-    public int foodBoundColor() {
-        return Config.FOOD_BOUND_COLOR.get();
+    public String foodBoundColorARGB() {
+        return Config.FOOD_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int foodBoundColorBlink() {
-        return Config.FOOD_BOUND_COLOR_BLINK.get();
+    public String foodBoundColorBlinkARGB() {
+        return Config.FOOD_BOUND_COLOR_BLINK_ARGB.get();
     }
 
     @Override
-    public int foodEmptyColor() {
-        return Config.FOOD_EMPTY_COLOR.get();
+    public String foodEmptyColorARGB() {
+        return Config.FOOD_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
-    public int saturationColor() {
-        return Config.SATURATION_COLOR.get();
+    public String saturationColorARGB() {
+        return Config.SATURATION_COLOR_ARGB.get();
     }
 
     @Override
-    public int experienceColor() {
-        return Config.EXPERIENCE_COLOR.get();
+    public String experienceColorARGB() {
+        return Config.EXPERIENCE_COLOR_ARGB.get();
     }
 
     @Override
-    public int experienceBoundColor() {
-        return Config.EXPERIENCE_BOUND_COLOR.get();
+    public String experienceBoundColorARGB() {
+        return Config.EXPERIENCE_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int experienceEmptyColor() {
-        return Config.EXPERIENCE_EMPTY_COLOR.get();
+    public String experienceEmptyColorARGB() {
+        return Config.EXPERIENCE_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
-    public int airColor() {
-        return Config.AIR_COLOR.get();
+    public String airColorARGB() {
+        return Config.AIR_COLOR_ARGB.get();
     }
 
     @Override
-    public int airBoundColor() {
-        return Config.AIR_BOUND_COLOR.get();
+    public String airBoundColorARGB() {
+        return Config.AIR_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int mountHealthColor() {
-        return Config.MOUNT_HEALTH_COLOR.get();
+    public String mountHealthColorARGB() {
+        return Config.MOUNT_HEALTH_COLOR_ARGB.get();
     }
 
     @Override
-    public int mountHealthColor2() {
-        return Config.MOUNT_HEALTH_COLOR_2.get();
+    public String mountHealthColor2ARGB() {
+        return Config.MOUNT_HEALTH_COLOR_2_ARGB.get();
     }
 
     @Override
-    public int mountHealthBoundColor() {
-        return Config.MOUNT_HEALTH_BOUND_COLOR.get();
+    public String mountHealthBoundColorARGB() {
+        return Config.MOUNT_HEALTH_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int mountHealthBoundColor2() {
-        return Config.MOUNT_HEALTH_BOUND_COLOR_2.get();
+    public String mountHealthBoundColor2ARGB() {
+        return Config.MOUNT_HEALTH_BOUND_COLOR_2_ARGB.get();
     }
 
     @Override
-    public int mountHealthEmptyColor() {
-        return Config.MOUNT_HEALTH_EMPTY_COLOR.get();
+    public String mountHealthEmptyColorARGB() {
+        return Config.MOUNT_HEALTH_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
@@ -811,23 +811,23 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int armorColor() {
-        return Config.ARMOR_COLOR.get();
+    public String armorColorARGB() {
+        return Config.ARMOR_COLOR_ARGB.get();
     }
 
     @Override
-    public int armorBoundColor() {
-        return Config.ARMOR_BOUND_COLOR.get();
+    public String armorBoundColorARGB() {
+        return Config.ARMOR_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int armorEmptyColor() {
-        return Config.ARMOR_EMPTY_COLOR.get();
+    public String armorEmptyColorARGB() {
+        return Config.ARMOR_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
-    public int armorToughnessColor() {
-        return Config.ARMOR_TOUGHNESS_COLOR.get();
+    public String armorToughnessColorARGB() {
+        return Config.ARMOR_TOUGHNESS_COLOR_ARGB.get();
     }
 
     @Override
@@ -1022,23 +1022,23 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColor() {
-        return Config.HEALTH_BAR_HEALTH_COLOR.get();
+    public String healthBarHealthColorARGB() {
+        return Config.HEALTH_BAR_HEALTH_COLOR_ARGB.get();
     }
 
     @Override
-    public int healthBarAbsorptionColor() {
-        return Config.HEALTH_BAR_ABSORPTION_COLOR.get();
+    public String healthBarAbsorptionColorARGB() {
+        return Config.HEALTH_BAR_ABSORPTION_COLOR_ARGB.get();
     }
 
     @Override
-    public int healthBarBoundColor() {
-        return Config.HEALTH_BAR_BOUND_COLOR.get();
+    public String healthBarBoundColorARGB() {
+        return Config.HEALTH_BAR_BOUND_COLOR_ARGB.get();
     }
 
     @Override
-    public int healthBarEmptyColor() {
-        return Config.HEALTH_BAR_EMPTY_COLOR.get();
+    public String healthBarEmptyColorARGB() {
+        return Config.HEALTH_BAR_EMPTY_COLOR_ARGB.get();
     }
 
     @Override
@@ -1047,13 +1047,13 @@ public class ForgeConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColorFull() {
-        return Config.HEALTH_BAR_HEALTH_COLOR_FULL.get();
+    public String healthBarHealthColorFullARGB() {
+        return Config.HEALTH_BAR_HEALTH_COLOR_FULL_ARGB.get();
     }
 
     @Override
-    public int healthBarHealthColorEmpty() {
-        return Config.HEALTH_BAR_HEALTH_COLOR_EMPTY.get();
+    public String healthBarHealthColorEmptyARGB() {
+        return Config.HEALTH_BAR_HEALTH_COLOR_EMPTY_ARGB.get();
     }
 
     @Override

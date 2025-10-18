@@ -46,4 +46,21 @@ public class Utils {
         short a = (short) ((color >> 24 & 0xFF));
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
+
+    /**
+     * Parse color from string.
+     * Decimal format: "16711680"
+     * Hex format: "#FF0000" or "0xFF0000"
+     */
+    public static int parseColor(String color) {
+        try {
+            if (color.startsWith("#") || color.startsWith("0x") || color.startsWith("0X")) {
+                return parseHexColor(color);
+            } else {
+                return Integer.parseInt(color);
+            }
+        } catch (NumberFormatException e) {
+            return 0xFFFFFFFF;
+        }
+    }
 }

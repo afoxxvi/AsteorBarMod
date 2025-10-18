@@ -1,18 +1,30 @@
 # Version History
 
-## v1.5.2-DEV
+## v1.5.3
+
+### Features
+- Use text style ARGB color configuration. e.g. #FFE91E63 instead of 4293467747. (Configuration should be proceeded again, sorry for potential inconvenience.)
+
+### Adjustments & Fixes
+- Render issue while using shader mod in 1.21.5+.
+- ArrayIndexOutOfBound not synced to 1.20.4+ versions.
+
+## v1.5.2
 
 ### Features
 
+- Now support 1.21.5-1.21.10
 - Add option to change the height and margin of the HUD bars.
 - Add option to lower the opacity of regeneration effect.
 - Health bar now has a fade effect on health loss.
 - Add option to hide decimal part of the numbers, or adjust the hide threshold.
+- Mod compatibility: Walk Jog Run, Legendary Survival Overhaul.
 
 ### Adjustments & Fixes
 
 - Fixed the food value increment preview from AppleSkin not accurate.
 - Fixed vanilla experience level not hidden when the experience bar is disabled.
+- Fixed ArrayIndexOutOfBound when enabling stacked health bar.
 
 ## v1.5.1
 

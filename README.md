@@ -129,7 +129,7 @@ such as configured.
 You can change the text scale in config, 1.0 should be well with force Unicode, and I recommend 0.75 if you are using
 vanilla font.
 
-**How to change color in config, I don't understand what these numbers mean.**</br>
+**(below 1.5.3) How to change color in config, I don't understand what these numbers mean.**</br>
 Colors are in ARGB hex format, but displayed as dec values. You can use Windows calculator, switch to programmer mode,
 click the 'QWORD' until it becomes 'DWORD', then click on HEX and input your ARGB color. The DEC value is just what you
 needed.
@@ -138,22 +138,28 @@ needed.
 
 Earlier versions is not planned to be supported.
 
-| Version | Forge       | Fabric      |  NeoForge   |
-|---------|-------------|-------------|:-----------:|
-| 1.18.2  | v1.4.6      | v1.4.6      |             |
-| 1.19.2  | v1.4.6      | v1.4.6      |             |
-| 1.19.3  | v1.4.1      | v1.4.1      |             |
-| 1.19.4  | v1.4.6      | v1.4.6      |             |
-| 1.20    | v1.2.2      | v1.2        |             |
-| 1.20.1  | latest      | latest      |             |
-| 1.20.2  | v1.4.6      | v1.4.6      |   v1.4.6    |
-| 1.20.3  | v1.2.2      | v1.2        |             |
-| 1.20.4  | latest      | latest      |   latest    |
-| 1.20.6  | latest      | latest      |   latest    |
-| 1.21    | v1.4.6      | v1.4.6      |   v1.4.6    |
-| 1.21.1  | latest      | latest      |   latest    |
-| 1.21.3  | in progress | in progress | in progress |
-| 1.21.4  | in progress | in progress | in progress |
+| Version | Forge  | Fabric | NeoForge |
+|---------|--------|--------|:--------:|
+| 1.18.2  | v1.4.6 | v1.4.6 |          |
+| 1.19.2  | v1.4.6 | v1.4.6 |          |
+| 1.19.3  | v1.4.1 | v1.4.1 |          |
+| 1.19.4  | v1.4.6 | v1.4.6 |          |
+| 1.20    | v1.2.2 | v1.2   |          |
+| 1.20.1  | latest | latest |          |
+| 1.20.2  | v1.4.6 | v1.4.6 |  v1.4.6  |
+| 1.20.3  | v1.2.2 | v1.2   |          |
+| 1.20.4  | latest | latest |  latest  |
+| 1.20.6  | latest | latest |  latest  |
+| 1.21    | v1.4.6 | v1.4.6 |  v1.4.6  |
+| 1.21.1  | latest | latest |  latest  |
+| 1.21.3  | latest | latest |  latest  |
+| 1.21.4  | latest | latest |  latest  |
+| 1.21.5  | latest | latest |  latest  |
+| 1.21.6  | latest | latest |  latest  |
+| 1.21.7  | latest | latest |  latest  |
+| 1.21.8  | latest | latest |  latest  |
+| 1.21.9  | latest | latest |  latest  |
+| 1.21.10 | latest | latest |  latest  |
 
 ## Acknowledgements
 

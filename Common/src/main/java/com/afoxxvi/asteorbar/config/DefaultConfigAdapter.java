@@ -104,133 +104,133 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthColorNormal() {
-        return 0xffff4545;
+    public String healthColorNormalARGB() {
+        return "#ffff4545";
     }
 
     @Override
-    public int healthColorPoison() {
-        return 0xff9c8022;
+    public String healthColorPoisonARGB() {
+        return "#ff9c8022";
     }
 
     @Override
-    public int healthColorWither() {
-        return 0xff4f2727;
+    public String healthColorWitherARGB() {
+        return "#ff4f2727";
     }
 
     @Override
-    public int healthColorFrozen() {
-        return 0xff3798f4;
+    public String healthColorFrozenARGB() {
+        return "#ff3798f4";
     }
 
     @Override
-    public int healthBoundColor() {
-        return 0xff5d4848;
+    public String healthBoundColorARGB() {
+        return "#ff5d4848";
     }
 
     @Override
-    public int healthBoundColorBlink() {
-        return 0xffffffff;
+    public String healthBoundColorBlinkARGB() {
+        return "#ffffffff";
     }
 
     @Override
-    public int healthBoundColorLow() {
-        return 0xffff0000;
+    public String healthBoundColorLowARGB() {
+        return "#ffff0000";
     }
 
     @Override
-    public int healthEmptyColor() {
-        return 0xff464646;
+    public String healthEmptyColorARGB() {
+        return "#ff464646";
     }
 
     @Override
-    public int absorptionColor() {
-        return 0xffe5d35c;
+    public String absorptionColorARGB() {
+        return "#ffe5d35c";
     }
 
     @Override
-    public int absorptionBoundColor() {
-        return 0xffe5d35c;
+    public String absorptionBoundColorARGB() {
+        return "#ffe5d35c";
     }
 
     @Override
-    public int foodColorNormal() {
-        return 0xfff4f24c;
+    public String foodColorNormalARGB() {
+        return "#fff4f24c";
     }
 
     @Override
-    public int foodColorHunger() {
-        return 0xffb0be54;
+    public String foodColorHungerARGB() {
+        return "#ffb0be54";
     }
 
     @Override
-    public int foodBoundColor() {
-        return 0xff6a6142;
+    public String foodBoundColorARGB() {
+        return "#ff6a6142";
     }
 
     @Override
-    public int foodBoundColorBlink() {
-        return 0xff8e835d;
+    public String foodBoundColorBlinkARGB() {
+        return "#ff8e835d";
     }
 
     @Override
-    public int foodEmptyColor() {
-        return 0xff464646;
+    public String foodEmptyColorARGB() {
+        return "#ff464646";
     }
 
     @Override
-    public int saturationColor() {
-        return 0xfffffe91;
+    public String saturationColorARGB() {
+        return "#fffffe91";
     }
 
     @Override
-    public int experienceColor() {
-        return 0xff86c457;
+    public String experienceColorARGB() {
+        return "#ff86c457";
     }
 
     @Override
-    public int experienceBoundColor() {
-        return 0xff09100c;
+    public String experienceBoundColorARGB() {
+        return "#ff09100c";
     }
 
     @Override
-    public int experienceEmptyColor() {
-        return 0xff29352f;
+    public String experienceEmptyColorARGB() {
+        return "#ff29352f";
     }
 
     @Override
-    public int airColor() {
-        return 0xffd1ebff;
+    public String airColorARGB() {
+        return "#ffd1ebff";
     }
 
     @Override
-    public int airBoundColor() {
-        return 0xff0094ff;
+    public String airBoundColorARGB() {
+        return "#ff0094ff";
     }
 
     @Override
-    public int mountHealthColor() {
-        return 0xffda662c;
+    public String mountHealthColorARGB() {
+        return "#ffda662c";
     }
 
     @Override
-    public int mountHealthColor2() {
-        return 0xffc1c1c1;
+    public String mountHealthColor2ARGB() {
+        return "#ffc1c1c1";
     }
 
     @Override
-    public int mountHealthBoundColor() {
-        return 0xff7f3919;
+    public String mountHealthBoundColorARGB() {
+        return "#ff7f3919";
     }
 
     @Override
-    public int mountHealthBoundColor2() {
-        return 0xff797979;
+    public String mountHealthBoundColor2ARGB() {
+        return "#ff797979";
     }
 
     @Override
-    public int mountHealthEmptyColor() {
-        return 0xff464646;
+    public String mountHealthEmptyColorARGB() {
+        return "#ff464646";
     }
 
     @Override
@@ -239,23 +239,23 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int armorColor() {
-        return 0xffe6e7f2;
+    public String armorColorARGB() {
+        return "#ffe6e7f2";
     }
 
     @Override
-    public int armorBoundColor() {
-        return 0xff323232;
+    public String armorBoundColorARGB() {
+        return "#ff323232";
     }
 
     @Override
-    public int armorEmptyColor() {
-        return 0xff464646;
+    public String armorEmptyColorARGB() {
+        return "#ff464646";
     }
 
     @Override
-    public int armorToughnessColor() {
-        return 0xff75cdff;
+    public String armorToughnessColorARGB() {
+        return "#ff75cdff";
     }
 
     @Override
@@ -449,23 +449,23 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColor() {
-        return 0xAA008000;
+    public String healthBarHealthColorARGB() {
+        return "#AA008000";
     }
 
     @Override
-    public int healthBarAbsorptionColor() {
-        return 0xAAFFFF00;
+    public String healthBarAbsorptionColorARGB() {
+        return "#AAFFFF00";
     }
 
     @Override
-    public int healthBarBoundColor() {
-        return 0x55606060;
+    public String healthBarBoundColorARGB() {
+        return "#55606060";
     }
 
     @Override
-    public int healthBarEmptyColor() {
-        return 0x33404040;
+    public String healthBarEmptyColorARGB() {
+        return "#33404040";
     }
 
     @Override
@@ -474,13 +474,13 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColorFull() {
-        return 0xAA008000;
+    public String healthBarHealthColorFullARGB() {
+        return "#AA008000";
     }
 
     @Override
-    public int healthBarHealthColorEmpty() {
-        return 0xAA800000;
+    public String healthBarHealthColorEmptyARGB() {
+        return "#AA800000";
     }
 
     @Override

@@ -113,133 +113,133 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthColorNormal() {
-        return config.overlay.healthColorNormal;
+    public String healthColorNormalARGB() {
+        return config.overlay.healthColorNormalARGB;
     }
 
     @Override
-    public int healthColorPoison() {
-        return config.overlay.healthColorPoison;
+    public String healthColorPoisonARGB() {
+        return config.overlay.healthColorPoisonARGB;
     }
 
     @Override
-    public int healthColorWither() {
-        return config.overlay.healthColorWither;
+    public String healthColorWitherARGB() {
+        return config.overlay.healthColorWitherARGB;
     }
 
     @Override
-    public int healthColorFrozen() {
-        return config.overlay.healthColorFrozen;
+    public String healthColorFrozenARGB() {
+        return config.overlay.healthColorFrozenARGB;
     }
 
     @Override
-    public int healthBoundColor() {
-        return config.overlay.healthBoundColor;
+    public String healthBoundColorARGB() {
+        return config.overlay.healthBoundColorARGB;
     }
 
     @Override
-    public int healthBoundColorBlink() {
-        return config.overlay.healthBoundColorBlink;
+    public String healthBoundColorBlinkARGB() {
+        return config.overlay.healthBoundColorBlinkARGB;
     }
 
     @Override
-    public int healthBoundColorLow() {
-        return config.overlay.healthBoundColorLow;
+    public String healthBoundColorLowARGB() {
+        return config.overlay.healthBoundColorLowARGB;
     }
 
     @Override
-    public int healthEmptyColor() {
-        return config.overlay.healthEmptyColor;
+    public String healthEmptyColorARGB() {
+        return config.overlay.healthEmptyColorARGB;
     }
 
     @Override
-    public int absorptionColor() {
-        return config.overlay.absorptionColor;
+    public String absorptionColorARGB() {
+        return config.overlay.absorptionColorARGB;
     }
 
     @Override
-    public int absorptionBoundColor() {
-        return config.overlay.absorptionBoundColor;
+    public String absorptionBoundColorARGB() {
+        return config.overlay.absorptionBoundColorARGB;
     }
 
     @Override
-    public int foodColorNormal() {
-        return config.overlay.foodColorNormal;
+    public String foodColorNormalARGB() {
+        return config.overlay.foodColorNormalARGB;
     }
 
     @Override
-    public int foodColorHunger() {
-        return config.overlay.foodColorHunger;
+    public String foodColorHungerARGB() {
+        return config.overlay.foodColorHungerARGB;
     }
 
     @Override
-    public int foodBoundColor() {
-        return config.overlay.foodBoundColor;
+    public String foodBoundColorARGB() {
+        return config.overlay.foodBoundColorARGB;
     }
 
     @Override
-    public int foodBoundColorBlink() {
-        return config.overlay.foodBoundColorBlink;
+    public String foodBoundColorBlinkARGB() {
+        return config.overlay.foodBoundColorBlinkARGB;
     }
 
     @Override
-    public int foodEmptyColor() {
-        return config.overlay.foodEmptyColor;
+    public String foodEmptyColorARGB() {
+        return config.overlay.foodEmptyColorARGB;
     }
 
     @Override
-    public int saturationColor() {
-        return config.overlay.saturationColor;
+    public String saturationColorARGB() {
+        return config.overlay.saturationColorARGB;
     }
 
     @Override
-    public int experienceColor() {
-        return config.overlay.experienceColor;
+    public String experienceColorARGB() {
+        return config.overlay.experienceColorARGB;
     }
 
     @Override
-    public int experienceBoundColor() {
-        return config.overlay.experienceBoundColor;
+    public String experienceBoundColorARGB() {
+        return config.overlay.experienceBoundColorARGB;
     }
 
     @Override
-    public int experienceEmptyColor() {
-        return config.overlay.experienceEmptyColor;
+    public String experienceEmptyColorARGB() {
+        return config.overlay.experienceEmptyColorARGB;
     }
 
     @Override
-    public int airColor() {
-        return config.overlay.airColor;
+    public String airColorARGB() {
+        return config.overlay.airColorARGB;
     }
 
     @Override
-    public int airBoundColor() {
-        return config.overlay.airBoundColor;
+    public String airBoundColorARGB() {
+        return config.overlay.airBoundColorARGB;
     }
 
     @Override
-    public int mountHealthColor() {
-        return config.overlay.mountHealthColor;
+    public String mountHealthColorARGB() {
+        return config.overlay.mountHealthColorARGB;
     }
 
     @Override
-    public int mountHealthColor2() {
-        return config.overlay.mountHealthColor2;
+    public String mountHealthColor2ARGB() {
+        return config.overlay.mountHealthColor2ARGB;
     }
 
     @Override
-    public int mountHealthBoundColor() {
-        return config.overlay.mountHealthBoundColor;
+    public String mountHealthBoundColorARGB() {
+        return config.overlay.mountHealthBoundColorARGB;
     }
 
     @Override
-    public int mountHealthBoundColor2() {
-        return config.overlay.mountHealthBoundColor2;
+    public String mountHealthBoundColor2ARGB() {
+        return config.overlay.mountHealthBoundColor2ARGB;
     }
 
     @Override
-    public int mountHealthEmptyColor() {
-        return config.overlay.mountHealthEmptyColor;
+    public String mountHealthEmptyColorARGB() {
+        return config.overlay.mountHealthEmptyColorARGB;
     }
 
     @Override
@@ -248,23 +248,23 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int armorColor() {
-        return config.overlay.armorColor;
+    public String armorColorARGB() {
+        return config.overlay.armorColorARGB;
     }
 
     @Override
-    public int armorBoundColor() {
-        return config.overlay.armorBoundColor;
+    public String armorBoundColorARGB() {
+        return config.overlay.armorBoundColorARGB;
     }
 
     @Override
-    public int armorEmptyColor() {
-        return config.overlay.armorEmptyColor;
+    public String armorEmptyColorARGB() {
+        return config.overlay.armorEmptyColorARGB;
     }
 
     @Override
-    public int armorToughnessColor() {
-        return config.overlay.armorToughnessColor;
+    public String armorToughnessColorARGB() {
+        return config.overlay.armorToughnessColorARGB;
     }
 
     @Override
@@ -459,23 +459,23 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColor() {
-        return config.entity.healthBarHealthColor;
+    public String healthBarHealthColorARGB() {
+        return config.entity.healthBarHealthColorARGB;
     }
 
     @Override
-    public int healthBarAbsorptionColor() {
-        return config.entity.healthBarAbsorptionColor;
+    public String healthBarAbsorptionColorARGB() {
+        return config.entity.healthBarAbsorptionColorARGB;
     }
 
     @Override
-    public int healthBarBoundColor() {
-        return config.entity.healthBarBoundColor;
+    public String healthBarBoundColorARGB() {
+        return config.entity.healthBarBoundColorARGB;
     }
 
     @Override
-    public int healthBarEmptyColor() {
-        return config.entity.healthBarEmptyColor;
+    public String healthBarEmptyColorARGB() {
+        return config.entity.healthBarEmptyColorARGB;
     }
 
     @Override
@@ -484,13 +484,13 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
-    public int healthBarHealthColorFull() {
-        return config.entity.healthBarHealthColorFull;
+    public String healthBarHealthColorFullARGB() {
+        return config.entity.healthBarHealthColorFullARGB;
     }
 
     @Override
-    public int healthBarHealthColorEmpty() {
-        return config.entity.healthBarHealthColorEmpty;
+    public String healthBarHealthColorEmptyARGB() {
+        return config.entity.healthBarHealthColorEmptyARGB;
     }
 
     @Override
@@ -651,67 +651,67 @@ public class FabricConfigAdapter implements ConfigAdapter {
             @Comment(ConfigComment.hideUnchangingBarAfterSeconds)
             public int hideUnchangingBarAfterSeconds = DefaultConfigAdapter.I.hideUnchangingBarAfterSeconds();
             @Comment(ConfigComment.healthColorNormal)
-            public int healthColorNormal = DefaultConfigAdapter.I.healthColorNormal();
+            public String healthColorNormalARGB = DefaultConfigAdapter.I.healthColorNormalARGB();
             @Comment(ConfigComment.healthColorPoison)
-            public int healthColorPoison = DefaultConfigAdapter.I.healthColorPoison();
+            public String healthColorPoisonARGB = DefaultConfigAdapter.I.healthColorPoisonARGB();
             @Comment(ConfigComment.healthColorWither)
-            public int healthColorWither = DefaultConfigAdapter.I.healthColorWither();
+            public String healthColorWitherARGB = DefaultConfigAdapter.I.healthColorWitherARGB();
             @Comment(ConfigComment.healthColorFrozen)
-            public int healthColorFrozen = DefaultConfigAdapter.I.healthColorFrozen();
+            public String healthColorFrozenARGB = DefaultConfigAdapter.I.healthColorFrozenARGB();
             @Comment(ConfigComment.healthBoundColor)
-            public int healthBoundColor = DefaultConfigAdapter.I.healthBoundColor();
+            public String healthBoundColorARGB = DefaultConfigAdapter.I.healthBoundColorARGB();
             @Comment(ConfigComment.healthBoundColorBlink)
-            public int healthBoundColorBlink = DefaultConfigAdapter.I.healthBoundColorBlink();
+            public String healthBoundColorBlinkARGB = DefaultConfigAdapter.I.healthBoundColorBlinkARGB();
             @Comment(ConfigComment.healthBoundColorLow)
-            public int healthBoundColorLow = DefaultConfigAdapter.I.healthBoundColor();
+            public String healthBoundColorLowARGB = DefaultConfigAdapter.I.healthBoundColorLowARGB();
             @Comment(ConfigComment.healthEmptyColor)
-            public int healthEmptyColor = DefaultConfigAdapter.I.healthEmptyColor();
+            public String healthEmptyColorARGB = DefaultConfigAdapter.I.healthEmptyColorARGB();
             @Comment(ConfigComment.absorptionColor)
-            public int absorptionColor = DefaultConfigAdapter.I.absorptionColor();
+            public String absorptionColorARGB = DefaultConfigAdapter.I.absorptionColorARGB();
             @Comment(ConfigComment.absorptionBoundColor)
-            public int absorptionBoundColor = DefaultConfigAdapter.I.absorptionBoundColor();
+            public String absorptionBoundColorARGB = DefaultConfigAdapter.I.absorptionBoundColorARGB();
             @Comment(ConfigComment.foodColorNormal)
-            public int foodColorNormal = DefaultConfigAdapter.I.foodColorNormal();
+            public String foodColorNormalARGB = DefaultConfigAdapter.I.foodColorNormalARGB();
             @Comment(ConfigComment.foodColorHunger)
-            public int foodColorHunger = DefaultConfigAdapter.I.foodColorHunger();
+            public String foodColorHungerARGB = DefaultConfigAdapter.I.foodColorHungerARGB();
             @Comment(ConfigComment.foodBoundColor)
-            public int foodBoundColor = DefaultConfigAdapter.I.foodBoundColor();
+            public String foodBoundColorARGB = DefaultConfigAdapter.I.foodBoundColorARGB();
             @Comment(ConfigComment.foodBoundColorBlink)
-            public int foodBoundColorBlink = DefaultConfigAdapter.I.foodBoundColorBlink();
+            public String foodBoundColorBlinkARGB = DefaultConfigAdapter.I.foodBoundColorBlinkARGB();
             @Comment(ConfigComment.foodEmptyColor)
-            public int foodEmptyColor = DefaultConfigAdapter.I.foodEmptyColor();
+            public String foodEmptyColorARGB = DefaultConfigAdapter.I.foodEmptyColorARGB();
             @Comment(ConfigComment.saturationColor)
-            public int saturationColor = DefaultConfigAdapter.I.saturationColor();
+            public String saturationColorARGB = DefaultConfigAdapter.I.saturationColorARGB();
             @Comment(ConfigComment.experienceColor)
-            public int experienceColor = DefaultConfigAdapter.I.experienceColor();
+            public String experienceColorARGB = DefaultConfigAdapter.I.experienceColorARGB();
             @Comment(ConfigComment.experienceBoundColor)
-            public int experienceBoundColor = DefaultConfigAdapter.I.experienceBoundColor();
+            public String experienceBoundColorARGB = DefaultConfigAdapter.I.experienceBoundColorARGB();
             @Comment(ConfigComment.experienceEmptyColor)
-            public int experienceEmptyColor = DefaultConfigAdapter.I.experienceEmptyColor();
+            public String experienceEmptyColorARGB = DefaultConfigAdapter.I.experienceEmptyColorARGB();
             @Comment(ConfigComment.airColor)
-            public int airColor = DefaultConfigAdapter.I.airColor();
+            public String airColorARGB = DefaultConfigAdapter.I.airColorARGB();
             @Comment(ConfigComment.airBoundColor)
-            public int airBoundColor = DefaultConfigAdapter.I.airBoundColor();
+            public String airBoundColorARGB = DefaultConfigAdapter.I.airBoundColorARGB();
             @Comment(ConfigComment.mountHealthColor)
-            public int mountHealthColor = DefaultConfigAdapter.I.mountHealthColor();
+            public String mountHealthColorARGB = DefaultConfigAdapter.I.mountHealthColorARGB();
             @Comment(ConfigComment.mountHealthColor2)
-            public int mountHealthColor2 = DefaultConfigAdapter.I.mountHealthColor2();
+            public String mountHealthColor2ARGB = DefaultConfigAdapter.I.mountHealthColor2ARGB();
             @Comment(ConfigComment.mountHealthBoundColor)
-            public int mountHealthBoundColor = DefaultConfigAdapter.I.mountHealthBoundColor();
+            public String mountHealthBoundColorARGB = DefaultConfigAdapter.I.mountHealthBoundColorARGB();
             @Comment(ConfigComment.mountHealthBoundColor2)
-            public int mountHealthBoundColor2 = DefaultConfigAdapter.I.mountHealthBoundColor2();
+            public String mountHealthBoundColor2ARGB = DefaultConfigAdapter.I.mountHealthBoundColor2ARGB();
             @Comment(ConfigComment.mountHealthEmptyColor)
-            public int mountHealthEmptyColor = DefaultConfigAdapter.I.mountHealthEmptyColor();
+            public String mountHealthEmptyColorARGB = DefaultConfigAdapter.I.mountHealthEmptyColorARGB();
             @Comment(ConfigComment.mountHealthOnLeftSide)
             public boolean mountHealthOnLeftSide = DefaultConfigAdapter.I.mountHealthOnLeftSide();
             @Comment(ConfigComment.armorColor)
-            public int armorColor = DefaultConfigAdapter.I.armorColor();
+            public String armorColorARGB = DefaultConfigAdapter.I.armorColorARGB();
             @Comment(ConfigComment.armorBoundColor)
-            public int armorBoundColor = DefaultConfigAdapter.I.armorBoundColor();
+            public String armorBoundColorARGB = DefaultConfigAdapter.I.armorBoundColorARGB();
             @Comment(ConfigComment.armorEmptyColor)
-            public int armorEmptyColor = DefaultConfigAdapter.I.armorEmptyColor();
+            public String armorEmptyColorARGB = DefaultConfigAdapter.I.armorEmptyColorARGB();
             @Comment(ConfigComment.armorToughnessColor)
-            public int armorToughnessColor = DefaultConfigAdapter.I.armorToughnessColor();
+            public String armorToughnessColorARGB = DefaultConfigAdapter.I.armorToughnessColorARGB();
             @Comment(ConfigComment.enableHealthBlink)
             public boolean enableHealthBlink = DefaultConfigAdapter.I.enableHealthBlink();
             @Comment(ConfigComment.lowHealthRate)
@@ -791,19 +791,19 @@ public class FabricConfigAdapter implements ConfigAdapter {
             @Comment(ConfigComment.healthBarBoundVertex)
             public boolean healthBarBoundVertex = DefaultConfigAdapter.I.healthBarBoundVertex();
             @Comment(ConfigComment.healthBarHealthColor)
-            public int healthBarHealthColor = DefaultConfigAdapter.I.healthBarHealthColor();
+            public String healthBarHealthColorARGB = DefaultConfigAdapter.I.healthBarHealthColorARGB();
             @Comment(ConfigComment.healthBarAbsorptionColor)
-            public int healthBarAbsorptionColor = DefaultConfigAdapter.I.healthBarAbsorptionColor();
+            public String healthBarAbsorptionColorARGB = DefaultConfigAdapter.I.healthBarAbsorptionColorARGB();
             @Comment(ConfigComment.healthBarBoundColor)
-            public int healthBarBoundColor = DefaultConfigAdapter.I.healthBarBoundColor();
+            public String healthBarBoundColorARGB = DefaultConfigAdapter.I.healthBarBoundColorARGB();
             @Comment(ConfigComment.healthBarEmptyColor)
-            public int healthBarEmptyColor = DefaultConfigAdapter.I.healthBarEmptyColor();
+            public String healthBarEmptyColorARGB = DefaultConfigAdapter.I.healthBarEmptyColorARGB();
             @Comment(ConfigComment.healthBarHealthColorDynamic)
             public boolean healthBarHealthColorDynamic = DefaultConfigAdapter.I.healthBarHealthColorDynamic();
             @Comment(ConfigComment.healthBarHealthColorFull)
-            public int healthBarHealthColorFull = DefaultConfigAdapter.I.healthBarHealthColorFull();
+            public String healthBarHealthColorFullARGB = DefaultConfigAdapter.I.healthBarHealthColorFullARGB();
             @Comment(ConfigComment.healthBarHealthColorEmpty)
-            public int healthBarHealthColorEmpty = DefaultConfigAdapter.I.healthBarHealthColorEmpty();
+            public String healthBarHealthColorEmptyARGB = DefaultConfigAdapter.I.healthBarHealthColorEmptyARGB();
         }
 
         static class HookConfig {

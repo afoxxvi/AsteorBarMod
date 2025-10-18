@@ -1,5 +1,7 @@
 package com.afoxxvi.asteorbar.config;
 
+import com.afoxxvi.asteorbar.utils.Utils;
+
 public interface ConfigAdapter {
     boolean enableOverlay();
 
@@ -41,67 +43,187 @@ public interface ConfigAdapter {
 
     int hideUnchangingBarAfterSeconds();
 
-    int healthColorNormal();
+    default int healthColorNormal() {
+        return Utils.parseColor(healthColorNormalARGB());
+    }
 
-    int healthColorPoison();
+    String healthColorNormalARGB();
 
-    int healthColorWither();
+    default int healthColorPoison() {
+        return Utils.parseColor(healthColorPoisonARGB());
+    }
 
-    int healthColorFrozen();
+    String healthColorPoisonARGB();
 
-    int healthBoundColor();
+    default int healthColorWither() {
+        return Utils.parseColor(healthColorWitherARGB());
+    }
 
-    int healthBoundColorBlink();
+    String healthColorWitherARGB();
 
-    int healthBoundColorLow();
+    default int healthColorFrozen() {
+        return Utils.parseColor(healthColorFrozenARGB());
+    }
 
-    int healthEmptyColor();
+    String healthColorFrozenARGB();
 
-    int absorptionColor();
+    default int healthBoundColor() {
+        return Utils.parseColor(healthBoundColorARGB());
+    }
 
-    int absorptionBoundColor();
+    String healthBoundColorARGB();
 
-    int foodColorNormal();
+    default int healthBoundColorBlink() {
+        return Utils.parseColor(healthBoundColorBlinkARGB());
+    }
 
-    int foodColorHunger();
+    String healthBoundColorBlinkARGB();
 
-    int foodBoundColor();
+    default int healthBoundColorLow() {
+        return Utils.parseColor(healthBoundColorLowARGB());
+    }
 
-    int foodBoundColorBlink();
+    String healthBoundColorLowARGB();
 
-    int foodEmptyColor();
+    default int healthEmptyColor() {
+        return Utils.parseColor(healthEmptyColorARGB());
+    }
 
-    int saturationColor();
+    String healthEmptyColorARGB();
 
-    int experienceColor();
+    default int absorptionColor() {
+        return Utils.parseColor(absorptionColorARGB());
+    }
 
-    int experienceBoundColor();
+    String absorptionColorARGB();
 
-    int experienceEmptyColor();
+    default int absorptionBoundColor() {
+        return Utils.parseColor(absorptionBoundColorARGB());
+    }
 
-    int airColor();
+    String absorptionBoundColorARGB();
 
-    int airBoundColor();
+    default int foodColorNormal() {
+        return Utils.parseColor(foodColorNormalARGB());
+    }
 
-    int mountHealthColor();
+    String foodColorNormalARGB();
 
-    int mountHealthColor2();
+    default int foodColorHunger() {
+        return Utils.parseColor(foodColorHungerARGB());
+    }
 
-    int mountHealthBoundColor();
+    String foodColorHungerARGB();
 
-    int mountHealthBoundColor2();
+    default int foodBoundColor() {
+        return Utils.parseColor(foodBoundColorARGB());
+    }
 
-    int mountHealthEmptyColor();
+    String foodBoundColorARGB();
+
+    default int foodBoundColorBlink() {
+        return Utils.parseColor(foodBoundColorBlinkARGB());
+    }
+
+    String foodBoundColorBlinkARGB();
+
+    default int foodEmptyColor() {
+        return Utils.parseColor(foodEmptyColorARGB());
+    }
+
+    String foodEmptyColorARGB();
+
+    default int saturationColor() {
+        return Utils.parseColor(saturationColorARGB());
+    }
+
+    String saturationColorARGB();
+
+    default int experienceColor() {
+        return Utils.parseColor(experienceColorARGB());
+    }
+
+    String experienceColorARGB();
+
+    default int experienceBoundColor() {
+        return Utils.parseColor(experienceBoundColorARGB());
+    }
+
+    String experienceBoundColorARGB();
+
+    default int experienceEmptyColor() {
+        return Utils.parseColor(experienceEmptyColorARGB());
+    }
+
+    String experienceEmptyColorARGB();
+
+    default int airColor() {
+        return Utils.parseColor(airColorARGB());
+    }
+
+    String airColorARGB();
+
+    default int airBoundColor() {
+        return Utils.parseColor(airBoundColorARGB());
+    }
+
+    String airBoundColorARGB();
+
+    default int mountHealthColor() {
+        return Utils.parseColor(mountHealthColorARGB());
+    }
+
+    String mountHealthColorARGB();
+
+    default int mountHealthColor2() {
+        return Utils.parseColor(mountHealthColor2ARGB());
+    }
+
+    String mountHealthColor2ARGB();
+
+    default int mountHealthBoundColor() {
+        return Utils.parseColor(mountHealthBoundColorARGB());
+    }
+
+    String mountHealthBoundColorARGB();
+
+    default int mountHealthBoundColor2() {
+        return Utils.parseColor(mountHealthBoundColor2ARGB());
+    }
+
+    String mountHealthBoundColor2ARGB();
+
+    default int mountHealthEmptyColor() {
+        return Utils.parseColor(mountHealthEmptyColorARGB());
+    }
+
+    String mountHealthEmptyColorARGB();
 
     boolean mountHealthOnLeftSide();
 
-    int armorColor();
+    default int armorColor() {
+        return Utils.parseColor(armorColorARGB());
+    }
 
-    int armorBoundColor();
+    String armorColorARGB();
 
-    int armorEmptyColor();
+    default int armorBoundColor() {
+        return Utils.parseColor(armorBoundColorARGB());
+    }
 
-    int armorToughnessColor();
+    String armorBoundColorARGB();
+
+    default int armorEmptyColor() {
+        return Utils.parseColor(armorEmptyColorARGB());
+    }
+
+    String armorEmptyColorARGB();
+
+    default int armorToughnessColor() {
+        return Utils.parseColor(armorToughnessColorARGB());
+    }
+
+    String armorToughnessColorARGB();
 
     boolean enableHealthBlink();
 
@@ -180,19 +302,43 @@ public interface ConfigAdapter {
 
     boolean healthBarBoundVertex();
 
-    int healthBarHealthColor();
+    default int healthBarHealthColor() {
+        return Utils.parseColor(healthBarHealthColorARGB());
+    }
 
-    int healthBarAbsorptionColor();
+    String healthBarHealthColorARGB();
 
-    int healthBarBoundColor();
+    default int healthBarAbsorptionColor() {
+        return Utils.parseColor(healthBarAbsorptionColorARGB());
+    }
 
-    int healthBarEmptyColor();
+    String healthBarAbsorptionColorARGB();
+
+    default int healthBarBoundColor() {
+        return Utils.parseColor(healthBarBoundColorARGB());
+    }
+
+    String healthBarBoundColorARGB();
+
+    default int healthBarEmptyColor() {
+        return Utils.parseColor(healthBarEmptyColorARGB());
+    }
+
+    String healthBarEmptyColorARGB();
 
     boolean healthBarHealthColorDynamic();
 
-    int healthBarHealthColorFull();
+    default int healthBarHealthColorFull() {
+        return Utils.parseColor(healthBarHealthColorFullARGB());
+    }
 
-    int healthBarHealthColorEmpty();
+    String healthBarHealthColorFullARGB();
+
+    default int healthBarHealthColorEmpty() {
+        return Utils.parseColor(healthBarHealthColorEmptyARGB());
+    }
+
+    String healthBarHealthColorEmptyARGB();
 
     boolean hookToughAsNails();
 

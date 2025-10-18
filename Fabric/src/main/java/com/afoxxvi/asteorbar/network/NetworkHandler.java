@@ -1,8 +1,6 @@
 package com.afoxxvi.asteorbar.network;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.AsteorBarFabric;
-import com.afoxxvi.asteorbar.AsteorBarFabricClient;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
@@ -13,9 +11,9 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.ClientCommonPacketListener;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -166,8 +164,8 @@ public class NetworkHandler {
         }
     }
 
-    public static Packet<ClientGamePacketListener> createAbsorptionPacket(int entityId, float absorption) {
+    public static Packet<ClientCommonPacketListener> createAbsorptionPacket(int entityId, float absorption) {
         ByteBuf buf = PacketByteBufs.create().writeByte(INDEX_ABSORPTION).writeInt(entityId).writeFloat(absorption);
-        return ServerPlayNetworking.createS2CPacket(CHANNEL, PacketByteBufs.duplicate(buf));
+        return ServerPlayNetworking.createS2CPacket(new NetworkPayload(PacketByteBufs.duplicate(buf)));
     }
 }

@@ -47,6 +47,23 @@ public class Utils {
         return (a << 24) | (r << 16) | (g << 8) | b;
     }
 
+    /**
+     * Parse color from string.
+     * Decimal format: "16711680"
+     * Hex format: "#FF0000" or "0xFF0000"
+     */
+    public static int parseColor(String color) {
+        try {
+            if (color.startsWith("#") || color.startsWith("0x") || color.startsWith("0X")) {
+                return parseHexColor(color);
+            } else {
+                return Integer.parseInt(color);
+            }
+        } catch (NumberFormatException e) {
+            return 0xFFFFFFFF;
+        }
+    }
+
     public static int modifyAlpha(int color, float alpha) {
         if (alpha == 0) return color;
         int alphaInt = (int) (alpha * 255);

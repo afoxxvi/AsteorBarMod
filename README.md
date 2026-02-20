@@ -8,6 +8,19 @@ Get it from badge links above.
 
 See changelog [here](version_history.md).
 
+## Build Notes
+For Minecraft 1.21.11, Fabric module requires Gradle 9 while Forge and NeoForge modules require Gradle 8.
+To handle this, the project will ignore the Fabric module when building with Gradle 8, and ignore Forge and NeoForge modules when building with Gradle 9.
+
+Two Gradle distribution url is defined in `gradle/wrapper/gradle-wrapper.properties`.
+
+Also note that two `loom_version` properties are defined in `gradle.properties`, 
+to build with Gradle 9, use '1.15-SNAPSHOT', and to build with Gradle 8, use '1.13-SNAPSHOT'.
+
+The repo is currently for Fabric module.
+
+There might be a better way to handle this, but currently this is the solution I can think of.
+
 ## Features
 
 ### HUD Overlay

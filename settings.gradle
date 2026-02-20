@@ -19,7 +19,14 @@ plugins {
 
 rootProject.name = 'AsteorBarMod'
 include 'Common'
-include 'Fabric'
-include 'Forge'
-include 'NeoForge'
 
+// Include 'Forge' and 'NeoForge' only on Gradle versions that their plugins support (<9).
+// This lets the workspace run with Gradle 9+ for Fabric while keeping the other subprojects
+// available when using an older Gradle wrapper.
+def gradleMajor = gradle.gradleVersion.tokenize('.')[0].toInteger()
+if (gradleMajor < 9) {
+    include 'Forge'
+    include 'NeoForge'
+} else {
+    include 'Fabric'
+}

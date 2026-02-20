@@ -7,6 +7,21 @@ plugins {
     id 'net.neoforged.gradle.mixin' version '7.0.173'
 }
 
+// If running on Gradle 9+, skip applying the ForgeGradle plugin and exit this script early.
+// This lets the multi-project build keep the `Forge` subproject present without applying
+// the incompatible ForgeGradle plugin, allowing `Fabric` (which requires Gradle 9+) to work.
+def gradleMajor = gradle.gradleVersion.tokenize('.')[0].toInteger()
+if (gradleMajor >= 9) {
+    logger.lifecycle("Skipping Forge subproject configuration because Gradle ${gradle.gradleVersion} is unsupported by ForgeGradle.")
+    group = mod_group_id
+    version = mod_version
+    base { archivesName = "$mod_id-forge-$minecraft_version" }
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+    return
+}
+
 repositories {
     maven {
         url "https://cursemaven.com"

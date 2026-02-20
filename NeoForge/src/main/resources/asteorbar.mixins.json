@@ -6,6 +6,7 @@
     "ContextualBarRendererMixin",
     "EntityMixin",
     "ExperienceBarRendererMixin",
+    "InventoryScreenMixin",
     "LivingEntityRendererMixin",
     "LivingEntityRenderStateMixin"
   ],

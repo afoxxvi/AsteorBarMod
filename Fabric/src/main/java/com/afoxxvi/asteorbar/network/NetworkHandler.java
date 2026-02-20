@@ -14,7 +14,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.ClientCommonPacketListener;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +26,7 @@ import java.util.UUID;
 
 public class NetworkHandler {
     private static boolean initialized = false;
-    private static final ResourceLocation CHANNEL = ResourceLocation.fromNamespaceAndPath("asteorbar", "network");
+    private static final Identifier CHANNEL = Identifier.fromNamespaceAndPath("asteorbar", "network");
     private static final int INDEX_EXHAUSTION = 0;
     private static final int INDEX_SATURATION = 1;
     private static final int INDEX_ABSORPTION = 2;

@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.AsteorBarForge;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public class NetworkHandler {
     private static boolean initialized = false;
     private static final SimpleChannel CHANNEL = ChannelBuilder
-            .named(ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "network"))
+            .named(Identifier.fromNamespaceAndPath(AsteorBar.MOD_ID, "network"))
             .networkProtocolVersion(1)
             .optional()
             .acceptedVersions((status, version) -> true)

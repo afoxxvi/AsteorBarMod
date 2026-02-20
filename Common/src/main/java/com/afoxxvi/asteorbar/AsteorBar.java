@@ -5,7 +5,8 @@ import com.afoxxvi.asteorbar.config.ConfigAdapter;
 import com.afoxxvi.asteorbar.config.DefaultConfigAdapter;
 import com.afoxxvi.asteorbar.overlay.parts.compat.AppleSkinCompat;
 import com.afoxxvi.asteorbar.utils.PlatformAdapter;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class AsteorBar {
 
         @Override
         public RenderType getRenderType() {
-            return RenderType.solid();
+            return RenderTypes.solidMovingBlock();
         }
 
         @Override

@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public class NetworkHandler {
     private static boolean initialized = false;
     //avoid sending packets too frequently
-    private static final ResourceLocation CHANNEL = ResourceLocation.fromNamespaceAndPath("asteorbar", "network");
+    private static final Identifier CHANNEL = Identifier.fromNamespaceAndPath("asteorbar", "network");
     private static final byte INDEX_EXHAUSTION = 0;
     private static final byte INDEX_SATURATION = 1;
     private static final byte INDEX_ABSORPTION = 2;

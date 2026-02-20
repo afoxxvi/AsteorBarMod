@@ -12,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
 import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,7 @@ public class EntityRenderer {
     //reserved for third party mods
     public static final List<ExtraRenderer> EXTRA_RENDERERS = new ArrayList<>();
     public static final List<ExtraTextRenderer> EXTRA_TEXT_RENDERERS = new ArrayList<>();
+    public static final Quaternionf FLIP_Y = new Quaternionf().rotationY((float) Math.PI);
 
     public static void extraSubmit(LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, float halfWidth, float halfHeight, float boundWidth) {
         EXTRA_RENDERERS.forEach(extraRenderer -> extraRenderer.render(renderState, poseStack, nodeCollector, halfWidth, halfHeight, boundWidth));
@@ -70,9 +70,13 @@ public class EntityRenderer {
          * poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().cameraOrientation());
          */
         // Start Of Rotation
-        final var cameraEuler = Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation().getEulerAnglesXYZ(new Vector3f());
-        poseStack.mulPose(new Quaternionf().rotationXYZ(0, (float) Math.PI, 0));
-        poseStack.mulPose(new Quaternionf().rotationXYZ(-cameraEuler.x, cameraEuler.y, -cameraEuler.z));
+        if (!feature.asteorBar$inInventory()) {
+            final var camera = Minecraft.getInstance().getEntityRenderDispatcher().camera;
+            if (camera != null) {
+                poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
+                poseStack.mulPose(FLIP_Y);
+            }
+        }
         // End Of Rotation
 
         {//render health bar

@@ -5,7 +5,7 @@ import com.afoxxvi.asteorbar.AsteorBarFabric;
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
 import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

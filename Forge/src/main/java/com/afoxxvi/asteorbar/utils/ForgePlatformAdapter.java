@@ -1,11 +1,9 @@
 package com.afoxxvi.asteorbar.utils;
 
 import com.afoxxvi.asteorbar.AsteorBarForge;
-import com.afoxxvi.asteorbar.AsteorBar;
-import com.afoxxvi.asteorbar.AsteorBarForge;
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
 import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.ForgeMod;

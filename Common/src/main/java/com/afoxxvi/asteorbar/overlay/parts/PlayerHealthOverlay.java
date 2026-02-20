@@ -3,7 +3,6 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
-import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -40,16 +39,17 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         highlight = false;
         if (AsteorBar.config.enableHealthBlink()) {
             highlight = (healthBlinkTime > tick) && ((healthBlinkTime - tick) / 3L % 2L == 1L);
+            long now = System.currentTimeMillis();
             if (health < lastHealth && player.invulnerableTime > 0) {
-                lastHealthTime = Util.getMillis();
+                lastHealthTime = now;
                 healthBlinkTime = tick + 20L;
             } else if (health > lastHealth && player.invulnerableTime > 0) {
-                lastHealthTime = Util.getMillis();
+                lastHealthTime = now;
                 healthBlinkTime = tick + 10L;
             }
-            if (Util.getMillis() - lastHealthTime > 1000L) {
+            if (now - lastHealthTime > 1000L) {
                 lastHealth = health;
-                lastHealthTime = Util.getMillis();
+                lastHealthTime = now;
             }
             lastHealth = health;
         }

@@ -13,6 +13,8 @@ public abstract class LivingEntityRenderStateMixin implements IHealthBarFeature 
     private double asteorBar$maxHealth = 0.0;
     @Unique
     private double asteorBar$absorptionAmount = 0.0;
+    @Unique
+    private boolean asteorBar$inInventory = false;
 
     @Override
     public void asteorBar$setHealth(double health) {
@@ -42,5 +44,15 @@ public abstract class LivingEntityRenderStateMixin implements IHealthBarFeature 
     @Override
     public double asteorBar$getAbsorptionAmount() {
         return asteorBar$absorptionAmount;
+    }
+
+    @Override
+    public void asteorBar$setInInventory(boolean inInventory) {
+        this.asteorBar$inInventory = inInventory;
+    }
+
+    @Override
+    public boolean asteorBar$inInventory() {
+        return asteorBar$inInventory;
     }
 }

@@ -12,4 +12,8 @@ public interface IHealthBarFeature {
     double asteorBar$getAbsorptionAmount();
 
     void asteorBar$setAbsorptionAmount(double absorptionAmount);
+
+    boolean asteorBar$inInventory();
+
+    void asteorBar$setInInventory(boolean inInventory);
 }

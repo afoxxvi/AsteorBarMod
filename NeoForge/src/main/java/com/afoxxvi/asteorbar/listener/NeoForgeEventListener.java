@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.NeoforgeGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -14,13 +14,13 @@ import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 @EventBusSubscriber(modid = AsteorBar.MOD_ID, value = Dist.CLIENT)
 public class NeoForgeEventListener {
-    private static final ResourceLocation THIRST_SATURATION = ResourceLocation.fromNamespaceAndPath("thirst", "saturation_overlay");
-    private static final ResourceLocation THIRST_EXHAUSTION = ResourceLocation.fromNamespaceAndPath("thirst", "exhaustion_overlay");
+    private static final Identifier THIRST_SATURATION = Identifier.fromNamespaceAndPath("thirst", "saturation_overlay");
+    private static final Identifier THIRST_EXHAUSTION = Identifier.fromNamespaceAndPath("thirst", "exhaustion_overlay");
 
     @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiLayerEvent.Pre event) {
         if (!AsteorBar.config.enableOverlay()) return;
-        ResourceLocation overlay = event.getName();
+        Identifier overlay = event.getName();
         if (overlay == VanillaGuiLayers.PLAYER_HEALTH) {
             Overlays.reset();
             NeoforgeGuiRegistry.init();

@@ -2,28 +2,21 @@ package com.afoxxvi.asteorbar.entity;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.RenderStateShard;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.renderer.rendertype.RenderSetup;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.resources.Identifier;
 
-public class AsteorBarRenderType extends RenderStateShard {
+public class AsteorBarRenderType {
     //If no texture, the bar is not rendered while using shader packs
-    private static final ResourceLocation LIGHTMAP_TEXTURE = ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/ui/lightmap.png");
+    private static final Identifier LIGHTMAP_TEXTURE = Identifier.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/ui/lightmap.png");
     public static final RenderType RENDER_TYPE = RenderType.create(
             "asteorbar_health_bar",
-            1536,
-            true,
-            false,
-            RenderPipelines.ENTITY_TRANSLUCENT,
-            RenderType.CompositeState.builder()
-                    //.setShaderState(RenderStateShard.POSITION_COLOR_TEX_LIGHTMAP_SHADER)
-                    //.setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                    .setTextureState(new TextureStateShard(LIGHTMAP_TEXTURE, false))
-                    .setLightmapState(LIGHTMAP)
-                    .createCompositeState(false)
+            RenderSetup.builder(RenderPipelines.ENTITY_TRANSLUCENT)
+                    .withTexture("Sampler0", LIGHTMAP_TEXTURE)
+                    .useOverlay()
+                    .useLightmap()
+                    .affectsCrumbling()
+                    .sortOnUpload()
+                    .createRenderSetup()
     );
-
-    public AsteorBarRenderType(String p_110161_, Runnable p_110162_, Runnable p_110163_) {
-        super(p_110161_, p_110162_, p_110163_);
-    }
 }

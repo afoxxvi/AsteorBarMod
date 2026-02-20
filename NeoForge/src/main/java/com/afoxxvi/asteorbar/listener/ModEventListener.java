@@ -5,7 +5,7 @@ import com.afoxxvi.asteorbar.AsteorBarNeoForge;
 import com.afoxxvi.asteorbar.key.KeyBinding;
 import com.afoxxvi.asteorbar.overlay.NeoForgeRenderGui;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -18,7 +18,7 @@ public class ModEventListener {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiLayersEvent event) {
         AsteorBarNeoForge.LOGGER.info("Registering Overlays");
-        event.registerBelow(VanillaGuiLayers.PLAYER_HEALTH, ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "main"), new NeoForgeRenderGui(Overlays.MAIN));
+        event.registerBelow(VanillaGuiLayers.PLAYER_HEALTH, Identifier.fromNamespaceAndPath(AsteorBar.MOD_ID, "main"), new NeoForgeRenderGui(Overlays.MAIN));
     }
 
     @SubscribeEvent

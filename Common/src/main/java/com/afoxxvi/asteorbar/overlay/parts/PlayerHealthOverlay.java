@@ -34,9 +34,21 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         return new int[]{Utils.parseHexColor(color1), Utils.parseHexColor(color2), Utils.parseHexColor(colors[(low + 1) % colors.length])};
     }
 
+    protected float getMaxHealth(Player player) {
+        return player.getMaxHealth();
+    }
+
+    protected float getHealth(Player player) {
+        return player.getHealth();
+    }
+
+    protected float getAbsorption(Player player) {
+        return player.getAbsorptionAmount();
+    }
+
     @Override
     protected Parameters getParameters(Player player) {
-        float health = player.getHealth();
+        float health = getHealth(player);
         highlight = false;
         if (AsteorBar.config.enableHealthBlink()) {
             highlight = (healthBlinkTime > tick) && ((healthBlinkTime - tick) / 3L % 2L == 1L);
@@ -57,9 +69,9 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         if (player.hasEffect(MobEffects.REGENERATION)) {
             regenerationOffset = tick % 30 * 6;
         }
-        float maxHealth = player.getMaxHealth();
+        float maxHealth = getMaxHealth(player);
         fullHealth = health >= maxHealth;
-        float absorb = player.getAbsorptionAmount();
+        float absorb = getAbsorption(player);
         flashAlpha = -1F;
         if (health < maxHealth * AsteorBar.config.lowHealthRate() && !highlight) {
             int margin = Math.abs(tick % 20 - 10);
@@ -89,7 +101,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         if (i == ABSORPTION_MODE_TOGETHER) {
             //draw health
             double full = maxHealth + absorb;
-            parameters.value = 1 - (maxHealth - health) / full - parameters.secondValue;
+            parameters.value = health / full;
             parameters.secondValue = absorb / full;
             parameters.secondValueOffset = parameters.value;
             parameters.secondFillColor = AsteorBar.config.absorptionColor();

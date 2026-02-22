@@ -163,6 +163,7 @@ public abstract class BaseOverlay {
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
             for (BaseOverlay baseOverlay : overrideOverlay) {
                 if (baseOverlay.shouldOverride()) {
+                    passRenderOptionsTo(baseOverlay);
                     baseOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
                     return;
                 }
@@ -172,4 +173,8 @@ public abstract class BaseOverlay {
     }
 
     public abstract void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight);
+
+    public void passRenderOptionsTo(BaseOverlay override) {
+        //default does nothing, override if you want to pass options to the override overlay
+    }
 }

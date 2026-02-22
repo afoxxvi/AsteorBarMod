@@ -25,7 +25,7 @@ public class NeoforgeGuiRegistry {
             Overlays.registerOverlayAtRecommended(new IronsSpellbooksOverlay(), Overlays.Position.UNSPECIFIED);
         }
         if (AsteorBar.compatibility.vampirism) {
-            Overlays.FOOD_LEVEL.setOverrideOverlay(new VampirismOverlay());
+            Overlays.FOOD_LEVEL.addOverrideOverlay(new VampirismOverlay());
         }
     }
 }

@@ -7,6 +7,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseOverlay {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/gui/overlay.png");
     public static final ResourceLocation LIGHTMAP_TEXTURE = ResourceLocation.fromNamespaceAndPath(AsteorBar.MOD_ID, "textures/ui/lightmap.png");
@@ -19,11 +22,11 @@ public abstract class BaseOverlay {
     public static final int Y_RIGHT_DECORATION = 27;
     public static final int Y_LEFT_DECORATION = 36;
 
-    protected BaseOverlay overrideOverlay = null;
+    protected List<BaseOverlay> overrideOverlay = new ArrayList<>();
     protected int tick = 0;
 
-    public void setOverrideOverlay(BaseOverlay overrideOverlay) {
-        this.overrideOverlay = overrideOverlay;
+    public void addOverrideOverlay(BaseOverlay overrideOverlay) {
+        this.overrideOverlay.add(overrideOverlay);
     }
 
     public boolean shouldOverride() {
@@ -149,11 +152,13 @@ public abstract class BaseOverlay {
         if (AsteorBar.config.enableOverlay()) {
             tick = gui.gui().getGuiTicks();
             RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
-            if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
-                overrideOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
-            } else {
-                renderOverlay(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+            for (BaseOverlay baseOverlay : overrideOverlay) {
+                if (baseOverlay.shouldOverride()) {
+                    baseOverlay.render(gui, guiGraphics, partialTick, screenWidth, screenHeight);
+                    return;
+                }
             }
+            renderOverlay(gui, guiGraphics, partialTick, screenWidth, screenHeight);
         }
     }
 

@@ -62,6 +62,8 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         public int leftOuterColor = 0;
         public int rightOuterColor = 0;
         public int verticalShift = 0;
+        public int coercedColor = 0;
+        public double coercedValue = 0;
 
         public Parameters() {
         }
@@ -127,6 +129,10 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         drawEmptyFill(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, parameters.emptyColor);
         drawFadeEffect(guiGraphics, left, top, right, bottom, parameters, flip);
         final int innerWidth = right - left - 2;
+        if (parameters.coercedColor != 0) {
+            final int coercedFillWidth = (int) (innerWidth * parameters.coercedValue / parameters.capacity);
+            drawFillFlipReversed(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, coercedFillWidth, parameters.coercedColor, flip);
+        }
         final int fillWidth = (int) (innerWidth * parameters.value / parameters.capacity);
         if (parameters.fillColor2 != 0) {
             drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, parameters.fillColor, parameters.fillColor2, flip);
@@ -296,7 +302,8 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
             switch (Overlays.style) {
                 case Overlays.STYLE_ABOVE_HOT_BAR_LONG, Overlays.STYLE_ABOVE_HOT_BAR_SHORT ->
                         position = isLeftSide() ? Overlays.Position.HALF_BOTTOM_LEFT : Overlays.Position.HALF_BOTTOM_RIGHT;
-                case Overlays.STYLE_TOP_BOTH_SIDES -> position = isLeftSide() ? Overlays.Position.TOP_LEFT : Overlays.Position.TOP_RIGHT;
+                case Overlays.STYLE_TOP_BOTH_SIDES ->
+                        position = isLeftSide() ? Overlays.Position.TOP_LEFT : Overlays.Position.TOP_RIGHT;
                 case Overlays.STYLE_BOTTOM_BOTH_SIDES ->
                         position = isLeftSide() ? Overlays.Position.BOTTOM_LEFT : Overlays.Position.BOTTOM_RIGHT;
                 case Overlays.STYLE_TOP_LEFT -> position = Overlays.Position.TOP_LEFT;

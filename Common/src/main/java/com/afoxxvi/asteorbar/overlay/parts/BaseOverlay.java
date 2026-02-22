@@ -85,6 +85,15 @@ public abstract class BaseOverlay {
         }
     }
 
+    protected void drawFillFlipReversed(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
+        width = Math.max(0, Math.min(right - left, width));
+        if (flip) {
+            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), left, top, left + width, bottom, color);
+        } else {
+            GuiHelper.drawSolidGradientUpDown(guiGraphics.pose(), right - width, top, right, bottom, color);
+        }
+    }
+
     protected void drawBoundFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
         if (has == 0) {
             drawBoundFlip(guiGraphics, left, top, right, bottom, width, color, flip);

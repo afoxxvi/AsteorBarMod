@@ -111,4 +111,5 @@ public class ConfigComment {
     public static final String hookApoli = "Whether to hook Apoli(Origins).";
     public static final String hookThermoo = "Whether to hook Thermoo(Scorchful & Frostiful).";
     public static final String hookMealAPI = "Whether to hook Meal API.";
+    public static final String hookLegendarySurvivalOverhaul = "Whether to hook Legendary Survival Overhaul.";
 }

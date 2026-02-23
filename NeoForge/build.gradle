@@ -118,6 +118,9 @@ dependencies {
     if (thirst_was_taken_version_neoforge != "0") {
         compileOnly "curse.maven:thirst-was-taken-679270:${thirst_was_taken_version_neoforge}"
     }
+    if (legendary_survival_overhaul_version_neoforge != "0") {
+        compileOnly "curse.maven:legendary-survival-overhaul-840254:${legendary_survival_overhaul_version_neoforge}"
+    }
 }
 
 compileJava {

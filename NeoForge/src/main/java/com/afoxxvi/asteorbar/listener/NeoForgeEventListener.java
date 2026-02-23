@@ -18,6 +18,9 @@ public class NeoForgeEventListener {
     private static final ResourceLocation THIRST_EXHAUSTION = ResourceLocation.fromNamespaceAndPath("thirst", "exhaustion_overlay");
     private static final ResourceLocation VAMPIRISM_BLOOD = ResourceLocation.fromNamespaceAndPath("vampirism", "blood_bar");
     private static final ResourceLocation IRONS_SPELLBOOKS_MANA = ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "mana_overlay");
+    private static final ResourceLocation LSO_HEALTH = ResourceLocation.fromNamespaceAndPath("legendarysurvivaloverhaul", "health_overhaul");
+    private static final ResourceLocation LSO_THIRST = ResourceLocation.fromNamespaceAndPath("legendarysurvivaloverhaul", "thirst");
+    private static final ResourceLocation LSO_COLD_HUNGER = ResourceLocation.fromNamespaceAndPath("legendarysurvivaloverhaul", "cold_hunger");
 
     @SubscribeEvent
     public static void disableVanillaOverlays(RenderGuiLayerEvent.Pre event) {
@@ -60,6 +63,9 @@ public class NeoForgeEventListener {
             return;
         }
         if (AsteorBar.compatibility.ironsSpellbooks && AsteorBar.config.hookIronsSpellbooks() && overlay.equals(IRONS_SPELLBOOKS_MANA)) {
+            event.setCanceled(true);
+        }
+        if (AsteorBar.compatibility.legendarySurvivalOverhaul && AsteorBar.config.hookLegendarySurvivalOverhaul() && (overlay.equals(LSO_HEALTH) || overlay.equals(LSO_THIRST) || overlay.equals(LSO_COLD_HUNGER))) {
             event.setCanceled(true);
         }
     }

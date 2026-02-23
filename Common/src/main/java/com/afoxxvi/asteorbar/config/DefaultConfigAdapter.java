@@ -567,4 +567,9 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     public boolean hookMealApi() {
         return true;
     }
+
+    @Override
+    public boolean hookLegendarySurvivalOverhaul() {
+        return true;
+    }
 }

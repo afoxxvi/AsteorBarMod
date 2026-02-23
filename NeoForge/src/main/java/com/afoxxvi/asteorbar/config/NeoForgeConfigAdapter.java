@@ -119,6 +119,7 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue HOOK_APOLI;
         public static final ModConfigSpec.BooleanValue HOOK_THERMOO;
         public static final ModConfigSpec.BooleanValue HOOK_MEAL_API;
+        public static final ModConfigSpec.BooleanValue HOOK_LEGENDARY_SURVIVAL_OVERHAUL;
 
         static {
             BUILDER.push("overlay");
@@ -566,6 +567,10 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.hookMealAPI)
                     .translation("text.autoconfig.asteorbar.option.hook.hookMealApi")
                     .define("mealAPI", DefaultConfigAdapter.I.hookMealApi());
+            HOOK_LEGENDARY_SURVIVAL_OVERHAUL = BUILDER
+                    .comment(ConfigComment.hookLegendarySurvivalOverhaul)
+                    .translation("text.autoconfig.asteorbar.option.hook.hookLegendarySurvivalOverhaul")
+                    .define("legendarySurvivalOverhaul", DefaultConfigAdapter.I.hookLegendarySurvivalOverhaul());
             BUILDER.pop();
         }
 
@@ -1138,6 +1143,11 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean hookMealApi() {
         return Config.HOOK_MEAL_API.get();
+    }
+
+    @Override
+    public boolean hookLegendarySurvivalOverhaul() {
+        return Config.HOOK_LEGENDARY_SURVIVAL_OVERHAUL.get();
     }
 
 }

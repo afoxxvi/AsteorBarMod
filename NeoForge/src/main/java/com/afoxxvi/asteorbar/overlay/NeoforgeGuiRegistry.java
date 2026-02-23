@@ -5,6 +5,9 @@ import com.afoxxvi.asteorbar.overlay.parts.IronsSpellbooksOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ThirstWasTakenOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.ToughAsNailsOverlay;
 import com.afoxxvi.asteorbar.overlay.parts.VampirismOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulFoodOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulHealthOverlay;
+import com.afoxxvi.asteorbar.overlay.parts.lso.LegendarySurvivalOverhaulThirstOverlay;
 
 public class NeoforgeGuiRegistry {
     private NeoforgeGuiRegistry() {
@@ -26,6 +29,11 @@ public class NeoforgeGuiRegistry {
         }
         if (AsteorBar.compatibility.vampirism) {
             Overlays.FOOD_LEVEL.addOverrideOverlay(new VampirismOverlay());
+        }
+        if (AsteorBar.compatibility.legendarySurvivalOverhaul) {
+            Overlays.registerOverlayAtRecommended(new LegendarySurvivalOverhaulThirstOverlay(), Overlays.Position.UNSPECIFIED);
+            Overlays.PLAYER_HEALTH.addOverrideOverlay(new LegendarySurvivalOverhaulHealthOverlay());
+            Overlays.FOOD_LEVEL.addOverrideOverlay(new LegendarySurvivalOverhaulFoodOverlay());
         }
     }
 }

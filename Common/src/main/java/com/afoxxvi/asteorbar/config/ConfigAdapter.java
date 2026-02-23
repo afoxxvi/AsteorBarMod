@@ -231,6 +231,10 @@ public interface ConfigAdapter {
 
     boolean shakeHealthAndFoodWhileLow();
 
+    boolean overwriteVanillaHealthBar();
+
+    boolean overwriteVanillaFoodBar();
+
     boolean overwriteVanillaArmorBar();
 
     boolean overwriteVanillaExperienceBar();

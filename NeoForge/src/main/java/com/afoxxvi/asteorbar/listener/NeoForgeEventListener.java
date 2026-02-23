@@ -30,11 +30,11 @@ public class NeoForgeEventListener {
             Overlays.reset();
             NeoforgeGuiRegistry.init();
         }
-        if (overlay == VanillaGuiLayers.PLAYER_HEALTH) {
+        if (AsteorBar.config.overwriteVanillaHealthBar() && overlay == VanillaGuiLayers.PLAYER_HEALTH) {
             event.setCanceled(true);
             return;
         }
-        if (overlay == VanillaGuiLayers.FOOD_LEVEL) {
+        if (AsteorBar.config.overwriteVanillaFoodBar() && overlay == VanillaGuiLayers.FOOD_LEVEL) {
             event.setCanceled(true);
             return;
         }

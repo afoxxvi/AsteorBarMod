@@ -202,7 +202,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
-        return true;
+        return AsteorBar.config.overwriteVanillaHealthBar();
     }
 
     @Override

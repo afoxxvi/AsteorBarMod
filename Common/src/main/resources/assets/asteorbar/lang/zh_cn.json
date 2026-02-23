@@ -58,6 +58,8 @@
   "text.autoconfig.asteorbar.option.overlay.enableHealthBlink": "生命值低血量闪烁",
   "text.autoconfig.asteorbar.option.overlay.lowHealthRate": "低血量比例",
   "text.autoconfig.asteorbar.option.overlay.shakeHealthAndFoodWhileLow": "低血量/饱食度时抖动",
+  "text.autoconfig.asteorbar.option.overlay.overwriteVanillaHealthBar": "替换原版生命条",
+  "text.autoconfig.asteorbar.option.overlay.overwriteVanillaFoodBar": "替换原版饱食度条",
   "text.autoconfig.asteorbar.option.overlay.overwriteVanillaArmorBar": "替换原版护甲条",
   "text.autoconfig.asteorbar.option.overlay.overwriteVanillaExperienceBar": "替换原版经验条",
   "text.autoconfig.asteorbar.option.overlay.displayExperienceProgress": "显示经验值文本",

@@ -274,6 +274,16 @@ public class DefaultConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean overwriteVanillaHealthBar() {
+        return true;
+    }
+
+    @Override
+    public boolean overwriteVanillaFoodBar() {
+        return true;
+    }
+
+    @Override
     public boolean overwriteVanillaArmorBar() {
         return true;
     }

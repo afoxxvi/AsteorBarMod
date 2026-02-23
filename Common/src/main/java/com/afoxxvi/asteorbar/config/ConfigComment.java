@@ -53,6 +53,8 @@ public class ConfigComment {
     public static final String enableHealthBlink = "Whether to enable health bar blink. This feature is designed to simulate the vanilla health icon blink.";
     public static final String lowHealthRate = "The health bar will start to flash when health rate is lower than this value. From 0.0-1.0. 0.0 means never flash.";
     public static final String shakeHealthAndFoodWhileLow = "Whether to shake health and food bar while low value.";
+    public static final String overwriteVanillaHealthBar = "Whether to overwrite vanilla health bar. If you don't like the mod's health bar, you can disable this option. May not work well except NeoForge";
+    public static final String overwriteVanillaFoodBar = "Whether to overwrite vanilla food bar. If you don't like the mod's food bar, you can disable this option. May not work well except NeoForge";
     public static final String overwriteVanillaArmorBar = "Whether to overwrite vanilla armor bar. If you don't like the mod's armor bar, you can disable this option.";
     public static final String overwriteVanillaExperienceBar = "Whether to overwrite vanilla experience bar. If you don't like the mod's experience bar, you can disable this option, progress label won't be affected.";
     public static final String displayExperienceProgress = "Whether to display experience progress on the side of the experience bar.";

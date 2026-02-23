@@ -58,6 +58,8 @@
   "text.autoconfig.asteorbar.option.overlay.enableHealthBlink": "Enable Health Blink",
   "text.autoconfig.asteorbar.option.overlay.lowHealthRate": "Low Health Rate",
   "text.autoconfig.asteorbar.option.overlay.shakeHealthAndFoodWhileLow": "Shake Health and Food Bar While Low",
+  "text.autoconfig.asteorbar.option.overlay.overwriteVanillaHealthBar": "Overwrite Vanilla Health Bar",
+  "text.autoconfig.asteorbar.option.overlay.overwriteVanillaFoodBar": "Overwrite Vanilla Food Bar",
   "text.autoconfig.asteorbar.option.overlay.overwriteVanillaArmorBar": "Overwrite Vanilla Armor Bar",
   "text.autoconfig.asteorbar.option.overlay.overwriteVanillaExperienceBar": "Overwrite Vanilla Experience Bar",
   "text.autoconfig.asteorbar.option.overlay.displayExperienceProgress": "Display Experience Progress",

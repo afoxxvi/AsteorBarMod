@@ -60,6 +60,8 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
         public static final ModConfigSpec.BooleanValue ENABLE_HEALTH_BLINK;
         public static final ModConfigSpec.DoubleValue LOW_HEALTH_RATE;
         public static final ModConfigSpec.BooleanValue SHAKE_HEALTH_AND_FOOD_WHILE_LOW;
+        public static final ModConfigSpec.BooleanValue OVERWRITE_VANILLA_HEALTH_BAR;
+        public static final ModConfigSpec.BooleanValue OVERWRITE_VANILLA_FOOD_BAR;
         public static final ModConfigSpec.BooleanValue OVERWRITE_VANILLA_ARMOR_BAR;
         public static final ModConfigSpec.BooleanValue OVERWRITE_VANILLA_EXPERIENCE_BAR;
         public static final ModConfigSpec.BooleanValue DISPLAY_EXPERIENCE_PROGRESS;
@@ -331,6 +333,14 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
                     .comment(ConfigComment.shakeHealthAndFoodWhileLow)
                     .translation("text.autoconfig.asteorbar.option.overlay.shakeHealthAndFoodWhileLow")
                     .define("shakeHealthAndFoodWhileLow", DefaultConfigAdapter.I.shakeHealthAndFoodWhileLow());
+            OVERWRITE_VANILLA_HEALTH_BAR = BUILDER
+                    .comment(ConfigComment.overwriteVanillaHealthBar)
+                    .translation("text.autoconfig.asteorbar.option.overlay.overwriteVanillaHealthBar")
+                    .define("overwriteVanillaHealthBar", DefaultConfigAdapter.I.overwriteVanillaHealthBar());
+            OVERWRITE_VANILLA_FOOD_BAR = BUILDER
+                    .comment(ConfigComment.overwriteVanillaFoodBar)
+                    .translation("text.autoconfig.asteorbar.option.overlay.overwriteVanillaFoodBar")
+                    .define("overwriteVanillaFoodBar", DefaultConfigAdapter.I.overwriteVanillaFoodBar());
             OVERWRITE_VANILLA_ARMOR_BAR = BUILDER
                     .comment(ConfigComment.overwriteVanillaArmorBar)
                     .translation("text.autoconfig.asteorbar.option.overlay.overwriteVanillaArmorBar")
@@ -847,6 +857,16 @@ public class NeoForgeConfigAdapter implements ConfigAdapter {
     @Override
     public boolean shakeHealthAndFoodWhileLow() {
         return Config.SHAKE_HEALTH_AND_FOOD_WHILE_LOW.get();
+    }
+
+    @Override
+    public boolean overwriteVanillaHealthBar() {
+        return Config.OVERWRITE_VANILLA_HEALTH_BAR.get();
+    }
+
+    @Override
+    public boolean overwriteVanillaFoodBar() {
+        return Config.OVERWRITE_VANILLA_FOOD_BAR.get();
     }
 
     @Override

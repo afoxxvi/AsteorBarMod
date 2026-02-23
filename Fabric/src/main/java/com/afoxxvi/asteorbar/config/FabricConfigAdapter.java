@@ -283,6 +283,16 @@ public class FabricConfigAdapter implements ConfigAdapter {
     }
 
     @Override
+    public boolean overwriteVanillaHealthBar() {
+        return config.overlay.overwriteVanillaHealthBar;
+    }
+
+    @Override
+    public boolean overwriteVanillaFoodBar() {
+        return config.overlay.overwriteVanillaFoodBar;
+    }
+
+    @Override
     public boolean overwriteVanillaArmorBar() {
         return config.overlay.overwriteVanillaArmorBar;
     }
@@ -708,6 +718,10 @@ public class FabricConfigAdapter implements ConfigAdapter {
             public double lowHealthRate = DefaultConfigAdapter.I.lowHealthRate();
             @Comment(ConfigComment.shakeHealthAndFoodWhileLow)
             public boolean shakeHealthAndFoodWhileLow = DefaultConfigAdapter.I.shakeHealthAndFoodWhileLow();
+            @Comment(ConfigComment.overwriteVanillaHealthBar)
+            public boolean overwriteVanillaHealthBar = DefaultConfigAdapter.I.overwriteVanillaHealthBar();
+            @Comment(ConfigComment.overwriteVanillaFoodBar)
+            public boolean overwriteVanillaFoodBar = DefaultConfigAdapter.I.overwriteVanillaFoodBar();
             @Comment(ConfigComment.overwriteVanillaArmorBar)
             public boolean overwriteVanillaArmorBar = DefaultConfigAdapter.I.overwriteVanillaArmorBar();
             @Comment(ConfigComment.overwriteVanillaExperienceBar)

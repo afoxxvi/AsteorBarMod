@@ -65,6 +65,6 @@ public class FoodLevelOverlay extends SimpleBarOverlay {
 
     @Override
     protected boolean shouldRender(Player player) {
-        return true;
+        return AsteorBar.config.overwriteVanillaFoodBar();
     }
 }

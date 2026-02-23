@@ -32,16 +32,16 @@ public class ExperienceBarOverlay extends SimpleBarOverlay {
         RenderSystem.setShaderTexture(0, TEXTURE);
         drawTextureFillColor(guiGraphics, left + 1, top, innerWidth, 5, 10, Y_EXPERIENCE_DECORATION, textureWidth, 5, AsteorBar.config.experienceColor());
         RenderSystem.setShaderTexture(0, LIGHTMAP_TEXTURE);
+        final int stringOffsetY = AsteorBar.config.overlayBarTextOffsetY();
         if (AsteorBar.config.displayExperienceLevel()) {
             int x = (right + left) / 2;
-            int y = top - 2;
+            int y = top + stringOffsetY;
             Overlays.addStringRender(x, y, 0x80FF20, String.valueOf(level), Overlays.ALIGN_CENTER, false, true, 0);
         }
         if (AsteorBar.config.displayExperienceProgress()) {
-            int x, y;
             int len = (right - left) / 2;
-            x = left + len;
-            y = top - 2;
+            int x = left + len;
+            int y = top + stringOffsetY;
             boolean inside = len < 180;
             if (x >= 0 && y >= 0) {
                 if (inside) {

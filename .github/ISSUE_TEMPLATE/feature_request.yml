@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest a new feature or improvement
+title: "[FEATURE] "
+labels: []
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest a feature! 
+        Please fill in all required fields. Issues without enough information may be closed without investigation.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the feature
+      description: Please provide a clear and concise description of the feature you are suggesting, including any relevant use cases or examples.
+      placeholder: What is the feature, why is it useful, and how would it work?
+    validations:
+      required: true
+
+  - type: input
+    id: related_mods
+    attributes:
+      label: Related mods (optional)
+      description: If this feature is related to or inspired by another mod, please list it here.
+      placeholder: List any related mods here, providing links if possible.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I am not requesting a support for old versions of Minecraft(<1.18) or mod loaders.
+          required: true
+        - label: I have searched existing issues and am confident this feature has not already been suggested.
+          required: true
+        - label: I am aware that issues without enough information may be closed without investigation
+          required: true

@@ -5,7 +5,7 @@ import com.afoxxvi.asteorbar.overlay.parts.*;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Pair;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -214,7 +214,7 @@ public class Overlays {
         rightHeight = 39;
     }
 
-    public static void renderString(GuiGraphics guiGraphics) {
+    public static void renderString(GuiGraphicsExtractor guiGraphics) {
         if (stringRenders == null) return;
         guiGraphics.pose().pushMatrix();
         float scale = (float) AsteorBar.config.overlayTextScale();

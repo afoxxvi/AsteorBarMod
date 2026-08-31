@@ -3,7 +3,7 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 
 public abstract class BaseOverlay {
@@ -29,15 +29,15 @@ public abstract class BaseOverlay {
         return false;
     }
 
-    protected void drawTextureFill(GuiGraphics guiGraphics, int left, int top, int width, int height, int textureX, int textureY) {
+    protected void drawTextureFill(GuiGraphicsExtractor guiGraphics, int left, int top, int width, int height, int textureX, int textureY) {
         GuiHelper.drawTexturedRect(guiGraphics, left, top, textureX, textureY, width, height);
     }
 
-    protected void drawTextureFillColor(GuiGraphics guiGraphics, int left, int top, int width, int height, int textureX, int textureY, int textureWidth, int textureHeight, int color) {
+    protected void drawTextureFillColor(GuiGraphicsExtractor guiGraphics, int left, int top, int width, int height, int textureX, int textureY, int textureWidth, int textureHeight, int color) {
         GuiHelper.drawTexturedRectColor(guiGraphics, left, top, left + width, top + height, textureX, textureY, textureX + textureWidth, textureY + textureHeight, 256, 256, color);
     }
 
-    protected void drawTextureFillFlip(GuiGraphics guiGraphics, int left, int top, int right, int width, int height, int textureX, int textureY, int textureFullWidth, boolean flip) {
+    protected void drawTextureFillFlip(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int width, int height, int textureX, int textureY, int textureFullWidth, boolean flip) {
         if (flip) {
             GuiHelper.drawTexturedRect(guiGraphics, right - width, top, textureX + textureFullWidth - width, textureY, width, height);
         } else {
@@ -45,11 +45,11 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawEmptyFill(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+    protected void drawEmptyFill(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color) {
         GuiHelper.drawSolidGradient(guiGraphics, left, top, right, bottom, color);
     }
 
-    protected void drawFillFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+    protected void drawFillFlipConcat(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
         if (has == 0) {
             drawFillFlip(guiGraphics, left, top, right, bottom, width, color, flip);
             return;
@@ -62,7 +62,7 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawFillFlip(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
+    protected void drawFillFlip(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         if (flip) {
             GuiHelper.drawSolidGradientUpDown(guiGraphics, right - width, top, right, bottom, color);
@@ -71,7 +71,7 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawFillFlip(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, int color2, boolean flip) {
+    protected void drawFillFlip(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int width, int color, int color2, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         drawFillFlip(guiGraphics, left, top, right, bottom, width, color, flip);
         if (flip) {
@@ -81,7 +81,7 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawBoundFlipConcat(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
+    protected void drawBoundFlipConcat(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int has, int width, int color, boolean flip) {
         if (has == 0) {
             drawBoundFlip(guiGraphics, left, top, right, bottom, width, color, flip);
             return;
@@ -106,7 +106,7 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawBoundFlip(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
+    protected void drawBoundFlip(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int width, int color, boolean flip) {
         width = Math.max(0, Math.min(right - left, width));
         if (width == 0) return;
         if (width == right - left) {
@@ -128,14 +128,14 @@ public abstract class BaseOverlay {
         }
     }
 
-    protected void drawBound(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+    protected void drawBound(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color) {
         GuiHelper.drawSolidColor(guiGraphics, left, top + 1, left + 1, bottom - 1, color);
         GuiHelper.drawSolidColor(guiGraphics, right - 1, top + 1, right, bottom - 1, color);
         GuiHelper.drawSolidColor(guiGraphics, left + 1, top, right - 1, top + 1, color);
         GuiHelper.drawSolidColor(guiGraphics, left + 1, bottom - 1, right - 1, bottom, color);
     }
 
-    protected void drawBound(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color, int color2) {
+    protected void drawBound(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color, int color2) {
         GuiHelper.drawSolidColor(guiGraphics, left, top + 1, left + 1, bottom - 2, color);
         GuiHelper.drawSolidColor(guiGraphics, right - 1, top + 1, right, bottom - 2, color);
         GuiHelper.drawSolidColor(guiGraphics, left + 1, top, right - 1, top + 1, color);
@@ -144,7 +144,7 @@ public abstract class BaseOverlay {
         GuiHelper.drawSolidColor(guiGraphics, left + 1, bottom - 1, right - 1, bottom, color2);
     }
 
-    public void render(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void render(RenderGui gui, GuiGraphicsExtractor guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         if (AsteorBar.config.enableOverlay()) {
             tick = gui.gui().getGuiTicks();
             if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
@@ -155,5 +155,5 @@ public abstract class BaseOverlay {
         }
     }
 
-    public abstract void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight);
+    public abstract void renderOverlay(RenderGui gui, GuiGraphicsExtractor guiGraphics, float partialTick, int screenWidth, int screenHeight);
 }

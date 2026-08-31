@@ -3,7 +3,7 @@ package com.afoxxvi.asteorbar.overlay.parts;
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
 import com.afoxxvi.asteorbar.utils.Utils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 
@@ -154,7 +154,7 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
     }
 
     @Override
-    protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    protected void drawDecorations(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         if (regenerationOffset >= 0) {
             float alpha = (float) AsteorBar.config.healthRegenerationOpacity();

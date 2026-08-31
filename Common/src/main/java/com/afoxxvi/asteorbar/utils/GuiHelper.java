@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -30,48 +30,48 @@ public class GuiHelper {
         return (color & 0x00FFFFFF) | (alpha << 24);
     }
 
-    public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int textureX, int textureY, int width, int height) {
+    public static void drawTexturedRect(GuiGraphicsExtractor guiGraphics, int left, int top, int textureX, int textureY, int width, int height) {
         drawTexturedRect(guiGraphics, left, top, left + width, top + height, textureX, textureY, textureX + (float) width, textureY + (float) height, 256, 256);
     }
 
-    public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int textureX, int textureY, int width, int height, int color) {
+    public static void drawTexturedRectColor(GuiGraphicsExtractor guiGraphics, int left, int top, int textureX, int textureY, int width, int height, int color) {
         drawTexturedRectColor(guiGraphics, left, top, left + width, top + height, textureX, textureY, textureX + (float) width, textureY + (float) height, 256, 256, color);
     }
 
-    public static void drawTexturedRect(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight) {
+    public static void drawTexturedRect(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight) {
         drawTexturedRectColor(guiGraphics, left, top, right, bottom, uvLeft, uvTop, uvRight, uvBottom, textureWidth, textureHeight, -1);
     }
 
-    public static void drawTexturedRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
+    public static void drawTexturedRectColor(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int textureWidth, int textureHeight, int color) {
         color = applyAlpha(color);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, left, top, uvLeft, uvTop, right - left, bottom - top, (int) (uvRight - uvLeft), (int) (uvBottom - uvTop), textureWidth, textureHeight, color);
     }
 
-    public static void drawLightmapRectColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int color) {
+    public static void drawLightmapRectColor(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, float uvLeft, float uvTop, float uvRight, float uvBottom, int color) {
         color = applyAlpha(color);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, LIGHTMAP_TEXTURE, left, top, uvLeft, uvTop, right - left, bottom - top, (int) (uvRight - uvLeft), (int) (uvBottom - uvTop), 32, 32, color);
     }
 
-    public static void drawSolidColor(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+    public static void drawSolidColor(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color) {
         color = applyAlpha(color);
         guiGraphics.fill(left, top, right, bottom, color);
     }
 
-    public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color) {
+    public static void drawString(GuiGraphicsExtractor guiGraphics, String string, int left, int top, int color) {
         color = applyAlpha(color);
         drawString(guiGraphics, string, left, top, color, true);
     }
 
-    public static void drawString(GuiGraphics guiGraphics, String string, int left, int top, int color, boolean shadow) {
+    public static void drawString(GuiGraphicsExtractor guiGraphics, String string, int left, int top, int color, boolean shadow) {
         color = applyAlpha(color);
-        guiGraphics.drawString(Minecraft.getInstance().font, string, left, top, color, shadow);
+        guiGraphics.text(Minecraft.getInstance().font, string, left, top, color, shadow);
     }
 
-    public static void drawSolidGradient(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+    public static void drawSolidGradient(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color) {
         drawLightmapRectColor(guiGraphics, left, top, right, bottom, 0, 20, 32, 32, color);
     }
 
-    public static void drawSolidGradientUpDown(GuiGraphics guiGraphics, int left, int top, int right, int bottom, int color) {
+    public static void drawSolidGradientUpDown(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, int color) {
         drawLightmapRectColor(guiGraphics, left, top, right, bottom, 0, 0, 32, 12, color);
     }
 

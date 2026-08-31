@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import com.afoxxvi.asteorbar.overlay.RenderGui;
 import com.afoxxvi.asteorbar.utils.GuiHelper;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.LinkedHashMap;
@@ -72,17 +72,17 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     }
 
     public interface Layer {
-        void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip);
+        void drawLayer(Player player, GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip);
     }
 
     public void applyShakeEffect(Parameters parameters, int level) {
         parameters.verticalShift = SHIFT[tick / (Math.max(0, level) + 1) % SHIFT.length];
     }
 
-    protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    protected void drawDecorations(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
     }
 
-    private void drawFadeEffect(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    private void drawFadeEffect(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (!showFadeEffect()) return;
         if (parameters.value < lastValue) {
             valueFadeFrom = lastFadeValue;
@@ -111,7 +111,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         drawFillFlip(guiGraphics, left + 1, top + 1, right - 1, bottom - 1, fillWidth, 0xbfffffff, flip);
     }
 
-    public void draw(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    public void draw(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         if (parameters == null) return;
         top += parameters.verticalShift;
         bottom += parameters.verticalShift;
@@ -246,7 +246,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
     }
 
     @Override
-    public void renderOverlay(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+    public void renderOverlay(RenderGui gui, GuiGraphicsExtractor guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         var position = definedPosition;
         if (position == null) {
             position = Overlays.Position.UNSPECIFIED;
@@ -254,7 +254,7 @@ public abstract class SimpleBarOverlay extends BaseOverlay {
         renderAtPosition(gui, guiGraphics, partialTick, screenWidth, screenHeight, position);
     }
 
-    public void renderAtPosition(RenderGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight, Overlays.Position position) {
+    public void renderAtPosition(RenderGui gui, GuiGraphicsExtractor guiGraphics, float partialTick, int screenWidth, int screenHeight, Overlays.Position position) {
         tick = gui.gui().getGuiTicks();
         if (overrideOverlay != null && overrideOverlay.shouldOverride()) {
             if (overrideOverlay instanceof SimpleBarOverlay simpleBarOverlay) {

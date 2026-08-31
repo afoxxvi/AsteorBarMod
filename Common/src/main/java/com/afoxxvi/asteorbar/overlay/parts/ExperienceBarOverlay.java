@@ -2,7 +2,7 @@ package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
 import com.afoxxvi.asteorbar.overlay.Overlays;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.player.Player;
 
 public class ExperienceBarOverlay extends SimpleBarOverlay {
@@ -24,7 +24,7 @@ public class ExperienceBarOverlay extends SimpleBarOverlay {
     }
 
     @Override
-    protected void drawDecorations(GuiGraphics guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
+    protected void drawDecorations(GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, Parameters parameters, boolean flip) {
         super.drawDecorations(guiGraphics, left, top, right, bottom, parameters, flip);
         int innerWidth = right - left - 2;
         int textureWidth = Math.min(179, Math.max(0, (innerWidth + 5) / 10 - 1) * 10 + 9);

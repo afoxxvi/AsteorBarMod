@@ -1,6 +1,7 @@
 package com.afoxxvi.asteorbar;
 
 import com.afoxxvi.asteorbar.config.FabricConfigAdapter;
+import com.afoxxvi.asteorbar.network.NetworkHandler;
 import com.afoxxvi.asteorbar.utils.FabricPlatformAdapter;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ public class AsteorBarFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        NetworkHandler.init();
         FabricConfigAdapter.init();
         AsteorBar.config = new FabricConfigAdapter();
         AsteorBar.platformAdapter = new FabricPlatformAdapter();

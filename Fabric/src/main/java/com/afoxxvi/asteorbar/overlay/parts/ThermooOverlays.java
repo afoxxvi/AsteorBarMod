@@ -1,7 +1,7 @@
 package com.afoxxvi.asteorbar.overlay.parts;
 
 import com.afoxxvi.asteorbar.AsteorBar;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.world.entity.player.Player;
 
 public class ThermooOverlays {
@@ -43,7 +43,7 @@ public class ThermooOverlays {
         private final SimpleBound simpleBound = new SimpleBound();
 
         @Override
-        public void drawLayer(Player player, GuiGraphics guiGraphics, int left, int top, int right, int bottom, SimpleBarOverlay.Parameters parameters, boolean flip) {
+        public void drawLayer(Player player, GuiGraphicsExtractor guiGraphics, int left, int top, int right, int bottom, SimpleBarOverlay.Parameters parameters, boolean flip) {
             var parameters2 = simpleBound.getParameters(player);
             simpleBound.draw(guiGraphics, left, top, right, bottom, parameters2, flip);
         }

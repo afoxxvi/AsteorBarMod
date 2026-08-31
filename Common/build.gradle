@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
 }
 
 group = 'com.afoxxvi'
@@ -15,8 +15,9 @@ repositories {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
 }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 test {
     useJUnitPlatform()

@@ -1,7 +1,7 @@
 package com.afoxxvi.asteorbar.overlay;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 
 public abstract class RenderGui {
     abstract public int leftHeight();
@@ -12,7 +12,7 @@ public abstract class RenderGui {
 
     abstract public void rightHeight(int i);
 
-    abstract public Gui gui();
+    abstract public Hud gui();
 
     public Minecraft mc() {
         return Minecraft.getInstance();

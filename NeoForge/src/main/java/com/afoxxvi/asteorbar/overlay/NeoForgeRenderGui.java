@@ -3,12 +3,12 @@ package com.afoxxvi.asteorbar.overlay;
 import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.Hud;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 
 public class NeoForgeRenderGui extends RenderGui implements GuiLayer {
-    private Gui gui;
+    private Hud hud;
     private final BaseOverlay overlay;
     private final boolean survival;
 
@@ -23,34 +23,34 @@ public class NeoForgeRenderGui extends RenderGui implements GuiLayer {
 
     @Override
     public int leftHeight() {
-        return gui.leftHeight;
+        return hud.leftHeight;
     }
 
     @Override
     public int rightHeight() {
-        return gui.rightHeight;
+        return hud.rightHeight;
     }
 
     @Override
     public void leftHeight(int i) {
-        gui.leftHeight += i;
+        hud.leftHeight += i;
     }
 
     @Override
     public void rightHeight(int i) {
-        gui.rightHeight += i;
+        hud.rightHeight += i;
     }
 
     @Override
-    public Gui gui() {
-        return gui;
+    public Hud gui() {
+        return hud;
     }
 
     @Override
     public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         final Minecraft mc = Minecraft.getInstance();
-        this.gui = mc.gui;
-        if (!mc.options.hideGui && (!survival || mc.gameMode.canHurtPlayer())) {
+        this.hud = mc.gui.hud;
+        if (!hud.isHidden() && (!survival || mc.gameMode.canHurtPlayer())) {
             overlay.render(this, guiGraphics, deltaTracker.getGameTimeDeltaPartialTick(true), guiGraphics.guiWidth(), guiGraphics.guiHeight());
         }
     }

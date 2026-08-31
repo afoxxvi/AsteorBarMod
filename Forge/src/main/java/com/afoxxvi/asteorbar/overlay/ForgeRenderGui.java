@@ -1,12 +1,12 @@
 package com.afoxxvi.asteorbar.overlay;
 
-import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.Hud;
 
 public class ForgeRenderGui extends RenderGui {
-    private final Gui gui;
+    private final Hud hud;
 
-    public ForgeRenderGui(Gui gui) {
-        this.gui = gui;
+    public ForgeRenderGui(Hud hud) {
+        this.hud = hud;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ForgeRenderGui extends RenderGui {
     }
 
     @Override
-    public Gui gui() {
-        return gui;
+    public Hud gui() {
+        return hud;
     }
 }

@@ -20,7 +20,7 @@ public class AppleSkinAdapter {
 
     public PlatformAdapter.AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
         FoodData stats = player.getFoodData();
-        FoodHelper.QueriedFoodResult result = HUDOverlayHandler.INSTANCE.heldFood.result(Minecraft.getInstance().gui.getGuiTicks(), player);
+        FoodHelper.QueriedFoodResult result = HUDOverlayHandler.INSTANCE.heldFood.result(Minecraft.getInstance().gui.hud.getGuiTicks(), player);
         if (result == null) {
             return null;
         }

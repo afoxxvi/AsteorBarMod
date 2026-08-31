@@ -3,10 +3,10 @@
   "package": "com.afoxxvi.asteorbar.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "ContextualBarRendererMixin",
+    "ContextualBarMixin",
     "EntityMixin",
-    "ExperienceBarRendererMixin",
-    "GuiMixin",
+    "ExperienceBarMixin",
+    "HudMixin",
     "InventoryScreenMixin",
     "LivingEntityRendererMixin",
     "LivingEntityRenderStateMixin"

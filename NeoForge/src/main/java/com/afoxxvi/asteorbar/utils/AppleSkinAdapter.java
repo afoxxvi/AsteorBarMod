@@ -17,7 +17,7 @@ public class AppleSkinAdapter {
     }
 
     public PlatformAdapter.AppleSkinFoodValues getAppleSkinFoodValues(Player player) {
-        FoodHelper.QueriedFoodResult result = AppleSkinMixin.getHeldFood().result(Minecraft.getInstance().gui.getGuiTicks(), player);
+        FoodHelper.QueriedFoodResult result = AppleSkinMixin.getHeldFood().result(Minecraft.getInstance().gui.hud.getGuiTicks(), player);
         if (result == null) {
             return null;
         }

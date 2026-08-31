@@ -4,9 +4,7 @@ import com.afoxxvi.asteorbar.AsteorBar;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
@@ -161,24 +159,4 @@ public class GuiHelper {
         vertexConsumer.addVertex(matrix4f, right, top, z).setColor(color).setUv(1, 0).setLight(LIGHT).setOverlay(OverlayTexture.NO_OVERLAY).setNormal(0, 0, 1);
     }
 
-    public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, float left, float top, int color, boolean shadow) {
-        color = applyAlpha(color);
-        Minecraft.getInstance().font.drawInBatch(string, left, top, color, shadow, poseStack.last().pose(), buffer, Font.DisplayMode.NORMAL, 0, 0xF000F0);
-    }
-
-    public static void renderString(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {
-        renderString(poseStack, buffer, string, left, top, color, false);
-    }
-
-    public static void renderCenteredString(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {
-        renderString(poseStack, buffer, string, left - Minecraft.getInstance().font.width(string) / 2.0f, top, color, false);
-    }
-
-    public static void renderStringShadow(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {
-        renderString(poseStack, buffer, string, left, top, color, true);
-    }
-
-    public static void renderCenteredStringShadow(PoseStack poseStack, MultiBufferSource buffer, String string, int left, int top, int color) {
-        renderString(poseStack, buffer, string, left - Minecraft.getInstance().font.width(string) / 2.0f, top, color, true);
-    }
 }

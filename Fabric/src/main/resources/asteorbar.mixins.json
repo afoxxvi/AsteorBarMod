@@ -8,10 +8,10 @@
     "ServerPlayerMixin"
   ],
   "client": [
-    "ContextualBarRendererMixin",
+    "ContextualBarMixin",
     "EntityMixin",
-    "ExperienceBarRendererMixin",
-    "GuiMixin",
+    "ExperienceBarMixin",
+    "HudMixin",
     "InventoryScreenMixin",
     "LivingEntityRendererMixin",
     "LivingEntityRenderStateMixin"

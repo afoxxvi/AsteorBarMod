@@ -7,7 +7,7 @@ import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ public class FabricPlatformAdapter implements PlatformAdapter {
     @Override
     public boolean isBoss(LivingEntity livingEntity) {
         var type = livingEntity.getType();
-        return type == EntityType.ENDER_DRAGON || type == EntityType.WITHER;
+        return type == EntityTypes.ENDER_DRAGON || type == EntityTypes.WITHER;
     }
 
     @Override

@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InventoryScreen.class)
 public abstract class InventoryScreenMixin {
-    @Inject(method = "extractRenderState", at = @At("TAIL"))
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;)Lnet/minecraft/client/renderer/entity/state/EntityRenderState;", at = @At("TAIL"))
     private static void extractRenderStateExtra(LivingEntity livingEntity, CallbackInfoReturnable<EntityRenderState> cir) {
         final var renderState = cir.getReturnValue();
         if (renderState instanceof IHealthBarFeature healthBarFeature) {

@@ -3,7 +3,7 @@ package com.afoxxvi.asteorbar.mixin;
 import com.afoxxvi.asteorbar.overlay.ForgeGuiRegistry;
 import com.afoxxvi.asteorbar.overlay.Overlays;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,21 +13,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = Gui.class, remap = false)
 public abstract class GuiMixin {
-    @Invoker("renderPlayerHealth")
-    public abstract void renderPlayerHealthRaw(GuiGraphics guiGraphics);
+    @Invoker("extractPlayerHealth")
+    public abstract void extractPlayerHealthRaw(GuiGraphicsExtractor guiGraphics);
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderPlayerHealth(Lnet/minecraft/client/gui/GuiGraphics;)V"), method = "renderHotbarAndDecorations")
-    public void renderPlayerHealth(Gui instance, GuiGraphics guiGraphics) {
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;extractPlayerHealth(Lnet/minecraft/client/gui/GuiGraphicsExtractor;)V"), method = "extractHotbarAndDecorations")
+    public void extractPlayerHealth(Gui instance, GuiGraphicsExtractor guiGraphics) {
         Overlays.reset();
         if (Overlays.style == Overlays.STYLE_NONE) {
-            renderPlayerHealthRaw(guiGraphics);
+            extractPlayerHealthRaw(guiGraphics);
             return;
         }
         ForgeGuiRegistry.startRender(instance, guiGraphics);
     }
 
-    @Inject(method = "renderVehicleHealth(Lnet/minecraft/client/gui/GuiGraphics;)V", at = @At("HEAD"), cancellable = true)
-    public void injectVehicle(GuiGraphics p_283368_, CallbackInfo ci) {
+    @Inject(method = "extractVehicleHealth", at = @At("HEAD"), cancellable = true)
+    public void extractVehicleHealth(GuiGraphicsExtractor guiGraphics, CallbackInfo ci) {
         if (Overlays.style != Overlays.STYLE_NONE) {
             ci.cancel();
         }

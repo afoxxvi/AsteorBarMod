@@ -19,7 +19,7 @@ public class ForgePlatformAdapter implements PlatformAdapter {
 
     @Override
     public boolean isBoss(LivingEntity livingEntity) {
-        return livingEntity.getType().is(Tags.EntityTypes.BOSSES);
+        return livingEntity.getType().builtInRegistryHolder().is(Tags.EntityTypes.BOSSES);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ForgePlatformAdapter implements PlatformAdapter {
 
     @Override
     public boolean isModLoaded(String modId) {
-        return ModList.get().isLoaded(modId);
+        return ModList.isLoaded(modId);
     }
 
     @Override

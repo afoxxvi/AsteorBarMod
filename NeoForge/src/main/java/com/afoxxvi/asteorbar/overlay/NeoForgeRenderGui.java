@@ -4,7 +4,7 @@ import com.afoxxvi.asteorbar.overlay.parts.BaseOverlay;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 
 public class NeoForgeRenderGui extends RenderGui implements GuiLayer {
@@ -47,7 +47,7 @@ public class NeoForgeRenderGui extends RenderGui implements GuiLayer {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker) {
         final Minecraft mc = Minecraft.getInstance();
         this.gui = mc.gui;
         if (!mc.options.hideGui && (!survival || mc.gameMode.canHurtPlayer())) {

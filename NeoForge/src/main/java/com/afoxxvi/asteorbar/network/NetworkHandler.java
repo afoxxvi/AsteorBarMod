@@ -15,7 +15,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.jetbrains.annotations.NotNull;
-import toughasnails.api.thirst.ThirstHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,12 +28,8 @@ public class NetworkHandler {
     private static final byte INDEX_SATURATION = 1;
     private static final byte INDEX_ABSORPTION = 2;
     private static final byte INDEX_ACTIVATE = 3;
-    private static final byte INDEX_TOUGH_AS_NAILS = 64;
     private static final Map<UUID, Float> EXHAUSTION = new HashMap<>();
     private static final Map<UUID, Float> SATURATION = new HashMap<>();
-
-    private static final Map<UUID, Float> TOUGH_AS_NAILS_HYDRATION = new HashMap<>();
-    private static final Map<UUID, Float> TOUGH_AS_NAILS_EXHAUSTION = new HashMap<>();
 
     public record NetworkPayload(byte index, float f1, float f2, int i1) implements CustomPacketPayload {
         public static final StreamCodec<FriendlyByteBuf, NetworkPayload> PAYLOAD_CODEC = CustomPacketPayload.codec(NetworkPayload::write, NetworkPayload::read);
@@ -82,16 +77,6 @@ public class NetworkHandler {
                 context.enqueueWork(() -> ClientPacketDistributor.sendToServer(new NetworkPayload(INDEX_ACTIVATE, 0F, 0F, activate ? 1 : 0)));
             }
             break;
-            case INDEX_TOUGH_AS_NAILS: {
-                float hydration = payload.f1;
-                float exhaustion = payload.f2;
-                context.enqueueWork(() -> {
-                    var thirst = ThirstHelper.getThirst(context.player());
-                    thirst.setHydration(hydration);
-                    thirst.setExhaustion(exhaustion);
-                });
-            }
-            break;
             default:
                 break;
         }
@@ -122,25 +107,6 @@ public class NetworkHandler {
             if (!initialized) {
                 initialized = true;
                 AsteorBar.compatibility.init();
-            }
-            if (AsteorBar.compatibility.toughAsNails) {
-                var thirst = ThirstHelper.getThirst(player);
-                boolean send = false;
-                float hydration = thirst.getHydration();
-                Float oldHydration = TOUGH_AS_NAILS_HYDRATION.get(player.getUUID());
-                if (oldHydration == null || Math.abs(oldHydration - hydration) >= 0.01F) {
-                    TOUGH_AS_NAILS_HYDRATION.put(player.getUUID(), hydration);
-                    send = true;
-                }
-                float exhaustion = thirst.getExhaustion();
-                Float oldToughAsNailsExhaustion = TOUGH_AS_NAILS_EXHAUSTION.get(player.getUUID());
-                if (oldToughAsNailsExhaustion == null || Math.abs(oldToughAsNailsExhaustion - exhaustion) >= 0.01F) {
-                    TOUGH_AS_NAILS_EXHAUSTION.put(player.getUUID(), exhaustion);
-                    send = true;
-                }
-                if (send) {
-                    PacketDistributor.sendToPlayer(player, new NetworkPayload(INDEX_TOUGH_AS_NAILS, hydration, exhaustion, 0));
-                }
             }
         }
     }

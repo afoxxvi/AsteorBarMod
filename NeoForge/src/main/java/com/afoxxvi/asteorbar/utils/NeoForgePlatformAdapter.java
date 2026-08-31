@@ -5,10 +5,10 @@ import com.afoxxvi.asteorbar.AsteorBarNeoForge;
 import com.afoxxvi.asteorbar.entity.AsteorBarRenderType;
 import com.afoxxvi.asteorbar.mixin.FoodDataMixin;
 import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.common.Tags;
 import org.slf4j.Logger;
 
@@ -20,12 +20,12 @@ public class NeoForgePlatformAdapter implements PlatformAdapter {
 
     @Override
     public boolean isBoss(LivingEntity livingEntity) {
-        return livingEntity.getType().is(Tags.EntityTypes.BOSSES);
+        return livingEntity.getType().builtInRegistryHolder().is(Tags.EntityTypes.BOSSES);
     }
 
     @Override
     public boolean isEyeInFluid(Player player) {
-        return player.isEyeInFluidType(NeoForgeMod.WATER_TYPE.value());
+        return player.isEyeInFluid(FluidTags.WATER);
     }
 
     @Override

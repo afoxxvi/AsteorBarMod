@@ -58,6 +58,9 @@ public class EntityRenderer {
     }
 
     public static void submit(IHealthBarFeature feature, LivingEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector) {
+        if (!AsteorBar.config.enableHealthBar()) {
+            return;
+        }
         var dist = Math.sqrt(renderState.distanceToCameraSq);
         //The layers will start to flash if too close
         var layerDist = Math.max(0.002F, (float) dist * 0.002F);

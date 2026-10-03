@@ -1,0 +1,75 @@
+name: Bug report
+description: Report a reproducible bug
+title: "[BUG] "
+labels: []
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! 
+        Please fill in all required fields. Issues without enough information may be closed without investigation.
+
+  - type: input
+    id: minecraft_version
+    attributes:
+      label: Minecraft version
+      description: The version of Minecraft you are using (e.g. 1.21.1)
+      placeholder: 1.21.1
+    validations:
+      required: true
+
+  - type: input
+    id: mod_version
+    attributes:
+      label: Mod version
+      description: The version of the mod you are using (e.g. 1.0.0)
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mod_loader
+    attributes:
+      label: Mod loader
+      description: The mod loader you are using
+      options:
+        - Fabric
+        - Forge
+        - NeoForge
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of the issue
+      description: Please provide a clear and concise description of the issue you are experiencing.
+      placeholder: What happened, what expected to happen, and steps to reproduce the issue if necessary.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or Crash report
+      description: Please include any relevant logs (e.g. crash reports, console output) that may help us identify the issue.
+      placeholder: Paste your logs here, screenshots of logs are not accepted and will be closed without investigation.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: I am using the latest version of the mod and mod loader
+          required: true
+        - label: I have provided the full logs or crash report
+          required: true
+        - label: I am using a supported version of Minecraft and mod loader
+          required: true
+        - label: I am aware that issues without enough information may be closed without investigation
+          required: true

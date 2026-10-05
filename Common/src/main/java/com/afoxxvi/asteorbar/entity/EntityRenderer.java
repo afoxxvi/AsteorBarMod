@@ -76,8 +76,8 @@ public class EntityRenderer {
         if (!feature.asteorBar$inInventory()) {
             final var camera = Minecraft.getInstance().getEntityRenderDispatcher().camera;
             if (camera != null) {
-                poseStack.mulPose(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
-                poseStack.mulPose(FLIP_Y);
+                poseStack.rotate(Minecraft.getInstance().getEntityRenderDispatcher().camera.rotation());
+                poseStack.rotate(FLIP_Y);
             }
         }
         // End Of Rotation

@@ -40,10 +40,10 @@ public class PlayerHealthOverlay extends SimpleBarOverlay {
         if (AsteorBar.config.enableHealthBlink()) {
             highlight = (healthBlinkTime > tick) && ((healthBlinkTime - tick) / 3L % 2L == 1L);
             long now = System.currentTimeMillis();
-            if (health < lastHealth && player.invulnerableTime > 0) {
+            if (health < lastHealth && player.getInvulnerableTime() > 0) {
                 lastHealthTime = now;
                 healthBlinkTime = tick + 20L;
-            } else if (health > lastHealth && player.invulnerableTime > 0) {
+            } else if (health > lastHealth && player.getInvulnerableTime() > 0) {
                 lastHealthTime = now;
                 healthBlinkTime = tick + 10L;
             }
